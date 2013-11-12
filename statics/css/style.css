@@ -1,0 +1,20 @@
+
+ul {
+   display:block;
+}
+li {
+   display:inline;
+}
+
+body {
+   background-color: #f5f3ee;
+}
+
+#demoArea svg {
+   margin: 20px;
+}
+
+rect#background {
+   fill: white;
+   stroke: black;
+}

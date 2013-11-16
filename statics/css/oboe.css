@@ -15,8 +15,9 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 	background: transparent;	
 	font-weight: normal;
 }
-body {
+html {
 	line-height: 1;
+	background-color: black;
 }
 ul {
 	list-style: none;

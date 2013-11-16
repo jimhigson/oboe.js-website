@@ -1,42 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8">
-    <title>Demo page</title>
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/reset.css">
-    
-    <script type="text/javascript" src="/jQuery.js"></script>
-    <script type="text/javascript" src="/d3.js"></script>
-    <script type="text/javascript" src="/oboe-browser.js"></script>
-    
-    <script type="text/javascript" src="/js/demo.js"></script>
+	
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="/css/oboe.css" />	 
+		
+		<title>Oboe.js</title>
 
+	<meta name="Description" content="Progressive loading of json"/>
 </head>
-
-<body id="home">
-
-   <h1>This is a merry demo/wizard thing for the oboe.js site</h1>
-    
-   <div id="demoArea">
-      <svg width="500" height="200">
-        
-        <rect id="background" x="0" y="0" width="500" height="200"></rect>
-        
-        <rect transform="translate(15, 55)" x="0" y="0" width="45" height="80"></rect>
-        <rect transform="translate(440,55)" x="0" y="0" width="45" height="80"></rect>
-
-      </svg>         
-   
-      <ul>
-         <li><a href="">&lt;</a></li>
-         <li><a href="">1</a></li>
-         <li><a href="">2</a></li>
-         <li><a href="">3</a></li>
-         <li><a href="">4</a></li>
-         <li><a href="">&gt;</a></li>      
-      </ul>
-   </div>
-
+<body>
+	<div id="header">
+		
+	</div>
+	<div id="pagearea">
+		<h1>Oboe.js</h1>
+		<p class="strapline">Progressive loading of json</p>
+		
+		<div class="col col1">
+			<a href="" id="download" title="Get the project">Download</a>
+			<ul class="links">
+				<li><a href="">Link here</a></li>
+				<li><a href="">Link there</a></li>
+				<li><a href="">Link everywhere</a></li>
+			</ul>
+		</div>
+		<div class="col col2">
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
+				sed do eiusmod tempor incididunt ut labore et dolore magna 
+				aliqua. Ut enim ad minim veniam, quis nostrud exercitation 
+				ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+	
+			<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum 
+			dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat 
+			non proident, sunt in culpa qui officia deserunt mollit anim id est 
+			laborum.</p>
+		</div>
+	</div>
+	<div id="footer">
+		<div id="footer-contents">
+			<a href="//samwakeling.com" id="sw" title="Web design by Sam Wakeling">Web design by Sam Wakeling</a>
+				<p>Some small text nestling down here.</p>
+		</div>
+	</div>
 </body>
 </html>

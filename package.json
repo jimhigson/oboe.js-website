@@ -30,6 +30,12 @@
     "url": "https://github.com/jimhigson/oboe.js-website/issues"
   },
   "subdomain": "oboejs",
+  "domains":[
+   "oboejs.com",
+   "oboejs.org",
+   "www.oboejs.com",
+   "www.oboejs.org"
+  ],
   "engines": {
     "node": "0.10.x"
   }

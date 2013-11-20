@@ -112,10 +112,6 @@ body {
    margin-right: 40px;
 }
 
-.col.col2 {
-   max-width: 500px;
-}
-
 a {
    color: #82ca9c;
    text-decoration: none;
@@ -150,6 +146,7 @@ a:active {
    border-radius: 100px;
    border: 2px solid #fff;
    box-shadow: inset 0 -3px 0px rgba(0, 0, 0, 0.2), inset 0 8px 0 rgba(255, 255, 255, 0.3), 0 4px 10px rgba(0, 0, 0, 0.1);
+   transition: all 0.5s;
 }
 
 .button2.wee {
@@ -160,11 +157,18 @@ a:active {
 
 .button2:hover {
    margin-top: -6px;
+   transition: all 0.2s;
 }
 
+
+
 /* main four elements making up grid */
+.row {
+   display:table-row;
+}
+
 h1, .strapline, .col {
-   display: inline-block;
+   display: table-cell;
    vertical-align: top;
 }
 
@@ -173,16 +177,20 @@ h1, .col1 {
    width: 292px;
 }
 
+
+
 h1 {
    font-size: 350%;
-   margin: 30px 40px 0.5em 0;
+   padding: 30px 40px 0.5em 0;
 }
 
 .strapline {
-   margin: 52px 0 0 0;
+   padding: 52px 0 0 9px;
    font-size: 180%;
    line-height: 1.1;
-   width: 500px;
+}
+.col2 {
+   padding-left:9px;
 }
 
 p {
@@ -254,17 +262,58 @@ p {
    float: right;
 }
 
-/* Smaller screens */
+/* Small screens - 1 column */
+@media only screen and (max-width: 780px) {
+
+   .row {
+      display:block;
+   }
+   
+   h1, .strapline, .col {
+      display: block;
+      vertical-align: top;
+   }
+   
+   h1 {
+      margin-bottom:0.2em;
+      padding: 30px 0 0.2em 0;
+   }
+   
+   .strapline {
+      padding:0;
+   }
+}
+
+
+/* Even Smaller screens */
 @media only screen and (max-width: 600px) {
+
+   #download {
+      display:none;
+   }
+
+   h1, 
+   .strapline {
+      margin: 20px auto;
+      text-align: center;
+   }
+   
+   h1, .col1 {
+      width: auto;
+   }
+   
+   .col.col1 {
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+   }
 
    .strapline {
       width: auto;
    }
 
    #pagearea {
-
       padding: 0 20px;
-
    }
 
 }

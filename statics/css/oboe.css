@@ -82,7 +82,6 @@ body {
 }
 
 #footer {
-	clear: both;
 	border-top: 10px solid #827e7a;
 	border-bottom: 30px solid #000;
  	position: relative;
@@ -103,14 +102,11 @@ body {
 }
 
 .col {
-	float: left;
 	margin-top: 30px;
 }
 
 
 .col.col1 {
-	clear: left;
-	width: 300px;
 	margin-right: 40px;
 }
 .col.col2 {
@@ -123,7 +119,7 @@ a {
 }
 a:hover {
 	color: #69b284;
-	text-decoration: underline;
+	text-decoratiocn: underline;
 }
 a:active {
 	color: #42c772;
@@ -160,15 +156,24 @@ a:active {
 	margin-top: -6px;
 }
 
+
+/* main four elements making up grid */
+h1, .strapline, .col {
+   display: inline-block;
+   vertical-align: top;
+}
+
+/* set width of left column */
+h1, .col1 {
+   width: 292px;
+}
+
 h1 {
 	font-size: 350%;
 	margin: 30px 40px 0.5em 0;
-	float: left;
-	width: 300px;
 }
 
 .strapline {
-	float: left;
 	margin: 52px 0 0 0;
 	font-size: 180%;
 	line-height: 1.1; 
@@ -189,7 +194,6 @@ p {
 	color: #fff;
 	font-size: 180%;
 	margin: 12px 0 40px 0;
-	clear: left;
 	width: 6em;
 	text-align: center;
 	transition: all 0.5s;

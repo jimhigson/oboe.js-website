@@ -100,8 +100,13 @@ body {
    margin: 0 auto;
 }
 
-#footer p {
+#footer p,
+#footer p a {
    color: #5a5855;
+}
+
+#footer p a:hover {
+   color: #82ca9c;
 }
 
 .col {
@@ -194,8 +199,8 @@ h1 {
 }
 
 p {
-   margin: 0.3em 0 0.5em 0;
-   line-height: 1.6;
+   margin: 0.3em 0 0.8em 0;
+   line-height: 1.5;
 }
 
 #download {

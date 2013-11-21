@@ -1,10 +1,11 @@
 {
   "name": "oboe.js-demo",
-  "version": "0.0.0-5",
+  "version": "0.0.0-17",
   "description": "A website for Oboe.js",
   "main": "index.js",
   "dependencies": {
-    "express": "~3.4.4"
+    "express": "~3.4.4",
+    "marked": "~0.2.10"
   },
   "devDependencies": {},
   "scripts": {
@@ -30,11 +31,11 @@
     "url": "https://github.com/jimhigson/oboe.js-website/issues"
   },
   "subdomain": "oboejs",
-  "domains":[
-   "oboejs.com",
-   "oboejs.org",
-   "www.oboejs.com",
-   "www.oboejs.org"
+  "domains": [
+    "oboejs.com",
+    "oboejs.org",
+    "www.oboejs.com",
+    "www.oboejs.org"
   ],
   "engines": {
     "node": "0.10.x"

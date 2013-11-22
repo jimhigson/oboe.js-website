@@ -19,11 +19,15 @@ function readMarkdown(markdownFileName, callback, errCallback) {
     });
 }
 
+function respondWithMarkdown(res, markdownFilename){
+    readMarkdown('index', function( html ){
+        res.render('page', {content:html});
+    });
+}
+
 app
    .get('/', function(req, res){
-        readMarkdown('index', function( html ){
-            res.render('page', {content:html});
-        });
+       respondWithMarkdown(res, 'index');
    })
    .use(express.static('statics'))
    .use(express.static('components/oboe/dist'))

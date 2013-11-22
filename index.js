@@ -20,7 +20,7 @@ function readMarkdown(markdownFileName, callback, errCallback) {
 }
 
 function respondWithMarkdown(res, markdownFilename){
-    readMarkdown('index', function( html ){
+    readMarkdown(markdownFilename, function( html ){
         res.render('page', {content:html});
     });
 }
@@ -29,14 +29,11 @@ app
    .get('/', function(req, res){
        respondWithMarkdown(res, 'index');
    })
+   .get('/api', function(req, res){
+       respondWithMarkdown(res, 'api');
+   })
    .use(express.static('statics'))
    .use(express.static('components/oboe/dist'))
    .use(express.static('components/jquery'))
    .use(express.static('components/d3'))
-   /* app.use(function(err, req, res, next){
-        if( err ){
-            res.status(500);
-            res.render('error', { error: err });
-        }
-    }) */
    .listen(8888);

@@ -47,15 +47,15 @@
           }
           
           $(document).scroll(function() {
-              var h = closest();
-              if (!h)
+              var activeEle = closest();
+              if (!activeEle)
                   return;
               
               if (prev) {
                   prev.removeClass('active');
               }
               
-              var a = $('a[href="#' + h.id + '"]');
+              var a = $('a[href="#' + activeEle.id + '"]');
               a.addClass('active');
               
               prev = a;

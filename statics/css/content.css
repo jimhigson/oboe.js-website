@@ -4,7 +4,7 @@
 }
 
 code {
-   color: white;
+   color: #f5f3ee;
    font-size:80%;
 }
 
@@ -37,13 +37,13 @@ code {
 https://github.com/jdiehl/dark-pastel/blob/master/dark-pastel.tmTheme */
 
 code .comment {
-   color: #B8FF9A;
+   color: #82ca9c;
 }
 code .string {
-   color: #FF9F9A;
+   color: #D79692;
 }
 code .keyword {
-   color: #66D9EF;
+   color: #71C8D9;
 }
 
 .marked ul {

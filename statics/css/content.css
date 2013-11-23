@@ -51,12 +51,17 @@ code .keyword {
    margin:0 2em 2em 2em;
    list-style: none;
 }
+
+/* use bullets from the font and otherwise make them look
+   like LaTeX.  */
 .marked li {
    margin:0.5em 0;
-}
-
-/* use bullets from the font */
+   padding-left:0;
+}   
+   
 .marked li:before {
     content: "•";
-    padding-right: 0.5em;
+    padding-right: 0;
+    position:absolute;
+    left:1em;
 }

@@ -53,12 +53,10 @@
               
               if (prev) {
                   prev.removeClass('active');
-                  prev.parent().parent().removeClass('active');
               }
               
               var a = $('a[href="#' + h.id + '"]');
               a.addClass('active');
-              a.parent().parent().addClass('active');
               
               prev = a;
           });

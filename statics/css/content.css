@@ -17,6 +17,8 @@ code {
    line-height: 1.2em;
    border:10px #827e7a solid;
    border-radius: 4px;   
+   
+   margin:1.2em 0;
 }
 
 /* inline code examples */

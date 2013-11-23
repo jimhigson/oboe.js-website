@@ -11,14 +11,14 @@ code {
 /* code blocks */
 .marked pre {
    background-color:#0f0a07;
-   max-width:100%;
+   max-width:35em;
    overflow:auto;
    padding:1em;
    line-height: 1.2em;
    border:3px #827e7a solid;
    border-radius: 4px;   
    
-   margin:1.5em 0 1.5em 0;
+   margin:1.5em 1em 1.5em 0.5em;
 }
 
 /* inline code examples */

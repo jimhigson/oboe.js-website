@@ -2,40 +2,17 @@
 var express = require('express'),
     app = express(),
     cons = require('consolidate'),
-    supermarked = require('supermarked'), 
-    fs = require('fs');
+    readContent = require('./read-content.js');
+
 
 app.engine('html', cons.mustache);
 app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
 
-function readMarkdown(requestedMarkdown, callback, errCallback) {
-
-   function markdownPath(markdownFileName) {
-      return 'content/' + markdownFileName + '.md';
-   }
-  
-   fs.exists(markdownPath(requestedMarkdown), function(requestedMarkdownExists){
-   
-      var fileToRead = requestedMarkdownExists? 
-                              markdownPath(requestedMarkdown) 
-                           :  'content/404.md';
-   
-      fs.readFile(fileToRead, function(err, markdownBuffer){
-       
-          var markdownStr = markdownBuffer.toString();
-          var html = supermarked(markdownStr, {ignoreMath:true});
-          
-          callback( html);
-       });   
-   });
-
-}
-
 function respondWithMarkdown(res, markdownFilename, opts){
     opts = opts || {};
 
-    readMarkdown(markdownFilename, function( html ){
+    readContent(markdownFilename, function( html ){
         opts.content = html;
         res.render('page', opts);
     });

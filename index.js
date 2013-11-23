@@ -30,10 +30,10 @@ function respondWithMarkdown(res, markdownFilename, opts){
 
 app
    .get('/', function(req, res){
-       respondWithMarkdown(res, 'index', {strapline:true});
+       respondWithMarkdown(res, 'index', {contentTitle:'Streaming JSON loading for Node and browsers'});
    })
    .get('/api', function(req, res){
-       respondWithMarkdown(res, 'api');
+       respondWithMarkdown(res, 'api', {contentTitle:'API'});
    })
    .use(express.static('statics'))
    .use(express.static('components/oboe/dist'))

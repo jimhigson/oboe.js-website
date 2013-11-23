@@ -7,7 +7,7 @@
     "express": "~3.4.4",
     "marked": "~0.2.10",
     "consolidate": "~0.9.1",
-    "mustache": "~0.7.3"
+    "supermarked": "~1.1.0"
   },
   "devDependencies": {},
   "scripts": {

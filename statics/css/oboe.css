@@ -243,11 +243,15 @@ p {
    opacity: 0.6;
 }
 
-.links {
+nav ul.links {
    font-size: 150%;
 }
 
-.links li {
+nav ul.links li {
+   margin: 0.5em;
+}
+
+nav ul.sections li {
    margin: 0.5em;
 }
 

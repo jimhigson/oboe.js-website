@@ -10,6 +10,17 @@
    <title>Oboe.js</title>
 
    <meta name="Description" content="Progressive loading of json"/>
+   
+   <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+   <script type="text/javascript" src="/js/jQuery.sticky.js"></script>
+   <script>
+      $(function(){
+         if( $( window ).width() > 780 ) {
+         
+            $('.internalNav').sticky({topSpacing:80});         
+         }
+      });
+   </script>
 </head>
 <body>
 <div id="header">
@@ -30,8 +41,9 @@
       <h1><a href="/">Oboe.js</a></h1>
       {{/home}}
 
-
-      <p class="strapline">{{^home}}/{{/home}}{{heading.text}}</p>
+      {{#if home}}
+         <p class="strapline">{{heading.text}}</p>
+      {{/if}}
    </div>
 
    <div class="row">
@@ -44,13 +56,16 @@
          </a>
          {{/home}}
 
-         {{#if sections}}
-         <ul class="sections">
-            {{#sections}}
-               <li><a href="#{{id}}">{{text}}</a></li>
-            {{/sections}}
-         </ul>
-         {{/if}}
+         <div class="internalNav">
+            {{#if sections}}         
+               <h2>{{heading.text}}</h2>
+               <ul class="sections">
+                  {{#sections}}
+                     <li><a href="#{{id}}">{{text}}</a></li>
+                  {{/sections}}
+               </ul>
+            {{/if}}
+         </div>
 
          {{#home}}
          <ul class="links">
@@ -89,7 +104,7 @@
    </div>
 </div>
 
-<script>!function (d, s, id) {
+<script type="text/javascript">!function (d, s, id) {
    var js, fjs = d.getElementsByTagName(s)[0];
    if (!d.getElementById(id)) {
       js = d.createElement(s);

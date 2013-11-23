@@ -12,8 +12,12 @@ app.set('views', __dirname + '/views');
 function respondWithMarkdown(res, markdownFilename, opts){
     opts = opts || {};
 
-    readContent(markdownFilename, function( html, outline ){
-        opts.content = html;
+    readContent(markdownFilename, function( outline ){
+    
+        opts.content = outline.content;
+        opts.heading = outline.heading;
+        opts.sections = outline.sections;        
+         
         res.render('page', opts);
         
         console.log(outline);
@@ -23,12 +27,11 @@ function respondWithMarkdown(res, markdownFilename, opts){
 app
    .get('/', function(req, res){
        respondWithMarkdown(res, 'index', {
-         contentTitle:'Streaming JSON loading for Node and browsers',
          home:'true'
        });
    })
    .get('/:page', function(req, res){
-       respondWithMarkdown(res, req.params.page, {contentTitle:'API'});
+       respondWithMarkdown(res, req.params.page);
    })
    .use(express.static('statics'))
    .use(express.static('components/oboe/dist'))

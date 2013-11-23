@@ -20,8 +20,11 @@ function outline(html){
                }
             });   
    
+   mainHeadingEle.remove();
+   
    return {
-      main: mainHeading,
+      content: $.html(),
+      heading: mainHeading,
       sections: sectionHeadings
    }
 }
@@ -44,7 +47,7 @@ function readMarkdown(requestedMarkdown, callback) {
               html = supermarked(markdownStr, {ignoreMath:true}),
               documentTree = outline(html);
           
-          callback( html, documentTree );
+          callback( documentTree );
        });   
    });
 }

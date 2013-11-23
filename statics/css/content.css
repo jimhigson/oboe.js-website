@@ -18,7 +18,7 @@ code {
    border:3px #827e7a solid;
    border-radius: 4px;   
    
-   margin:1.2em 0;
+   margin:1.5em 0 1.5em 0;
 }
 
 /* inline code examples */
@@ -30,7 +30,7 @@ code {
 
 .marked h2 {
    border-bottom: 1px #0f0a07 solid;
-   margin:1.5em 1em 1em 0;
+   margin:0.5em 1em 1em 0;
 }
 
 /* colours stolen from here:

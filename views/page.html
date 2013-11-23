@@ -46,20 +46,26 @@
               }
           }
           
-          $(document).scroll(function() {
-              var activeEle = closest();
-              if (!activeEle)
-                  return;
+          function updateActive() {
+              var activeHeading = closest();
+                            
+              if (!activeHeading)
+                  activeHeading = headings.first()[0];
+                  
+             console.log(activeHeading);                  
               
               if (prev) {
                   prev.removeClass('active');
               }
               
-              var a = $('a[href="#' + activeEle.id + '"]');
+              var a = $('a[href="#' + activeHeading.id + '"]');
               a.addClass('active');
               
               prev = a;
-          });
+          };
+          
+         $(document).scroll(updateActive);
+         updateActive();
       })
    </script>
 </head>

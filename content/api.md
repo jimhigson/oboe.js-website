@@ -1,12 +1,5 @@
 # API
 
-If you are in Node.js or are in a browser and have AMD loaded Oboe won't register 
-a global so do this:
-
-```js
-var oboe = require('oboe')
-```
-
 ## The oboe object
 
 Start a new AJAX request by calling one of these methods:

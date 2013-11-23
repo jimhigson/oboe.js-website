@@ -4,6 +4,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../css/oboe.css" />
+    <link rel="stylesheet" href="../css/content.css" />
 
     <title>Oboe.js</title>
 
@@ -22,7 +23,9 @@
 <div id="pagearea">
     <div class="row">
         <h1>Oboe.js</h1>
-        <p class="strapline">Streaming JSON loading for Node and browsers</p>
+         {{#strapline}}
+            <p class="strapline">Streaming JSON loading for Node and browsers</p>
+         {{/strapline}}
     </div>
 
     <div class="row">
@@ -50,7 +53,9 @@
         </div>
         <div class="col col2">
 
-            {{{content}}}
+            <div class="marked">
+               {{{content}}}
+            </div>
 
         </div>
 

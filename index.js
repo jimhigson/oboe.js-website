@@ -19,15 +19,18 @@ function readMarkdown(markdownFileName, callback, errCallback) {
     });
 }
 
-function respondWithMarkdown(res, markdownFilename){
+function respondWithMarkdown(res, markdownFilename, opts){
+    opts = opts || {};
+
     readMarkdown(markdownFilename, function( html ){
-        res.render('page', {content:html});
+        opts.content = html;
+        res.render('page', opts);
     });
 }
 
 app
    .get('/', function(req, res){
-       respondWithMarkdown(res, 'index');
+       respondWithMarkdown(res, 'index', {strapline:true});
    })
    .get('/api', function(req, res){
        respondWithMarkdown(res, 'api');

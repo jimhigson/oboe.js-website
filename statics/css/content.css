@@ -28,6 +28,7 @@ code {
    padding: 2px 5px;
 }
 
+.internalNav h2,
 .marked h2 {
    border-bottom: 1px #0f0a07 solid;
    margin:0.5em 1em 0.5em 0;

@@ -17,7 +17,7 @@ function respondWithMarkdown(res, markdownFilename, opts){
         opts.heading = outline.heading;
         opts.sections = outline.sections;        
          
-        res.render('page', opts);        
+        res.render('page', opts);
     });
 }
 

@@ -48,7 +48,14 @@ code .keyword {
 
 .marked ul {
    margin:0 2em 2em 2em;
+   list-style: none;
 }
 .marked li {
    margin:0.5em 0;
+}
+
+/* use bullets from the font */
+.marked li:before {
+    content: "•";
+    padding-right: 0.5em;
 }

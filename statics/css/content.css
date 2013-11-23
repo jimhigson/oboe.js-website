@@ -43,3 +43,9 @@ code .keyword {
    color: #66D9EF;
 }
 
+.marked ul {
+   margin:1em 2em;
+}
+.marked li {
+   margin:0.5em 0;
+}

@@ -42,12 +42,12 @@
                    Download <span id="version">v1.10.3</span>
                </a>
            {{/home}}            
-            
+
+           {{#sections}}            
            <ul class="links">
-              {{#sections}}
-                <li><a href="#{{id}}">{{text}}</a></li>
-              {{/sections}} 
+               <li><a href="#{{id}}">{{text}}</a></li> 
            </ul>            
+           {{/sections}}           
 
            {{#home}}            
             <ul class="links">

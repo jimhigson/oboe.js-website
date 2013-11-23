@@ -4,7 +4,7 @@ $(function(){
    if( $( window ).width() > 780 ) {
    
       $('.internalNav').sticky({
-         topSpacing:80
+         topSpacing:10
       ,  getWidthFrom:'.col1'
       });         
 

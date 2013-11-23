@@ -12,10 +12,7 @@ function readMarkdown(markdownFileName, callback, errCallback) {
     fs.readFile('content/' + markdownFileName + '.md', function(err, markdownBuffer){
         var markdownStr = markdownBuffer.toString();
 
-        require('marked')(markdownStr, function( err, html ){
-
-            callback(html);
-        });
+        callback( require('supermarked')(markdownStr));
     });
 }
 

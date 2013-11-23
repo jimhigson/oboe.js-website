@@ -12,7 +12,7 @@ code {
 .marked pre {
    background-color: #827e7a;
    max-width:100%;
-   overflow:scroll;
+   overflow:auto;
    padding:1em;
    line-height: 1.2em;
    border:1px #827e7a solid;   
@@ -30,3 +30,17 @@ code {
    border-bottom: 1px #0f0a07 solid;
    margin:1.5em 1em 1em 0;
 }
+
+/* colours stolen from here:
+https://github.com/jdiehl/dark-pastel/blob/master/dark-pastel.tmTheme */
+
+code .comment {
+   color: #B8FF9A;
+}
+code .string {
+   color: #FF9F9A;
+}
+code .keyword {
+   color: #66D9EF;
+}
+

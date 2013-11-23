@@ -79,6 +79,7 @@ body {
 }
 
 #pagearea {
+   display:table;
    max-width: 900px;
    margin: 80px auto;
    padding: 0 50px;
@@ -131,6 +132,10 @@ a:hover {
 
 a:active {
    color: #42c772;
+}
+
+h1 a, h1 a:hover {
+   color:black;
 }
 
 .button {
@@ -269,6 +274,10 @@ p {
 
 /* Small screens - 1 column */
 @media only screen and (max-width: 780px) {
+
+   #pagearea {
+      display:block;
+   }
 
    .row {
       display:block;

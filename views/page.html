@@ -13,13 +13,53 @@
    
    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
    <script type="text/javascript" src="/js/jQuery.sticky.js"></script>
-   <script>
+   <script type="text/javascript">
       $(function(){
+         // make internal nav sticky
          if( $( window ).width() > 780 ) {
          
             $('.internalNav').sticky({topSpacing:80});         
          }
-      });
+
+
+         // highlight active item on internal nav 
+          var prev;
+          
+          var headings = $('.marked.body h2').map(function(i, el) {
+              return {
+                  top: $(el).offset().top,
+                  id: el.id
+              }
+          });
+          
+          function closest() {
+              var h;
+              var top = $(window).scrollTop() +2;
+              var i = headings.length;
+              while (i--) {
+                  h = headings[i];
+                  if (top >= h.top)
+                      return h;
+              }
+          }
+          
+          $(document).scroll(function() {
+              var h = closest();
+              if (!h)
+                  return;
+              
+              if (prev) {
+                  prev.removeClass('active');
+                  prev.parent().parent().removeClass('active');
+              }
+              
+              var a = $('a[href="#' + h.id + '"]');
+              a.addClass('active');
+              a.parent().parent().addClass('active');
+              
+              prev = a;
+          });
+      })
    </script>
 </head>
 <body>
@@ -87,7 +127,7 @@
       </nav>
       <div class="col col2">
 
-         <div class="marked">
+         <div class="marked body">
             {{{content}}}
          </div>
 

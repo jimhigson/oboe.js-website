@@ -134,6 +134,11 @@ a:active {
    color: #42c772;
 }
 
+a.active {
+   color: #42c772;
+   background-color:white;
+}
+
 h1 a, h1 a:hover {
    color:black;
 }

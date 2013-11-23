@@ -1,0 +1,32 @@
+
+.marked {
+   position:relative;
+}
+
+code {
+   color: white;
+   font-size:80%;
+}
+
+/* code blocks */
+.marked pre {
+   background-color: #827e7a;
+   max-width:100%;
+   overflow:scroll;
+   padding:1em;
+   line-height: 1.2em;
+   border:1px #827e7a solid;   
+}
+
+/* inline code examples */
+:not(pre) > code {
+   display:inline-block;
+   background-color: #827e7a;
+   border:1px #0f0a07 solid;
+   padding: 2px 5px;
+}
+
+.marked h2 {
+   border-bottom: 1px #0f0a07 solid;
+   margin:1.5em 1em 1em 0;
+}

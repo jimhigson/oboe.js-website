@@ -10,12 +10,13 @@ code {
 
 /* code blocks */
 .marked pre {
-   background-color: #827e7a;
+   background-color:#0f0a07;
    max-width:100%;
    overflow:auto;
    padding:1em;
    line-height: 1.2em;
-   border:1px #827e7a solid;   
+   border:10px #827e7a solid;
+   border-radius: 4px;   
 }
 
 /* inline code examples */

@@ -36,18 +36,22 @@ function readMarkdown(requestedMarkdown, callback) {
    }
   
    fs.exists(markdownPath(requestedMarkdown), function(requestedMarkdownExists){
-   
+      
       var fileToRead = requestedMarkdownExists? 
                               markdownPath(requestedMarkdown) 
                            :  'content/404.md';
+                           
+      var status = requestedMarkdownExists? 200 : 404;                           
    
       fs.readFile(fileToRead, function(err, markdownBuffer){
        
           var markdownStr = markdownBuffer.toString(),
               html = supermarked(markdownStr, {ignoreMath:true}),
-              documentTree = outline(html);
+              response = outline(html);
+              
+          response.status = status;    
           
-          callback( documentTree );
+          callback( response );
        });   
    });
 }

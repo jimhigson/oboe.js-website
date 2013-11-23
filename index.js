@@ -19,6 +19,7 @@ function respondWithMarkdown(res, markdownFilename, opts){
         
         console.log('making page with options', opts);        
          
+        res.status(outline.status);
         res.render('page', opts);
     });
 }

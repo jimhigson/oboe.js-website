@@ -8,8 +8,8 @@
     "marked": "~0.2.10",
     "consolidate": "~0.9.1",
     "supermarked": "~1.1.0",
-    "mustache": "~0.7.3",
-    "cheerio": "~0.12.4"
+    "cheerio": "~0.12.4",
+    "handlebars": "~1.1.2"
   },
   "devDependencies": {},
   "scripts": {

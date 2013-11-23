@@ -1,11 +1,10 @@
 
 var express = require('express'),
     app = express(),
-    cons = require('consolidate'),
+    consolidate = require('consolidate'),
     readContent = require('./read-content.js');
 
-
-app.engine('html', cons.mustache);
+app.engine('html', consolidate.handlebars);
 app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
 

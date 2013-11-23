@@ -2,6 +2,7 @@
 var express = require('express'),
     app = express(),
     cons = require('consolidate'),
+    supermarked = require('supermarked'), 
     fs = require('fs');
 
 app.engine('html', cons.mustache);
@@ -10,9 +11,11 @@ app.set('views', __dirname + '/views');
 
 function readMarkdown(markdownFileName, callback, errCallback) {
     fs.readFile('content/' + markdownFileName + '.md', function(err, markdownBuffer){
-        var markdownStr = markdownBuffer.toString();
-
-        callback( require('supermarked')(markdownStr));
+    
+       var markdownStr = markdownBuffer.toString();
+       var html = supermarked(markdownStr, {ignoreMath:true});
+       
+       callback( html);
     });
 }
 

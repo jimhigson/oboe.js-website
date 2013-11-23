@@ -35,8 +35,8 @@ app
          home:'true'
        });
    })
-   .get('/api', function(req, res){
-       respondWithMarkdown(res, 'api', {contentTitle:'API'});
+   .get('/:page', function(req, res){
+       respondWithMarkdown(res, req.params.page, {contentTitle:'API'});
    })
    .use(express.static('statics'))
    .use(express.static('components/oboe/dist'))

@@ -22,7 +22,13 @@
 </div>
 <div id="pagearea">
     <div class="row">
-        <h1><a href="/">Oboe.js</a></h1>
+        {{#home}}
+            <h1>Oboe.js</h1>
+        {{/home}}
+        {{^home}}
+            <h1><a href="/">Oboe.js</a></h1>
+        {{/home}}
+
          
         <p class="strapline">{{contentTitle}}</p>
     </div>

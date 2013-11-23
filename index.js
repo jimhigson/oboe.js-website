@@ -30,7 +30,10 @@ function respondWithMarkdown(res, markdownFilename, opts){
 
 app
    .get('/', function(req, res){
-       respondWithMarkdown(res, 'index', {contentTitle:'Streaming JSON loading for Node and browsers'});
+       respondWithMarkdown(res, 'index', {
+         contentTitle:'Streaming JSON loading for Node and browsers',
+         home:'true'
+       });
    })
    .get('/api', function(req, res){
        respondWithMarkdown(res, 'api', {contentTitle:'API'});

@@ -22,7 +22,6 @@ code {
 :not(pre) > code {
    display:inline-block;
    background-color: #827e7a;
-   border:1px #0f0a07 solid;
    padding: 2px 5px;
 }
 

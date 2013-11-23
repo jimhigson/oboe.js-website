@@ -36,10 +36,20 @@
     <div class="row">
 
         <nav class="col col1">
-            <a href="https://raw.github.com/jimhigson/oboe.js/v1.10.3/dist/oboe-browser.js"
-               id="download" title="Get the project">
-                Download <span id="version">v1.10.3</span>
-            </a>
+           {{#home}}
+               <a href="https://raw.github.com/jimhigson/oboe.js/v1.10.3/dist/oboe-browser.js"
+                  id="download" title="Get the project">
+                   Download <span id="version">v1.10.3</span>
+               </a>
+           {{/home}}            
+            
+           <ul class="links">
+              {{#sections}}
+                <li><a href="#{{id}}">{{text}}</a></li>
+              {{/sections}} 
+           </ul>            
+
+           {{#home}}            
             <ul class="links">
                 <li><a href="https://github.com/jimhigson/oboe.js">Github</a></li>
                 <li><a href="https://twitter.com/OboeJs">Twitter</a>
@@ -55,6 +65,7 @@
                     </a>
                 </li>
             </ul>
+           {{/home}}            
         </nav>
         <div class="col col2">
 

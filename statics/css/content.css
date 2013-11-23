@@ -37,13 +37,13 @@ code {
 https://github.com/jdiehl/dark-pastel/blob/master/dark-pastel.tmTheme */
 
 code .comment {
-   color: #82ca9c;
+   color: #8EB29B;
 }
 code .string {
    color: #D79692;
 }
 code .keyword {
-   color: #71C8D9;
+   color: #85BBC6;
 }
 
 .marked ul {

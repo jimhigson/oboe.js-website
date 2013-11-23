@@ -1,8 +1,32 @@
 var supermarked = require('supermarked'), 
-    fs = require('fs');
+    fs = require('fs'),
+    cheerio = require('cheerio');
 
+function outline(html){
 
-function readMarkdown(requestedMarkdown, callback, errCallback) {
+   var $ = cheerio.load(html),
+       mainHeadingEle = $('h1').first()   
+   
+       mainHeading = {
+         text: mainHeadingEle.text(),
+         id:   mainHeadingEle.attr('id')
+       };
+       
+       sectionHeadings = 
+            $('h2').map(function(i, element){
+               return {
+                  text: $(element).text(),
+                  id:   $(element).attr('id')
+               }
+            });   
+   
+   return {
+      main: mainHeading,
+      sections: sectionHeadings
+   }
+}
+
+function readMarkdown(requestedMarkdown, callback) {
 
    function markdownPath(markdownFileName) {
       return 'content/' + markdownFileName + '.md';
@@ -16,10 +40,11 @@ function readMarkdown(requestedMarkdown, callback, errCallback) {
    
       fs.readFile(fileToRead, function(err, markdownBuffer){
        
-          var markdownStr = markdownBuffer.toString();
-          var html = supermarked(markdownStr, {ignoreMath:true});
+          var markdownStr = markdownBuffer.toString(),
+              html = supermarked(markdownStr, {ignoreMath:true}),
+              documentTree = outline(html);
           
-          callback( html);
+          callback( html, documentTree );
        });   
    });
 }

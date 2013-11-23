@@ -12,9 +12,11 @@ app.set('views', __dirname + '/views');
 function respondWithMarkdown(res, markdownFilename, opts){
     opts = opts || {};
 
-    readContent(markdownFilename, function( html ){
+    readContent(markdownFilename, function( html, outline ){
         opts.content = html;
         res.render('page', opts);
+        
+        console.log(outline);
     });
 }
 

@@ -1,4 +1,3 @@
-
 $(function(){
    // make internal nav sticky
    if( $( window ).width() > 780 ) {
@@ -11,7 +10,7 @@ $(function(){
       // highlight active item on internal nav 
        var prev;
        
-       var headings = $('.marked.body h2').map(function(i, el) {
+       var headings = $('main h2').map(function(i, el) {
            return {
                top: $(el).offset().top,
                id: el.id
@@ -34,9 +33,7 @@ $(function(){
                          
            if (!activeHeading)
                activeHeading = headings.first()[0];
-               
-          console.log(activeHeading);                  
-           
+                                 
            if (prev) {
                prev.removeClass('active');
            }
@@ -50,4 +47,4 @@ $(function(){
       $(document).scroll(updateActive);
       updateActive();
    }
-})
+});

@@ -4,8 +4,8 @@ var express = require('express'),
     consolidate = require('consolidate'),
     readContent = require('./read-content.js');
 
-app.engine('html', consolidate.handlebars);
-app.set('view engine', 'html');
+app.engine('handlebars', consolidate.handlebars);
+app.set('view engine', 'handlebars');
 app.set('views', __dirname + '/views');
 
 function respondWithMarkdown(res, markdownFilename, opts){
@@ -33,6 +33,9 @@ app
    .get('/:page', function(req, res){
        respondWithMarkdown(res, req.params.page);
    })
+/*  .get('/articles/:article', function(req, res){
+        respondWithMarkdown(res, 'articles/' + req.params.article);
+    })*/   
    .use(express.static('statics'))
    .use(express.static('components/oboe/dist'))
    .use(express.static('components/jquery'))

@@ -25,7 +25,7 @@
    <div class="button2"></div>
 </div>
 <div id="pagearea">
-   <div class="row">
+   <header class="row">
       {{#home}}
       <h1>Oboe.js</h1>
       {{/home}}
@@ -36,7 +36,7 @@
       {{#if home}}
          <p class="strapline">{{heading.text}}</p>
       {{/if}}
-   </div>
+   </header>
 
    <div class="row">
 
@@ -79,22 +79,22 @@
       </nav>
       <div class="col col2">
 
-         <div class="marked body">
+         <main class="marked">
             {{{content}}}
-         </div>
+         </main>
 
       </div>
 
    </div>
 </div>
-<div id="footer">
+<footer>
    <div id="footer-contents">
       <a href="//samwakeling.com" id="sw" title="Web design by Sam Wakeling">Web
          design by Sam Wakeling</a>
 
       <p><a href="mailto:jim.higson@gmail.com">Contact the author</a></p>
    </div>
-</div>
+</footer>
 
 <script type="text/javascript">!function (d, s, id) {
    var js, fjs = d.getElementsByTagName(s)[0];

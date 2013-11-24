@@ -1,109 +1,109 @@
 <!DOCTYPE html>
 <html>
-<head>
-
-   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-   <link rel="stylesheet" href="../css/oboe.css"/>
-   <link rel="stylesheet" href="../css/content.css"/>
-
-   <title>Oboe.js</title>
-
-   <meta name="Description" content="Progressive loading of json"/>
-   
-   <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-   <script type="text/javascript" src="/js/jquery.sticky.js"></script>
-   <script type="text/javascript" src="/js/app.js"></script>
-</head>
-<body>
-<div id="header">
-   <div class="button2 wee"></div>
-   <div class="button2 wee"></div>
-   <div class="button2 wee"></div>
-   <div class="button2"></div>
-   <div class="button2"></div>
-   <div class="button2"></div>
-   <div class="button2"></div>
-</div>
-<div id="pagearea">
-   <header class="row">
-      {{#home}}
-      <h1>Oboe.js</h1>
-      {{/home}}
-      {{^home}}
-      <h1><a href="/">Oboe.js</a></h1>
-      {{/home}}
-
-      {{#if home}}
-         <p class="strapline">{{heading.text}}</p>
-      {{/if}}
-   </header>
-
-   <div class="row">
-
-      <nav class="col col1">
-         {{#home}}
-         <a href="https://raw.github.com/jimhigson/oboe.js/v1.10.3/dist/oboe-browser.js"
-            id="download" title="Get the project">
-            Download <span id="version">v1.10.3</span>
-         </a>
-         {{/home}}
-
-         <div class="internalNav">
-            {{#if sections}}         
-               <h2>{{heading.text}}</h2>
-               <ul class="sections">
-                  {{#sections}}
-                     <li><a href="#{{id}}">{{text}}</a></li>
-                  {{/sections}}
-               </ul>
-            {{/if}}
-         </div>
-
-         {{#home}}
-         <ul class="links">
-            <li><a href="https://github.com/jimhigson/oboe.js">Github</a></li>
-            <li><a href="https://twitter.com/OboeJs">Twitter</a>
-            </li>
-            <li><a href="https://npmjs.org/package/oboe/">npm</a></li>
-            <li>
-               <a href="https://twitter.com/OboeJs"
-                  class="twitter-follow-button"
-                  data-show-count="false"
-                  data-lang="en"
-                  data-size="large">
-                  Follow @OboeJs
-               </a>
-            </li>
-         </ul>
-         {{/home}}
-      </nav>
-      <div class="col col2">
-
-         <main class="marked">
-            {{{content}}}
-         </main>
-
-      </div>
-
-   </div>
-</div>
-<footer>
-   <div id="footer-contents">
-      <a href="//samwakeling.com" id="sw" title="Web design by Sam Wakeling">Web
-         design by Sam Wakeling</a>
-
-      <p><a href="mailto:jim.higson@gmail.com">Contact the author</a></p>
-   </div>
-</footer>
-
-<script type="text/javascript">!function (d, s, id) {
-   var js, fjs = d.getElementsByTagName(s)[0];
-   if (!d.getElementById(id)) {
-      js = d.createElement(s);
-      js.id = id;
-      js.src = "//platform.twitter.com/widgets.js";
-      fjs.parentNode.insertBefore(js, fjs);
-   }
-}(document, "script", "twitter-wjs");</script>
-</body>
+    <head>
+    
+       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+       <link rel="stylesheet" href="../css/oboe.css"/>
+       <link rel="stylesheet" href="../css/content.css"/>
+    
+       <title>Oboe.js</title>
+    
+       <meta name="Description" content="Progressive loading of json"/>
+       
+       <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+       <script type="text/javascript" src="/js/jquery.sticky.js"></script>
+       <script type="text/javascript" src="/js/app.js"></script>
+    </head>
+    <body>
+        <div id="header">
+           <div class="button2 wee"></div>
+           <div class="button2 wee"></div>
+           <div class="button2 wee"></div>
+           <div class="button2"></div>
+           <div class="button2"></div>
+           <div class="button2"></div>
+           <div class="button2"></div>
+        </div>
+        <div id="pagearea">
+           <header class="row">
+              {{#home}}
+                  <h1>Oboe.js</h1>
+              {{/home}}
+              {{^home}}
+                  <h1><a href="/">Oboe.js</a></h1>
+              {{/home}}
+        
+              {{#if home}}
+                 <p class="strapline">{{heading.text}}</p>
+              {{/if}}
+           </header>
+        
+           <div class="row">
+        
+              <nav class="col col1">
+                 {{#home}}
+                     <a href="https://raw.github.com/jimhigson/oboe.js/v1.10.3/dist/oboe-browser.js"
+                        id="download" title="Get the project">
+                        Download <span id="version">v1.10.3</span>
+                     </a>
+                 {{/home}}
+        
+                 <div class="internalNav">
+                    {{#if sections}}         
+                       <h2>{{heading.text}}</h2>
+                       <ul class="sections">
+                          {{#sections}}
+                             <li><a href="#{{id}}">{{text}}</a></li>
+                          {{/sections}}
+                       </ul>
+                    {{/if}}
+                 </div>
+        
+                 {{#home}}
+                     <ul class="links">
+                        <li><a href="https://github.com/jimhigson/oboe.js">Github</a></li>
+                        <li><a href="https://twitter.com/OboeJs">Twitter</a>
+                        </li>
+                        <li><a href="https://npmjs.org/package/oboe/">npm</a></li>
+                        <li>
+                           <a href="https://twitter.com/OboeJs"
+                              class="twitter-follow-button"
+                              data-show-count="false"
+                              data-lang="en"
+                              data-size="large">
+                              Follow @OboeJs
+                           </a>
+                        </li>
+                     </ul>
+                 {{/home}}
+              </nav>
+              <div class="col col2">
+        
+                 <main class="marked">
+                    {{{content}}}
+                 </main>
+        
+              </div>
+        
+           </div>
+        </div>
+        <footer>
+           <div id="footer-contents">
+              <a href="//samwakeling.com" id="sw" title="Web design by Sam Wakeling">Web
+                 design by Sam Wakeling</a>
+        
+              <p><a href="mailto:jim.higson@gmail.com">Contact the author</a></p>
+           </div>
+        </footer>
+        
+        <script type="text/javascript">!function (d, s, id) {
+           var js, fjs = d.getElementsByTagName(s)[0];
+           if (!d.getElementById(id)) {
+              js = d.createElement(s);
+              js.id = id;
+              js.src = "//platform.twitter.com/widgets.js";
+              fjs.parentNode.insertBefore(js, fjs);
+           }
+        }(document, "script", "twitter-wjs");</script>
+    </body>
 </html>

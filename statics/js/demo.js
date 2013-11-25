@@ -22,8 +22,8 @@ function Packet(name, direction){
 function PacketHolder(name){
     this.name = name;
     this.adjacents = {
-        downstream: new EventSink(),
-        upstream:   new EventSink()
+        downstream: new EventSink('downstream void'),
+        upstream:   new EventSink('upstream void')
     };
 }
 PacketHolder.prototype.accept = abstract;

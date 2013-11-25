@@ -11,6 +11,12 @@ app.set('views', __dirname + '/views');
 function respondWithMarkdown(res, markdownFilename, opts){
     opts = opts || {};
 
+    opts.scripts = [
+        "//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"
+    ,   "/js/jquery.sticky.js"
+    ,   "/js/app.js"        
+    ];
+    
     readContent(markdownFilename, function( outline ){
     
         opts.content = outline.content;

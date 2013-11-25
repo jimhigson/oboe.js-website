@@ -22,11 +22,6 @@ function PacketHolder(name){
 }
 PacketHolder.prototype.accept = abstract;
 
-PacketHolder.prototype.withUpstream = function(upstream){
-    this.adjacents.upstream = upstream;
-    upstream.adjacents.downstream = this;
-    return this;
-};
 PacketHolder.prototype.withDownstream = function(downstream){
     this.adjacents.downstream = downstream;
     downstream.adjacents.upstream = this;

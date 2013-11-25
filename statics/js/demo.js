@@ -4,12 +4,6 @@ function extend(Sup, Sub) {
     Sub.super = Sup;
     return Sub;
 }
-function setter(fieldName) {
-    return function(value){
-        this[fieldName] = value;
-        return this;
-    }
-}
 function abstract(){
     throw new Error('don\'t call me, I\'m abstract');
 }
@@ -22,8 +16,8 @@ function Packet(name, direction){
 function PacketHolder(name){
     this.name = name;
     this.adjacents = {
-        downstream: new EventSink('downstream void'),
-        upstream:   new EventSink('upstream void')
+        downstream: new EventSink('downstream void')
+    ,   upstream:   new EventSink('upstream void')
     };
 }
 PacketHolder.prototype.accept = abstract;

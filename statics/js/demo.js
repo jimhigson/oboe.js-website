@@ -26,7 +26,7 @@ function PacketHolder(name){
         upstream:   new EventSink()
     };
 }
-PacketHolder.prototype.acceptPacket = abstract;
+PacketHolder.prototype.accept = abstract;
 
 PacketHolder.prototype.withUpstream = function(upstream){
     this.adjacents.upstream = upstream;
@@ -48,11 +48,19 @@ function EventSink (name) {
 
 var Wire = extend( PacketHolder, function(name) {
     PacketHolder.apply(this, arguments);
+    this.latency = 500;
 });
+Wire.prototype.accept = function(packet){
+    console.log(this.name, 'got', packet);
+    window.setTimeout(this.propagate.bind(this, packet), this.latency);
+};
 
 var Server = extend( PacketHolder, function(name) {
     PacketHolder.apply(this, arguments);
 });
+Server.prototype.accept = function(packet){
+    console.log(this.name, 'got', packet);
+};
 
 var Client = extend( PacketHolder, function(name) {
     PacketHolder.apply(this, arguments);
@@ -73,3 +81,5 @@ server = new Server('webServer')
         client = new Client('little_jimmy') 
     )
 );
+
+client.makeRequest();

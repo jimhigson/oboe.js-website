@@ -44,7 +44,9 @@ $(function(){
            prev = a;
        }
        
-      $(document).scroll(updateActive);
-      updateActive();
+        if( headings.length ) {
+            $(document).scroll(updateActive);
+            updateActive();
+        }
    }
 });

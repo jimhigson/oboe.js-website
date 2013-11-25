@@ -17,6 +17,11 @@ function respondWithMarkdown(res, markdownFilename, opts){
     ,   "/js/app.js"        
     ];
     
+    opts.stylesheets = [
+        "oboe.css"
+    ,   "content.css"        
+    ];
+    
     readContent(markdownFilename, function( outline ){
     
         opts.content = outline.content;

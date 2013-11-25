@@ -38,13 +38,13 @@ function respondWithMarkdown(res, markdownFilename, opts){
 app
    .get('/demo', function(req, res){
 
-        res.render('demo', function(err, html) {
+        res.render('demo', function(err, demoContentHtml) {
             res.render('page', {
                 scripts:     UNMINIFIED_SCRIPTS
                                 .concat('/js/demo/model.js'),
                 stylesheets: UNMINIFIED_STYLESHEETS
                                 .concat('demo.css'),                
-                content: html
+                content: demoContentHtml
             });
         });
    })    

@@ -3,6 +3,8 @@ var express = require('express'),
     app = express(),
     consolidate = require('consolidate'),
     readContent = require('./read-content.js'),
+    
+    PORT = '8888',
 
     UNMINIFIED_SCRIPTS = [
         "//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"
@@ -13,7 +15,9 @@ var express = require('express'),
     UNMINIFIED_STYLESHEETS = [
         "oboe.css"
     ,   "content.css"
-    ];    
+    ];
+
+require('colors');
 
 app.engine('handlebars', consolidate.handlebars);
 app.set('view engine', 'handlebars');
@@ -64,4 +68,6 @@ app
    .use(express.static('components/oboe/dist'))
    .use(express.static('components/jquery'))
    .use(express.static('components/d3'))
-   .listen(8888);
+   .listen(PORT);
+
+console.log('started on port', PORT.cyan);

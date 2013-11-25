@@ -9,7 +9,8 @@
     "consolidate": "~0.9.1",
     "supermarked": "~1.1.0",
     "cheerio": "~0.12.4",
-    "handlebars": "~1.1.2"
+    "handlebars": "~1.1.2",
+    "colors": "~0.6.2"
   },
   "devDependencies": {},
   "scripts": {

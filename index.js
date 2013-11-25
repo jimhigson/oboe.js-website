@@ -41,7 +41,7 @@ app
         res.render('demo', function(err, html) {
             res.render('page', {
                 scripts:     UNMINIFIED_SCRIPTS
-                                .concat('/js/demo.js'),
+                                .concat('/js/demo/model.js'),
                 stylesheets: UNMINIFIED_STYLESHEETS
                                 .concat('demo.css'),                
                 content: html

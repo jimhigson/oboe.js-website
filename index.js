@@ -15,7 +15,9 @@ var express = require('express'),
     UNMINIFIED_STYLESHEETS = [
         "oboe.css"
     ,   "content.css"
-    ];
+    ],
+    
+    LATEST_TAG = 'v1.11.0';
 
 require('colors');
 
@@ -28,6 +30,7 @@ function respondWithMarkdown(res, markdownFilename, opts){
     opts = opts || {};
     opts.scripts     = UNMINIFIED_SCRIPTS;
     opts.stylesheets = UNMINIFIED_STYLESHEETS;
+    opts.latestTag   = LATEST_TAG;
     
     readContent(markdownFilename, function( outline ){
     

@@ -44,12 +44,12 @@
            <div class="row">
         
               <nav class="col col1">
-                 {{#home}}
-                     <a href="https://raw.github.com/jimhigson/oboe.js/v1.10.3/dist/oboe-browser.js"
-                        id="download" title="Get the project">
-                        Download <span id="version">v1.10.3</span>
+                 {{#if home}}
+                     <a href="https://raw.github.com/jimhigson/oboe.js/{{latestTag}}/dist/oboe-browser.js"
+                        id="download" title="Get the code">
+                        Download <span id="version">{{latestTag}}</span>
                      </a>
-                 {{/home}}
+                 {{/if}}
         
                  <div class="internalNav">
                     {{#if sections}}         

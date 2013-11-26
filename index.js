@@ -48,9 +48,17 @@ app
         res.render('demo', function(err, demoContentHtml) {
             res.render('page', {
                 scripts:     UNMINIFIED_SCRIPTS
-                                .concat('/js/demo/model.js'),
+                                .concat([
+                                    "/js/demo/functional.js"
+                                ,   "/js/demo/singleEventPubSub.js"
+                                ,   "/js/demo/pubSub.js"
+                                ,   '/js/demo/demoModel.js'                        
+                                ,   "/js/demo/demoView.js"
+                                ]),
                 stylesheets: UNMINIFIED_STYLESHEETS
-                                .concat('demo.css'),                
+                                .concat([
+                                    'demo.css'
+                                ]),                
                 content: demoContentHtml
             });
         });

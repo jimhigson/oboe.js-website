@@ -49,11 +49,13 @@ app
             res.render('page', {
                 scripts:     UNMINIFIED_SCRIPTS
                                 .concat([
-                                    "/js/demo/functional.js"
+                                    "/js/demo/functional.js"                        
+                                ,   "/js/demo/lists.js"
                                 ,   "/js/demo/singleEventPubSub.js"
                                 ,   "/js/demo/pubSub.js"
                                 ,   '/js/demo/demoModel.js'                        
                                 ,   "/js/demo/demoView.js"
+                                ,   "/js/demo/wireDemo.js"
                                 ]),
                 stylesheets: UNMINIFIED_STYLESHEETS
                                 .concat([

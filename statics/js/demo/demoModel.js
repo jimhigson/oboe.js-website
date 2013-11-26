@@ -11,7 +11,16 @@ function abstract(){
 function Packet(name, direction){
     this.direction = direction;
     this.name = name;
+    this.events = pubSub();
+    Packet.new.emit(this);    
 }
+Packet.new = singleEventPubSub('new');
+Packet.prototype.move = function(x, y, duration){
+    this.events('move').emit(x, y, duration);
+};
+Packet.prototype.done = function(x, y, duration){
+    this.events('done').emit();
+};
 
 function PacketHolder(name){
     this.name = name;
@@ -35,6 +44,7 @@ function EventSink (name) {
     this.name = name;
 }
 
+
 var Wire = extend( PacketHolder, function(name) {
     PacketHolder.apply(this, arguments);
     this.latency = 1500;
@@ -51,6 +61,7 @@ Server.prototype.accept = function(packet){
     console.log(this.name, 'got', packet);
     if( packet.name == 'request' ) {
         this.sendResponse();
+        packet.done();
     }
 };
 Server.prototype.sendResponse = function() {
@@ -73,18 +84,6 @@ Client.prototype.makeRequest = function(){
 };
 Client.prototype.accept = function(packet){
     console.log(this.name, 'got', packet);
+    packet.done();    
 };
 
-
-// setup the application
-var server, wire, client;
-
-server = new Server('webServer')
-.withDownstream(
-    wire = new Wire('internet')
-    .withDownstream( 
-        client = new Client('little_jimmy') 
-    )
-);
-
-client.makeRequest();

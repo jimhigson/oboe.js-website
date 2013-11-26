@@ -9,7 +9,7 @@ var express = require('express'),
     UNMINIFIED_SCRIPTS = [
         "//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"
     ,   "/js/jquery.sticky.js"
-    ,   "/js/app.js"
+    ,   "/js/internalNav.js"
     ],
 
     UNMINIFIED_STYLESHEETS = [

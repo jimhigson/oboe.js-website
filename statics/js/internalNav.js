@@ -19,7 +19,7 @@ $(function(){
        
        function closest() {
            var h;
-           var top = $(window).scrollTop() +2;
+           var top = $(window).scrollTop() +20;
            var i = headings.length;
            while (i--) {
                h = headings[i];
@@ -48,5 +48,20 @@ $(function(){
             $(document).scroll(updateActive);
             updateActive();
         }
+
+       // set up smooth scrolling for internal links
+       // http://css-tricks.com/snippets/jquery/smooth-scrolling/
+       $('a[href*=#]:not([href=#])').click(function() {
+           if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+               var target = $(this.hash);
+               target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+               if (target.length) {
+                   $('html,body').animate({
+                       scrollTop: target.offset().top
+                   }, 500);
+                   return false;
+               }
+           }
+       });       
    }
 });

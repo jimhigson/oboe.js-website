@@ -54,7 +54,7 @@ code .keyword {
 }   
    
 .marked li:before {
-    content: "Ã¢â‚¬Â¢";
+    content: "•";
     padding-right: 0;
     position:absolute;
     left:1em;

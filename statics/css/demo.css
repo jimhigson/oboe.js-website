@@ -18,3 +18,33 @@ rect#background {
    fill: white;
    stroke: black;
 }
+
+.packet {
+   stroke:black;
+}
+
+.packet.request {
+    fill:white;
+}
+
+.packet.response0 {
+   fill:red;
+}
+.packet.response1 {
+   fill:orange;    
+}
+.packet.response2 {
+   fill:yellow;    
+}
+.packet.response3 {
+   fill:green;    
+}
+.packet.response4 {
+   fill:blue;    
+}
+.packet.response5 {
+   fill:indigo;    
+}
+.packet.response6 {
+   fill:violet;    
+}

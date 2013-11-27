@@ -1,4 +1,8 @@
 
+function stampFromTemplate(templateId) {
+    return $('template#' + templateId).children().clone();
+}
+
 Packet.new.on( function(newPacket){
     
     console.log('__new packet created', newPacket);
@@ -8,13 +12,20 @@ Packet.new.on( function(newPacket){
 });
 
 function PacketView(packet) {
+
+    var packetDom = stampFromTemplate('packet');
+    packetDom.attr('class', 'packet ' + packet.name);
+    PacketView.container.append(packetDom);
     
-    packet.events('move').on(function(x, y, dur){
-        console.log('__moved:', packet, x, y, dur);
+    packet.events('move').on(function(location, dur){
+        console.log(packet, 'is moving to', location, 'and will take', dur);
+        
     });
     
     packet.events('done').on(function(){
-        console.log('__finished:', packet);        
+        packetDom.remove();        
     });
     
 }
+
+PacketView.container = $('.packets');

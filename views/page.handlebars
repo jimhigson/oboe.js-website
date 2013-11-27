@@ -11,10 +11,6 @@
        <title>Oboe.js</title>
     
        <meta name="Description" content="Progressive loading of json"/>
-
-       {{#each scripts}}
-           <script type="text/javascript" src="{{this}}"></script>          
-       {{/each}}
            
     </head>
     <body>
@@ -108,5 +104,9 @@
               fjs.parentNode.insertBefore(js, fjs);
            }
         }(document, "script", "twitter-wjs");</script>
+
+        {{#each scripts}}
+            <script type="text/javascript" src="{{this}}"></script>
+        {{/each}}    
     </body>
 </html>

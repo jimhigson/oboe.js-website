@@ -8,6 +8,15 @@ function abstract(){
     throw new Error('don\'t call me, I\'m abstract');
 }
 
+function oppositeDirectionTo(dir) {
+    switch(dir){
+        case 'upstream':
+            return 'downstream';
+        case 'downstream':
+            return 'upstream';
+    }
+}
+
 function Packet(name, direction){
     this.direction = direction;
     this.name = name;
@@ -15,10 +24,10 @@ function Packet(name, direction){
     Packet.new.emit(this);    
 }
 Packet.new = singleEventPubSub('new');
-Packet.prototype.move = function(x, y, duration){
-    this.events('move').emit(x, y, duration);
+Packet.prototype.move = function(location, duration){
+    this.events('move').emit(location, duration);
 };
-Packet.prototype.done = function(x, y, duration){
+Packet.prototype.done = function(location, duration){
     this.events('done').emit();
 };
 
@@ -45,13 +54,20 @@ function EventSink (name) {
 }
 
 
-var Wire = extend( PacketHolder, function(name) {
+var Wire = extend( PacketHolder, function(name, upstreamEndLocation, downstreamEndLocation) {
+    this.locations = {
+        downstream: downstreamEndLocation
+    ,   upstream:   upstreamEndLocation
+    };
+    
     PacketHolder.apply(this, arguments);
     this.latency = 1500;
 });
 Wire.prototype.accept = function(packet){
     console.log(this.name, 'got', packet);
     window.setTimeout(this.propagate.bind(this, packet), this.latency);
+    
+    packet.move( this.locations[ oppositeDirectionTo(packet.direction) ], this.latency );
 };
 
 var Server = extend( PacketHolder, function(name) {

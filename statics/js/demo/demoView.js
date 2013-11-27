@@ -17,8 +17,9 @@ function PacketView(packet) {
     packetDom.attr('class', 'packet ' + packet.name);
     PacketView.container.append(packetDom);
     
-    packet.events('move').on(function(x, y, dur){
-
+    packet.events('move').on(function(location, dur){
+        console.log(packet, 'is moving to', location, 'and will take', dur);
+        
     });
     
     packet.events('done').on(function(){

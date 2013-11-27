@@ -13,14 +13,16 @@ Packet.new.on( function(newPacket){
 
 function PacketView(packet) {
 
-    PacketView.container.append(stampFromTemplate('packet'));
+    var packetDom = stampFromTemplate('packet');
+    packetDom.attr('class', 'packet ' + packet.name);
+    PacketView.container.append(packetDom);
     
     packet.events('move').on(function(x, y, dur){
-        console.log('__moved:', packet, x, y, dur);
+
     });
     
     packet.events('done').on(function(){
-        console.log('__finished:', packet);        
+        packetDom.remove();        
     });
     
 }

@@ -80,9 +80,9 @@ body {
 
 #pagearea {
    display:table;
-   max-width: 900px;
-   margin: 80px auto;
-   padding: 0;
+   max-width: 1100px;
+   margin: 30px auto;
+   padding: 0 20px;
    padding-bottom: 100px;
 }
 
@@ -119,35 +119,47 @@ footer p a:hover {
 }
 
 a {
-   color: #82ca9c;
+   color: #74b58c;
    text-decoration: none;
    transition: all 0.5s;   
 }
 
 a:hover {
-   color: #69b284;
-   text-decoratiocn: underline;
+   color: #4a765a;
+   text-decoration: underline;
    transition: all 0.2s;   
 }
 
 a:active {
-   color: #42c772;
+   color: #000;
+   transition: all 0s;   
 }
 
 a.active {
-   color: #42c772;
-   background-color:white;
+      background: #eeebe7;
+      display: block;
+      padding: 5px;
+      margin: 0 -6px ;
+      border-left: 1px solid #827e7a;
 }
 
 h1 a, h1 a:hover {
-   color:black;
+   color: #0f0a07;
+   text-decoration: none;
+}
+
+.internalNav h2,
+.marked h2 {
+   border-bottom: 1px #c1bcb7 solid;
+   padding-bottom: 6px;
+   margin:1.2em 0 0.7em;
 }
 
 .button {
    width: 100px;
    height: 100px;
    position: absolute;
-   top: 100px;
+   top: 100px;   
 }
 
 .button2 {
@@ -155,25 +167,47 @@ h1 a, h1 a:hover {
    height: 50px;
    background: #ccc;
    position: relative;
-   float: right;
-   top: 40px;
+   float: left;
+   top: 25px;
    margin: 0 10px;
    border-radius: 100px;
    border: 2px solid #fff;
-   box-shadow: inset 0 -3px 0px rgba(0, 0, 0, 0.2), inset 0 8px 0 rgba(255, 255, 255, 0.3), 0 4px 10px rgba(0, 0, 0, 0.1);
-   transition: all 0.5s;
+   box-shadow: inset 0 -3px 0px rgba(0, 0, 0, 0.2), 
+               inset 0 8px 0 rgba(255, 255, 255, 0.3), 
+               0 4px 10px rgba(0, 0, 0, 0.1);
+-webkit-animation-duration: 2s;
+	  -webkit-animation-name: slidein;
+	  animation-duration: 2s;
+	  animation-name: slidein;
 }
+
+@keyframes slidein { 
+      0% { left: -50%; 
+            margin-left: 50px;
+            animation-timing-function: ease-in; }
+       80% { left: 9%; margin-left: 0;
+            animation-timing-function: ease-out; }
+      100% { left: 0%; 
+            margin-left: 10px;}
+}
+@-webkit-keyframes slidein {
+        0% { left: -50%; 
+            margin-left: 50px;
+             -webkit-animation-timing-function: ease-in; }
+       80% { left: 9%; margin-left: 0;
+             -webkit-animation-timing-function: ease-out; }
+      100% { left: 0%; 
+            margin-left: 10px;}
+  
+}
+
 
 .button2.wee {
    width: 30px;
    height: 30px;
-   top: 50px;
+   top: 45px;
 }
 
-.button2:hover {
-   margin-top: -6px;
-   transition: all 0.2s;
-}
 
 
 
@@ -189,7 +223,7 @@ h1, .strapline, .col {
 
 /* set width of left column */
 h1, .col1 {
-   width: 292px;
+   width: 30%;
 }
 
 
@@ -200,16 +234,16 @@ h1 {
 }
 
 .strapline {
-   padding: 52px 0 0 9px;
+   padding: 52px 0 0 70px;
    font-size: 180%;
    line-height: 1.1;
 }
 .col2 {
-   padding-left:9px;
+   padding-left:70px;
 }
 
 p {
-   margin: 0 0 1.2em 0;
+   margin: 0.6em 0 0.6em 0;
    line-height: 1.5;
 }
 
@@ -249,15 +283,15 @@ p {
 }
 
 nav ul.links {
-   font-size: 150%;
+   font-size: 120%;
 }
 
 nav ul.links li {
-   margin: 0.5em;
+   margin: 0.5em 0;
 }
 
 nav ul.sections li {
-   margin: 0.5em;
+   margin: 0.7em 0;
 }
 
 #sw {
@@ -279,6 +313,8 @@ nav ul.sections li {
 
 footer #sw {
    float: right;
+   position: relative;
+   top: -10px;
 }
 
 /* Small screens - 1 column */
@@ -287,7 +323,12 @@ footer #sw {
    #pagearea {
       display:block;
    }
-
+   .col1 {
+        width: auto;
+   }
+   .col2 {
+         padding-left:0px;
+   }
    .row {
       display:block;
    }
@@ -305,12 +346,35 @@ footer #sw {
    .strapline {
       padding:0;
    }
+   
+   
+      .button2 {
+         width: 25px;
+         height: 25px;
+         top: 55px;
+      }
+      
+      .button2.wee {
+         width: 15px;
+         height: 15px;
+         top: 60px;
+      }
+
 }
 
 
 /* Even Smaller screens */
 @media only screen and (max-width: 600px) {
 
+      .button2, .button2.wee {
+            margin-left:0px;
+            margin-right:8px;
+            top: 18px;
+      }
+      #header, footer {
+         padding: 30px;
+      }
+      
    #download {
       display:none;
    }
@@ -323,10 +387,10 @@ footer #sw {
    
    h1, .col1 {
       width: auto;
+      margin: ;
    }
    
    .col.col1 {
-      text-align: center;
       margin-left: auto;
       margin-right: auto;
    }

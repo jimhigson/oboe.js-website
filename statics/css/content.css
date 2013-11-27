@@ -4,47 +4,41 @@
 }
 
 code {
-   color: #f5f3ee;
+   color: #3d3935;
    font-size:80%;
 }
 
 /* code blocks */
 .marked pre {
-   background-color:#0f0a07;
-   max-width:35em;
+   background-color:#eeece7;
    overflow:auto;
    padding:1em;
    line-height: 1.2em;
-   border:3px #827e7a solid;
-   border-radius: 4px;   
-   
-   margin:1.5em 0 1.5em 0;
+   margin:0em 0 2em 0;
 }
 
 /* inline code examples */
 :not(pre) > code {
    display:inline-block;
    background-color: #827e7a;
+   color: #fff;
+   border-radius: 2px;
    padding: 2px 5px;
 }
 
-.internalNav h2,
-.marked h2 {
-   border-bottom: 1px #0f0a07 solid;
-   margin:0.5em 1em 0.5em 0;
-}
+
 
 /* colours stolen from here:
 https://github.com/jdiehl/dark-pastel/blob/master/dark-pastel.tmTheme */
 
 code .comment {
-   color: #8EB29B;
+   color: #4eb974;
 }
 code .string {
-   color: #D79692;
+   color: #d8615a;
 }
 code .keyword {
-   color: #85BBC6;
+   color: #50c3db;
 }
 
 .marked ul {
@@ -60,7 +54,7 @@ code .keyword {
 }   
    
 .marked li:before {
-    content: "•";
+    content: "Ã¢â‚¬Â¢";
     padding-right: 0;
     position:absolute;
     left:1em;

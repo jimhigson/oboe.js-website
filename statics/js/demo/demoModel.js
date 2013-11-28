@@ -66,9 +66,7 @@ var Wire = extend( PacketHolder, function(name) {
 });
 Wire.prototype.accept = function(packet){
     var self = this;
-    
-    console.log(this.name, 'got', packet);
-    
+        
     this.movePacket(packet, oppositeDirectionTo(packet.direction), packet.direction);
 
     window.setTimeout(function(){
@@ -81,7 +79,7 @@ var Server = extend( PacketHolder, function(name) {
     this.timeBetweenPackets = 100;
 });
 Server.prototype.accept = function(packet){
-    console.log(this.name, 'got', packet);
+    
     if( packet.name == 'request' ) {
         this.sendResponse();
         packet.done();

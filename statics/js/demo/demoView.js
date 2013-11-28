@@ -23,8 +23,7 @@ function stampFromTemplate(templateId) {
 
 Packet.new.on( function(newPacket){
     
-    console.log('__new packet created', newPacket);
-    
+   
     new PacketView(newPacket);   
     
 });
@@ -36,7 +35,6 @@ function PacketView(packet) {
     PacketView.container.append(jPacket);
 
     packet.events('move').on(function( fromXY, toXY, duration ){
-        console.log(fromXY, toXY, duration);
         
         jPacket.css({
             circleX:fromXY.x,

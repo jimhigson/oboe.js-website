@@ -55,7 +55,7 @@ app
                                 ,   "/js/demo/pubSub.js"
                                 ,   '/js/demo/demoModel.js'                        
                                 ,   "/js/demo/demoView.js"
-                                ,   "/js/demo/wireDemo.js"
+                                ,   "/js/demo/wire.js"
                                 ]),
                 stylesheets: UNMINIFIED_STYLESHEETS
                                 .concat([

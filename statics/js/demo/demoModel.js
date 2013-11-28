@@ -24,15 +24,14 @@ function Packet(name, direction){
     Packet.new.emit(this);    
 }
 Packet.new = singleEventPubSub('new');
-Packet.prototype.move = function(location, duration){
-    this.events('move').emit(location, duration);
-};
-Packet.prototype.done = function(location, duration){
+
+Packet.prototype.done = function(){
     this.events('done').emit();
 };
 
 function PacketHolder(name){
     this.name = name;
+    this.latency = 0;    
     this.adjacents = {
         downstream: new EventSink('downstream void')
     ,   upstream:   new EventSink('upstream void')
@@ -41,12 +40,18 @@ function PacketHolder(name){
 PacketHolder.prototype.accept = abstract;
 
 PacketHolder.prototype.withDownstream = function(downstream){
+    
     this.adjacents.downstream = downstream;
     downstream.adjacents.upstream = this;
+    this.packetMove = singleEventPubSub('packetMove');
+        
     return this;    
 };
 PacketHolder.prototype.propagate = function(packet){
     this.adjacents[packet.direction].accept(packet);
+};
+PacketHolder.prototype.movePacket = function(packet, location){
+    this.packetMove.emit(packet, location);    
 };
 
 function EventSink (name) {
@@ -54,11 +59,7 @@ function EventSink (name) {
 }
 
 
-var Wire = extend( PacketHolder, function(name, upstreamEndLocation, downstreamEndLocation) {
-    this.locations = {
-        downstream: downstreamEndLocation
-    ,   upstream:   upstreamEndLocation
-    };
+var Wire = extend( PacketHolder, function(name) {
     
     PacketHolder.apply(this, arguments);
     this.latency = 1500;
@@ -67,7 +68,7 @@ Wire.prototype.accept = function(packet){
     console.log(this.name, 'got', packet);
     window.setTimeout(this.propagate.bind(this, packet), this.latency);
     
-    packet.move( this.locations[ oppositeDirectionTo(packet.direction) ], this.latency );
+    this.movePacket(packet, packet.direction);
 };
 
 var Server = extend( PacketHolder, function(name) {

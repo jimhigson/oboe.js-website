@@ -1,3 +1,21 @@
+/* allow svg properties to be set like css by jQuery */
+$.cssHooks[ "circleX" ] = {
+    get: function( elem, computed, extra ) {
+        return elem.getAttribute('cx') || 0;
+    },
+    set: function( elem, value ) {
+        return elem.setAttribute('cx', value);
+    }
+};
+$.cssHooks[ "circleY" ] = {
+    get: function( elem, computed, extra ) {
+        return elem.getAttribute('cy') || 0;
+    },
+    set: function( elem, value ) {
+        return elem.setAttribute('cy', value);
+    }
+};
+
 
 function stampFromTemplate(templateId) {
     return $('template#' + templateId).children().clone();
@@ -13,12 +31,27 @@ Packet.new.on( function(newPacket){
 
 function PacketView(packet) {
 
-    var packetDom = stampFromTemplate('packet');
-    packetDom.attr('class', 'packet ' + packet.name);
-    PacketView.container.append(packetDom);
+    var jPacket = stampFromTemplate('packet');
+    jPacket.attr('class', 'packet ' + packet.name);
+    PacketView.container.append(jPacket);
+
+    packet.events('move').on(function( fromXY, toXY, duration ){
+        console.log(fromXY, toXY, duration);
         
+        jPacket.css({
+            circleX:fromXY.x,
+            circleY:fromXY.y
+        });
+        jPacket.animate({
+            circleX:toXY.x,
+            circleY:toXY.y
+        },
+            {duration:duration}
+        );
+    });    
+    
     packet.events('done').on(function(){
-        packetDom.remove();        
+        jPacket.remove();        
     });
 }
 
@@ -37,11 +70,10 @@ var WireView = extend(PacketHolderView, function(subject, upstreamLocation, down
     });
     
     subject.packetMove.on(function(packet, fromLocation, toLocation){
-        console.log('__move', packet, fromLocation, toLocation);
-        console.log('__move', 
-                this.locations[fromLocation], 
-                this.locations[toLocation], 
-                subject.latency );
+        var fromXY = this.locations[fromLocation]; 
+        var toXY   = this.locations[toLocation]; 
+                
+        packet.events('move').emit(fromXY, toXY, subject.latency);
     }.bind(this));
 });
 

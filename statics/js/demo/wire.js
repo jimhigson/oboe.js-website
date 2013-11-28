@@ -10,6 +10,6 @@ server = new Server('webServer')
             )
     );
 
-wireView = new WireView(wire, {x:15,y:55}, {x:440,y:55});
+wireView = new WireView(wire, {x:15,y:55}, {x:440,y:85});
 
 client.makeRequest();

@@ -78,6 +78,7 @@ Wire.prototype.accept = function(packet){
 
 var Server = extend( PacketHolder, function(name) {
     PacketHolder.apply(this, arguments);
+    this.timeBetweenPackets = 100;
 });
 Server.prototype.accept = function(packet){
     console.log(this.name, 'got', packet);
@@ -94,7 +95,7 @@ Server.prototype.sendResponse = function() {
                 if( times == 7 ) {
                     window.clearInterval(interval);
                 }        
-            }.bind(this), 1000);
+            }.bind(this), this.timeBetweenPackets);
 };
 
 var Client = extend( PacketHolder, function(name) {

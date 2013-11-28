@@ -29,16 +29,19 @@ function PacketHolderView(locations) {
     this.locations = locations;
 }
 
-var WireView = extend(PacketHolderView, function(wire, upstreamLocation, downstreamLocation){
+var WireView = extend(PacketHolderView, function(subject, upstreamLocation, downstreamLocation){
 
     PacketHolderView.call(this, {
         upstream:   upstreamLocation,
         downstream: downstreamLocation
     });
     
-    wire.packetMove.on(function(packet, location){
-        console.log('__move', packet, location);
-        console.log('__move', this.locations[location], wire.latency );
+    subject.packetMove.on(function(packet, fromLocation, toLocation){
+        console.log('__move', packet, fromLocation, toLocation);
+        console.log('__move', 
+                this.locations[fromLocation], 
+                this.locations[toLocation], 
+                subject.latency );
     }.bind(this));
 });
 

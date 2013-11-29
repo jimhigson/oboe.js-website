@@ -116,7 +116,6 @@ Client.prototype.makeRequest = function(){
     this.propagate(new Packet('request', 'upstream'));
 };
 Client.prototype.accept = function(packet){
-    console.log(this.name, 'got', packet);
     packet.done();    
 };
 

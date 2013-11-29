@@ -34,6 +34,7 @@ Packet.new.on( function(newPacket){
 
 function ThingView(containerName, templateName, subject) {
     this.jDom = stampFromTemplate(templateName, subject.name);
+    debugger;
     $('#' + containerName).append(this.jDom);
 }
 

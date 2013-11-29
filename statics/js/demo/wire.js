@@ -7,6 +7,7 @@ function start() {
     
     server = new Server('webServer',
                         {where:serverLocation}
+                        , 100, 500
     ).withDownstream(
         wire = new Wire('internet',
                         {downstream: clientLocation, upstream:serverLocation}

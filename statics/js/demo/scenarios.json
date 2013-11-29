@@ -1,16 +1,17 @@
-{
-    "simple":{
-        "items":{
-            "server":{
-                "next":["internetWire"]
-            },
-            "internetWire":{
-                "next":["client"],
-                "bandwidth":500,
-                "latency":1500
-            },
-            "client":{}
+[
+    {   "name":"fast-ajax"
+    ,   "simple":{
+            "items":{
+                "server":{
+                    "next":["internetWire"]
+                },
+                "internetWire":{
+                    "next":["client"],
+                    "bandwidth":500,
+                    "latency":1500
+                },
+                "client":{}
+            }
         }
     }
-
-}
+]

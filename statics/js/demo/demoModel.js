@@ -86,9 +86,10 @@ Wire.prototype.accept = function(packet){
     }, this.latency);
 };
 
-var Server = extend( PacketHolder, function(name) {
+var Server = extend( PacketHolder, function(name, locations, timeBetweenPackets, initialDelay) {
     PacketHolder.apply(this, arguments);
-    this.timeBetweenPackets = 100;
+    this.timeBetweenPackets = timeBetweenPackets;
+    this.initialDelay = initialDelay;
 });
 Server.prototype.accept = function(packet, locations){
     
@@ -98,14 +99,17 @@ Server.prototype.accept = function(packet, locations){
     }
 };
 Server.prototype.sendResponse = function() {
-    var times = 0,
-        interval = window.setInterval(function(){
-                this.propagate(new Packet('response' + times, 'downstream'));
-                times++;
-                if( times == 7 ) {
-                    window.clearInterval(interval);
-                }        
-            }.bind(this), this.timeBetweenPackets);
+    window.setTimeout(function(){
+        var times = 0,
+            interval = window.setInterval(function(){
+                    this.propagate(new Packet('response' + times, 'downstream'));
+                    times++;
+                    if( times == 7 ) {
+                        window.clearInterval(interval);
+                    }        
+                }.bind(this), this.timeBetweenPackets);
+        
+    }.bind(this), this.initialDelay);
 };
 
 var Client = extend( PacketHolder, function(name, locations) {

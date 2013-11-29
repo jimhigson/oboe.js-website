@@ -16,5 +16,7 @@ server = new Server('webServer',
 );
 
 wireView = new WireView(wire);
+clientView = new ClientView(client);
+serverView = new ServerView(server);
 
 client.makeRequest();

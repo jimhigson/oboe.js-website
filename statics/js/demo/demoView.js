@@ -18,7 +18,10 @@ $.cssHooks[ "circleY" ] = {
 
 
 function stampFromTemplate(templateId, klass) {
-    return $('template#' + templateId).children().clone().addClass(klass);
+    var copy = $('template#' + templateId).children().clone();
+    // jQuery doesn't like addClass on SVG...
+    copy[0].setAttribute('class', copy[0].getAttribute('class') + ' ' + klass);
+    return copy;
 }
 
 function transformToLocation(location){
@@ -34,8 +37,11 @@ Packet.new.on( function(newPacket){
 
 function ThingView(containerName, templateName, subject) {
     this.jDom = stampFromTemplate(templateName, subject.name);
-    debugger;
-    $('#' + containerName).append(this.jDom);
+    var jContainer = $('#' + containerName);
+    if( !jContainer.length ) {
+        throw new Error('nowhere to put the thing');
+    }
+    jContainer.append(this.jDom);
 }
 
 function PacketView(subject) {

@@ -5,7 +5,13 @@
      
      <rect id="background" x="0" y="0" width="500" height="200"></rect>
 
-      <g id="places">
+       <g id="wires">
+           <template id="wire">
+               <line class="wire" />
+           </template>
+       </g>
+
+       <g id="places">
          <template id="server">
             <rect class="server" x="-22.5" y="-40" width="45" height="80"></rect>
          </template>
@@ -13,13 +19,7 @@
             <rect class="client" x="-22.5" y="-40" width="45" height="80"></rect>
          </template>
       </g>
-       
-      <g id="wires">
-          <template id="wire">
-              <line class="wire" />
-          </template>
-      </g>
-       
+              
       <g id="packets">
 
          <template id="packet">

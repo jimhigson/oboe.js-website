@@ -52,3 +52,7 @@ rect#background {
 line.wire {
    stroke:black;
 }
+
+rect.server {
+    fill: #827e7a;
+}

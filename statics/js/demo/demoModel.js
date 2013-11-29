@@ -1,7 +1,7 @@
 
 function extend(Sup, Sub) {
-    Sub.prototype = new Sup();
-    Sub.super = Sup;
+    Sub.prototype = Object.create(Sup.prototype);
+    Sub.prototype.constructor = Sub;
     return Sub;
 }
 function abstract(){
@@ -39,7 +39,7 @@ function PacketHolder(name, locations){
 
     this.name = name;
     this.latency = 0;
-    this.locations = locations;
+    this.locations = locations || {};
     this.adjacents = {
         downstream: new EventSink('downstream void')
     ,   upstream:   new EventSink('upstream void')
@@ -71,7 +71,7 @@ function EventSink (name) {
 }
 
 
-var Wire = extend( PacketHolder, function(name) {
+var Wire = extend( PacketHolder, function(name, locations) {
     
     PacketHolder.apply(this, arguments);
     this.latency = 1500;
@@ -90,7 +90,7 @@ var Server = extend( PacketHolder, function(name) {
     PacketHolder.apply(this, arguments);
     this.timeBetweenPackets = 100;
 });
-Server.prototype.accept = function(packet){
+Server.prototype.accept = function(packet, locations){
     
     if( packet.name == 'request' ) {
         this.sendResponse();
@@ -108,7 +108,7 @@ Server.prototype.sendResponse = function() {
             }.bind(this), this.timeBetweenPackets);
 };
 
-var Client = extend( PacketHolder, function(name) {
+var Client = extend( PacketHolder, function(name, locations) {
     PacketHolder.apply(this, arguments);
 });
 

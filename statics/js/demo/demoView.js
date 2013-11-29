@@ -34,7 +34,7 @@ Packet.new.on( function(newPacket){
 
 function ThingView(containerName, templateName, subject) {
     this.jDom = stampFromTemplate(templateName, subject.name);
-    $('#' + containerName).append(jDom);
+    $('#' + containerName).append(this.jDom);
 }
 
 function PacketView(subject) {
@@ -43,11 +43,11 @@ function PacketView(subject) {
 
     subject.events('move').on(function( fromXY, toXY, duration ){
         
-        this.jPacket.css({
+        this.jDom.css({
             circleX:fromXY.x,
             circleY:fromXY.y
         });
-        this.jPacket.animate({
+        this.jDom.animate({
                 circleX:toXY.x,
                 circleY:toXY.y
             },
@@ -56,7 +56,7 @@ function PacketView(subject) {
     }.bind(this));
     
     subject.events('done').on(function(){
-        this.jPacket.remove();
+        this.jDom.remove();
     }.bind(this));
 }
 

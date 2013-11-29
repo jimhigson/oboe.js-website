@@ -1,18 +1,23 @@
  
 <section id="demoArea">
 
-    
    <svg width="500" height="200">
      
      <rect id="background" x="0" y="0" width="500" height="200"></rect>
-      
+
       <g class="places">
-         <rect id="server" transform="translate(15, 55)" x="0" y="0" width="45" height="80"></rect>
-         <rect id="client" transform="translate(440,55)" x="0" y="0" width="45" height="80"></rect>
+         <template id="server">
+            <rect class="server" x="-22.5" y="-40" width="45" height="80"></rect>
+         </template>
+         <template id="client">
+            <rect class="client" x="-22.5" y="-40" width="45" height="80"></rect>
+         </template>
       </g>
        
       <g class="wires">
-          
+          <template id="server">
+              <line />
+          </template>
       </g>
        
       <g class="packets">
@@ -20,7 +25,6 @@
          <template id="packet">
             <circle class="packet" r="10"></circle>
          </template>
-
       </g>
 
    </svg>         

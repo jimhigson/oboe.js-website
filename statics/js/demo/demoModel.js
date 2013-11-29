@@ -15,6 +15,7 @@ function oppositeDirectionTo(dir) {
         case 'downstream':
             return 'upstream';
     }
+    throw new Error('unknown direction' + dir);
 }
 
 function Packet(name, direction){
@@ -24,14 +25,21 @@ function Packet(name, direction){
     Packet.new.emit(this);    
 }
 Packet.new = singleEventPubSub('new');
-
+Packet.prototype.move = function(fromXY, toXY, latency){
+    this.events('move').emit(fromXY, toXY, latency);
+}
 Packet.prototype.done = function(){
     this.events('done').emit();
 };
 
-function PacketHolder(name){
+function PacketHolder(name, locations){
+    if( !locations ) {
+        throw new Error("don't know where " + name + " is");
+    }
+
     this.name = name;
-    this.latency = 0;    
+    this.latency = 0;
+    this.locations = locations;
     this.adjacents = {
         downstream: new EventSink('downstream void')
     ,   upstream:   new EventSink('upstream void')
@@ -43,15 +51,19 @@ PacketHolder.prototype.withDownstream = function(downstream){
     
     this.adjacents.downstream = downstream;
     downstream.adjacents.upstream = this;
-    this.packetMove = singleEventPubSub('packetMove');
         
     return this;    
 };
 PacketHolder.prototype.propagate = function(packet){
     this.adjacents[packet.direction].accept(packet);
 };
-PacketHolder.prototype.movePacket = function(packet, fromLocation, toLocation){
-    this.packetMove.emit(packet, fromLocation, toLocation);    
+PacketHolder.prototype.movePacket = function(packet){
+    var fromLocation = oppositeDirectionTo(packet.direction),
+        toLocation = packet.direction,
+        fromXY = this.locations[fromLocation];
+        toXY   = this.locations[toLocation];
+
+    packet.move(fromXY, toXY, this.latency);
 };
 
 function EventSink (name) {
@@ -67,7 +79,7 @@ var Wire = extend( PacketHolder, function(name) {
 Wire.prototype.accept = function(packet){
     var self = this;
         
-    this.movePacket(packet, oppositeDirectionTo(packet.direction), packet.direction);
+    this.movePacket(packet);
 
     window.setTimeout(function(){
         self.propagate(packet);

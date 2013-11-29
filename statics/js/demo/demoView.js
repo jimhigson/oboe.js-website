@@ -17,8 +17,12 @@ $.cssHooks[ "circleY" ] = {
 };
 
 
-function stampFromTemplate(templateId) {
-    return $('template#' + templateId).children().clone();
+function stampFromTemplate(templateId, klass) {
+    return $('template#' + templateId).children().clone().addClass(klass);
+}
+
+function transformToLocation(location){
+    return 'translate(' + location.x + ',' + location.y + ')';
 }
 
 Packet.new.on( function(newPacket){
@@ -28,55 +32,50 @@ Packet.new.on( function(newPacket){
     
 });
 
-function PacketView(packet) {
+function ThingView(containerName, templateName, subject) {
+    this.jDom = stampFromTemplate(templateName, subject.name);
+    $('#' + containerName).append(jDom);
+}
 
-    var jPacket = stampFromTemplate('packet');
-    jPacket.attr('class', 'packet ' + packet.name);
-    PacketView.container.append(jPacket);
+function PacketView(subject) {
 
-    packet.events('move').on(function( fromXY, toXY, duration ){
+    ThingView.call(this, 'packets', 'packet', subject);
+
+    subject.events('move').on(function( fromXY, toXY, duration ){
         
-        jPacket.css({
+        this.jPacket.css({
             circleX:fromXY.x,
             circleY:fromXY.y
         });
-        jPacket.animate({
-            circleX:toXY.x,
-            circleY:toXY.y
-        },
-            {duration:duration}
+        this.jPacket.animate({
+                circleX:toXY.x,
+                circleY:toXY.y
+            },
+            {   duration:duration}
         );
-    });    
-    
-    packet.events('done').on(function(){
-        jPacket.remove();        
-    });
-}
-
-PacketView.container = $('.packets');
-
-
-function PacketHolderView(locations) {
-    this.locations = locations;
-}
-
-var WireView = extend(PacketHolderView, function(subject, upstreamLocation, downstreamLocation){
-
-    PacketHolderView.call(this, {
-        upstream:   upstreamLocation,
-        downstream: downstreamLocation
-    });
-    
-    subject.packetMove.on(function(packet, fromLocation, toLocation){
-        var fromXY = this.locations[fromLocation]; 
-        var toXY   = this.locations[toLocation]; 
-                
-        packet.events('move').emit(fromXY, toXY, subject.latency);
     }.bind(this));
+    
+    subject.events('done').on(function(){
+        this.jPacket.remove();
+    }.bind(this));
+}
+
+var WireView = extend(ThingView, function(subject){
+
+    ThingView.call(this, 'wires', 'wire', subject);
+    this.jDom.attr('x1', subject.locations.downstream.x );
+    this.jDom.attr('y1', subject.locations.downstream.y );
+    this.jDom.attr('x2', subject.locations.upstream.x );
+    this.jDom.attr('y2', subject.locations.upstream.y );
 });
 
-var ServerView = extend(PacketHolderView, function(){
+var ServerView = extend(ThingView, function(subject){
+
+    ThingView.call(this, 'places', 'server', subject);
+    this.jDom.attr('transform', transformToLocation(subject.locations.where));
 });
 
-var ClientView = extend(PacketHolderView, function(){
+var ClientView = extend(ThingView, function(subject){
+    ThingView.call(this, 'places', 'client', subject);
+    this.jDom.attr('transform', transformToLocation(subject.locations.where));
 });

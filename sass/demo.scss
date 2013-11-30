@@ -16,7 +16,7 @@ rect#background {
 
 
 .packet.request {
-    fill:#17becf;
+    fill:nth($categoricalColors, 10);
 }
 
 .packet text {
@@ -25,42 +25,16 @@ rect#background {
     alignment-baseline:middle;
 }
 
-/* categorical colours from:
-    https://github.com/mbostock/d3/wiki/Ordinal-Scales
-*/
-.packet.response0 {            
-   fill:#1f77b4;
-}
-.packet.response1 {
-   fill:#ff7f0e;    
-}
-.packet.response2 {
-   fill:#2ca02c;    
-}
-.packet.response3 {
-   fill:#d62728;    
-}
-.packet.response4 {
-   fill:#9467bd;    
-}
-.packet.response5 {
-   fill:#8c564b;    
-}
-.packet.response6 {
-   fill:#e377c2;    
-}
-.packet.response7 {
-   fill:#7f7f7f;    
-}
-.packet.response8 {
-   fill:#bcbd22;    
-}
-.packet.response9 {
-    fill:#17becf;
+$i: 1;
+@while $i < length($categoricalColors) {
+  .packet.response#{$i - 1} {
+    fill:nth($categoricalColors, $i);
+  }
+  $i: $i + 1;
 }
 
 line.wire {
-   stroke:#74b58c;
+   stroke:$highlight;
    stroke-width:3;
 }
 

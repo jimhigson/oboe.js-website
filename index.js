@@ -25,7 +25,7 @@ app.engine('handlebars', consolidate.handlebars);
 app.set('view engine', 'handlebars');
 app.set('views', __dirname + '/views');
 
-function respondWithMarkdown(res, markdownFilename, opts){
+function respondWithMarkdown(req, res, markdownFilename, opts){
     
     opts = opts || {};
     opts.scripts     = UNMINIFIED_SCRIPTS;
@@ -38,8 +38,12 @@ function respondWithMarkdown(res, markdownFilename, opts){
         opts.heading = outline.heading;
         opts.sections = outline.sections;
         res.status(outline.status);
-        res.render('page', opts);
+        res.render(getView(req), opts);
     });
+}
+
+function getView(req){
+    return req.query.mode == 'raw'? 'raw' : 'page';
 }
 
 app
@@ -50,17 +54,13 @@ app
       renderDemo(parseInt(req.params.scenarioNumber), res);
    })    
    .get('/', function(req, res){
-        respondWithMarkdown(res, 'index', {
+        respondWithMarkdown(req, res, 'index', {
             home:'true'
         });
    })
    .get('/:page', function(req, res){
-       respondWithMarkdown(res, req.params.page);
-   })
-    
-/*  .get('/articles/:article', function(req, res){
-        respondWithMarkdown(res, 'articles/' + req.params.article);
-    })*/   
+       respondWithMarkdown(req, res, req.params.page);
+   })   
    .use(express.static('statics'))
    .use(express.static('components/oboe/dist'))
    .use(express.static('components/jquery'))

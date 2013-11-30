@@ -29,12 +29,11 @@ module.exports = function (grunt) {
 
     // load all grunt tasks
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-newer');
     grunt.loadNpmTasks('grunt-develop');
     grunt.loadNpmTasks('grunt-sass');
 
     // register a few tasks
-    grunt.registerTask('build', ['newer:sass:all']);
+    grunt.registerTask('build', ['sass:all']);
     grunt.registerTask('start-dev', ['develop:server', 'sass:all', 'watch:sources']);
     //grunt.registerTask('start-real', ???);
 

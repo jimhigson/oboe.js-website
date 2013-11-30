@@ -1,6 +1,6 @@
 <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" version="1.1">
 
-    <rect class="frame" width="85" height="95.000008" x="0" y="0" style="fill:#827e7a;"/>
+    <rect class="frame" width="85" height="95" x="0" y="0" style="fill:#827e7a;"/>
     <rect class="innerFrame" width="75" height="80" x="5" y="10" style="fill:#ffffff;"/>
 
     <rect class="part1" width="65" height="10" x="10" y="15"/>

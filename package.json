@@ -1,6 +1,6 @@
 {
   "name": "oboe.js-demo",
-  "version": "0.0.0-20",
+  "version": "0.0.0-86",
   "description": "A website for Oboe.js",
   "main": "index.js",
   "dependencies": {
@@ -15,12 +15,13 @@
     "grunt-sass": "~0.8.1",
     "grunt-contrib-watch": "~0.5.3",
     "grunt-develop": "~0.2.2",
-    "grunt-cli": "~0.1.11"
+    "grunt-cli": "~0.1.11",
+    "mustache": "~0.7.3"
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "predeploy":"grunt build",
+    "predeploy": "grunt build",
     "start": "node index.js"
   },
   "repository": {

@@ -57,7 +57,7 @@ function start(scenario) {
         itemViews[scenarioItem.name] = new ViewType(modelItem);
     });
 
-    // TODO: put client requests in scenarios
+    // TODO: put client requests as script-like things in scenarios
     modelItems.client.makeRequest();
 }
 

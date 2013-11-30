@@ -12,56 +12,56 @@
             height="95.000008"
             x="0"
             y="0"
-            style="fill:#827e7a;stroke:#000000;stroke-width:1;"/>
+            style="fill:#827e7a;"/>
     <rect
             width="75"
             height="80"
             x="5"
             y="10"
-            style="fill:#ffffff;stroke:#000000;stroke-width:1;"/>
+            style="fill:#ffffff;"/>
     <rect
             width="65"
             height="10"
             x="10"
             y="15"
-            style="fill:#ff0000;stroke:#000000;stroke-width:1;"/>
+            style="fill:#ff0000;"/>
     <rect
             width="15"
             height="25"
             x="60"
             y="30"
-            style="fill:#00ffff;stroke:#000000;stroke-width:1;"/>
+            style="fill:#00ffff;"/>
     <rect
             width="15"
             height="30"
             x="60"
             y="60"
-            style="fill:#800080;stroke:#000000;stroke-width:1;"/>
+            style="fill:#800080;"/>
     <path
             d="m 40,46 c 0,8.28427 -6.71573,15 -15,15 -8.28427,0 -15,-6.71573 -15,-15 0,-8.28427 6.71573,-15 15,-15 8.28427,0 15,6.71573 15,15 z"
-            style="fill:#00ff00;stroke:#000000;stroke-width:1;"/>
+            style="fill:#00ff00;"/>
     <path
             d="m 25.19015,30.001205 c 8.283606,0.105017 14.913662,6.90534 14.808645,15.188945 -0.105017,8.283606 -6.90534,14.913662 -15.188945,14.808645 -3.892348,-0.04935 -7.613073,-1.6099 -10.376046,-4.351941 L 25,45 z"
             transform="translate(0,1.0000076)"
             id="path3824"
-            style="fill:#ff00ff;stroke:#000000;stroke-width:1;"/>
+            style="fill:#ff00ff;"/>
     <rect
             width="10"
             height="5"
             x="45"
             y="35"
-            style="fill:#ff00ff;stroke:#000000;stroke-width:1;"/>
+            style="fill:#ff00ff;"/>
     <rect
             width="45"
             height="25"
             x="10"
             y="65"
-            style="fill:#ffff00;stroke:#000000;stroke-width:1;"/>
+            style="fill:#ffff00;"/>
     <rect
             width="10"
             height="5"
             x="45"
             y="46"
-            style="fill:#00ff00;stroke:#000000;stroke-width:1;"/>
+            style="fill:#00ff00;"/>
 
 </svg>

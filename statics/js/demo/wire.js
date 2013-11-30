@@ -1,5 +1,7 @@
-// setup the application
-function start(scenario) {
+
+function loadScenario(scenarioId) {
+    var scenario = getScenario(scenarioId);
+    
     console.log(scenario);
     
     var modelItems = {},
@@ -60,5 +62,3 @@ function start(scenario) {
     // TODO: put client requests as script-like things in scenarios
     modelItems.client.makeRequest();
 }
-
-start( getScenario(0) );

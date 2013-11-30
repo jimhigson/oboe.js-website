@@ -108,5 +108,8 @@
         {{#each scripts}}
             <script type="text/javascript" src="{{this}}"></script>
         {{/each}}    
+        {{#if initScript}}
+            <script type="text/javascript">{{initScript}}</script>           
+        {{/if}}
     </body>
 </html>

@@ -84,6 +84,7 @@ function renderDemo(scenarioNumber, res){
                         ,   "/js/demo/demoView.js"
                         ,   "/js/demo/wire.js"
                     ]),
+                initScript:"loadScenario( " + scenarioNumber + ")",
                 stylesheets: UNMINIFIED_STYLESHEETS
                     .concat([
                         'demo.css'

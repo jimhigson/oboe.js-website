@@ -27,9 +27,10 @@ rect#background {
 
 $i: 1;
 @while $i < length($categoricalColors) {
-  .packet.response#{$i - 1} {
+  .packet.response#{$i - 1},
+  g.client.received-response#{$i - 1} .part#{$i - 1} {
     fill:nth($categoricalColors, $i);
-  }    
+  }  
   $i: $i + 1;
 }
 
@@ -50,12 +51,4 @@ g.client .viewPort {
 }
 g.client .part {
   fill:none;
-}
-
-$i: 1;
-@while $i < length($categoricalColors) {
-  g.client.received-response#{$i - 1} .part#{$i - 1} {
-    fill:nth($categoricalColors, $i);
-  }
-  $i: $i + 1;
 }

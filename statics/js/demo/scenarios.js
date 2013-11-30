@@ -8,7 +8,8 @@ var getScenario = (function(){
                     "type":"server",
                     "options":{
                         "timeBetweenPackets": 100,
-                        "initialDelay"      : 500
+                        "initialDelay"      : 500,
+                        "messageSize"       : 7
                     }
                 },
                 {
@@ -16,7 +17,8 @@ var getScenario = (function(){
                     "type":"wire",
                     "options":{
                         "bandwidth":500,
-                        "latency":1500
+                        "latency":1500,
+                        "messageSize" : 7                        
                     }
                 },
                 {

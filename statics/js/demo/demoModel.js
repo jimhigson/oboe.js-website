@@ -102,8 +102,9 @@ var Server = extend( PacketHolder, function(name, locations, options) {
     PacketHolder.apply(this, arguments);
     this.timeBetweenPackets = options.timeBetweenPackets;
     this.initialDelay = options.initialDelay;
+    this.messageSize = options.messageSize;
 });
-Server.prototype.accept = function(packet, locations){
+Server.prototype.accept = function(packet){
     
     if( packet.name == 'request' ) {
         this.sendResponse();
@@ -116,7 +117,7 @@ Server.prototype.sendResponse = function() {
             interval = window.setInterval(function(){
                     var ordering = {
                         isFirst: i == 0,
-                        isLast: i == 6
+                        isLast: i == (this.messageSize -1)
                     };
                 
                     this.propagate(new Packet('response' + i, 'JSON', 'downstream', ordering));

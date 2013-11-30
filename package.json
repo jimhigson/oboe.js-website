@@ -20,7 +20,8 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./node_modules/grunt-cli/bin/grunt build ; node index.js"
+    "predeploy":"node ./node_modules/grunt-cli/bin/grunt build",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",

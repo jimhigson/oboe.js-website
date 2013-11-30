@@ -20,7 +20,7 @@ rect#background {
 }
 
 .packet text {
-    fill:black;
+    fill:$nearBlack;
     text-anchor: middle;
     alignment-baseline:middle;
 }
@@ -29,7 +29,7 @@ $i: 1;
 @while $i < length($categoricalColors) {
   .packet.response#{$i - 1} {
     fill:nth($categoricalColors, $i);
-  }
+  }    
   $i: $i + 1;
 }
 
@@ -50,4 +50,12 @@ g.client .viewPort {
 }
 g.client .part {
   fill:none;
+}
+
+$i: 1;
+@while $i < length($categoricalColors) {
+  g.client.received-response#{$i - 1} .part#{$i - 1} {
+    fill:nth($categoricalColors, $i);
+  }
+  $i: $i + 1;
 }

@@ -20,11 +20,16 @@ $.cssHooks.translateY = {
 $.cssNumber.translateX = true;
 $.cssNumber.translateY = true;
 
+/* jQuery doesn't like adding classes to SVG elements */
+function addClass(jEle, klass) {
+    var ele = jEle[0];
+    ele.setAttribute('class', ele.getAttribute('class') + ' ' + klass);
+}
 
 function stampFromTemplate(templateId, klass) {
     var copy = $('template#' + templateId).children().clone();
     // jQuery doesn't like addClass on SVG...
-    copy[0].setAttribute('class', copy[0].getAttribute('class') + ' ' + klass);
+    addClass(copy, klass);
     return copy;
 }
 
@@ -107,4 +112,8 @@ var ClientView = extend(ThingView, function(subject){
     this.initDomFromTemplate( 'places', 'client', subject);
     
     this.jDom.attr('transform', transformToLocation(subject.locations.where));
+    
+    subject.events('receive').on(function( packet ){
+        addClass(this.jDom, 'received-' + packet.name); 
+    }.bind(this));
 });

@@ -41,7 +41,9 @@ Packet.prototype.done = function(){
     this.events('done').emit();
 };
 
-function PacketHolder(name, locations){
+
+var PacketHolder = extend(Thing, function (name, locations){
+    Thing.apply(this, arguments);
     if( !locations ) {
         throw new Error("don't know where " + name + " is");
     }
@@ -53,7 +55,7 @@ function PacketHolder(name, locations){
         downstream: new EventSink('downstream void')
     ,   upstream:   new EventSink('upstream void')
     };
-}
+});
 PacketHolder.prototype.accept = abstract;
 
 PacketHolder.prototype.withDownstream = function(downstream){
@@ -137,6 +139,8 @@ Client.prototype.makeRequest = function(){
     this.propagate(new Packet('request', 'GET', 'upstream', {isFirst:true, isLast:true}));
 };
 Client.prototype.accept = function(packet){
+    this.events('receive').emit(packet);
+    
     packet.done();    
 };
 

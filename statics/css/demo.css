@@ -18,34 +18,43 @@ rect#background {
    fill: #eeece7;
 }
 
-.packet {
-   stroke:black;
-}
 
 .packet.request {
     fill:white;
 }
 
-.packet.response0 {
-   fill:red;
+/* categorical colours from:
+    https://github.com/mbostock/d3/wiki/Ordinal-Scales
+*/
+.packet.response0 {            
+   fill:#1f77b4;
 }
 .packet.response1 {
-   fill:orange;    
+   fill:#ff7f0e;    
 }
 .packet.response2 {
-   fill:yellow;    
+   fill:#2ca02c;    
 }
 .packet.response3 {
-   fill:green;    
+   fill:#d62728;    
 }
 .packet.response4 {
-   fill:blue;    
+   fill:#9467bd;    
 }
 .packet.response5 {
-   fill:indigo;    
+   fill:#8c564b;    
 }
 .packet.response6 {
-   fill:violet;    
+   fill:#e377c2;    
+}
+.packet.response7 {
+   fill:#7f7f7f;    
+}
+.packet.response8 {
+   fill:#bcbd22;    
+}
+.packet.response9 {
+    fill:#17becf;
 }
 
 line.wire {

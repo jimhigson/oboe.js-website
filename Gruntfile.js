@@ -8,7 +8,7 @@ module.exports = function (grunt) {
         watch:{
             sources:{
                 files:['index.js', 'sass/*.scss'],
-                tasks:['develop:server', 'newer:sass:all'],
+                tasks:['develop:server', 'build'],
                 options: { nospawn: true }
             }
         }
@@ -34,6 +34,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-sass');
 
     // register a few tasks
+    grunt.registerTask('build', ['newer:sass:all']);
     grunt.registerTask('start-dev', ['develop:server', 'sass:all', 'watch:sources']);
     //grunt.registerTask('start-real', ???);
 

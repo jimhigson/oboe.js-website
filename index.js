@@ -26,6 +26,10 @@ app.set('view engine', 'handlebars');
 app.set('views', __dirname + '/views');
 
 function respondWithMarkdown(req, res, markdownFilename, opts){
+
+    function getMarkupView(req){
+        return req.query.mode == 'raw'? 'raw' : 'page';
+    }
     
     opts = opts || {};
     opts.scripts     = UNMINIFIED_SCRIPTS;
@@ -38,12 +42,8 @@ function respondWithMarkdown(req, res, markdownFilename, opts){
         opts.heading = outline.heading;
         opts.sections = outline.sections;
         res.status(outline.status);
-        res.render(getView(req), opts);
+        res.render(getMarkupView(req), opts);
     });
-}
-
-function getView(req){
-    return req.query.mode == 'raw'? 'raw' : 'page';
 }
 
 app

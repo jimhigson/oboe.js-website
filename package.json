@@ -14,12 +14,13 @@
     "grunt": "~0.4.2",
     "grunt-sass": "~0.8.1",
     "grunt-contrib-watch": "~0.5.3",
-    "grunt-develop": "~0.2.2"
+    "grunt-develop": "~0.2.2",
+    "grunt-cli": "~0.1.11"
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./node_modules/grunt-cli/bin/grunt start"
+    "start": "node ./node_modules/grunt-cli/bin/grunt start-dev"
   },
   "repository": {
     "type": "git",

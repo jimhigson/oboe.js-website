@@ -18,16 +18,21 @@ function oppositeDirectionTo(dir) {
     throw new Error('unknown direction' + dir);
 }
 
-function Packet(name, type, direction, ordering){
-    this.direction = direction;
+function Thing(name){
     this.name = name;
     this.events = pubSub();
+}
+
+var Packet = extend(Thing, function (name, type, direction, ordering){
+    Thing.apply(this, arguments);
+    
+    this.direction = direction;
     this.isFirst = ordering.isFirst;
     this.isLast = ordering.isLast;
     this.type = type;
     
     Packet.new.emit(this);    
-}
+});
 Packet.new = singleEventPubSub('new');
 Packet.prototype.move = function(fromXY, toXY, latency){
     this.events('move').emit(fromXY, toXY, latency);

@@ -38,7 +38,13 @@ line.wire {
    stroke-width:3;
 }
 
-rect.client,
 rect.server {
     fill: $midTone;
+}
+
+g.client .frame {
+  fill: $midTone;
+}
+g.client .viewPort {
+  fill: $backgroundColor;
 }

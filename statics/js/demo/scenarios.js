@@ -56,7 +56,7 @@ var getScenario = (function(){
     function defaultLocationForItem(item) {
         // fill in default positions
         var DEFAULT_SERVER_LOCATION = {x:40,y:55},
-            DEFAULT_CLIENT_LOCATION = {x:465,y:145};
+            DEFAULT_CLIENT_LOCATION = {x:440,y:145};
         
         switch( item.type ){
             case 'client':

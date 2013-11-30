@@ -74,10 +74,11 @@ function EventSink (name) {
 }
 
 
-var Wire = extend( PacketHolder, function(name, locations) {
+var Wire = extend( PacketHolder, function(name, locations, options) {
     
     PacketHolder.apply(this, arguments);
-    this.latency = 1500;
+    this.latency = options.latency;
+    this.bandwidth = options.bandwidth;
 });
 Wire.prototype.accept = function(packet){
     var self = this;
@@ -107,7 +108,7 @@ Server.prototype.sendResponse = function() {
             interval = window.setInterval(function(){
                     var ordering = {
                         isFirst: i == 0,
-                        isLast: i == 7
+                        isLast: i == 6
                     };
                 
                     this.propagate(new Packet('response' + i, 'downstream', ordering));

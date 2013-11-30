@@ -1,20 +1,24 @@
-/* allow svg properties to be set like css by jQuery */
-$.cssHooks[ "circleX" ] = {
+
+/* allow svg properties to be set like css by jQuery. Apply a simple
+ * idea of SVG transforms that ignores order and other transforms */
+ $.cssHooks.translateX = {
     get: function( elem, computed, extra ) {
-        return elem.getAttribute('cx') || 0;
+        return elem.transform.baseVal.getItem(0).matrix.e;
     },
     set: function( elem, value ) {
-        return elem.setAttribute('cx', value);
+        elem.transform.baseVal.getItem(0).matrix.e = value; 
     }
 };
-$.cssHooks[ "circleY" ] = {
+$.cssHooks.translateY = {
     get: function( elem, computed, extra ) {
-        return elem.getAttribute('cy') || 0;
+        return elem.transform.baseVal.getItem(0).matrix.f;
     },
     set: function( elem, value ) {
-        return elem.setAttribute('cy', value);
+        elem.transform.baseVal.getItem(0).matrix.f = value;
     }
 };
+$.cssNumber.translateX = true;
+$.cssNumber.translateY = true;
 
 
 function stampFromTemplate(templateId, klass) {
@@ -46,18 +50,25 @@ ThingView.prototype.initDomFromTemplate = function(containerName, templateName, 
 };
 
 var PacketView = extend(ThingView, function (subject) {
-
-    this.initDomFromTemplate( 'packets', 'packet', subject);
+    var templateName =  (   subject.isFirst
+                        ?   'firstPacket' 
+                        :       (   subject.isLast
+                                ?   'lastPacket'
+                                :   'packet'
+                                )
+                        );
+    
+    this.initDomFromTemplate( 'packets', templateName, subject);
 
     subject.events('move').on(function( fromXY, toXY, duration ){
         
         this.jDom.css({
-            circleX:fromXY.x,
-            circleY:fromXY.y
+            translateX:fromXY.x,
+            translateY:fromXY.y
         });
         this.jDom.animate({
-                circleX:toXY.x,
-                circleY:toXY.y
+                translateX:toXY.x,
+                translateY:toXY.y
             },
             {   duration:duration}
         );

@@ -21,10 +21,21 @@
       </g>
               
       <g id="packets">
-
          <template id="packet">
-            <circle class="packet" r="10"></circle>
+            <circle transform="translate(0,0)" class="packet" r="{{packetRadius}}"></circle>
          </template>
+         <template id="firstPacket">
+            <g transform="translate(0,0)" class="packet"> 
+               <circle r="{{packetRadius}}"></circle>
+               <text>{</text>
+            </g>
+         </template>
+          <template id="lastPacket">
+              <g transform="translate(0,0)" class="packet">
+                  <circle r="{{packetRadius}}"></circle>
+                  <text>}</text>
+              </g>
+          </template>          
       </g>
 
    </svg>         

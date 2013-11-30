@@ -18,10 +18,13 @@ function oppositeDirectionTo(dir) {
     throw new Error('unknown direction' + dir);
 }
 
-function Packet(name, direction){
+function Packet(name, direction, ordering){
     this.direction = direction;
     this.name = name;
     this.events = pubSub();
+    this.isFirst = ordering.isFirst;
+    this.isLast = ordering.isLast;
+    
     Packet.new.emit(this);    
 }
 Packet.new = singleEventPubSub('new');
@@ -100,13 +103,20 @@ Server.prototype.accept = function(packet, locations){
 };
 Server.prototype.sendResponse = function() {
     window.setTimeout(function(){
-        var times = 0,
+        var i = 0,
             interval = window.setInterval(function(){
-                    this.propagate(new Packet('response' + times, 'downstream'));
-                    times++;
-                    if( times == 7 ) {
+                    var ordering = {
+                        isFirst: i == 0,
+                        isLast: i == 7
+                    };
+                
+                    this.propagate(new Packet('response' + i, 'downstream', ordering));
+                                
+                    if( ordering.isLast ) {
                         window.clearInterval(interval);
-                    }        
+                    }
+                
+                    i++;
                 }.bind(this), this.timeBetweenPackets);
         
     }.bind(this), this.initialDelay);
@@ -117,7 +127,7 @@ var Client = extend( PacketHolder, function(name, locations) {
 });
 
 Client.prototype.makeRequest = function(){
-    this.propagate(new Packet('request', 'upstream'));
+    this.propagate(new Packet('request', 'upstream', {isFirst:true, isLast:true}));
 };
 Client.prototype.accept = function(packet){
     packet.done();    

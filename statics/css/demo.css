@@ -50,7 +50,8 @@ rect#background {
 }
 
 line.wire {
-   stroke:black;
+   stroke:#74b58c;
+   stroke-width:3;
 }
 
 rect.server {

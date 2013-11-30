@@ -30,23 +30,24 @@ function transformToLocation(location){
 
 Packet.new.on( function(newPacket){
     
-   
-    new PacketView(newPacket);   
-    
+    new PacketView(newPacket);
 });
 
-function ThingView(containerName, templateName, subject) {
+function ThingView(containerName, templateName, subject) {    
+}
+ThingView.prototype.initDomFromTemplate = function(containerName, templateName, subject) {
     this.jDom = stampFromTemplate(templateName, subject.name);
     var jContainer = $('#' + containerName);
     if( !jContainer.length ) {
         throw new Error('nowhere to put the thing');
     }
     jContainer.append(this.jDom);
-}
+    return this.jDom;
+};
 
-function PacketView(subject) {
+var PacketView = extend(ThingView, function (subject) {
 
-    ThingView.call(this, 'packets', 'packet', subject);
+    this.initDomFromTemplate( 'packets', 'packet', subject);
 
     subject.events('move').on(function( fromXY, toXY, duration ){
         
@@ -65,11 +66,12 @@ function PacketView(subject) {
     subject.events('done').on(function(){
         this.jDom.remove();
     }.bind(this));
-}
+});
 
 var WireView = extend(ThingView, function(subject){
 
-    ThingView.call(this, 'wires', 'wire', subject);
+    this.initDomFromTemplate( 'wires', 'wire', subject);
+    
     this.jDom.attr('x1', subject.locations.downstream.x );
     this.jDom.attr('y1', subject.locations.downstream.y );
     this.jDom.attr('x2', subject.locations.upstream.x );
@@ -78,11 +80,13 @@ var WireView = extend(ThingView, function(subject){
 
 var ServerView = extend(ThingView, function(subject){
 
-    ThingView.call(this, 'places', 'server', subject);
+    this.initDomFromTemplate( 'places', 'server', subject);
+    
     this.jDom.attr('transform', transformToLocation(subject.locations.where));
 });
 
 var ClientView = extend(ThingView, function(subject){
-    ThingView.call(this, 'places', 'client', subject);
+    this.initDomFromTemplate( 'places', 'client', subject);
+    
     this.jDom.attr('transform', transformToLocation(subject.locations.where));
 });

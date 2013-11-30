@@ -55,6 +55,13 @@ var getScenario = (function(){
         })        
     ];
     
+    function translateLocation( location, delta ){
+        return {
+            x: location.x + (delta.x | 0 )
+        ,   y: location.y + (delta.y | 0 )
+        };
+    }
+    
     function defaultLocationForItem(item) {
         // fill in default positions
         var DEFAULT_SERVER_LOCATION = {x:40,y:55},
@@ -66,8 +73,9 @@ var getScenario = (function(){
             case 'server':
                 return {    where:      DEFAULT_SERVER_LOCATION };
             case 'wire':
-                return {    downstream: DEFAULT_CLIENT_LOCATION, 
-                            upstream:   DEFAULT_SERVER_LOCATION }
+                return {    downstream: translateLocation(DEFAULT_CLIENT_LOCATION, {x:-32}), 
+                            upstream:   translateLocation(DEFAULT_SERVER_LOCATION, {x: 5})
+                }
         }
     }
     

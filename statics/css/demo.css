@@ -25,6 +25,8 @@ rect#background {
 
 .packet text {
     fill:black;
+    text-anchor: middle;
+    alignment-baseline:middle;
 }
 
 /* categorical colours from:

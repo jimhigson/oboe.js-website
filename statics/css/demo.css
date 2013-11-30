@@ -15,8 +15,7 @@ body {
 }
 
 rect#background {
-   fill: white;
-   stroke: black;
+   fill: #eeece7;
 }
 
 .packet {

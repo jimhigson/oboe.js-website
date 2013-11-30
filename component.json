@@ -3,9 +3,7 @@
   "version": "0.0.0",
   "main": "index.js",
   "dependencies": {
-    "d3": "~3.3.9",
-    "jquery": "~2.0.3",
-    "oboe": "~1.10.0"
+    "jquery": "~2.0.3"
   },
   "ignore": [
     "**/.*",

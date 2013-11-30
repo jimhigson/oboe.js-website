@@ -1,5 +1,6 @@
 
 var express = require('express'),
+    slashes = require('connect-slashes'),
     app = express(),
     consolidate = require('consolidate'),
     readContent = require('./read-content.js'),
@@ -46,9 +47,11 @@ function respondWithMarkdown(req, res, markdownFilename, opts){
 }
 
 app
+   .use(express.static('statics'))
+   .use(slashes())
    .get('/demo/', function(req, res){
       renderDemo(1, res);
-   })    
+   })        
    .get('/demo/:scenarioNumber', function(req, res){
       renderDemo(parseInt(req.params.scenarioNumber), res);
    })    
@@ -59,11 +62,7 @@ app
    })
    .get('/:page', function(req, res){
        respondWithMarkdown(req, res, req.params.page);
-   })   
-   .use(express.static('statics'))
-   .use(express.static('components/oboe/dist'))
-   .use(express.static('components/jquery'))
-   .use(express.static('components/d3'))
+   })    
    .listen(PORT);
 
 function renderDemo(scenarioNumber, res){

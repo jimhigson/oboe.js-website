@@ -18,7 +18,7 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 
 html {
    line-height: 1;
-   background-color: #0f0a07;
+   background-color: $nearBlack;
 }
 
 nav ul {
@@ -67,14 +67,14 @@ input[type="submit"].button {
 }
 
 body {
-   background: #f5f3ee;
-   color: #0f0a07;
+   background: $backgroundColor;
+   color: $nearBlack;
    font-family: Computer Modern, georgia, serif;
    font-size: 120%;
 }
 
 #header, footer {
-   background: #0f0a07;
+   background: $nearBlack;
    padding: 70px;
 }
 
@@ -136,7 +136,7 @@ a:active {
 }
 
 a.active {
-      background: #eeebe7;
+      background: $shadedBackgroundColor;
       display: block;
       padding: 5px;
       margin: 0 -6px ;
@@ -144,7 +144,7 @@ a.active {
 }
 
 h1 a, h1 a:hover {
-   color: #0f0a07;
+   color: $nearBlack;
    text-decoration: none;
 }
 

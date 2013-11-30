@@ -1,13 +1,9 @@
 
-ul {
+#demoArea ul {
    display:block;
 }
-li {
+#demoArea li {
    display:inline;
-}
-
-body {
-   background-color: #f5f3ee;
 }
 
 #demoArea svg {
@@ -15,7 +11,7 @@ body {
 }
 
 rect#background {
-   fill: #eeece7;
+   fill: $shadedBackgroundColor;
 }
 
 

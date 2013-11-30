@@ -10,7 +10,7 @@ code {
 
 /* code blocks */
 .marked pre {
-   background-color:#eeece7;
+   background-color:$shadedBackgroundColor;
    overflow:auto;
    padding:1em;
    line-height: 1.2em;
@@ -20,8 +20,7 @@ code {
 /* inline code examples */
 :not(pre) > code {
    display:inline-block;
-   background-color: #827e7a;
-   color: #fff;
+   background-color: $shadedBackgroundColor;
    border-radius: 2px;
    padding: 2px 5px;
 }

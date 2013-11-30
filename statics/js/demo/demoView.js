@@ -50,15 +50,22 @@ ThingView.prototype.initDomFromTemplate = function(containerName, templateName, 
 };
 
 var PacketView = extend(ThingView, function (subject) {
-    var templateName =  (   subject.isFirst
-                        ?   'firstPacket' 
-                        :       (   subject.isLast
-                                ?   'lastPacket'
-                                :   'packet'
-                                )
-                        );
+    function templateName(){
+        switch(subject.type) {
+            case 'GET':
+                return 'getRequest';
+            case 'JSON':
+                return (   subject.isFirst
+                    ?   'firstPacket'
+                    :       (   subject.isLast
+                    ?   'lastPacket'
+                    :   'packet'
+                    )
+                );
+        }        
+    }
     
-    this.initDomFromTemplate( 'packets', templateName, subject);
+    this.initDomFromTemplate( 'packets', templateName(), subject);
 
     subject.events('move').on(function( fromXY, toXY, duration ){
         

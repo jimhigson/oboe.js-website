@@ -23,6 +23,10 @@ rect#background {
     fill:#17becf;
 }
 
+.packet text {
+    fill:black;
+}
+
 /* categorical colours from:
     https://github.com/mbostock/d3/wiki/Ordinal-Scales
 */

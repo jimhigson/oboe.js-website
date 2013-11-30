@@ -44,7 +44,7 @@ function respondWithMarkdown(res, markdownFilename, opts){
 
 app
    .get('/demo/', function(req, res){
-      renderDemo(0, res);
+      renderDemo(1, res);
    })    
    .get('/demo/:scenarioNumber', function(req, res){
       renderDemo(parseInt(req.params.scenarioNumber), res);

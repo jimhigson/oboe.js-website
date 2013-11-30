@@ -1,5 +1,5 @@
 var getScenario = (function(){
-    var scenarios = [
+    var scenarios = [, // NB: hole in array - there is no item zero
         new Scenario({   
             "name":"fast-ajax"
         ,   "items":[
@@ -63,6 +63,10 @@ var getScenario = (function(){
     }
     
     return function(name) {
+        if( !scenarios[name] ) {
+            throw new Error('no scenario called ' + name);
+        }
+        
         return scenarios[name];
     }
 })();   

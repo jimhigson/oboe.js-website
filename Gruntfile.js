@@ -6,13 +6,19 @@ module.exports = function (grunt) {
     grunt.initConfig({
     
         watch:{
-            server:{
-                files:['index.js'],
-                tasks:['develop:server'],
+            sources:{
+                files:['index.js', 'sass/*.scss'],
+                tasks:['develop:server', 'newer:sass:all'],
                 options: { nospawn: true }
             }
-        },
-        
+        }
+    ,
+        sass: {
+            all:{
+                files: {'statics/css/all.css':'sass/all.scss'}
+            }
+        }
+    ,   
         develop: {
             server: {
                 file: 'index.js'
@@ -23,10 +29,12 @@ module.exports = function (grunt) {
 
     // load all grunt tasks
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-newer');
     grunt.loadNpmTasks('grunt-develop');
+    grunt.loadNpmTasks('grunt-sass');
 
     // register a few tasks
-    grunt.registerTask('start-dev', ['develop:server', 'watch:server']);
+    grunt.registerTask('start-dev', ['develop:server', 'sass:all', 'watch:sources']);
     //grunt.registerTask('start-real', ???);
 
 };

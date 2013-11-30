@@ -12,9 +12,8 @@ var express = require('express'),
     ,   "/js/internalNav.js"
     ],
 
-    UNMINIFIED_STYLESHEETS = [
-        "oboe.css"
-    ,   "content.css"
+    CSS_STYLESHEETS = [
+        "all.css"
     ],
     
     LATEST_TAG = 'v1.11.0';
@@ -33,7 +32,7 @@ function respondWithMarkdown(req, res, markdownFilename, opts){
     
     opts = opts || {};
     opts.scripts     = UNMINIFIED_SCRIPTS;
-    opts.stylesheets = UNMINIFIED_STYLESHEETS;
+    opts.stylesheets = CSS_STYLESHEETS;
     opts.latestTag   = LATEST_TAG;
     
     readContent(markdownFilename, function( outline ){
@@ -85,10 +84,7 @@ function renderDemo(scenarioNumber, res){
                         ,   "/js/demo/wire.js"
                     ]),
                 initScript:"loadScenario( " + scenarioNumber + ")",
-                stylesheets: UNMINIFIED_STYLESHEETS
-                    .concat([
-                        'demo.css'
-                    ]),
+                stylesheets: CSS_STYLESHEETS,
                 content: demoContentHtml
             });
         });

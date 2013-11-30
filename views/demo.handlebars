@@ -11,6 +11,30 @@
            </template>
        </g>
 
+       <g id="packets">
+           <template id="packet">
+               <circle transform="translate(0,0)" class="packet" r="{{packetRadius}}"></circle>
+           </template>
+           <template id="firstPacket">
+               <g transform="translate(0,0)" class="packet">
+                   <circle r="{{packetRadius}}"></circle>
+                   <text>{</text>
+               </g>
+           </template>
+           <template id="lastPacket">
+               <g transform="translate(0,0)" class="packet">
+                   <circle r="{{packetRadius}}"></circle>
+                   <text>}</text>
+               </g>
+           </template>
+           <template id="getRequest">
+               <g transform="translate(0,0)" class="packet">
+                   <circle r="{{packetRadius}}"></circle>
+                   <text>GET</text>
+               </g>
+           </template>
+       </g>      
+      
        <g id="places">
          <template id="server">
             <rect class="server" x="-22.5" y="-40" width="45" height="80"></rect>
@@ -40,29 +64,6 @@
          </template>
       </g>
               
-      <g id="packets">
-         <template id="packet">
-            <circle transform="translate(0,0)" class="packet" r="{{packetRadius}}"></circle>
-         </template>
-         <template id="firstPacket">
-            <g transform="translate(0,0)" class="packet"> 
-               <circle r="{{packetRadius}}"></circle>
-               <text>{</text>
-            </g>
-         </template>
-          <template id="lastPacket">
-              <g transform="translate(0,0)" class="packet">
-                  <circle r="{{packetRadius}}"></circle>
-                  <text>}</text>
-              </g>
-          </template>
-          <template id="getRequest">
-              <g transform="translate(0,0)" class="packet">
-                  <circle r="{{packetRadius}}"></circle>
-                  <text>GET</text>
-              </g>
-          </template>          
-      </g>
 
    </svg>         
 

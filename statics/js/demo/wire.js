@@ -1,28 +1,64 @@
 // setup the application
-function start() {
-
-    var server, wire, client,
-        serverView, wireView, clientView,
-        serverLocation = {x:40,y:55}, clientLocation = {x:465,y:145};
+function start(scenario) {
+    console.log(scenario);
     
-    server = new Server('webServer',
-                        {where:serverLocation}
-                        , 100, 500
-    ).withDownstream(
-        wire = new Wire('internet',
-                        {downstream: clientLocation, upstream:serverLocation}
-        ).withDownstream(
-            client = new Client('little_jimmy',
-                                {where:clientLocation}
-            )
-        )
-    );
-    
-    wireView = new WireView(wire);
-    clientView = new ClientView(client);
-    serverView = new ServerView(server);
+    var modelItems = {},
+        itemViews = {};
 
-    client.makeRequest();    
+    function makeModel(scenarioItem){
+        var Type = modelType(scenarioItem.type);
+
+        return new Type(
+            scenarioItem.name,
+            scenarioItem.locations,
+            scenarioItem.options
+        );
+    }
+
+    function modelType(scenarioType){
+        switch(scenarioType){
+            case "server":  return Server;
+            case "wire":    return Wire;
+            case "client":  return Client;
+        }
+        throw new Error('unknown type ' + scenarioType);
+    }
+
+    function viewType(scenarioType){
+        switch(scenarioType){
+            case "server":  return ServerView;
+            case "wire":    return WireView;
+            case "client":  return ClientView;
+        }
+        throw new Error('unknown type ' + scenarioType);
+    }    
+
+    // init the model items
+    scenario.items.forEach(function (scenarioItem){
+
+        modelItems[scenarioItem.name] = makeModel(scenarioItem);
+    });
+
+    // link up model items to each other
+    scenario.items.forEach(function(scenarioItem){
+        var modelItem = modelItems[scenarioItem.name];    
+
+        scenarioItem.next.forEach(function( nextScenarioName ){
+
+            modelItem.withDownstream( modelItems[nextScenarioName] );
+        });
+    });    
+    
+    // make some views:
+    scenario.items.forEach(function(scenarioItem){
+        var modelItem = modelItems[scenarioItem.name],
+            ViewType = viewType(scenarioItem.type);
+        
+        itemViews[scenarioItem.name] = new ViewType(modelItem);
+    });
+
+    // TODO: put client requests in scenarios
+    modelItems.client.makeRequest();
 }
 
-start();
+start( getScenario(0) );

@@ -86,10 +86,10 @@ Wire.prototype.accept = function(packet){
     }, this.latency);
 };
 
-var Server = extend( PacketHolder, function(name, locations, timeBetweenPackets, initialDelay) {
+var Server = extend( PacketHolder, function(name, locations, options) {
     PacketHolder.apply(this, arguments);
-    this.timeBetweenPackets = timeBetweenPackets;
-    this.initialDelay = initialDelay;
+    this.timeBetweenPackets = options.timeBetweenPackets;
+    this.initialDelay = options.initialDelay;
 });
 Server.prototype.accept = function(packet, locations){
     

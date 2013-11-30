@@ -53,6 +53,7 @@ app
                                 ,   "/js/demo/lists.js"
                                 ,   "/js/demo/singleEventPubSub.js"
                                 ,   "/js/demo/pubSub.js"
+                                ,   '/js/demo/scenarios.js'                        
                                 ,   '/js/demo/demoModel.js'                        
                                 ,   "/js/demo/demoView.js"
                                 ,   "/js/demo/wire.js"

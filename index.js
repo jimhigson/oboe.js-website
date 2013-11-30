@@ -43,31 +43,11 @@ function respondWithMarkdown(res, markdownFilename, opts){
 }
 
 app
-   .get('/demo', function(req, res){
-
-        var DEMO_TEMPLATE_OPTIONS = {packetRadius: 15};
-        
-        res.render('demo', DEMO_TEMPLATE_OPTIONS, 
-            function(err, demoContentHtml) {
-                res.render('page', {
-                    scripts:     UNMINIFIED_SCRIPTS
-                                    .concat([
-                                        "/js/demo/functional.js"                        
-                                    ,   "/js/demo/lists.js"
-                                    ,   "/js/demo/singleEventPubSub.js"
-                                    ,   "/js/demo/pubSub.js"
-                                    ,   '/js/demo/scenarios.js'                        
-                                    ,   '/js/demo/demoModel.js'                        
-                                    ,   "/js/demo/demoView.js"
-                                    ,   "/js/demo/wire.js"
-                                    ]),
-                    stylesheets: UNMINIFIED_STYLESHEETS
-                                    .concat([
-                                        'demo.css'
-                                    ]),                
-                    content: demoContentHtml
-            });
-        });
+   .get('/demo/', function(req, res){
+      renderDemo(0, res);
+   })    
+   .get('/demo/:scenarioNumber', function(req, res){
+      renderDemo(parseInt(req.params.scenarioNumber), res);
    })    
    .get('/', function(req, res){
         respondWithMarkdown(res, 'index', {
@@ -86,5 +66,31 @@ app
    .use(express.static('components/jquery'))
    .use(express.static('components/d3'))
    .listen(PORT);
+
+function renderDemo(scenarioNumber, res){
+    var DEMO_TEMPLATE_OPTIONS = {packetRadius: 15};
+
+    res.render('demo', DEMO_TEMPLATE_OPTIONS,
+        function(err, demoContentHtml) {
+            res.render('page', {
+                scripts:     UNMINIFIED_SCRIPTS
+                    .concat([
+                        "/js/demo/functional.js"
+                        ,   "/js/demo/lists.js"
+                        ,   "/js/demo/singleEventPubSub.js"
+                        ,   "/js/demo/pubSub.js"
+                        ,   '/js/demo/scenarios.js'
+                        ,   '/js/demo/demoModel.js'
+                        ,   "/js/demo/demoView.js"
+                        ,   "/js/demo/wire.js"
+                    ]),
+                stylesheets: UNMINIFIED_STYLESHEETS
+                    .concat([
+                        'demo.css'
+                    ]),
+                content: demoContentHtml
+            });
+        });
+}
 
 console.log('started on port', PORT.cyan);

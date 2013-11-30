@@ -1,7 +1,7 @@
 <svg
         xmlns:svg="http://www.w3.org/2000/svg"
         xmlns="http://www.w3.org/2000/svg"
-        version="1.1" >
+        version="1.1">
 
     <rect class="frame"
           width="85"
@@ -20,50 +20,42 @@
           width="65"
           height="10"
           x="10"
-          y="15"
-          style="fill:#ff0000;"/>
+          y="15"/>
 
     <rect class="part2"
           width="15"
           height="25"
           x="60"
-          y="30"
-          style="fill:#00ffff;"/>
+          y="30"/>
 
     <rect class="part3"
           width="15"
           height="30"
           x="60"
-          y="60"
-          style="fill:#800080;"/>
+          y="60"/>
 
     <rect class="part4"
           width="10"
           height="5"
           x="45"
-          y="46"
-          style="fill:#00ff00;"/>
+          y="46"/>
     <path class="part4"
-          d="m 40,46 c 0,8.28427 -6.71573,15 -15,15 -8.28427,0 -15,-6.71573 -15,-15 0,-8.28427 6.71573,-15 15,-15 8.28427,0 15,6.71573 15,15 z"
-          style="fill:#00ff00;"/>
+          d="m 40,46 c 0,8.28427 -6.71573,15 -15,15 -8.28427,0 -15,-6.71573 -15,-15 0,-8.28427 6.71573,-15 15,-15 8.28427,0 15,6.71573 15,15 z"/>
 
     <rect class="part5"
           width="45"
           height="25"
           x="10"
-          y="65"
-          style="fill:#ffff00;"/>
+          y="65"/>
 
     <path class="part5"
           d="m 25.19015,30.001205 c 8.283606,0.105017 14.913662,6.90534 14.808645,15.188945 -0.105017,8.283606 -6.90534,14.913662 -15.188945,14.808645 -3.892348,-0.04935 -7.613073,-1.6099 -10.376046,-4.351941 L 25,45 z"
           transform="translate(0,1.0000076)"
-          id="path3824"
-          style="fill:#ff00ff;"/>
+          id="path3824"/>
 
     <rect class="part6"
           width="10"
           height="5"
           x="45"
-          y="35"
-          style="fill:#ff00ff;"/>
+          y="35"/>
 </svg>

@@ -10,12 +10,16 @@
     "supermarked": "~1.1.0",
     "cheerio": "~0.12.4",
     "handlebars": "~1.1.2",
-    "colors": "~0.6.2"
+    "colors": "~0.6.2",
+    "grunt": "~0.4.2",
+    "grunt-sass": "~0.8.1",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-develop": "~0.2.2"
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "node ./node_modules/grunt-cli/bin/grunt start"
   },
   "repository": {
     "type": "git",

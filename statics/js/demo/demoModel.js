@@ -71,6 +71,7 @@ var PacketHolder = extend(Thing, function(name, locations){
         throw new Error("don't know where " + name + " is");
     }
 
+    this.timeouts = [];
     this.name = name;
     this.latency = 0;
     this.locations = locations || {};
@@ -99,6 +100,18 @@ PacketHolder.prototype.movePacket = function(packet){
 
     packet.move(fromXY, toXY, this.latency);
 };
+PacketHolder.prototype.removeTimeout = function(timeout){
+
+    this.timeouts = this.timeouts.filter(function( storedTimeout ){
+        return storedTimeout != timeout;
+    });
+};
+PacketHolder.prototype.reset = function(){
+    // cancel all scheduled events:
+    this.timeouts.forEach(function(timeout){
+        window.clearTimeout(timeout);
+    });
+}
 
 function EventSink (name) {
     this.name = name;
@@ -110,7 +123,6 @@ var Wire = extend( PacketHolder, function(name, locations, options) {
     PacketHolder.apply(this, arguments);
     this.latency = options.latency;
     this.bandwidth = options.bandwidth;
-    this.timeouts = [];
 });
 Wire.prototype.accept = function(packet){
         
@@ -129,18 +141,6 @@ Wire.prototype.propagateAfterLatency = function(packet){
 
     this.timeouts.push( timeout );
 }
-Wire.prototype.removeTimeout = function(timeout){
-    
-    this.timeouts = this.timeouts.filter(function( storedTimeout ){
-        return storedTimeout != timeout;
-    });
-};
-Wire.prototype.reset = function(){
-    // cancel all scheduled events:
-    this.timeouts.forEach(function(timeout){
-        window.clearTimeout(timeout);
-    });
-}
 
 var Server = extend( PacketHolder, function(name, locations, options) {
     PacketHolder.apply(this, arguments);
@@ -156,7 +156,7 @@ Server.prototype.accept = function(packet){
     }
 };
 Server.prototype.sendResponse = function() {
-    window.setTimeout(function(){
+    var timeout = window.setTimeout(function(){
         var i = 0,
             interval = window.setInterval(function(){
                     var ordering = {
@@ -179,6 +179,8 @@ Server.prototype.sendResponse = function() {
                 }.bind(this), this.timeBetweenPackets);
         
     }.bind(this), this.initialDelay);
+
+    this.timeouts.push( timeout );
 };
 
 var Client = extend( PacketHolder, function(name, locations, options) {

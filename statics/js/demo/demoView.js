@@ -169,6 +169,6 @@ var ClientView = extend(ThingView, function(subject, demoView){
             oldClassAttr = ele.getAttribute('class'),
             newClassAttr = oldClassAttr.replace(/received-response\d/g, '');
         
-        this.jDom[0].setAttribute('class', newClassAttr);
+        ele.setAttribute('class', newClassAttr);
     }.bind(this));
 });

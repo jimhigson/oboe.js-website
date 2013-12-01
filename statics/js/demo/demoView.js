@@ -89,6 +89,10 @@ var DemoView = extend(ThingView, function(subject){
 
         jReset.fadeIn();
     });
+
+    jReset.click(function(){
+        subject.reset();
+    });
 });
 
 var PacketView = extend(ThingView, function (subject, demoView) {
@@ -157,6 +161,14 @@ var ClientView = extend(ThingView, function(subject, demoView){
     this.jDom.attr('transform', transformToLocation(subject.locations.where));
     
     subject.events('receive').on(function( packet ){
-        addClass(this.jDom, 'received-' + packet.name); 
+        addClass(this.jDom, 'received-' + packet.name);        
+    }.bind(this));
+
+    subject.events('reset').on(function(){
+        var ele = this.jDom[0],
+            oldClassAttr = ele.getAttribute('class'),
+            newClassAttr = oldClassAttr.replace(/received-response\d/g, '');
+        
+        this.jDom[0].setAttribute('class', newClassAttr);
     }.bind(this));
 });

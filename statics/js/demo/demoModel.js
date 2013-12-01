@@ -22,8 +22,14 @@ function Thing(name){
     this.name = name;
     this.events = pubSub();
 }
+Thing.prototype.reset = function(){
+}
 Thing.prototype.inDemo = function(demo){
     this.demo = demo;
+    this.demo.events('reset').on(function(){
+        this.reset();
+        this.events('reset').emit();
+    }.bind(this));
     return this; //chaining
 }
 
@@ -32,6 +38,9 @@ var Demo = extend(Thing, function(name){
 });
 Demo.prototype.start = function(){
     this.startSimulation();
+};
+Demo.prototype.reset = function(){
+    this.events('reset').emit();
 };
 
 var Packet = extend(Thing, function (name, type, direction, ordering){
@@ -50,6 +59,7 @@ Packet.new = singleEventPubSub('new');
 Packet.prototype.move = function(fromXY, toXY, latency){
     this.events('move').emit(fromXY, toXY, latency);
 };
+Packet.prototype.reset =
 Packet.prototype.done = function(){
     this.events('done').emit();
 };
@@ -100,16 +110,37 @@ var Wire = extend( PacketHolder, function(name, locations, options) {
     PacketHolder.apply(this, arguments);
     this.latency = options.latency;
     this.bandwidth = options.bandwidth;
+    this.timeouts = [];
 });
 Wire.prototype.accept = function(packet){
-    var self = this;
         
     this.movePacket(packet);
 
-    window.setTimeout(function(){
-        self.propagate(packet);
-    }, this.latency);
+    this.propagateAfterLatency(packet);
 };
+Wire.prototype.propagateAfterLatency = function(packet){
+    
+    var timeout = window.setTimeout(function(){
+
+        this.removeTimeout(timeout);
+        this.propagate(packet);
+
+    }.bind(this), this.latency);
+
+    this.timeouts.push( timeout );
+}
+Wire.prototype.removeTimeout = function(timeout){
+    
+    this.timeouts = this.timeouts.filter(function( storedTimeout ){
+        return storedTimeout != timeout;
+    });
+};
+Wire.prototype.reset = function(){
+    // cancel all scheduled events:
+    this.timeouts.forEach(function(timeout){
+        window.clearTimeout(timeout);
+    });
+}
 
 var Server = extend( PacketHolder, function(name, locations, options) {
     PacketHolder.apply(this, arguments);

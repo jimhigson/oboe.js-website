@@ -64,7 +64,7 @@ var DemoView = extend(ThingView, function(subject){
 
     this.jDom = stampFromTemplate($('#demo'));
     
-    var containerDiv = $("div[data-demo=" + subject.name + "]"),
+    var containerDiv = $("[data-demo=" + subject.name + "]"),
         jControls = this.jDom.find('.controls'),
         jLightbox = jControls.find('.lightbox'),
         jReset = jControls.find('.reset').hide();

@@ -1,19 +1,19 @@
-# Why Streaming AJAX
+# Why Streaming REST?
 
-## Case1
+## Downloading from non-streamed REST
 
 Well, why not?
 
-<div data-demo="fast-ajax-discrete"></div>
+<figure data-demo="fast-ajax-discrete"></figure>
 
-## Case2
+## Streaming downloading from non-streamed REST
 
 There's probably more to it then "why not"
 
-<div data-demo="fast-ajax-progressive"></div>
+<figure data-demo="fast-ajax-progressive"></figure>
 
 ## Case3
 
 I'll write it later
 
-<div data-demo="slow-ajax-discrete"></div>
+<figure data-demo="slow-ajax-discrete"></figure>

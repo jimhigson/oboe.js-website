@@ -10,10 +10,6 @@ div[data-demo] {
   user-select: none;  
 }
 
-#demoArea svg {
-   margin: 20px;
-}
-
 rect.background,
 rect.fade {
    fill: $shadedBackgroundColor;

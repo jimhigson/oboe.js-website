@@ -12,7 +12,11 @@ There's probably more to it then "why not"
 
 <figure data-demo="fast-ajax-progressive"></figure>
 
-## Case3
+## Aggregating resources
+
+## Cacheable streaming
+
+## Historic and live data on the same transport
 
 I'll write it later
 

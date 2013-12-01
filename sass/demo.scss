@@ -40,13 +40,16 @@ rect.fade {
 
 .controls text {
     @include svg-text-centered; 
-    fill:$highlight;
+    @include link; 
 }
 .controls:hover {
     cursor: pointer;
 }
 .controls:hover text {
-    fill:$highlightHover;  
+    @include hovered-link;
+}
+.controls:active text {
+   @include active-link;
 }
 
 .pie-divide {

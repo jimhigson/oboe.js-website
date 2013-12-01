@@ -123,20 +123,15 @@ footer p a:hover {
 }
 
 a {
-   color: $highlight;
-   text-decoration: none;
-   transition: all 0.5s;   
+  @include link;  
 }
 
 a:hover {
-   color: $highlightHover;
-   text-decoration: underline;
-   transition: all 0.2s;   
+  @include hovered-link;
 }
 
 a:active {
-   color: $nearBlack;
-   transition: all 0s;   
+  @include active-link;   
 }
 
 a.active {

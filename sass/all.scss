@@ -11,6 +11,25 @@ $highlightPressed:      #569a6e;
 */
 $categoricalColors: #1f77b4 #ff7f0e #2ca02c #d62728 #9467bd #8c564b #e377c2 #7f7f7f #bcbd22 #17becf;
 
+@mixin link {
+  color: $highlight;
+  fill: $highlight;
+  text-decoration: none;
+  transition: all 0.5s;
+}
+@mixin hovered-link {
+  color: $highlightHover;
+  fill: $highlightHover;
+  text-decoration: underline;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+@mixin active-link {
+  color: $nearBlack;
+  fill: $nearBlack;
+  transition: all 0s;
+}
+
 @import 'oboe';
 @import 'content';
 @import 'demo';

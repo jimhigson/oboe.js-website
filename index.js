@@ -11,6 +11,14 @@ var express = require('express'),
         "//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"
     ,   "/js/jquery.sticky.js"
     ,   "/js/internalNav.js"
+    ,   "/js/demo/functional.js"
+    ,   "/js/demo/lists.js"
+    ,   "/js/demo/singleEventPubSub.js"
+    ,   "/js/demo/pubSub.js"
+    ,   '/js/demo/scenarios.js'
+    ,   '/js/demo/demoModel.js'
+    ,   "/js/demo/demoView.js"
+    ,   "/js/demo/wire.js"        
     ],
 
     CSS_STYLESHEETS = [
@@ -25,6 +33,16 @@ app.engine('handlebars', consolidate.handlebars);
 app.set('view engine', 'handlebars');
 app.set('views', __dirname + '/views');
 
+/* create <template> elements to send to the client side */
+function renderClientSideTemplates(res, callback){
+    var DEMO_TEMPLATE_OPTIONS = {packetRadius: 15};
+
+    res.render('demoTemplate', DEMO_TEMPLATE_OPTIONS,
+        function(err, demoContentHtml) {
+            callback(demoContentHtml);
+        });
+}
+
 function respondWithMarkdown(req, res, markdownFilename, opts){
 
     function getMarkupView(req){
@@ -35,26 +53,25 @@ function respondWithMarkdown(req, res, markdownFilename, opts){
     opts.scripts     = UNMINIFIED_SCRIPTS;
     opts.stylesheets = CSS_STYLESHEETS;
     opts.latestTag   = LATEST_TAG;
-    
+
+
     readContent(markdownFilename, function( outline ){
-    
-        opts.content = outline.content;
-        opts.heading = outline.heading;
-        opts.sections = outline.sections;
-        res.status(outline.status);
-        res.render(getMarkupView(req), opts);
+        
+        renderClientSideTemplates(res, function(templateHtml) {
+        
+            opts.templates = templateHtml;
+            opts.content = outline.content;
+            opts.heading = outline.heading;
+            opts.sections = outline.sections;
+            res.status(outline.status);
+            res.render(getMarkupView(req), opts);
+        });
     });
 }
 
 app
    .use(express.static('statics'))
-   .use(slashes())
-   .get('/demo/', function(req, res){
-      renderDemo(1, res);
-   })        
-   .get('/demo/:scenarioNumber', function(req, res){
-      renderDemo(parseInt(req.params.scenarioNumber), res);
-   })    
+   .use(slashes())    
    .get('/', function(req, res){
         respondWithMarkdown(req, res, 'index', {
             home:'true'
@@ -64,28 +81,5 @@ app
        respondWithMarkdown(req, res, req.params.page);
    })    
    .listen(PORT);
-
-function renderDemo(scenarioNumber, res){
-    var DEMO_TEMPLATE_OPTIONS = {packetRadius: 15};
-
-    res.render('demo', DEMO_TEMPLATE_OPTIONS,
-        function(err, demoContentHtml) {
-            res.render('page', {
-                scripts:     UNMINIFIED_SCRIPTS
-                    .concat([
-                        "/js/demo/functional.js"
-                        ,   "/js/demo/lists.js"
-                        ,   "/js/demo/singleEventPubSub.js"
-                        ,   "/js/demo/pubSub.js"
-                        ,   '/js/demo/scenarios.js'
-                        ,   '/js/demo/demoModel.js'
-                        ,   "/js/demo/demoView.js"
-                        ,   "/js/demo/wire.js"
-                    ]),
-                stylesheets: CSS_STYLESHEETS,
-                content: demoContentHtml
-            });
-        });
-}
 
 console.log('started on port', PORT.cyan);

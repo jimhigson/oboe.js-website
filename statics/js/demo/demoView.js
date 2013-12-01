@@ -70,8 +70,10 @@ var DemoView = extend(ThingView, function(subject){
     containerDiv.append( this.jDom );
 
     Packet.new.on( function(newPacket){
-
-        new PacketView(newPacket, this);
+        
+        if( newPacket.demo == subject )        
+            new PacketView(newPacket, this);
+        
     }.bind(this));
     
     jControls.one('click', function(){

@@ -13,7 +13,7 @@ var getScenario = (function(){
         * creating an aggregation (Insight) Oboe
      */
     
-    var scenarios = [, // NB: hole in array - there is no item zero
+    var scenarios = [
         new Scenario({   
             "name":"fast-ajax"
         ,   "items":[
@@ -42,6 +42,31 @@ var getScenario = (function(){
             ]
         })
         
+    ,   new Scenario({
+            "name":"slow-ajax"
+            ,   "items":[
+                {
+                    "name":"sever",
+                    "type":"server",
+                    "options":{
+                        "timeBetweenPackets": 100,
+                        "initialDelay"      : 500
+                    }
+                },
+                {
+                    "name":"internet",
+                    "type":"wire",
+                    "options":{
+                        "bandwidth":500,
+                        "latency":3000
+                    }
+                },
+                {
+                    "name":"client",
+                    "type":"client"
+                }
+            ]
+        })
     ,   new Scenario({
             "name":"slow-ajax"
             ,   "items":[

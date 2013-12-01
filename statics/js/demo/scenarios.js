@@ -13,9 +13,9 @@ var getScenario = (function(){
         * creating an aggregation (Insight) Oboe
      */
     
-    var scenarios = [
-        new Scenario({   
-            "name":"fast-ajax"
+    var scenarios = {
+        "fast-ajax-discrete": new Scenario({   
+            "name":"fast-ajax-discrete"
         ,   "items":[
                 {
                     "name":"sever",
@@ -37,20 +37,55 @@ var getScenario = (function(){
                 },
                 {
                     "name":"client",                    
-                    "type":"client"
+                    "type":"client",
+                    "options":{
+                        "parsing":"discrete"
+                    }
                 }
             ]
         })
-        
-    ,   new Scenario({
-            "name":"slow-ajax"
+
+    ,   "fast-ajax-progressive": new Scenario({
+            "name":"fast-ajax-progressive"
             ,   "items":[
                 {
                     "name":"sever",
                     "type":"server",
                     "options":{
                         "timeBetweenPackets": 100,
-                        "initialDelay"      : 500
+                        "initialDelay"      : 500,
+                        "messageSize"       : 7
+                    }
+                },
+                {
+                    "name":"internet",
+                    "type":"wire",
+                    "options":{
+                        "bandwidth":500,
+                        "latency":1500,
+                        "messageSize" : 7
+                    }
+                },
+                {
+                    "name":"client",
+                    "type":"client",
+                    "options":{
+                        "parsing":"progressive"
+                    }
+                }
+            ]
+        })        
+        
+    ,   "slow-ajax-discrete": new Scenario({
+            "name":"slow-ajax-discrete"
+            ,   "items":[
+                {
+                    "name":"sever",
+                    "type":"server",
+                    "options":{
+                        "timeBetweenPackets": 100,
+                        "initialDelay"      : 500,
+                        "messageSize"       : 7
                     }
                 },
                 {
@@ -67,7 +102,7 @@ var getScenario = (function(){
                 }
             ]
         })
-    ,   new Scenario({
+    ,   "slow-ajax": new Scenario({
             "name":"slow-ajax"
             ,   "items":[
                 {
@@ -92,7 +127,7 @@ var getScenario = (function(){
                 }
             ]
         })        
-    ];
+    };
     
     function translateLocation( location, delta ){
         return {

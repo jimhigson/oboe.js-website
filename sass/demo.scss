@@ -14,7 +14,10 @@
   user-select: none;  
 }
 
-rect.background,
+[data-demo] {
+  background-color: $shadedBackgroundColor;
+}
+
 rect.fade {
    fill: $shadedBackgroundColor;
 }

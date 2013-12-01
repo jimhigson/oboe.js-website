@@ -2,6 +2,11 @@
 function loadScenario(scenarioId) {
     var scenario = getScenario(scenarioId);
     
+    if( !scenario ) {
+        console.warn('no scenario for ' + scenarioId);
+        return;
+    }
+    
     console.log('setting up demo', scenario);
     
     var modelItems = {},

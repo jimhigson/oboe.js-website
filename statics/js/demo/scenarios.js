@@ -179,10 +179,7 @@ var getScenario = (function(){
     }
     
     return function(name) {
-        if( !scenarios[name] ) {
-            throw new Error('no scenario called ' + name);
-        }
-        
+
         return scenarios[name];
     }
 })();   

@@ -78,21 +78,33 @@ var DemoView = extend(ThingView, function(subject){
         
     }.bind(this));
     
-    jLightbox.one('click', function(){
-                
-        jLightbox.fadeOut();
-        jLightbox.promise().done( function(){
-            window.setTimeout( function(){
-                subject.start();
-            }, 500);
+    function listenForPlay(){
+        jLightbox.one('click', function(){
+
+            jLightbox.fadeOut();
+            jLightbox.promise().done( function(){
+                window.setTimeout( function(){
+                    subject.start();
+                }, 500);
+            });
+
+            jReset.fadeIn();
+
+            listenForReset();
+        });        
+    }
+    
+    function listenForReset(){
+        jReset.one('click', function(){
+            
+            subject.reset();
+            jLightbox.fadeIn();
+            jReset.fadeOut();
+            listenForPlay();            
         });
-
-        jReset.fadeIn();
-    });
-
-    jReset.click(function(){
-        subject.reset();
-    });
+    }
+        
+    listenForPlay();
 });
 
 var PacketView = extend(ThingView, function (subject, demoView) {

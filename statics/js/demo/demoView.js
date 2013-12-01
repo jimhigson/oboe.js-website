@@ -52,8 +52,8 @@ ThingView.prototype.initDomFromTemplate = function(containerName, templateName, 
     
     var jContainer = this.demoView.jDom.find('.' + containerName);
     
-    if( !jContainer.length ) {
-        throw new Error('nowhere to put the thing');
+    if( jContainer.length != 1 ) {
+        throw new Error('no one place to put the thing');
     }
     jContainer.append(this.jDom);
     return this.jDom;
@@ -102,7 +102,7 @@ var PacketView = extend(ThingView, function (subject, demoView) {
                 );
         }        
     }
-    
+        
     this.initDomFromTemplate( 'packets', templateName(), subject);
 
     subject.events('move').on(function( fromXY, toXY, duration ){

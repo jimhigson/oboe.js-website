@@ -2,7 +2,7 @@
 function loadScenario(scenarioId) {
     var scenario = getScenario(scenarioId);
     
-    console.log(scenario);
+    console.log('setting up demo', scenario);
     
     var modelItems = {},
         itemViews = {};

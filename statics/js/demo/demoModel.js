@@ -41,13 +41,15 @@ var Packet = extend(Thing, function (name, type, direction, ordering){
     this.isFirst = ordering.isFirst;
     this.isLast = ordering.isLast;
     this.type = type;
-    
-    Packet.new.emit(this);    
 });
+Packet.prototype.announce = function() {
+    Packet.new.emit(this);
+    return this;
+};
 Packet.new = singleEventPubSub('new');
 Packet.prototype.move = function(fromXY, toXY, latency){
     this.events('move').emit(fromXY, toXY, latency);
-}
+};
 Packet.prototype.done = function(){
     this.events('done').emit();
 };
@@ -116,7 +118,7 @@ var Server = extend( PacketHolder, function(name, locations, options) {
     this.messageSize = options.messageSize;
 });
 Server.prototype.accept = function(packet){
-    
+        
     if( packet.name == 'request' ) {
         this.sendResponse();
         packet.done();
@@ -130,8 +132,13 @@ Server.prototype.sendResponse = function() {
                         isFirst: i == 0,
                         isLast: i == (this.messageSize -1)
                     };
+
+                    var packet =
+                        new Packet('response' + i, 'JSON', 'downstream', ordering)
+                            .inDemo(this.demo)
+                            .announce();  
                 
-                    this.propagate(new Packet('response' + i, 'JSON', 'downstream', ordering));
+                    this.propagate(packet);
                                 
                     if( ordering.isLast ) {
                         window.clearInterval(interval);
@@ -148,7 +155,12 @@ var Client = extend( PacketHolder, function(name, locations) {
 });
 
 Client.prototype.makeRequest = function(){
-    this.propagate(new Packet('request', 'GET', 'upstream', {isFirst:true, isLast:true}));
+    var packet = 
+        new Packet('request', 'GET', 'upstream', {isFirst:true, isLast:true})
+            .inDemo(this.demo)
+            .announce();
+    
+    this.propagate(packet);
 };
 Client.prototype.accept = function(packet){
     this.events('receive').emit(packet);

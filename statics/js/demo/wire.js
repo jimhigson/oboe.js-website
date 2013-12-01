@@ -73,3 +73,9 @@ function loadScenario(scenarioId) {
         modelItems.client.makeRequest();
     }
 }
+
+$(function(){
+    $('[data-demo]').each(function( _i, element ){
+        loadScenario( element.getAttribute('data-demo') );
+    })
+});

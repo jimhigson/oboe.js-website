@@ -82,7 +82,6 @@ function renderDemo(scenarioNumber, res){
                         ,   "/js/demo/demoView.js"
                         ,   "/js/demo/wire.js"
                     ]),
-                initScript:"loadScenario( " + scenarioNumber + ")",
                 stylesheets: CSS_STYLESHEETS,
                 content: demoContentHtml
             });

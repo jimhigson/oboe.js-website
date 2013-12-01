@@ -1,87 +1,88 @@
- 
 <section id="demoArea">
 
-   <svg width="500" height="200">
-     
-     <rect id="background" x="0" y="0" width="500" height="200" />
-       <g id="wires">
-       </g>
+    <svg width="500" height="200">
 
-       <g id="packets">
-       </g>      
-      
-       <g id="places">         
-      </g>
+        <rect id="background" x="0" y="0" width="500" height="200"/>
+        <g id="wires">
+        </g>
 
-      <g class="controls">
-         <rect id="fade" x="0" y="0" width="500" height="200" />
-         <text class="play" x="250" y="100">Play ▶</text>
-      </g>
+        <g id="packets">
+        </g>
 
-       <template id="wire">
-           <line class="wire" />
-       </template>
-      
-       <template id="server">
-           <rect class="server" x="-22.5" y="-40" width="45" height="80"></rect>
-       </template>
-      
-       <template id="client">
-           <g class="client"><g transform="translate(-42.5, -52.5)">
-               <rect class="frame" width="85" height="95" x="0" y="0" />
-               <rect class="viewPort" width="75" height="80" x="5" y="10" />
+        <g id="places">
+        </g>
 
-               <rect class="part part0" width="65" height="10" x="10" y="15"/>
+        <g class="controls">
+            <rect id="fade" x="0" y="0" width="500" height="200"/>
+            <text class="play" x="250" y="100">Play ▶</text>
+        </g>
 
-               <rect class="part part1" width="15" height="25" x="60" y="30"/>
+        <template id="wire">
+            <line class="wire"/>
+        </template>
 
-               <rect class="part part2" width="15" height="30" x="60" y="60"/>
+        <template id="server">
+            <rect class="server" x="-22.5" y="-40" width="45" height="80"></rect>
+        </template>
 
-               <rect class="part part3" width="10" height="5" x="45" y="45"/>
-               <path class="part part3"
-                     d="m 40,46 c 0,8.3 -6.7,15 -15,15 -8.3,0 -15,-6.7 -15,-15 0,-8.3 6.7,-15 15,-15 8.3,0 15,6.7 15,15 z"/>
+        <template id="client">
+            <g class="client">
+                <g transform="translate(-42.5, -52.5)">
+                    <rect class="frame" width="85" height="95" x="0" y="0"/>
+                    <rect class="viewPort" width="75" height="80" x="5" y="10"/>
 
-               <rect class="part part4" width="10" height="5" x="45" y="35"/>
-               <path class="part part4"
-                     d="m 25.2,31 c 8.3,0.1 14.9,6.9 14.8,15.2 -0.1,8.3 -6.9,14.9 -15.2,14.8 -3.9,0 -7.6,-1.6 -10.4,-4.4 L 25,45 z" />
+                    <rect class="part part0" width="65" height="10" x="10" y="15"/>
 
-               <path class="pie-divide" d="m 15,57 11,-10 0,-16"></path>
+                    <rect class="part part1" width="15" height="25" x="60" y="30"/>
 
-               <rect class="part part5" width="45" height="5" x="10" y="66"/>
-               <rect class="part part6" width="45" height="14" x="10" y="76"/>
-           </g></g>
-       </template>      
-      
-       <template id="packet">
-           <circle transform="translate(0,0)" class="packet" r="{{packetRadius}}"></circle>
-       </template>
-       <template id="firstPacket">
-           <g transform="translate(0,0)" class="packet">
-               <circle r="{{packetRadius}}"></circle>
-               <text>{</text>
-           </g>
-       </template>
-       <template id="lastPacket">
-           <g transform="translate(0,0)" class="packet">
-               <circle r="{{packetRadius}}"></circle>
-               <text>}</text>
-           </g>
-       </template>
-       <template id="getRequest">
-           <g transform="translate(0,0)" class="packet">
-               <circle r="{{packetRadius}}"></circle>
-               <text>GET</text>
-           </g>
-       </template>       
+                    <rect class="part part2" width="15" height="30" x="60" y="60"/>
 
-   </svg>         
+                    <rect class="part part3" width="10" height="5" x="45" y="45"/>
+                    <path class="part part3"
+                          d="m 40,46 c 0,8.3 -6.7,15 -15,15 -8.3,0 -15,-6.7 -15,-15 0,-8.3 6.7,-15 15,-15 8.3,0 15,6.7 15,15 z"/>
 
-   <ul>
-      <!--<li><a href="">&lt;</a></li>-->
-      <li><a href="/demo/1">1</a></li>
-      <li><a href="/demo/2">2</a></li>
-      <li><a href="/demo/3">3</a></li>
-      <li><a href="/demo/4">4</a></li>
-      <!--<li><a href="">&gt;</a></li>      -->
-   </ul>
+                    <rect class="part part4" width="10" height="5" x="45" y="35"/>
+                    <path class="part part4"
+                          d="m 25.2,31 c 8.3,0.1 14.9,6.9 14.8,15.2 -0.1,8.3 -6.9,14.9 -15.2,14.8 -3.9,0 -7.6,-1.6 -10.4,-4.4 L 25,45 z"/>
+
+                    <path class="pie-divide" d="m 15,57 11,-10 0,-16"></path>
+
+                    <rect class="part part5" width="45" height="5" x="10" y="66"/>
+                    <rect class="part part6" width="45" height="14" x="10" y="76"/>
+                </g>
+            </g>
+        </template>
+
+        <template id="packet">
+            <circle transform="translate(0,0)" class="packet" r="{{packetRadius}}"></circle>
+        </template>
+        <template id="firstPacket">
+            <g transform="translate(0,0)" class="packet">
+                <circle r="{{packetRadius}}"></circle>
+                <text>{</text>
+            </g>
+        </template>
+        <template id="lastPacket">
+            <g transform="translate(0,0)" class="packet">
+                <circle r="{{packetRadius}}"></circle>
+                <text>}</text>
+            </g>
+        </template>
+        <template id="getRequest">
+            <g transform="translate(0,0)" class="packet">
+                <circle r="{{packetRadius}}"></circle>
+                <text>GET</text>
+            </g>
+        </template>
+
+    </svg>
+
+    <ul>
+        <!--<li><a href="">&lt;</a></li>-->
+        <li><a href="/demo/1">1</a></li>
+        <li><a href="/demo/2">2</a></li>
+        <li><a href="/demo/3">3</a></li>
+        <li><a href="/demo/4">4</a></li>
+        <!--<li><a href="">&gt;</a></li>      -->
+    </ul>
 </section>

@@ -68,6 +68,8 @@ function loadScenario(scenarioId) {
         itemViews[scenarioItem.name] = new ViewType(modelItem, demoView);
     });
 
-    // TODO: put client requests as script-like things in scenarios
-    modelItems.client.makeRequest();
+    // TODO: get from scenario or something:
+    demo.start = function(){
+        modelItems.client.makeRequest();
+    }
 }

@@ -73,7 +73,11 @@ var DemoView = extend(ThingView, function(subject){
     Packet.new.on( function(newPacket){
 
         new PacketView(newPacket, this);
-    }.bind(this));    
+    }.bind(this));
+    
+    this.jDom.find('.controls').click(function(){
+        subject.start();
+    });
 });
 
 var PacketView = extend(ThingView, function (subject, demoView) {

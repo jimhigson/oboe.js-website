@@ -65,7 +65,9 @@ var DemoView = extend(ThingView, function(subject){
     this.jDom = stampFromTemplate($('#demo'));
     
     var containerDiv = $("div[data-demo=" + subject.name + "]"),
-        jControls = this.jDom.find('.controls');
+        jControls = this.jDom.find('.controls'),
+        jLightbox = jControls.find('.lightbox'),
+        jReset = jControls.find('.reset').hide();
     
     containerDiv.append( this.jDom );
 
@@ -76,15 +78,17 @@ var DemoView = extend(ThingView, function(subject){
         
     }.bind(this));
     
-    jControls.one('click', function(){
-
-        jControls.fadeOut({duration:1000});
-        jControls.promise().done( function(){       
-            subject.start();
+    jLightbox.one('click', function(){
+                
+        jLightbox.fadeOut();
+        jLightbox.promise().done( function(){
+            window.setTimeout( function(){
+                subject.start();
+            }, 500);
         });
+
+        jReset.fadeIn();
     });
-    
-    
 });
 
 var PacketView = extend(ThingView, function (subject, demoView) {

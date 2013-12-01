@@ -14,21 +14,37 @@ There's probably more to it then "why not"
 
 ## Mobile data connections
 
+Mobile networks today can be high-bandwidth but they are also high-latency and
+give poor guarantees of packet delivery time. This is why mobile networks, with buffering
+on the device, streaming HD video fluidly while web surfing feels laggy. If we wait until
+we have everything we're wasting the chance to show data earlier.
+
 <figure data-demo="mobile-discrete"></figure>
 
-Now with some streaming:
+With some stream-loading we show everything at the earliest opportunity:
 
 <figure data-demo="mobile-progressive"></figure>
 
 ## Failed connections
 
+Mobile networks go down while requests are being made. Today's AJAX frameworks treat
+responses as wholly successful or wholly unsuccessful. Even if a request is 90% done
+when the connection goes down, nothing is shown.
+
 <figure data-demo="mobile-fail-discrete"></figure>
+
+If we use the data that we have, we can show it *now* and only request the missing
+part when the network comes back.
 
 <figure data-demo="mobile-fail-progressive"></figure>
 
 ## Aggregating resources
 
+- waiting for the last one
+
 <figure data-demo="aggregated-discrete"></figure>
+
+- don't let one slow resource slow everything down
 
 <figure data-demo="aggregated-progressive"></figure>
 

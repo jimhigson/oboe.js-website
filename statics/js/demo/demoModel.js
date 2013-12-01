@@ -106,12 +106,29 @@ PacketHolder.prototype.removeTimeout = function(timeout){
         return storedTimeout != timeout;
     });
 };
-PacketHolder.prototype.reset = function(){
+PacketHolder.prototype.cancelTimeouts = function(){
+
     // cancel all scheduled events:
     this.timeouts.forEach(function(timeout){
         window.clearTimeout(timeout);
     });
+
+    this.timeouts = [];
 }
+PacketHolder.prototype.schedule = function(fn, time) {
+    var timeout = window.setTimeout(function(){
+        
+        // stop remembering this timeout, it is done now:
+        this.removeTimeout(timeout);
+        fn();
+        
+    }.bind(this), time);
+
+    this.timeouts.push( timeout );
+};
+PacketHolder.prototype.reset = function(){
+    this.cancelTimeouts(); 
+};
 
 function EventSink (name) {
     this.name = name;
@@ -132,14 +149,11 @@ Wire.prototype.accept = function(packet){
 };
 Wire.prototype.propagateAfterLatency = function(packet){
     
-    var timeout = window.setTimeout(function(){
+    this.schedule(function(){
 
-        this.removeTimeout(timeout);
         this.propagate(packet);
 
     }.bind(this), this.latency);
-
-    this.timeouts.push( timeout );
 }
 
 var Server = extend( PacketHolder, function(name, locations, options) {
@@ -156,31 +170,27 @@ Server.prototype.accept = function(packet){
     }
 };
 Server.prototype.sendResponse = function() {
-    var timeout = window.setTimeout(function(){
-        var i = 0,
-            interval = window.setInterval(function(){
-                    var ordering = {
-                        isFirst: i == 0,
-                        isLast: i == (this.messageSize -1)
-                    };
 
-                    var packet =
-                        new Packet('response' + i, 'JSON', 'downstream', ordering)
-                            .inDemo(this.demo)
-                            .announce();  
-                
-                    this.propagate(packet);
-                                
-                    if( ordering.isLast ) {
-                        window.clearInterval(interval);
-                    }
-                
-                    i++;
-                }.bind(this), this.timeBetweenPackets);
+    function newPacket(i){
+        var ordering = {
+            isFirst: i == 0,
+            isLast: i == (this.messageSize -1)
+        };
+
+        var packet =
+            new Packet('response' + i, 'JSON', 'downstream', ordering)
+                .inDemo(this.demo)
+                .announce();
+
+        this.propagate(packet);
+    }
+    
+    for( var i = 0; i < this.messageSize ; i++ ) {
         
-    }.bind(this), this.initialDelay);
-
-    this.timeouts.push( timeout );
+        var delay = this.initialDelay + (i * this.timeBetweenPackets);
+        
+        this.schedule( newPacket.bind(this, i), delay )
+    }
 };
 
 var Client = extend( PacketHolder, function(name, locations, options) {

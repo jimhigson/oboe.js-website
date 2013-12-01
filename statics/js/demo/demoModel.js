@@ -22,6 +22,14 @@ function Thing(name){
     this.name = name;
     this.events = pubSub();
 }
+Thing.prototype.inDemo = function(demo){
+    this.demo = demo;
+    return this; //chaining
+}
+
+var Demo = extend(Thing, function(name){
+    Thing.apply(this, arguments);
+});
 
 var Packet = extend(Thing, function (name, type, direction, ordering){
     Thing.apply(this, arguments);
@@ -42,7 +50,7 @@ Packet.prototype.done = function(){
 };
 
 
-var PacketHolder = extend(Thing, function (name, locations){
+var PacketHolder = extend(Thing, function(name, locations){
     Thing.apply(this, arguments);
     if( !locations ) {
         throw new Error("don't know where " + name + " is");
@@ -144,4 +152,3 @@ Client.prototype.accept = function(packet){
     
     packet.done();    
 };
-

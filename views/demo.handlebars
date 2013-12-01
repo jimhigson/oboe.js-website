@@ -1,22 +1,26 @@
 <section id="demoArea">
+    
+    <svg>
+        <template id="demo">
+            <svg width="500" height="200">
+                <rect class="background" x="0" y="0" width="500" height="200"/>
 
-    <svg width="500" height="200">
+                <g class="wires">
+                </g>
 
-        <rect id="background" x="0" y="0" width="500" height="200"/>
-        <g id="wires">
-        </g>
+                <g class="packets">
+                </g>
 
-        <g id="packets">
-        </g>
+                <g class="places">
+                </g>
 
-        <g id="places">
-        </g>
-
-        <g class="controls">
-            <rect id="fade" x="0" y="0" width="500" height="200"/>
-            <text class="play" x="250" y="100">Play ▶</text>
-        </g>
-
+                <g class="controls">
+                    <rect class="fade" x="0" y="0" width="500" height="200"/>
+                    <text class="play" x="250" y="100">Play ▶</text>
+                </g>
+            </svg>
+        </template>        
+        
         <template id="wire">
             <line class="wire"/>
         </template>
@@ -76,6 +80,8 @@
         </template>
 
     </svg>
+   
+    <div data-demo="1" ></div>
 
     <ul>
         <!--<li><a href="">&lt;</a></li>-->

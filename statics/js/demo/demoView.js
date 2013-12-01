@@ -26,10 +26,15 @@ function addClass(jEle, klass) {
     ele.setAttribute('class', ele.getAttribute('class') + ' ' + klass);
 }
 
-function stampFromTemplate(templateId, klass) {
-    var copy = $('template#' + templateId).children().clone();
+function stampFromTemplate(jTemplate, klass) {
+    if( !jTemplate.length )
+        throw new Error('no template');
+    
+    var copy = jTemplate.children().clone();
     // jQuery doesn't like addClass on SVG...
-    addClass(copy, klass);
+    if( klass )
+        addClass(copy, klass);
+    
     return copy;
 }
 
@@ -37,16 +42,16 @@ function transformToLocation(location){
     return 'translate(' + location.x + ',' + location.y + ')';
 }
 
-Packet.new.on( function(newPacket){
-    
-    new PacketView(newPacket);
-});
-
-function ThingView(containerName, templateName, subject) {    
+function ThingView(subject, demoView) {
+    this.subject = subject;
+    this.demoView = demoView;
 }
+
 ThingView.prototype.initDomFromTemplate = function(containerName, templateName, subject) {
-    this.jDom = stampFromTemplate(templateName, subject.name);
-    var jContainer = $('#' + containerName);
+    this.jDom = stampFromTemplate($('#' + templateName), subject.name);
+    
+    var jContainer = this.demoView.jDom.find('.' + containerName);
+    
     if( !jContainer.length ) {
         throw new Error('nowhere to put the thing');
     }
@@ -54,7 +59,26 @@ ThingView.prototype.initDomFromTemplate = function(containerName, templateName, 
     return this.jDom;
 };
 
-var PacketView = extend(ThingView, function (subject) {
+var DemoView = extend(ThingView, function(subject){
+    ThingView.apply(this,arguments);
+    
+    var containerDiv = $("div[data-demo=" + subject.name + "]" );
+    
+    console.log('demo', subject, 'should be shown in', containerDiv);
+        
+    this.jDom = stampFromTemplate($('#demo'));
+
+    containerDiv.append( this.jDom );
+
+    Packet.new.on( function(newPacket){
+
+        new PacketView(newPacket, this);
+    }.bind(this));    
+});
+
+var PacketView = extend(ThingView, function (subject, demoView) {
+    ThingView.apply(this,arguments);
+    
     function templateName(){
         switch(subject.type) {
             case 'GET':
@@ -91,8 +115,9 @@ var PacketView = extend(ThingView, function (subject) {
     }.bind(this));
 });
 
-var WireView = extend(ThingView, function(subject){
-
+var WireView = extend(ThingView, function(subject, demoView){
+    ThingView.apply(this,arguments);
+    
     this.initDomFromTemplate( 'wires', 'wire', subject);
     
     this.jDom.attr('x1', subject.locations.downstream.x );
@@ -101,14 +126,17 @@ var WireView = extend(ThingView, function(subject){
     this.jDom.attr('y2', subject.locations.upstream.y );
 });
 
-var ServerView = extend(ThingView, function(subject){
-
+var ServerView = extend(ThingView, function(subject, demoView){
+    ThingView.apply(this,arguments);
+    
     this.initDomFromTemplate( 'places', 'server', subject);
     
     this.jDom.attr('transform', transformToLocation(subject.locations.where));
 });
 
-var ClientView = extend(ThingView, function(subject){
+var ClientView = extend(ThingView, function(subject, demoView){
+    ThingView.apply(this,arguments);
+    
     this.initDomFromTemplate( 'places', 'client', subject);
     
     this.jDom.attr('transform', transformToLocation(subject.locations.where));

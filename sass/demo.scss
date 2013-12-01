@@ -1,3 +1,7 @@
+div[data-demo] {
+  /* reserve some space for the demo: */
+  width:500px; height: 200px;
+}
 
 #demoArea ul {
    display:block;
@@ -10,10 +14,11 @@
    margin: 20px;
 }
 
-rect#background, rect#fade {
+rect.background,
+rect.fade {
    fill: $shadedBackgroundColor;
 }
-rect#fade {
+rect.fade {
     opacity: 0.9;
 }
 

@@ -33,13 +33,19 @@ function loadScenario(scenarioId) {
             case "client":  return ClientView;
         }
         throw new Error('unknown type ' + scenarioType);
-    }    
+    }
 
+   
     // init the model items
+    var demo
+        = modelItems.demo
+        = new Demo(scenarioId);
+    
     scenario.items.forEach(function (scenarioItem){
 
-        modelItems[scenarioItem.name] = makeModel(scenarioItem);
+        modelItems[scenarioItem.name] = makeModel(scenarioItem).inDemo(demo);
     });
+    
 
     // link up model items to each other
     scenario.items.forEach(function(scenarioItem){
@@ -51,12 +57,15 @@ function loadScenario(scenarioId) {
         });
     });    
     
+    
     // make some views:
+    var demoView = new DemoView(demo);
+    
     scenario.items.forEach(function(scenarioItem){
         var modelItem = modelItems[scenarioItem.name],
             ViewType = viewType(scenarioItem.type);
         
-        itemViews[scenarioItem.name] = new ViewType(modelItem);
+        itemViews[scenarioItem.name] = new ViewType(modelItem, demoView);
     });
 
     // TODO: put client requests as script-like things in scenarios

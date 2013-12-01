@@ -10,8 +10,11 @@
    margin: 20px;
 }
 
-rect#background {
+rect#background, rect#fade {
    fill: $shadedBackgroundColor;
+}
+rect#fade {
+    opacity: 0.9;
 }
 
 
@@ -19,10 +22,26 @@ rect#background {
     fill:nth($categoricalColors, 10);
 }
 
+@mixin svg-text-centered {
+  text-anchor: middle;
+  alignment-baseline:middle;
+}
+
+
 .packet text {
     fill:$nearBlack;
-    text-anchor: middle;
-    alignment-baseline:middle;
+    @include svg-text-centered
+}
+
+.controls text {
+    @include svg-text-centered; 
+    fill:$highlight;
+}
+.controls:hover {
+    cursor: pointer;
+}
+.controls:hover text {
+    fill:$highlightHover;  
 }
 
 .pie-divide {

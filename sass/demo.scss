@@ -39,16 +39,21 @@ rect.fade {
 }
 
 .controls text {
-    @include svg-text-centered; 
     @include link; 
 }
+.controls text.play {
+  @include svg-text-centered;
+}
+
 .controls:hover {
     cursor: pointer;
 }
-.controls:hover text {
+.controls:hover text.play,
+.controls text.reset:hover {
     @include hovered-link;
 }
-.controls:active text {
+.controls:active text.play,
+.controls text.reset:active{
    @include active-link;
 }
 

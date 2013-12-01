@@ -74,13 +74,15 @@ var DemoView = extend(ThingView, function(subject){
         new PacketView(newPacket, this);
     }.bind(this));
     
-    jControls.one('click', function(){       
-        subject.start();
+    jControls.one('click', function(){
+
+        jControls.fadeOut({duration:1000});
+        jControls.promise().done( function(){       
+            subject.start();
+        });
     });
     
-    subject.events('start').on(function(){
-        jControls.fadeOut();
-    });
+    
 });
 
 var PacketView = extend(ThingView, function (subject, demoView) {

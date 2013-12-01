@@ -31,7 +31,6 @@ var Demo = extend(Thing, function(name){
     Thing.apply(this, arguments);
 });
 Demo.prototype.start = function(){
-    this.events('start').emit();
     this.startSimulation();
 };
 

@@ -134,12 +134,15 @@ a:active {
   @include active-link;   
 }
 
-a.active {
-      background: $shadedBackgroundColor;
-      display: block;
-      padding: 5px;
-      margin: 0 -6px ;
-      border-left: 1px solid $midTone;
+.internalNav a.active {
+   background: $shadedBackgroundColor;
+   border-left-color: $midTone;
+}
+.internalNav a {
+   display: block;
+   padding: 5px;
+   margin: 0 -6px ;
+   border-left: 1px solid $backgroundColor;
 }
 
 h1 a, h1 a:hover {

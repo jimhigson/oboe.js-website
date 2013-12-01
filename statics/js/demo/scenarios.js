@@ -1,4 +1,18 @@
 var getScenario = (function(){
+    
+    /* some more:
+        * jQ fast
+        * Oboe fast
+        * jQ mobile
+        * Oboe mobile
+        * jQ mobile, failing
+        * Oboe mobile, failing
+        * streaming + historic together
+        * a chat session
+        * creating an aggregation (Insight) jQ
+        * creating an aggregation (Insight) Oboe
+     */
+    
     var scenarios = [, // NB: hole in array - there is no item zero
         new Scenario({   
             "name":"fast-ajax"

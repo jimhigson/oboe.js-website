@@ -39,7 +39,7 @@ var getScenario = (function(){
                     "name":"client",                    
                     "type":"client",
                     "options":{
-                        "parsing":"discrete"
+                        "parseStrategy":"discrete"
                     }
                 }
             ]
@@ -70,7 +70,7 @@ var getScenario = (function(){
                     "name":"client",
                     "type":"client",
                     "options":{
-                        "parsing":"progressive"
+                        "parseStrategy":"progressive"
                     }
                 }
             ]
@@ -98,11 +98,14 @@ var getScenario = (function(){
                 },
                 {
                     "name":"client",
-                    "type":"client"
+                    "type":"client",
+                    "options":{
+                        "parseStrategy":"discrete"
+                    }
                 }
             ]
         })
-    ,   "slow-ajax": new Scenario({
+    ,   "slow-ajax-progressive": new Scenario({
             "name":"slow-ajax"
             ,   "items":[
                 {
@@ -123,7 +126,10 @@ var getScenario = (function(){
                 },
                 {
                     "name":"client",
-                    "type":"client"
+                    "type":"client",
+                    "options":{
+                        "parseStrategy":"progressive"
+                    }                    
                 }
             ]
         })        

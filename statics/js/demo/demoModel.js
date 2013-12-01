@@ -150,9 +150,41 @@ Server.prototype.sendResponse = function() {
     }.bind(this), this.initialDelay);
 };
 
-var Client = extend( PacketHolder, function(name, locations) {
+var Client = extend( PacketHolder, function(name, locations, options) {
+    
     PacketHolder.apply(this, arguments);
+    this.parseStrategy = this.makeParseStrategy(options.parseStrategy);
 });
+
+Client.prototype.makeParseStrategy = function(strategyName){
+
+    if( !strategyName )
+        throw Error('no parsing strategy given');
+
+    var receive = this.events('receive');
+
+    switch(strategyName){
+        case 'progressive':
+            return function(packet){
+                receive.emit(packet);
+            }
+
+        case 'discrete':
+            var packetsSoFar = [];
+            return function(packet){
+                packetsSoFar.push(packet);
+                
+                if( packet.isLast ) {
+                    packetsSoFar.forEach(function(packet){
+                        receive.emit(packet);
+                    });
+                }            
+            }
+        
+        default:
+            throw Error('what is ' + strategyName + '?');            
+    }
+}
 
 Client.prototype.makeRequest = function(){
     var packet = 
@@ -163,7 +195,8 @@ Client.prototype.makeRequest = function(){
     this.propagate(packet);
 };
 Client.prototype.accept = function(packet){
-    this.events('receive').emit(packet);
     
+    this.parseStrategy(packet);
+        
     packet.done();    
 };

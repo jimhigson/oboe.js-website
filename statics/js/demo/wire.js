@@ -13,7 +13,7 @@ function loadScenario(scenarioId) {
         return new Type(
             scenarioItem.name,
             scenarioItem.locations,
-            scenarioItem.options
+            (scenarioItem.options || {})
         );
     }
 

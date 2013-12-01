@@ -61,13 +61,12 @@ ThingView.prototype.initDomFromTemplate = function(containerName, templateName, 
 
 var DemoView = extend(ThingView, function(subject){
     ThingView.apply(this,arguments);
-    
-    var containerDiv = $("div[data-demo=" + subject.name + "]" );
-    
-    console.log('demo', subject, 'should be shown in', containerDiv);
-        
-    this.jDom = stampFromTemplate($('#demo'));
 
+    this.jDom = stampFromTemplate($('#demo'));
+    
+    var containerDiv = $("div[data-demo=" + subject.name + "]"),
+        jControls = this.jDom.find('.controls');
+    
     containerDiv.append( this.jDom );
 
     Packet.new.on( function(newPacket){
@@ -75,8 +74,12 @@ var DemoView = extend(ThingView, function(subject){
         new PacketView(newPacket, this);
     }.bind(this));
     
-    this.jDom.find('.controls').click(function(){
+    jControls.one('click', function(){
         subject.start();
+    });
+    
+    subject.events('start').on(function(){
+        jControls.fadeOut();
     });
 });
 

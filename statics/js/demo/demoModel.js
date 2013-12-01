@@ -30,7 +30,10 @@ Thing.prototype.inDemo = function(demo){
 var Demo = extend(Thing, function(name){
     Thing.apply(this, arguments);
 });
-Demo.prototype.start = abstract;
+Demo.prototype.start = function(){
+    this.events('start').emit();
+    this.startSimulation();
+};
 
 var Packet = extend(Thing, function (name, type, direction, ordering){
     Thing.apply(this, arguments);

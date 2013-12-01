@@ -69,7 +69,7 @@ function loadScenario(scenarioId) {
     });
 
     // TODO: get from scenario or something:
-    demo.start = function(){
+    demo.startSimulation = function(){
         modelItems.client.makeRequest();
     }
 }

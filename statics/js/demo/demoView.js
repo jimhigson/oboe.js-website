@@ -74,7 +74,7 @@ var DemoView = extend(ThingView, function(subject){
         new PacketView(newPacket, this);
     }.bind(this));
     
-    jControls.one('click', function(){
+    jControls.one('click', function(){       
         subject.start();
     });
     

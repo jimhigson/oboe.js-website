@@ -52,7 +52,7 @@ part when the network comes back.
 
 ## Historic and live data on the same transport
 
-<figure data-demo="chat-service"></figure>
+<figure data-demo="historic-and-live"></figure>
 
 ## Cacheable streaming
 

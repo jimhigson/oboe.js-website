@@ -229,7 +229,7 @@ function clientPage(pageName, jDom, events) {
 
             var jTweet = stampFromTemplate(jTweetTemplate, unitClass(packet)),
                 offset = packetsReceived * 22
-            jTweet.css({'translateY': -offset});            
+            jTweet.css({'translateY': -offset}).fadeIn();            
 
             jTweetScroll.append(jTweet);
             jTweetScroll.animate({'translateY': offset});
@@ -238,7 +238,11 @@ function clientPage(pageName, jDom, events) {
         });
 
         events('reset').on(function(){
-
+            packetsReceived = 0;
+            jTweetScroll
+                .stop(true)
+                .css({'translateY': 0})
+                .empty();
         });
     }
     

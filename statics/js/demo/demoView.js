@@ -181,15 +181,26 @@ var ClientView = extend(ThingView, function(subject, demoView){
     
     this.jDom.attr('transform', transformToLocation(subject.locations.where));
     
-    subject.events('receive').on(function( packet ){
-        addClass(this.jDom, 'received-' + packet.name);        
-    }.bind(this));
-
-    subject.events('reset').on(function(){
-        var ele = this.jDom[0],
-            oldClassAttr = ele.getAttribute('class'),
-            newClassAttr = oldClassAttr.replace(/received-response\d/g, '');
-        
-        ele.setAttribute('class', newClassAttr);
-    }.bind(this));
+    clientPage(subject.page, this.jDom, subject.events);
 });
+
+function clientPage(pageName, jDom, events) {
+    switch(pageName){
+        case "singlePageSite":
+            
+            events('receive').on(function( packet ){
+                addClass(jDom, 'received-' + packet.name);
+            });
+
+            events('reset').on(function(){
+                var ele = jDom[0],
+                    oldClassAttr = ele.getAttribute('class'),
+                    newClassAttr = oldClassAttr.replace(/received-response\d/g, '');
+
+                ele.setAttribute('class', newClassAttr);
+            });
+            return;
+        default:
+            throw Error("unknown page " + pageName);
+    }
+}

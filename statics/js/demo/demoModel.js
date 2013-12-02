@@ -209,6 +209,7 @@ Server.prototype.sendResponse = function() {
 var Client = extend( PacketHolder, function(name, locations, options) {
     
     PacketHolder.apply(this, arguments);
+    this.page = options.page;
     this.parseStrategy = this.makeParseStrategy(options.parseStrategy);
 });
 

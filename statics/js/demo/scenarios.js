@@ -39,7 +39,8 @@ var getScenario = (function(){
                     "name":"client",                    
                     "type":"client",
                     "options":{
-                        "parseStrategy":"discrete"
+                        "parseStrategy":"discrete",
+                        "page":"singlePageSite"
                     }
                 }
             ]
@@ -70,7 +71,8 @@ var getScenario = (function(){
                     "name":"client",
                     "type":"client",
                     "options":{
-                        "parseStrategy":"progressive"
+                        "parseStrategy":"progressive",
+                        "page":"singlePageSite"
                     }
                 }
             ]
@@ -100,7 +102,8 @@ var getScenario = (function(){
                     "name":"client",
                     "type":"client",
                     "options":{
-                        "parseStrategy":"discrete"
+                        "parseStrategy":"discrete",
+                        "page":"singlePageSite"
                     }
                 }
             ]
@@ -128,7 +131,8 @@ var getScenario = (function(){
                     "name":"client",
                     "type":"client",
                     "options":{
-                        "parseStrategy":"progressive"
+                        "parseStrategy":"progressive",
+                        "page":"singlePageSite"
                     }                    
                 }
             ]
@@ -159,7 +163,8 @@ var getScenario = (function(){
                     "name":"client",
                     "type":"client",
                     "options":{
-                        "parseStrategy":"progressive"
+                        "parseStrategy":"progressive",
+                        "page":"singlePageSite"
                     }
                 }
             ]

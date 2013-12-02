@@ -193,10 +193,10 @@ function clientPage(pageName, jDom, events) {
     switch(pageName){
         case "twitter":
             var jTweetTemplate = $('#tweet'),
-                jTweets = jDom.find('.tweets'); 
+                jTweets = jDom.find('.tweetsScroll'); 
             
             events('receive').on(function( packet ){
-;
+                
                 var jTweet = stampFromTemplate(jTweetTemplate, unitClass(packet));
                 
                 jTweets.append(jTweet);

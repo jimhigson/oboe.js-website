@@ -157,8 +157,15 @@ Wire.prototype.propagateAfterLatency = function(packet){
 }
 
 var Server = extend( PacketHolder, function(name, locations, options) {
+    
     PacketHolder.apply(this, arguments);
-    this.timeBetweenPackets = options.timeBetweenPackets;
+    var timeBetweenPackets = options.timeBetweenPackets; 
+    this.timeBetweenPackets = 
+            (typeof timeBetweenPackets == 'function')
+            ?   timeBetweenPackets    
+            :   function(){return timeBetweenPackets}
+            ;
+
     this.initialDelay = options.initialDelay;
     this.messageSize = options.messageSize;
 });
@@ -170,8 +177,8 @@ Server.prototype.accept = function(packet){
     }
 };
 Server.prototype.sendResponse = function() {
-
-    function newPacket(i){
+    
+    function next(i){
         var ordering = {
             isFirst: i == 0,
             isLast: i == (this.messageSize -1)
@@ -183,14 +190,18 @@ Server.prototype.sendResponse = function() {
                 .announce();
 
         this.propagate(packet);
-    }
+
+        console.log('delay is', this.timeBetweenPackets(i++));
+        
+        // schedule the next packet if there is one:
+        if( !ordering.isLast ) {
+            this.schedule(  next.bind(this, i++)
+                         ,  this.timeBetweenPackets(i++)
+                         );
+        }
+    };
     
-    for( var i = 0; i < this.messageSize ; i++ ) {
-        
-        var delay = this.initialDelay + (i * this.timeBetweenPackets);
-        
-        this.schedule( newPacket.bind(this, i), delay )
-    }
+    this.schedule( next.bind(this,0), this.initialDelay )
 };
 
 var Client = extend( PacketHolder, function(name, locations, options) {

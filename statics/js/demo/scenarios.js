@@ -132,8 +132,44 @@ var getScenario = (function(){
                     }                    
                 }
             ]
+        })
+        ,   "historic-and-live": new Scenario({
+            "name":"historic-and-live"
+            ,   "items":[
+                {
+                    "name":"sever",
+                    "type":"server",
+                    "options":{
+                        "timeBetweenPackets": function( i ){
+                            return (i < 4 ? 100 : randomBetween(500,2000)); 
+                        },
+                        "initialDelay" : 500,
+                        "messageSize"  : Number.POSITIVE_INFINITY
+                    }
+                },
+                {
+                    "name":"internet",
+                    "type":"wire",
+                    "options":{
+                        "bandwidth":500,
+                        "latency":500
+                    }
+                },
+                {
+                    "name":"client",
+                    "type":"client",
+                    "options":{
+                        "parseStrategy":"progressive"
+                    }
+                }
+            ]
         })        
     };
+
+    function randomBetween(min, max) {
+        var range = (max - min);
+        return min + (Math.random() * range);
+    }
     
     function translateLocation( location, delta ){
         return {

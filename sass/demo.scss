@@ -68,7 +68,7 @@ rect.fade {
 
 $i: 1;
 @while $i <= length($categoricalColors) {
-  .packet.unit-#{$i - 1},
+  .unit-#{$i - 1},
   g.client.received-response#{$i - 1} .part#{$i - 1} {
     fill:nth($categoricalColors, $i);
   }  

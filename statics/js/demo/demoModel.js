@@ -179,6 +179,7 @@ Server.prototype.accept = function(packet){
 Server.prototype.sendResponse = function() {
     
     function next(i){
+
         var ordering = {
             isFirst: i == 0,
             isLast: i == (this.messageSize -1)
@@ -191,12 +192,11 @@ Server.prototype.sendResponse = function() {
 
         this.propagate(packet);
 
-        console.log('delay is', this.timeBetweenPackets(i++));
-        
+        var nextPacketNumber = i +1;
         // schedule the next packet if there is one:
         if( !ordering.isLast ) {
-            this.schedule(  next.bind(this, i++)
-                         ,  this.timeBetweenPackets(i++)
+            this.schedule(  next.bind(this, nextPacketNumber)
+                         ,  this.timeBetweenPackets(nextPacketNumber)
                          );
         }
     };

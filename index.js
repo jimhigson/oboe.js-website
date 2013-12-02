@@ -9,6 +9,7 @@ var express = require('express'),
 
     UNMINIFIED_SCRIPTS = [
         "//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"
+    ,   "/js/jquery.js"
     ,   "/js/jquery.sticky.js"
     ,   "/js/internalNav.js"
     ,   "/js/demo/functional.js"
@@ -18,7 +19,7 @@ var express = require('express'),
     ,   '/js/demo/scenarios.js'
     ,   '/js/demo/demoModel.js'
     ,   "/js/demo/demoView.js"
-    ,   "/js/demo/wire.js"        
+    ,   "/js/demo/wire.js"
     ],
 
     CSS_STYLESHEETS = [

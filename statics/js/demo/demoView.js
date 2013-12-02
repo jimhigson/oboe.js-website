@@ -190,37 +190,42 @@ var ClientView = extend(ThingView, function(subject, demoView){
 });
 
 function clientPage(pageName, jDom, events) {
+    function singlePageSite(){        
+        events('receive').on(function( packet ){
+            addClass(jDom, 'received-' + packet.name);
+        });
+        
+        events('reset').on(function(){
+            var ele = jDom[0],
+                oldClassAttr = ele.getAttribute('class'),
+                newClassAttr = oldClassAttr.replace(/received-response\d/g, '');
+
+            ele.setAttribute('class', newClassAttr);
+        });        
+    }
+    
+    function twitter(){
+        var jTweetTemplate = $('#tweet'),
+            jTweetScroll = jDom.find('.tweetsScroll');
+
+        events('receive').on(function( packet ){
+
+            var jTweet = stampFromTemplate(jTweetTemplate, unitClass(packet));
+
+            jTweetScroll.append(jTweet);
+            jTweetScroll.animate({'translateY':'+=15'});
+        });
+
+        events('reset').on(function(){
+
+        });
+    }
+    
     switch(pageName){
         case "twitter":
-            var jTweetTemplate = $('#tweet'),
-                jTweetScroll = jDom.find('.tweetsScroll'); 
-            
-            events('receive').on(function( packet ){
-                
-                var jTweet = stampFromTemplate(jTweetTemplate, unitClass(packet));
-                
-                jTweetScroll.append(jTweet);
-                jTweetScroll.animate({'translateY':'+15'});
-            });
-
-            events('reset').on(function(){
-                
-            });
-            return;
+            return twitter();
         case "singlePageSite":
-            
-            events('receive').on(function( packet ){
-                addClass(jDom, 'received-' + packet.name);
-            });
-
-            events('reset').on(function(){
-                var ele = jDom[0],
-                    oldClassAttr = ele.getAttribute('class'),
-                    newClassAttr = oldClassAttr.replace(/received-response\d/g, '');
-
-                ele.setAttribute('class', newClassAttr);
-            });
-            return;
+            return singlePageSite();
         default:
             throw Error("unknown page type " + pageName);
     }

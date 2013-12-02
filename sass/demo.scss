@@ -94,7 +94,7 @@ g.client .part {
   fill:none;
 }
 
-/* TODO: remove */
-.tweet circle {
+.tweet .detail {
   fill:$backgroundColor;
+  opacity:0.5;
 }

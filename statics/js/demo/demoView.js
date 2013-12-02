@@ -106,6 +106,10 @@ var DemoView = extend(ThingView, function(subject){
     listenForPlay();
 });
 
+function unitClass(packet) {
+    return 'unit-' + (packet.i % 10);
+}
+
 var PacketView = extend(ThingView, function (subject, demoView) {
     ThingView.apply(this,arguments);
     
@@ -127,7 +131,7 @@ var PacketView = extend(ThingView, function (subject, demoView) {
     var className = [   
         subject.name
         // since we only have categorical colours...
-    ,   'unit-' + (subject.i % 10)
+    ,   unitClass(subject)
     ].join(' ');
     
     this.initDomFromTemplate( 
@@ -188,8 +192,14 @@ var ClientView = extend(ThingView, function(subject, demoView){
 function clientPage(pageName, jDom, events) {
     switch(pageName){
         case "twitter":
+            var jTweetTemplate = $('#tweet'),
+                jTweets = jDom.find('.tweets'); 
+            
             events('receive').on(function( packet ){
+;
+                var jTweet = stampFromTemplate(jTweetTemplate, unitClass(packet));
                 
+                jTweets.append(jTweet);
             });
 
             events('reset').on(function(){

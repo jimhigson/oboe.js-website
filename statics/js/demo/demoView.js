@@ -224,7 +224,8 @@ function clientPage(pageName, jDom, events) {
         var jTweetTemplate = $('#tweet'),
             jTweetScroll = jDom.find('.tweetsScroll'),
             packetsReceived = 0,
-            livePacketsReceived = 0;
+            livePacketsReceived = 0,
+            MAX_DISPLAYABLE = 5;
 
         events('receive').on(function( packet ){
 
@@ -237,14 +238,20 @@ function clientPage(pageName, jDom, events) {
             var jTweet = stampFromTemplate(jTweetTemplate, unitClass(packet)),                
                 tweetOffset = (packetsReceived-1) * 22
                 scrollOffset = (livePacketsReceived) * 22
-
-            jTweetScroll.append(jTweet);
             
             if( packet.mode == 'live' ) {
+                jTweetScroll.append(jTweet);
                 jTweet.css({'translateY': -scrollOffset}).fadeIn();
                 jTweetScroll.animate({'translateY': scrollOffset});
             } else {
+                jTweetScroll.prepend(jTweet);
                 jTweet.css({'translateY': tweetOffset}).fadeIn();
+            }
+            
+            // prevent an infinite DOM from being built by removing tweets which
+            // will never be seen again:
+            if( packetsReceived > MAX_DISPLAYABLE ) {
+                jTweetScroll.find('.tweet:first-child').remove();
             }
         });
 

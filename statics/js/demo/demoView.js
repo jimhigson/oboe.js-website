@@ -241,11 +241,11 @@ function clientPage(pageName, jDom, events) {
             
             if( packet.mode == 'live' ) {
                 jTweetScroll.append(jTweet);
-                jTweet.css({'translateY': -scrollOffset}).fadeIn();
+                jTweet.css({'translateY': -scrollOffset});
                 jTweetScroll.animate({'translateY': scrollOffset});
             } else {
                 jTweetScroll.prepend(jTweet);
-                jTweet.css({'translateY': tweetOffset}).fadeIn();
+                jTweet.css({'translateY': tweetOffset});
             }
             
             // prevent an infinite DOM from being built by removing tweets which
@@ -257,6 +257,7 @@ function clientPage(pageName, jDom, events) {
 
         events('reset').on(function(){
             packetsReceived = 0;
+            livePacketsReceived = 0;
             jTweetScroll
                 .stop(true)
                 .css({'translateY': 0})

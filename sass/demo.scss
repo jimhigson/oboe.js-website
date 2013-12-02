@@ -93,3 +93,8 @@ g.client .viewPort {
 g.client .part {
   fill:none;
 }
+
+/* TODO: remove */
+.tweet circle {
+  fill:$backgroundColor;
+}

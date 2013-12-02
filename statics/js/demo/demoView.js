@@ -29,12 +29,12 @@ function stampFromTemplate(jTemplate, klass) {
     if( !jTemplate.length )
         throw new Error('no template');
     
-    var copy = jTemplate.children().clone();
+    var jCopy = jTemplate.children().clone();
     // jQuery doesn't like addClass on SVG...
     if( klass )
-        addClass(copy, klass);
+        addClass(jCopy, klass);
     
-    return copy;
+    return jCopy;
 }
 
 function transformToLocation(location){

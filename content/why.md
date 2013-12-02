@@ -52,7 +52,18 @@ part when the network comes back.
 
 ## Historic and live data on the same transport
 
+You got to a page, you get the 'old' data and then are kept up
+to date with 'live' events.
+We normally use two transports for this, but wouldn't it be
+nicer if we didn't have to handle distinct cases?
+
 <figure data-demo="historic-and-live"></figure>
+
+If we treat the historic part as a stream and the streaming
+becomes trivial. Handle both with the same code, with no
+divergent code to write.
+
+*write: Why this is more like REST. Why REST is good.*
 
 ## Cacheable streaming
 

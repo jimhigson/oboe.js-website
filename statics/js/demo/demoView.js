@@ -188,6 +188,13 @@ var ClientView = extend(ThingView, function(subject, demoView){
 function clientPage(pageName, jDom, events) {
     switch(pageName){
         case "twitter":
+            events('receive').on(function( packet ){
+                
+            });
+
+            events('reset').on(function(){
+                
+            });
             return;
         case "singlePageSite":
             

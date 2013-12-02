@@ -8,7 +8,9 @@ Well, why not?
 
 ## Streaming downloading from non-streamed REST
 
-There's probably more to it then "why not"
+On a fast, low latency, predictable network there isn't a great deal of time to save.
+That doesn't stop us rendering things progressively though. Progressive AJAX is a lot
+like progressive HTML rendering.
 
 <figure data-demo="fast-ajax-progressive"></figure>
 

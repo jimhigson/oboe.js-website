@@ -177,7 +177,8 @@ var ServerView = extend(ThingView, function(subject, demoView){
 var ClientView = extend(ThingView, function(subject, demoView){
     ThingView.apply(this,arguments);
     
-    this.initDomFromTemplate( 'places', 'client', subject.name);
+    var templateName = 'client-' + subject.page;
+    this.initDomFromTemplate( 'places', templateName, subject.name);
     
     this.jDom.attr('transform', transformToLocation(subject.locations.where));
     
@@ -186,6 +187,8 @@ var ClientView = extend(ThingView, function(subject, demoView){
 
 function clientPage(pageName, jDom, events) {
     switch(pageName){
+        case "twitter":
+            return;
         case "singlePageSite":
             
             events('receive').on(function( packet ){
@@ -201,6 +204,6 @@ function clientPage(pageName, jDom, events) {
             });
             return;
         default:
-            throw Error("unknown page " + pageName);
+            throw Error("unknown page type " + pageName);
     }
 }

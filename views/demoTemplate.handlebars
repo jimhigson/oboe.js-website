@@ -29,9 +29,10 @@
         <rect class="server" x="-22.5" y="-40" width="45" height="80"></rect>
     </template>
 
-    <template id="client">
+    <template id="client-singlePageSite">
         <g class="client">
-            <g transform="translate(-42.5, -52.5)">
+            <g transform="translate(-42.5, -52.5)"> {{!centre the client}}
+               
                 <rect class="frame" width="85" height="95" x="0" y="0"/>
                 <rect class="viewPort" width="75" height="80" x="5" y="10"/>
 
@@ -56,6 +57,16 @@
             </g>
         </g>
     </template>
+
+    <template id="client-twitter">
+        <g class="client">
+            <g transform="translate(-42.5, -52.5)"> {{!centre the client}}
+
+                <rect class="frame" width="85" height="95" x="0" y="0"/>
+                <rect class="viewPort" width="75" height="80" x="5" y="10"/>
+            </g>
+        </g>
+    </template>   
 
     <template id="packet">
         <circle transform="translate(0,0)" class="packet" r="{{packetRadius}}"></circle>

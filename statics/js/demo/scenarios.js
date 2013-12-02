@@ -164,7 +164,7 @@ var getScenario = (function(){
                     "type":"client",
                     "options":{
                         "parseStrategy":"progressive",
-                        "page":"singlePageSite"
+                        "page":"twitter"
                     }
                 }
             ]

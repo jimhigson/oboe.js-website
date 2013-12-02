@@ -48,7 +48,8 @@ var Packet = extend(Thing, function (name, type, direction, ordering){
     
     this.direction = direction;
     this.isFirst = ordering.isFirst;
-    this.isLast = ordering.isLast;
+    this.isLast  = ordering.isLast;
+    this.i       = ordering.i;
     this.type = type;
 });
 Packet.prototype.announce = function() {
@@ -181,6 +182,7 @@ Server.prototype.sendResponse = function() {
     function next(i){
 
         var ordering = {
+            i:i,
             isFirst: i == 0,
             isLast: i == (this.messageSize -1)
         };

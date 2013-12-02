@@ -1,4 +1,3 @@
-
 /* allow svg properties to be set like css by jQuery. Apply a simple
  * idea of SVG transforms that ignores order and other transforms */
  $.cssHooks.translateX = {
@@ -47,8 +46,8 @@ function ThingView(subject, demoView) {
     this.demoView = demoView;
 }
 
-ThingView.prototype.initDomFromTemplate = function(containerName, templateName, subject) {
-    this.jDom = stampFromTemplate($('#' + templateName), subject.name);
+ThingView.prototype.initDomFromTemplate = function(containerName, templateName, className) {
+    this.jDom = stampFromTemplate($('#' + templateName), className);
     
     var jContainer = this.demoView.jDom.find('.' + containerName);
     
@@ -125,7 +124,17 @@ var PacketView = extend(ThingView, function (subject, demoView) {
         }        
     }
         
-    this.initDomFromTemplate( 'packets', templateName(), subject);
+    var className = [   
+        subject.name
+        // since we only have categorical colours...
+    ,   'unit-' + (subject.i % 10)
+    ].join(' ');
+    
+    this.initDomFromTemplate( 
+            'packets', 
+            templateName(),
+            className
+    );
 
     subject.events('move').on(function( fromXY, toXY, duration ){
         
@@ -149,7 +158,7 @@ var PacketView = extend(ThingView, function (subject, demoView) {
 var WireView = extend(ThingView, function(subject, demoView){
     ThingView.apply(this,arguments);
     
-    this.initDomFromTemplate( 'wires', 'wire', subject);
+    this.initDomFromTemplate( 'wires', 'wire', subject.name);
     
     this.jDom.attr('x1', subject.locations.downstream.x );
     this.jDom.attr('y1', subject.locations.downstream.y );
@@ -160,7 +169,7 @@ var WireView = extend(ThingView, function(subject, demoView){
 var ServerView = extend(ThingView, function(subject, demoView){
     ThingView.apply(this,arguments);
     
-    this.initDomFromTemplate( 'places', 'server', subject);
+    this.initDomFromTemplate( 'places', 'server', subject.name);
     
     this.jDom.attr('transform', transformToLocation(subject.locations.where));
 });
@@ -168,7 +177,7 @@ var ServerView = extend(ThingView, function(subject, demoView){
 var ClientView = extend(ThingView, function(subject, demoView){
     ThingView.apply(this,arguments);
     
-    this.initDomFromTemplate( 'places', 'client', subject);
+    this.initDomFromTemplate( 'places', 'client', subject.name);
     
     this.jDom.attr('transform', transformToLocation(subject.locations.where));
     

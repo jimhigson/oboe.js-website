@@ -145,7 +145,10 @@ var getScenario = (function(){
                     "type":"server",
                     "options":{
                         "timeBetweenPackets": function( i ){
-                            return (i < 9 ? 50 : randomBetween(300,2500)); 
+                            return (i < 9 ? 50 : randomBetween(500,2500)); 
+                        },
+                        "packetMode":function(i){
+                            return (i < 9 ? 'historic' : 'live');                            
                         },
                         "initialDelay" : 500,
                         "messageSize"  : Number.POSITIVE_INFINITY

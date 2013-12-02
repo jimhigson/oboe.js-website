@@ -43,7 +43,7 @@ Demo.prototype.reset = function(){
     this.events('reset').emit();
 };
 
-var Packet = extend(Thing, function (name, type, direction, ordering){
+var Packet = extend(Thing, function (name, type, direction, ordering, mode){
     Thing.apply(this, arguments);
     
     this.direction = direction;
@@ -51,6 +51,7 @@ var Packet = extend(Thing, function (name, type, direction, ordering){
     this.isLast  = ordering.isLast;
     this.i       = ordering.i;
     this.type = type;
+    this.mode = mode;
 });
 Packet.prototype.announce = function() {
     Packet.new.emit(this);
@@ -166,6 +167,7 @@ var Server = extend( PacketHolder, function(name, locations, options) {
             ?   timeBetweenPackets    
             :   function(){return timeBetweenPackets}
             ;
+    this.packetMode = options.packetMode || function(){return 'live'};
 
     this.initialDelay = options.initialDelay;
     this.messageSize = options.messageSize;
@@ -188,7 +190,7 @@ Server.prototype.sendResponse = function() {
         };
 
         var packet =
-            new Packet('response' + i, 'JSON', 'downstream', ordering)
+            new Packet('response' + i, 'JSON', 'downstream', ordering, this.packetMode(i))
                 .inDemo(this.demo)
                 .announce();
 

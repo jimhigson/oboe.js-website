@@ -223,18 +223,29 @@ function clientPage(pageName, jDom, events) {
     function twitter(){
         var jTweetTemplate = $('#tweet'),
             jTweetScroll = jDom.find('.tweetsScroll'),
-            packetsReceived = 0;
+            packetsReceived = 0,
+            livePacketsReceived = 0;
 
         events('receive').on(function( packet ){
 
-            var jTweet = stampFromTemplate(jTweetTemplate, unitClass(packet)),
-                offset = packetsReceived * 22
-            jTweet.css({'translateY': -offset}).fadeIn();            
+            packetsReceived++;
+            
+            if( packet.mode == 'live' ) {
+                livePacketsReceived++;
+            }
+            
+            var jTweet = stampFromTemplate(jTweetTemplate, unitClass(packet)),                
+                tweetOffset = (packetsReceived-1) * 22
+                scrollOffset = (livePacketsReceived) * 22
 
             jTweetScroll.append(jTweet);
-            jTweetScroll.animate({'translateY': offset});
-
-            packetsReceived++;
+            
+            if( packet.mode == 'live' ) {
+                jTweet.css({'translateY': -scrollOffset}).fadeIn();
+                jTweetScroll.animate({'translateY': scrollOffset});
+            } else {
+                jTweet.css({'translateY': tweetOffset}).fadeIn();
+            }
         });
 
         events('reset').on(function(){

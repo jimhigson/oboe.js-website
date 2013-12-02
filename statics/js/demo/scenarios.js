@@ -145,7 +145,7 @@ var getScenario = (function(){
                     "type":"server",
                     "options":{
                         "timeBetweenPackets": function( i ){
-                            return (i < 4 ? 100 : randomBetween(500,2000)); 
+                            return (i < 9 ? 50 : randomBetween(300,2500)); 
                         },
                         "initialDelay" : 500,
                         "messageSize"  : Number.POSITIVE_INFINITY

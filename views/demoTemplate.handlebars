@@ -64,10 +64,17 @@
 
                 <rect class="frame" width="85" height="95" x="0" y="0"/>
                 <rect class="viewPort" width="75" height="80" x="5" y="10"/>
+               
+                <clipPath id="viewPort-clip">               
+                  <rect width="75" height="70" x="5" y="15"/>
+                </clipPath>
 
-                <g class="tweets" transform="translate(10, 15)">
-                    <g class="tweetsScroll" transform="translate(0, 0)">
-                    </g>
+                <g class="tweetsClipper"
+                   clip-path="url(#viewPort-clip)">
+                   <g class="tweets" transform="translate(10, 15)" >
+                       <g class="tweetsScroll">
+                       </g>
+                   </g>
                 </g>
                
             </g>
@@ -81,22 +88,22 @@
     </template>
 
     <template id="packet">
-        <circle transform="translate(0,0)" class="packet" r="{{packetRadius}}"></circle>
+        <circle class="packet" r="{{packetRadius}}"></circle>
     </template>
     <template id="firstPacket">
-        <g transform="translate(0,0)" class="packet">
+        <g class="packet">
             <circle r="{{packetRadius}}"></circle>
             <text>{</text>
         </g>
     </template>
     <template id="lastPacket">
-        <g transform="translate(0,0)" class="packet">
+        <g class="packet">
             <circle r="{{packetRadius}}"></circle>
             <text>}</text>
         </g>
     </template>
     <template id="getRequest">
-        <g transform="translate(0,0)" class="packet">
+        <g class="packet">
             <circle r="{{packetRadius}}"></circle>
             <text>GET</text>
         </g>

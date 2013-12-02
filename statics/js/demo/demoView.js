@@ -2,18 +2,34 @@
  * idea of SVG transforms that ignores order and other transforms */
  $.cssHooks.translateX = {
     get: function( elem, computed, extra ) {
-        return elem.transform.baseVal.getItem(0).matrix.e;
+        var baseVal = elem.transform.baseVal;
+        if( !baseVal.numberOfItems ) {
+            return 0;
+        }
+        return baseVal.getItem(0).matrix.e;
     },
     set: function( elem, value ) {
-        elem.transform.baseVal.getItem(0).matrix.e = value; 
+        var baseVal = elem.transform.baseVal;
+        if( !baseVal.numberOfItems ) {
+            elem.setAttribute('transform', 'translate(0,0)')
+        }
+        baseVal.getItem(0).matrix.e = value; 
     }
 };
 $.cssHooks.translateY = {
     get: function( elem, computed, extra ) {
-        return elem.transform.baseVal.getItem(0).matrix.f;
+        var baseVal = elem.transform.baseVal;
+        if( !baseVal.numberOfItems ) {
+            return 0;
+        }        
+        return baseVal.getItem(0).matrix.f;
     },
     set: function( elem, value ) {
-        elem.transform.baseVal.getItem(0).matrix.f = value;
+        var baseVal = elem.transform.baseVal;
+        if( !baseVal.numberOfItems ) {
+            elem.setAttribute('transform', 'translate(0,0)')
+        }
+        baseVal.getItem(0).matrix.f = value;
     }
 };
 $.cssNumber.translateX = true;
@@ -206,14 +222,19 @@ function clientPage(pageName, jDom, events) {
     
     function twitter(){
         var jTweetTemplate = $('#tweet'),
-            jTweetScroll = jDom.find('.tweetsScroll');
+            jTweetScroll = jDom.find('.tweetsScroll'),
+            packetsReceived = 0;
 
         events('receive').on(function( packet ){
 
-            var jTweet = stampFromTemplate(jTweetTemplate, unitClass(packet));
+            var jTweet = stampFromTemplate(jTweetTemplate, unitClass(packet)),
+                offset = packetsReceived * 22
+            jTweet.css({'translateY': -offset});            
 
             jTweetScroll.append(jTweet);
-            jTweetScroll.animate({'translateY':'+=15'});
+            jTweetScroll.animate({'translateY': offset});
+
+            packetsReceived++;
         });
 
         events('reset').on(function(){

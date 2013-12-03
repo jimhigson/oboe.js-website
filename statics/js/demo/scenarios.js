@@ -137,40 +137,39 @@ var getScenario = (function(){
                 }
             ]
         })
-        ,   "historic-and-live": new Scenario({
-            "name":"historic-and-live"
-            ,   "items":[
-                {
-                    "name":"sever",
-                    "type":"server",
-                    "options":{
-                        "timeBetweenPackets": function( i ){
-                            return (i < 6 ? 50 : randomBetween(500,2500)); 
-                        },
-                        "packetMode":function(i){
-                            return (i < 6 ? 'historic' : 'live');                            
-                        },
-                        "initialDelay" : 500,
-                        "messageSize"  : Number.POSITIVE_INFINITY
-                    }
-                },
-                {
-                    "name":"internet",
-                    "type":"wire",
-                    "options":{
-                        "bandwidth":500,
-                        "latency":500
-                    }
-                },
-                {
-                    "name":"client",
-                    "type":"client",
-                    "options":{
-                        "parseStrategy":"progressive",
-                        "page":"twitter"
-                    }
+    ,   "historic-and-live": new Scenario({
+        "name":"historic-and-live"
+        ,   "items":[
+            {
+                "name":"sever",
+                "type":"server",
+                "options":{
+                    "timeBetweenPackets": function( i ){
+                        return (i < 6 ? 50 : randomBetween(500,2500)); 
+                    },
+                    "packetMode":function(i){
+                        return (i < 6 ? 'historic' : 'live');                            
+                    },
+                    "initialDelay" : 500,
+                    "messageSize"  : Number.POSITIVE_INFINITY
                 }
-            ]
+            },
+            {
+                "name":"internet",
+                "type":"wire",
+                "options":{
+                    "bandwidth":500,
+                    "latency":500
+                }
+            },
+            {
+                "name":"client",
+                "type":"client",
+                "options":{
+                    "parseStrategy":"progressive",
+                    "page":"twitter"
+                }
+            }]
         })        
     };
 

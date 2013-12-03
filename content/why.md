@@ -27,7 +27,7 @@ With some stream-loading we show everything at the earliest opportunity:
 
 <figure data-demo="mobile-progressive"></figure>
 
-## Failed connections
+## Dropped connections
 
 Mobile networks go down while requests are being made. Today's AJAX frameworks treat
 responses as wholly successful or wholly unsuccessful. Even if a request is 90% done

@@ -2,11 +2,15 @@
 
 ## Downloading from non-streamed REST
 
-Well, why not?
+Your app AJAXes in some JSON. You wait for the response to finish and you update the
+page.
 
 <figure data-demo="fast-ajax-discrete"></figure>
 
 ## Streaming downloading from non-streamed REST
+
+But if you are developing for a browser you already have progressive HTML, JPEG,
+..., ... rendering. Why not render the JSON progressively as well?
 
 On a fast, low latency, predictable network there isn't a great deal of time to save.
 That doesn't stop us rendering things progressively though. Progressive AJAX is a lot

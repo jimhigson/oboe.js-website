@@ -132,17 +132,24 @@ var getScenario = (function () {
         "aggregated-progressive": new Scenario({
             "name": "aggregated-progressive", "items": [
                 {
-                    "name": "sever",
+                    "name": "origin1",
                     "type": "server",
                     "options": {
-                        "timeBetweenPackets": function (i) {
-                            return (i < 6 ? 50 : randomBetween(500, 2500));
-                        },
-                        "packetMode": function (i) {
-                            return (i < 6 ? 'historic' : 'live');
-                        },
+                        "timeBetweenPackets": 1000,
                         "initialDelay": 500,
                         "messageSize": Number.POSITIVE_INFINITY
+                    }
+                },                
+                {
+                    "name": "aggregator",
+                    "type": "server",
+                    "options": {
+                        "timeBetweenPackets": 1000,
+                        "initialDelay": 500,
+                        "messageSize": Number.POSITIVE_INFINITY
+                    },
+                    "locations":{
+                        "where":{x:240, y:100}
                     }
                 },
                 {

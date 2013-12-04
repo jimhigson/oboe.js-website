@@ -134,6 +134,7 @@ var getScenario = (function () {
 
         "aggregated-progressive": new Scenario({
             "name": "aggregated-progressive", 
+            "options":{"height":750},
             "items": [
                 {
                     "name": "origin-slow",

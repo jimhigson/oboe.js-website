@@ -49,7 +49,7 @@ function loadScenario(scenarioId) {
     // init the model items
     var demo
         = modelItems.demo
-        = new Demo(scenarioId);
+        = new Demo(scenarioId, (scenario.options || {}));
     
     scenario.items.forEach(function (scenarioItem){
 

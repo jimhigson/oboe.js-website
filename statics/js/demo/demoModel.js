@@ -33,8 +33,10 @@ Thing.prototype.inDemo = function(demo){
     return this; //chaining
 }
 
-var Demo = extend(Thing, function(name){
+var Demo = extend(Thing, function(name, options){
     Thing.apply(this, arguments);
+    
+    this.height = options.height; 
 });
 Demo.prototype.start = function(){
     this.startSimulation();

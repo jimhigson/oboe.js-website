@@ -79,6 +79,10 @@ var DemoView = extend(ThingView, function(subject){
 
     this.jDom = stampFromTemplate($('#demo'));
     
+    if( subject.height ){
+        this.jDom.attr('height', subject.height);
+    }
+    
     var containerDiv = $("[data-demo=" + subject.name + "]"),
         jControls = this.jDom.find('.controls'),
         jLightbox = jControls.find('.lightbox'),

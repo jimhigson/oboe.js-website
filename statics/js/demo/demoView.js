@@ -123,7 +123,7 @@ var DemoView = extend(ThingView, function(subject){
 });
 
 function unitClass(packet) {
-    return 'unit-' + (packet.i % 10);
+    return 'unit-' + (packet.ordering.i % 10);
 }
 
 var PacketView = extend(ThingView, function (subject, demoView) {
@@ -134,9 +134,9 @@ var PacketView = extend(ThingView, function (subject, demoView) {
             case 'GET':
                 return 'getRequest';
             case 'JSON':
-                return (   subject.isFirst
+                return (   subject.ordering.isFirst
                     ?   'firstPacket'
-                    :       (   subject.isLast
+                    :       (   subject.ordering.isLast
                     ?   'lastPacket'
                     :   'packet'
                     )

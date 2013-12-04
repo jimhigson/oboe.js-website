@@ -47,12 +47,20 @@ var Packet = extend(Thing, function (name, type, direction, ordering, mode){
     Thing.apply(this, arguments);
     
     this.direction = direction;
-    this.isFirst = ordering.isFirst;
-    this.isLast  = ordering.isLast;
-    this.i       = ordering.i;
+    this.ordering = ordering;
     this.type = type;
     this.mode = mode;
 });
+Packet.prototype.copy = function(i) {
+    return new Packet(
+                this.name + '-' + i,
+                this.type, 
+                this.direction, 
+                this.ordering,
+                this.mode
+        
+           ).inDemo(this.demo);
+};
 Packet.prototype.announce = function() {
     Packet.new.emit(this);
     return this;
@@ -92,7 +100,12 @@ PacketHolder.prototype.withDownstream = function(downstream){
     return this;    
 };
 PacketHolder.prototype.propagate = function(packet){
-    this.adjacents[packet.direction][0].accept(packet);
+    
+    this.adjacents[packet.direction].forEach( function(adjacent, i){
+        //var packetCopy = packet.copy(i).announce();
+        adjacent.accept(packet);        
+    }.bind(this));
+
 };
 PacketHolder.prototype.movePacket = function(packet){
     var fromLocation = oppositeDirectionTo(packet.direction),

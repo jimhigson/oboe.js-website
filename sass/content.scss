@@ -1,4 +1,5 @@
 
+
 .marked {
    position:relative;
 }
@@ -9,12 +10,22 @@ code {
 }
 
 /* code blocks */
+
+@font-face {
+   font-family: "Computer Modern mono";
+   src: url("/type/cmuntt.eot");
+   src: url("/type/cmuntt.ttf");
+   src: url("/type/cmuntt.svg");
+   src: url("/type/cmuntt.woff");
+}
+
 .marked pre {
    background-color:$shadedBackgroundColor;
    overflow:auto;
    padding:1em;
    line-height: 1.2em;
    margin:0em 0 2em 0;
+   font-family: Computer Modern mono, monospace; 
 }
 
 /* inline code examples */
@@ -23,12 +34,9 @@ code {
    background-color: $shadedBackgroundColor;
    border-radius: 2px;
    padding: 2px 5px;
+   font-family: Computer Modern mono, monospace; 
 }
 
-
-
-/* colours stolen from here:
-https://github.com/jdiehl/dark-pastel/blob/master/dark-pastel.tmTheme */
 
 code .comment {
    color: #4eb974;

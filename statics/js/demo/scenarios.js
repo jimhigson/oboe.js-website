@@ -141,7 +141,26 @@ var getScenario = (function () {
                     }
                 },
                 {
-                    "name": "internet1",
+                    "name": "origin1-wire",
+                    "type": "wire",
+                    "next":["aggregator"],
+                    "options": {
+                        "bandwidth": 500,
+                        "latency": 500
+                    }
+                },                
+                {
+                    "name": "origin2",
+                    "type": "server",
+                    "options": {
+                        "timeBetweenPackets": 1000,
+                        "initialDelay": 500,
+                        "messageSize": Number.POSITIVE_INFINITY
+                    },
+                    "locations":{ "where":{x:50, y:200} }                    
+                },                
+                {
+                    "name": "origin2-wire",
                     "type": "wire",
                     "options": {
                         "bandwidth": 500,
@@ -156,12 +175,10 @@ var getScenario = (function () {
                         "initialDelay": 500,
                         "messageSize": Number.POSITIVE_INFINITY
                     },
-                    "locations":{
-                        "where":{x:240, y:10}
-                    }
+                    "locations":{ "where":{x:240, y:10} }
                 },
                 {
-                    "name": "internet2",
+                    "name": "client-internet",
                     "type": "wire",
                     "options": {
                         "bandwidth": 500,
@@ -239,15 +256,25 @@ var getScenario = (function () {
     
     function Scenario(rawJson) {
 
+        var itemsByName = {};
+ 
         rawJson.items.forEach(function (item, i, items) {
-            // fill in next property if not explicitly given:
-            if (!item.next) {
-                item.next = items[i + 1] ? [items[i + 1].name] : [];
-            }
+            itemsByName[item.name] = item;
+        });
+        
+        rawJson.items.forEach(function (rawItem, i, items) {
+            // fill in next property if not explicitly given:            
+            var nextRawItem = rawItem.next 
+                            ? itemsByName[rawItem.next[0]]
+                            : items[i + 1]; 
+            
+            rawItem.next = nextRawItem ? [nextRawItem.name] : [];
+            
+            console.log( 'set next for', rawItem, 'to', rawItem.next); 
 
             // fill in locations json by sensible defaults if not given:
-            if (!item.locations) {
-                item.locations = defaultLocationForItem(item);
+            if (!rawItem.locations) {
+                rawItem.locations = defaultLocationForItem(rawItem);
             }
         });
 
@@ -256,7 +283,7 @@ var getScenario = (function () {
 
             if( item.type == 'wire' ) {
                 var upstreamItem   = items[i - 1].locations.where,
-                    downstreamItem = items[i + 1].locations.where;
+                    downstreamItem = itemsByName[item.next[0]].locations.where;
 
                 item.locations = {
                     upstream:   translateLocation(upstreamItem,   {x: 5  }),                    

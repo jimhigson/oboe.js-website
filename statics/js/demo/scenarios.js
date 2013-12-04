@@ -169,7 +169,7 @@ var getScenario = (function () {
                 },                
                 {
                     "name": "aggregator",
-                    "type": "server",
+                    "type": "aggregatingServer",
                     "options": {
                         "timeBetweenPackets": 1000,
                         "initialDelay": 500,

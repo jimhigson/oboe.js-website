@@ -208,6 +208,15 @@ Server.prototype.sendResponse = function() {
     this.schedule( next.bind(this,0), this.initialDelay )
 };
 
+var AggregatingServer = extend(Server, function(name, locations, options){
+    Server.apply(this, arguments);    
+});
+AggregatingServer.prototype.accept = function(packet) {
+    if( packet.name == 'request' ) {
+        this.propagate(packet);
+    }    
+};
+
 var Client = extend( PacketHolder, function(name, locations, options) {
     
     PacketHolder.apply(this, arguments);

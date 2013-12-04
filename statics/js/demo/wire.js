@@ -24,18 +24,23 @@ function loadScenario(scenarioId) {
 
     function modelType(scenarioType){
         switch(scenarioType){
-            case "server":  return Server;
-            case "wire":    return Wire;
-            case "client":  return Client;
+            case "server":              return Server;
+            case "wire":                return Wire;
+            case "client":              return Client;
+            case "aggregatingServer":   return AggregatingServer;
         }
         throw new Error('unknown type ' + scenarioType);
     }
 
     function viewType(scenarioType){
         switch(scenarioType){
-            case "server":  return ServerView;
-            case "wire":    return WireView;
-            case "client":  return ClientView;
+            case "aggregatingServer":  
+            case "server":  
+                    return ServerView;
+            case "wire":    
+                    return WireView;
+            case "client":  
+                    return ClientView;
         }
         throw new Error('unknown type ' + scenarioType);
     }

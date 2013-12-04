@@ -102,9 +102,12 @@ PacketHolder.prototype.withDownstream = function(downstream){
 PacketHolder.prototype.propagate = function(packet){
     
     this.adjacents[packet.direction].forEach( function(adjacent, i){
-        //var packetCopy = packet.copy(i).announce();
-        adjacent.accept(packet);        
+        var packetCopy = packet.copy(i).announce();
+        
+        adjacent.accept(packetCopy);        
     }.bind(this));
+    
+    packet.done();
 
 };
 PacketHolder.prototype.movePacket = function(packet){
@@ -184,10 +187,10 @@ var Server = extend( PacketHolder, function(name, locations, options) {
 });
 Server.prototype.accept = function(packet){
         
-    if( packet.name == 'request' ) {
+    if( packet.direction == 'upstream' ) {
         this.sendResponse();
         packet.done();
-    }
+    }    
 };
 Server.prototype.sendResponse = function() {
     
@@ -222,9 +225,11 @@ var AggregatingServer = extend(Server, function(name, locations, options){
     Server.apply(this, arguments);    
 });
 AggregatingServer.prototype.accept = function(packet) {
-    if( packet.name == 'request' ) {
+    if( packet.direction == 'upstream' ) {
         this.propagate(packet);
-    }    
+    } else {
+        packet.done(); // TODO: handle case
+    }
 };
 
 var Client = extend( PacketHolder, function(name, locations, options) {
@@ -245,19 +250,19 @@ Client.prototype.makeParseStrategy = function(strategyName){
         case 'progressive':
             return function(packet){
                 receive.emit(packet);
-            }
+            };
 
         case 'discrete':
             var packetsSoFar = [];
             return function(packet){
                 packetsSoFar.push(packet);
                 
-                if( packet.isLast ) {
+                if( packet.ordering.isLast ) {
                     packetsSoFar.forEach(function(packet){
                         receive.emit(packet);
                     });
                 }            
-            }
+            };
         
         default:
             throw Error('what is ' + strategyName + '?');            
@@ -266,7 +271,7 @@ Client.prototype.makeParseStrategy = function(strategyName){
 
 Client.prototype.makeRequest = function(){
     var packet = 
-        new Packet('request', 'GET', 'upstream', {isFirst:true, isLast:true})
+        new Packet('request', 'GET', 'upstream', {isFirst:true, isLast:true, i:0})
             .inDemo(this.demo)
             .announce();
     

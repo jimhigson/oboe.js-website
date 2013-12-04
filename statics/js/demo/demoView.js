@@ -208,13 +208,13 @@ var ClientView = extend(ThingView, function(subject, demoView){
 function clientPage(pageName, jDom, events) {
     function singlePageSite(){        
         events('receive').on(function( packet ){
-            addClass(jDom, 'received-' + packet.name);
+            addClass(jDom, 'received-' + packet.ordering.i);
         });
         
         events('reset').on(function(){
             var ele = jDom[0],
                 oldClassAttr = ele.getAttribute('class'),
-                newClassAttr = oldClassAttr.replace(/received-response\d/g, '');
+                newClassAttr = oldClassAttr.replace(/received-\d/g, '');
 
             ele.setAttribute('class', newClassAttr);
         });        

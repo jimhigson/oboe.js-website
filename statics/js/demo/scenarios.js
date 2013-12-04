@@ -132,16 +132,16 @@ var getScenario = (function () {
         "aggregated-progressive": new Scenario({
             "name": "aggregated-progressive", "items": [
                 {
-                    "name": "origin1",
+                    "name": "origin-slow",
                     "type": "server",
                     "options": {
                         "timeBetweenPackets": 1000,
                         "initialDelay": 500,
-                        "messageSize": Number.POSITIVE_INFINITY
+                        "messageSize": 7
                     }
                 },
                 {
-                    "name": "origin1-wire",
+                    "name": "origin-slow-wire",
                     "type": "wire",
                     "next":["aggregator"],
                     "options": {
@@ -150,17 +150,17 @@ var getScenario = (function () {
                     }
                 },                
                 {
-                    "name": "origin2",
+                    "name": "origin-fast",
                     "type": "server",
                     "options": {
-                        "timeBetweenPackets": 1000,
-                        "initialDelay": 500,
-                        "messageSize": Number.POSITIVE_INFINITY
+                        "timeBetweenPackets": 500,
+                        "initialDelay": 250,
+                        "messageSize": 5
                     },
                     "locations":{ "where":{x:50, y:200} }                    
                 },                
                 {
-                    "name": "origin2-wire",
+                    "name": "origin-fast-wire",
                     "type": "wire",
                     "options": {
                         "bandwidth": 500,

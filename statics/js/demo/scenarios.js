@@ -44,7 +44,8 @@ var getScenario = (function () {
                 }
             ]
         }), "fast-ajax-progressive": new Scenario({
-            "name": "fast-ajax-progressive", "items": [
+            "name": "fast-ajax-progressive", 
+            "items": [
                 {
                     "name": "sever",
                     "type": "server",
@@ -73,7 +74,8 @@ var getScenario = (function () {
                 }
             ]
         }), "slow-ajax-discrete": new Scenario({
-            "name": "slow-ajax-discrete", "items": [
+            "name": "slow-ajax-discrete", 
+            "items": [
                 {
                     "name": "sever",
                     "type": "server",
@@ -101,7 +103,8 @@ var getScenario = (function () {
                 }
             ]
         }), "slow-ajax-progressive": new Scenario({
-            "name": "slow-ajax", "items": [
+            "name": "slow-ajax", 
+            "items": [
                 {
                     "name": "sever",
                     "type": "server",
@@ -130,7 +133,8 @@ var getScenario = (function () {
         }),
 
         "aggregated-progressive": new Scenario({
-            "name": "aggregated-progressive", "items": [
+            "name": "aggregated-progressive", 
+            "items": [
                 {
                     "name": "origin-slow",
                     "type": "server",
@@ -195,7 +199,8 @@ var getScenario = (function () {
                 }
             ]
         }), "historic-and-live": new Scenario({
-            "name": "historic-and-live", "items": [
+            "name": "historic-and-live",
+            "items": [
                 {
                     "name": "sever",
                     "type": "server",

@@ -265,7 +265,9 @@ var getScenario = (function () {
         rawJson.items.forEach(function (rawItem, i, items) {
             // fill in next property if not explicitly given:
             if( ! rawItem.next ) {
-                rawItem.next = items[i + 1]? [items[i + 1].name] : [];
+                rawItem.next    = (i < items.length-1)
+                                ? [items[i + 1].name] 
+                                : [];
             }
             
             // fill in locations json by sensible defaults if not given:

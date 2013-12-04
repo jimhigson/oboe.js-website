@@ -175,7 +175,7 @@ var getScenario = (function () {
                         "initialDelay": 500,
                         "messageSize": Number.POSITIVE_INFINITY
                     },
-                    "locations":{ "where":{x:240, y:10} }
+                    "locations":{ "where":{x:240, y:100} }
                 },
                 {
                     "name": "client-internet",
@@ -190,7 +190,7 @@ var getScenario = (function () {
                     "type": "client",
                     "options": {
                         "parseStrategy": "progressive",
-                        "page": "twitter"
+                        "page": "singlePageSite"
                     }
                 }
             ]

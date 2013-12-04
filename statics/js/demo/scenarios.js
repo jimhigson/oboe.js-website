@@ -139,6 +139,14 @@ var getScenario = (function () {
                         "initialDelay": 500,
                         "messageSize": Number.POSITIVE_INFINITY
                     }
+                },
+                {
+                    "name": "internet1",
+                    "type": "wire",
+                    "options": {
+                        "bandwidth": 500,
+                        "latency": 500
+                    }
                 },                
                 {
                     "name": "aggregator",
@@ -149,11 +157,11 @@ var getScenario = (function () {
                         "messageSize": Number.POSITIVE_INFINITY
                     },
                     "locations":{
-                        "where":{x:240, y:100}
+                        "where":{x:240, y:10}
                     }
                 },
                 {
-                    "name": "internet",
+                    "name": "internet2",
                     "type": "wire",
                     "options": {
                         "bandwidth": 500,
@@ -226,13 +234,9 @@ var getScenario = (function () {
                 return {    where: DEFAULT_CLIENT_LOCATION };
             case 'server':
                 return {    where: DEFAULT_SERVER_LOCATION };
-            case 'wire':
-                return {    downstream: translateLocation(DEFAULT_CLIENT_LOCATION, {x: -32}),
-                    upstream: translateLocation(DEFAULT_SERVER_LOCATION, {x: 5})
-                }
         }
     }
-
+    
     function Scenario(rawJson) {
 
         rawJson.items.forEach(function (item, i, items) {
@@ -244,6 +248,20 @@ var getScenario = (function () {
             // fill in locations json by sensible defaults if not given:
             if (!item.locations) {
                 item.locations = defaultLocationForItem(item);
+            }
+        });
+
+        // give wires their location:
+        rawJson.items.forEach(function (item, i, items) {
+
+            if( item.type == 'wire' ) {
+                var upstreamItem   = items[i - 1].locations.where,
+                    downstreamItem = items[i + 1].locations.where;
+
+                item.locations = {
+                    upstream:   translateLocation(upstreamItem,   {x: 5  }),                    
+                    downstream: translateLocation(downstreamItem, {x: -32})
+                }
             }
         });
 

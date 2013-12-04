@@ -50,7 +50,8 @@ part when the network comes back.
 
 <figure data-demo="aggregated-discrete"></figure>
 
-- don't let one slow resource slow everything down
+- don't let one slow resource slow everything down.
+- don't slow everything's display down to the speed of the slowest component
 
 <figure data-demo="aggregated-progressive"></figure>
 

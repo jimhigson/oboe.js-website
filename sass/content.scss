@@ -24,8 +24,7 @@ code {
    overflow:auto;
    padding:1em;
    line-height: 1.2em;
-   margin:0em 0 2em 0;
-   font-family: Computer Modern mono, monospace; 
+   margin:0em 0 2em 0; 
 }
 
 /* inline code examples */
@@ -33,8 +32,11 @@ code {
    display:inline-block;
    background-color: $shadedBackgroundColor;
    border-radius: 2px;
-   padding: 2px 5px;
-   font-family: Computer Modern mono, monospace; 
+   padding: 2px 5px; 
+}
+
+code {
+   font-family: Computer Modern mono, monospace;
 }
 
 

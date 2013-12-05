@@ -8,8 +8,7 @@ var express = require('express'),
     PORT = '8888',
 
     UNMINIFIED_SCRIPTS = [
-        "//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"
-    ,   "/js/jquery.js"
+        "/jquery/jquery.js"
     ,   "/js/jquery.sticky.js"
     ,   "/js/internalNav.js"
     ,   "/js/demo/functional.js"
@@ -72,6 +71,7 @@ function respondWithMarkdown(req, res, markdownFilename, opts){
 
 app
    .use(express.static('statics'))
+   .use(express.static('bower_components'))
    .use(slashes())    
    .get('/', function(req, res){
         respondWithMarkdown(req, res, 'index', {

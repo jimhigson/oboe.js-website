@@ -134,7 +134,7 @@ var getScenario = (function () {
 
         "aggregated-progressive": new Scenario({
             "name": "aggregated-progressive", 
-            "options":{"height":750},
+            "options":{"height":300},
             "items": [
                 {
                     "name": "origin-slow",
@@ -151,7 +151,7 @@ var getScenario = (function () {
                     "next":["aggregator"],
                     "options": {
                         "bandwidth": 500,
-                        "latency": 500
+                        "latency": 600
                     }
                 },                
                 {
@@ -162,14 +162,14 @@ var getScenario = (function () {
                         "initialDelay": 250,
                         "messageSize": 5
                     },
-                    "locations":{ "where":{x:50, y:200} }                    
+                    "locations":{ "where":{x:100, y:200} }                    
                 },                
                 {
                     "name": "origin-fast-wire",
                     "type": "wire",
                     "options": {
                         "bandwidth": 500,
-                        "latency": 500
+                        "latency": 400
                     }
                 },                
                 {
@@ -290,8 +290,8 @@ var getScenario = (function () {
                     downstreamItem = itemsByName[item.next[0]].locations.where;
 
                 item.locations = {
-                    upstream:   translateLocation(upstreamItem,   {x: 5  }),                    
-                    downstream: translateLocation(downstreamItem, {x: -32})
+                    upstream:   upstreamItem,                    
+                    downstream: downstreamItem
                 }
             }
         });

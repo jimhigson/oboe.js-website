@@ -363,7 +363,7 @@ Client.prototype.makeParseStrategy = function(strategyName){
         default:
             throw Error('what is ' + strategyName + '?');            
     }
-}
+};
 
 Client.prototype.makeRequest = function(){
     var packet = 

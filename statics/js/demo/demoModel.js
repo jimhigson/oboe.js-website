@@ -204,10 +204,7 @@ Server.prototype.sendResponse = function() {
     function next(previousPacketNumber){
 
         var packetNumber = this.packetNumberAfter(previousPacketNumber);
-        
-        console.log(this.name, 'will send packet number', packetNumber,
-            'last was', previousPacketNumber);
-        
+                
         var ordering = {
             i:packetNumber,
             isFirst: packetNumber == 0,

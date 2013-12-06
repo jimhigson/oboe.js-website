@@ -212,7 +212,11 @@ var getScenario = (function () {
                     "options": {
                         "timeBetweenPackets": 1000,
                         "initialDelay": 500,
-                        "messageSize": 7
+                        "messageSize": 7,
+                        "packetSequence":function(i) {
+                            return (i === undefined)?
+                                   0 : i+=2;
+                        }
                     }
                 },
                 {
@@ -230,7 +234,11 @@ var getScenario = (function () {
                     "options": {
                         "timeBetweenPackets": 500,
                         "initialDelay": 250,
-                        "messageSize": 5
+                        "messageSize": 5,
+                        "packetSequence":function(i) {
+                            return (i === undefined)?
+                                1 : i+=2;
+                        }
                     },
                     "locations":{ "where":{x:100, y:200} }                    
                 },                

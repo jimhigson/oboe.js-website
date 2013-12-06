@@ -186,6 +186,11 @@ var Server = extend( PacketHolder, function(name, locations, options) {
 
     this.initialDelay = options.initialDelay;
     this.messageSize = options.messageSize;
+    this.packetNumberAfter = options.packetSequence || function(previousPacketNumber){
+        return      (previousPacketNumber === undefined)
+                ?   0
+                :   previousPacketNumber+1;
+    };
 });
 Server.prototype.accept = function(packet){
         
@@ -196,31 +201,35 @@ Server.prototype.accept = function(packet){
 };
 Server.prototype.sendResponse = function() {
     
-    function next(i){
+    function next(previousPacketNumber){
 
+        var packetNumber = this.packetNumberAfter(previousPacketNumber);
+        
+        console.log(this.name, 'will send packet number', packetNumber,
+            'last was', previousPacketNumber);
+        
         var ordering = {
-            i:i,
-            isFirst: i == 0,
-            isLast: i == (this.messageSize -1)
+            i:packetNumber,
+            isFirst: packetNumber == 0,
+            isLast: packetNumber >= (this.messageSize -1)
         };
 
         var packet =
-            new Packet('response' + i, 'JSON', 'downstream', ordering, this.packetMode(i))
+            new Packet('response' + packetNumber, 'JSON', 'downstream', ordering, this.packetMode(previousPacketNumber))
                 .inDemo(this.demo)
                 .announce();
 
         this.propagate(packet);
 
-        var nextPacketNumber = i +1;
         // schedule the next packet if there is one:
         if( !ordering.isLast ) {
-            this.schedule(  next.bind(this, nextPacketNumber)
-                         ,  this.timeBetweenPackets(nextPacketNumber)
+            this.schedule(  next.bind(this, packetNumber)
+                         ,  this.timeBetweenPackets(packetNumber)
                          );
         }
-    };
+    }
     
-    this.schedule( next.bind(this,0), this.initialDelay )
+    this.schedule( next.bind(this), this.initialDelay )
 };
 
 var AggregatingServer = extend(Server, function(name, locations, options){
@@ -230,7 +239,8 @@ AggregatingServer.prototype.accept = function(packet) {
     if( packet.direction == 'upstream' ) {
         this.propagate(packet);
     } else {
-        // TODO: this only describes the Oboe case, not the standard case
+        // TODO: this only describes the Oboe case, not the standard case,
+        // will need to wait for all inbound messages to complete
         this.propagate(packet); 
     }
 };

@@ -273,7 +273,8 @@ Server.prototype.createMessagesTo = function(destinations) {
 Server.prototype.sendResponse = function() {
 
     var nextLocations = this.nextLocationsInDirection('downstream'),
-        messages = this.createMessagesTo(nextLocations);
+        messages = this.createMessagesTo(nextLocations),
+        firstSent = false;
     
     function next(previousPacketNumber){
 
@@ -281,7 +282,7 @@ Server.prototype.sendResponse = function() {
                 
         var ordering = {
             i:packetNumber,
-            isFirst: packetNumber == 0,
+            isFirst: !firstSent,
             isLast: packetNumber >= (this.messageSize -1)
         };
 
@@ -306,6 +307,8 @@ Server.prototype.sendResponse = function() {
         announceAll(packetCopies);
 
         this.sendPacketsToDestinations(packetCopies, nextLocations);
+
+        firstSent = true;
     }
     
     this.schedule( next.bind(this), this.initialDelay );

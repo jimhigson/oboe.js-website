@@ -57,6 +57,11 @@ part when the network comes back.
 
 ## Historic and live data on the same transport
 
+REST talks in the language of resources, not services. URLs should identify
+things, not endpoints. It shouldn't matter if the server has the thing now
+or if it will send it later when it does have it, or some combination of
+both.
+
 You got to a page, you get the 'old' data and then are kept up
 to date with 'live' events.
 We normally use two transports for this, but wouldn't it be

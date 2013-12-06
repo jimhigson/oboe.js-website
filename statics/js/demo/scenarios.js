@@ -358,7 +358,7 @@ var getScenario = (function () {
         }
     }
     
-    function processScenario(rawJson) {
+    function fillInScenarioDescription(rawJson) {
 
         var itemsByName = {};
  
@@ -400,6 +400,6 @@ var getScenario = (function () {
 
     return function (name) {
 
-        return scenarios[name] && processScenario( scenarios[name] );
+        return scenarios[name] && fillInScenarioDescription( scenarios[name] );
     }
 })();   

@@ -93,8 +93,7 @@ Message.prototype.sentBy = function(sender){
     return this; // chaining
 };
 Message.prototype.withFirst = function(firstPacket){
-    console.log('message for first packet', firstPacket); 
-    
+     
     firstPacket.events('move').on(function(){
         
         this.events('startMove').emit();
@@ -102,8 +101,7 @@ Message.prototype.withFirst = function(firstPacket){
     return this; // chaining
 };
 Message.prototype.withLast = function(lastPacket){
-    console.log('message for last packet', firstPacket);    
-    
+        
     lastPacket.events('move').on(function(){
 
         this.events('endMove').emit();

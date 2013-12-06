@@ -107,6 +107,12 @@ var DemoView = extend(ThingView, function(subject){
         
     }.bind(this));
     
+    Message.new.on(function(newMessage){
+        if( newMessage.demo == subject ) {
+            new MessageView(newMessage, this);
+        }
+    });
+    
     function listenForPlay(){
         jLightbox.one('click', function(){
 
@@ -187,6 +193,24 @@ var PacketView = extend(ThingView, function (subject, demoView) {
     subject.events('done').on(function(){
         this.jDom.remove();
     }.bind(this));
+});
+
+var MessageView = extend(ThingView, function(subject, demoView){
+    ThingView.apply(this,arguments);
+    
+    subject.events('startMove').on(function(){
+        console.log(
+            this,
+            'the start of a message moved:',
+            arguments );
+    }.bind(this));
+    
+    subject.events('endMove').on(function(){
+        console.log(
+            this,
+            'the end of a message moved:',
+            arguments );
+    }.bind(this));    
 });
 
 var WireView = extend(ThingView, function(subject, demoView){

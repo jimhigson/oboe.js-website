@@ -23,7 +23,7 @@ function Thing(name){
     this.events = pubSub();
 }
 Thing.prototype.reset = function(){
-}
+};
 Thing.prototype.inDemo = function(demo){
     this.demo = demo;
     this.demo.events('reset').on(function(){
@@ -31,11 +31,12 @@ Thing.prototype.inDemo = function(demo){
         this.events('reset').emit();
     }.bind(this));
     return this; //chaining
-}
+};;
 Thing.prototype.announce = function() {
     this.constructor.new.emit(this);
     return this;
 };
+
 
 var Demo = extend(Thing, function(name, options){
     Thing.apply(this, arguments);
@@ -48,6 +49,7 @@ Demo.prototype.start = function(){
 Demo.prototype.reset = function(){
     this.events('reset').emit();
 };
+
 
 var Packet = extend(Thing, function (name, type, direction, ordering, mode){
     Thing.apply(this, arguments);
@@ -77,6 +79,46 @@ Packet.prototype.done = function(){
 };
 
 
+
+var Message = extend(Thing, function() {
+    Thing.apply(this, arguments);
+});
+Message.new = singleEventPubSub('new');
+Message.prototype.sentBy = function(sender){
+    return this; // chaining
+};
+Message.prototype.withFirst = function(firstPacket){
+    console.log('message for first packet', firstPacket); 
+    
+    firstPacket.events('move').on(function(){
+        
+        this.events('startMove').emit();
+    }.bind(this));
+    return this; // chaining
+};
+Message.prototype.withLast = function(lastPacket){
+    console.log('message for last packet', firstPacket);    
+    
+    lastPacket.events('move').on(function(){
+
+        this.events('endMove').emit();
+    }.bind(this));
+    return this; // chaining
+};
+Message.prototype.includes = function(packet) {
+    var ordering = packet.ordering;
+    
+    if( ordering.isFirst ) {
+        this.withFirst(packet);
+    }
+    if( ordering.isLast ) {
+        this.withLast(packet);
+    }
+};
+
+
+
+
 var PacketHolder = extend(Thing, function(name, locations){
     Thing.apply(this, arguments);
     if( !locations ) {
@@ -101,16 +143,35 @@ PacketHolder.prototype.withDownstream = function(downstream){
         
     return this;    
 };
-PacketHolder.prototype.propagate = function(packet){
-    
-    this.adjacents[packet.direction].forEach( function(adjacent, i){
-        var packetCopy = packet.copy(i).announce();
-        
-        adjacent.accept(packetCopy);        
-    }.bind(this));
-    
-    packet.done();
+PacketHolder.prototype.nextLocationsInDirection = function(direction){
+    return this.adjacents[direction];
+};
 
+PacketHolder.prototype.createCopiesForDestinations = function(packetSource, destinations) {
+
+    return destinations.map( function(place, i) {
+
+        return packetSource.copy(i);
+    });
+};
+PacketHolder.prototype.sendPacketsToDestinations = function(packets, destinations){
+    destinations.forEach(function( destination, i){
+        destination.accept( packets[i] );
+    }.bind(this))    
+};
+
+PacketHolder.prototype.propagate = function(basePacket){
+
+    var nextPacketHolders = this.nextLocationsInDirection(basePacket.direction),
+        packetCopies = this.createCopiesForDestinations( basePacket, nextPacketHolders );
+    
+    announceAll(packetCopies);
+
+    this.sendPacketsToDestinations(packetCopies, nextPacketHolders);
+            
+    basePacket.done();
+
+    return packetCopies;
 };
 PacketHolder.prototype.movePacket = function(packet){
     var fromLocation = oppositeDirectionTo(packet.direction),
@@ -199,7 +260,16 @@ Server.prototype.accept = function(packet){
         packet.done();
     }    
 };
+Server.prototype.createMessagesTo = function(destinations) {
+    return destinations.map(function(){
+        return new Message().inDemo(this.demo).sentBy(this);
+    }.bind(this));
+}
+
 Server.prototype.sendResponse = function() {
+
+    var nextLocations = this.nextLocationsInDirection('downstream'),
+        messages = this.createMessagesTo(nextLocations);
     
     function next(previousPacketNumber){
 
@@ -211,23 +281,39 @@ Server.prototype.sendResponse = function() {
             isLast: packetNumber >= (this.messageSize -1)
         };
 
-        var packet =
-            new Packet('response' + packetNumber, 'JSON', 'downstream', ordering, this.packetMode(previousPacketNumber))
-                .inDemo(this.demo)
-                .announce();
-
-        this.propagate(packet);
-
+        // unannounced packet to use as a template for others
+        var basePacket =
+                new Packet('response' + packetNumber, 'JSON', 'downstream', ordering, this.packetMode(previousPacketNumber))
+                    .inDemo(this.demo);
+         
         // schedule the next packet if there is one:
         if( !ordering.isLast ) {
             this.schedule(  next.bind(this, packetNumber)
                          ,  this.timeBetweenPackets(packetNumber)
                          );
         }
+
+        var packetCopies = this.createCopiesForDestinations( basePacket, nextLocations );
+        
+        messages.forEach(function( message, i ){
+            message.includes(packetCopies[i]);
+        });
+
+        announceAll(packetCopies);
+
+        this.sendPacketsToDestinations(packetCopies, nextLocations);
     }
     
-    this.schedule( next.bind(this), this.initialDelay )
+    this.schedule( next.bind(this), this.initialDelay );
+    
+    announceAll(messages);
 };
+
+function announceAll(things){
+    things.forEach(function( thing ){
+        thing.announce();
+    });
+}
 
 var AggregatingServer = extend(Server, function(name, locations, options){
     Server.apply(this, arguments);    

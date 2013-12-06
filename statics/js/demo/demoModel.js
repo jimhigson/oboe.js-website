@@ -96,7 +96,7 @@ Message.prototype.withFirst = function(firstPacket){
      
     firstPacket.events('move').on(function(){
         
-        this.events('startMove').emit();
+        this.events('startMove').emit.apply(this, arguments);
     }.bind(this));
     return this; // chaining
 };
@@ -104,7 +104,7 @@ Message.prototype.withLast = function(lastPacket){
         
     lastPacket.events('move').on(function(){
 
-        this.events('endMove').emit();
+        this.events('endMove').emit.apply(this, arguments);;
     }.bind(this));
     return this; // chaining
 };

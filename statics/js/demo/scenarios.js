@@ -213,10 +213,7 @@ var getScenario = (function () {
                         "timeBetweenPackets": 1000,
                         "initialDelay": 500,
                         "messageSize": 7,
-                        "packetSequence":function(i) {
-                            return (i === undefined)?
-                                   0 : i+=2;
-                        }
+                        "packetSequence": evenNumberedPackets
                     }
                 },
                 {
@@ -235,10 +232,7 @@ var getScenario = (function () {
                         "timeBetweenPackets": 500,
                         "initialDelay": 250,
                         "messageSize": 5,
-                        "packetSequence":function(i) {
-                            return (i === undefined)?
-                                1 : i+=2;
-                        }
+                        "packetSequence": oddNumberedPackets
                     },
                     "locations":{ "where":{x:100, y:200} }                    
                 },                
@@ -395,6 +389,16 @@ var getScenario = (function () {
     function historicPacketsThenLive(i) {
         return (i < 6 ? 'historic' : 'live');
     }
+
+    function evenNumberedPackets(i) {
+        return (i === undefined)?
+            0 : i+=2;
+    }
+
+    function oddNumberedPackets(i) {
+        return (i === undefined)?
+            1 : i+=2;
+    }    
 
     return function (name) {
 

@@ -1,13 +1,13 @@
 # Why Streaming REST?
 
-## Downloading from non-streamed REST
+## Downloading from standard REST
 
 Your app AJAXes in some JSON. You wait for the response to finish and you update the
 page.
 
 <figure data-demo="fast-ajax-discrete"></figure>
 
-## Streaming downloading from non-streamed REST
+## Streaming downloading from standard REST
 
 But if you are developing for a browser you already have progressive HTML, JPEG,
 ..., ... rendering. Why not render the JSON progressively as well?

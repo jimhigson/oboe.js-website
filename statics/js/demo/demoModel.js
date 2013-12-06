@@ -36,6 +36,11 @@ Thing.prototype.announce = function() {
     this.constructor.new.emit(this);
     return this;
 };
+function announceAll(things){
+    things.forEach(function( thing ){
+        thing.announce();
+    });
+}
 
 
 var Demo = extend(Thing, function(name, options){
@@ -309,11 +314,6 @@ Server.prototype.sendResponse = function() {
     announceAll(messages);
 };
 
-function announceAll(things){
-    things.forEach(function( thing ){
-        thing.announce();
-    });
-}
 
 var AggregatingServer = extend(Server, function(name, locations, options){
     Server.apply(this, arguments);    

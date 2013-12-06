@@ -43,7 +43,9 @@ var getScenario = (function () {
                     }
                 }
             ]
-        }), "fast-ajax-progressive": new Scenario({
+        }), 
+        
+        "fast-ajax-progressive": new Scenario({
             "name": "fast-ajax-progressive", 
             "items": [
                 {
@@ -73,7 +75,99 @@ var getScenario = (function () {
                     }
                 }
             ]
-        }), "slow-ajax-discrete": new Scenario({
+        }),
+
+        "mobile-discrete": new Scenario({
+            "name": "mobile-discrete",
+            "items": [
+                {
+                    "name": "sever",
+                    "type": "server",
+                    "options": {
+                        "timeBetweenPackets": function (i) {
+                            switch(i){
+                                case 0:
+                                case 1:
+                                case 5:
+                                case 6:
+                                    return 50;                                    
+                                
+                                case 2:
+                                case 3:
+                                case 4:
+                                    return 500;
+                            }
+                        },
+                        "initialDelay": 500,
+                        "messageSize": 7
+                    }
+                },
+                {
+                    "name": "internet",
+                    "type": "wire",
+                    "options": {
+                        "bandwidth": 500,
+                        "latency": 800,
+                        "messageSize": 7
+                    }
+                },
+                {
+                    "name": "client",
+                    "type": "client",
+                    "options": {
+                        "parseStrategy": "discrete",
+                        "page": "singlePageSite"
+                    }
+                }
+            ]
+        }),
+
+        "mobile-progressive": new Scenario({
+            "name": "mobile-progressive",
+            "items": [
+                {
+                    "name": "sever",
+                    "type": "server",
+                    "options": {
+                        "timeBetweenPackets": function (i) {
+                            switch(i){
+                                case 0:
+                                case 1:
+                                case 5:
+                                case 6:
+                                    return 50;
+
+                                case 2:
+                                case 3:
+                                case 4:
+                                    return 500;
+                            }
+                        },
+                        "initialDelay": 500,
+                        "messageSize": 7
+                    }
+                },
+                {
+                    "name": "internet",
+                    "type": "wire",
+                    "options": {
+                        "bandwidth": 500,
+                        "latency": 800,
+                        "messageSize": 7
+                    }
+                },
+                {
+                    "name": "client",
+                    "type": "client",
+                    "options": {
+                        "parseStrategy": "progressive",
+                        "page": "singlePageSite"
+                    }
+                }
+            ]
+        }),        
+        
+        "slow-ajax-discrete": new Scenario({
             "name": "slow-ajax-discrete", 
             "items": [
                 {

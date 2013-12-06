@@ -84,20 +84,7 @@ var getScenario = (function () {
                     "name": "sever",
                     "type": "server",
                     "options": {
-                        "timeBetweenPackets": function (i) {
-                            switch(i){
-                                case 0:
-                                case 1:
-                                case 5:
-                                case 6:
-                                    return 50;                                    
-                                
-                                case 2:
-                                case 3:
-                                case 4:
-                                    return 500;
-                            }
-                        },
+                        "timeBetweenPackets": inconsistent_packet_spacing,
                         "initialDelay": 500,
                         "messageSize": 7
                     }
@@ -129,20 +116,7 @@ var getScenario = (function () {
                     "name": "sever",
                     "type": "server",
                     "options": {
-                        "timeBetweenPackets": function (i) {
-                            switch(i){
-                                case 0:
-                                case 1:
-                                case 5:
-                                case 6:
-                                    return 50;
-
-                                case 2:
-                                case 3:
-                                case 4:
-                                    return 500;
-                            }
-                        },
+                        "timeBetweenPackets": inconsistent_packet_spacing,
                         "initialDelay": 500,
                         "messageSize": 7
                     }
@@ -171,7 +145,7 @@ var getScenario = (function () {
             "name": "slow-ajax-discrete", 
             "items": [
                 {
-                    "name": "sever",
+                    "name": "server",
                     "type": "server",
                     "options": {
                         "timeBetweenPackets": 100,
@@ -304,12 +278,8 @@ var getScenario = (function () {
                     "name": "sever",
                     "type": "server",
                     "options": {
-                        "timeBetweenPackets": function (i) {
-                            return (i < 6 ? 50 : randomBetween(500, 2500));
-                        },
-                        "packetMode": function (i) {
-                            return (i < 6 ? 'historic' : 'live');
-                        },
+                        "timeBetweenPackets": fastTimingThenStream,
+                        "packetMode": historicPacketsThenLive,
                         "initialDelay": 500,
                         "messageSize": Number.POSITIVE_INFINITY
                     }
@@ -394,8 +364,28 @@ var getScenario = (function () {
             }
         });
 
-
         return rawJson;
+    }
+
+    function inconsistent_packet_spacing(i) {
+        
+        switch(i){
+            case 0:
+            case 1:
+            case 5:
+            case 6:
+                return 50; // fast    
+        }
+        return 500; //slow
+    }
+    
+    function fastTimingThenStream(i){
+
+        return (i < 6 ? 50 : randomBetween(500, 2500));
+    }
+
+    function historicPacketsThenLive(i) {
+        return (i < 6 ? 'historic' : 'live');
     }
 
     return function (name) {

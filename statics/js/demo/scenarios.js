@@ -14,7 +14,7 @@ var getScenario = (function () {
      */
 
     var scenarios = {
-        "fast-ajax-discrete": new Scenario({
+        "fast-ajax-discrete": {
             "name": "fast-ajax-discrete", "items": [
                 {
                     "name": "sever",
@@ -43,9 +43,9 @@ var getScenario = (function () {
                     }
                 }
             ]
-        }), 
+        }, 
         
-        "fast-ajax-progressive": new Scenario({
+        "fast-ajax-progressive": {
             "name": "fast-ajax-progressive", 
             "items": [
                 {
@@ -75,9 +75,9 @@ var getScenario = (function () {
                     }
                 }
             ]
-        }),
+        },
 
-        "mobile-discrete": new Scenario({
+        "mobile-discrete": {
             "name": "mobile-discrete",
             "items": [
                 {
@@ -120,9 +120,9 @@ var getScenario = (function () {
                     }
                 }
             ]
-        }),
+        },
 
-        "mobile-progressive": new Scenario({
+        "mobile-progressive": {
             "name": "mobile-progressive",
             "items": [
                 {
@@ -165,9 +165,9 @@ var getScenario = (function () {
                     }
                 }
             ]
-        }),        
+        },        
         
-        "slow-ajax-discrete": new Scenario({
+        "slow-ajax-discrete": {
             "name": "slow-ajax-discrete", 
             "items": [
                 {
@@ -196,7 +196,9 @@ var getScenario = (function () {
                     }
                 }
             ]
-        }), "slow-ajax-progressive": new Scenario({
+        },
+    
+        "slow-ajax-progressive": {
             "name": "slow-ajax", 
             "items": [
                 {
@@ -224,9 +226,9 @@ var getScenario = (function () {
                     }
                 }
             ]
-        }),
+        },
 
-        "aggregated-progressive": new Scenario({
+        "aggregated-progressive": {
             "name": "aggregated-progressive", 
             "options":{"height":300},
             "items": [
@@ -293,7 +295,9 @@ var getScenario = (function () {
                     }
                 }
             ]
-        }), "historic-and-live": new Scenario({
+        },
+        
+        "historic-and-live": {
             "name": "historic-and-live",
             "items": [
                 {
@@ -327,7 +331,7 @@ var getScenario = (function () {
                     }
                 }
             ]
-        })
+        }
     };
 
     function randomBetween(min, max) {
@@ -354,7 +358,7 @@ var getScenario = (function () {
         }
     }
     
-    function Scenario(rawJson) {
+    function processScenario(rawJson) {
 
         var itemsByName = {};
  
@@ -396,6 +400,6 @@ var getScenario = (function () {
 
     return function (name) {
 
-        return scenarios[name];
+        return scenarios[name] && processScenario( scenarios[name] );
     }
 })();   

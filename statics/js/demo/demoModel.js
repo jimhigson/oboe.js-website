@@ -230,7 +230,8 @@ AggregatingServer.prototype.accept = function(packet) {
     if( packet.direction == 'upstream' ) {
         this.propagate(packet);
     } else {
-        packet.done(); // TODO: handle case
+        // TODO: this only describes the Oboe case, not the standard case
+        this.propagate(packet); 
     }
 };
 

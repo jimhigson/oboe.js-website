@@ -117,6 +117,7 @@ Message.prototype.includes = function(packet) {
     if( ordering.isLast ) {
         this.withLast(packet);
     }
+    return this; // chaining
 };
 
 

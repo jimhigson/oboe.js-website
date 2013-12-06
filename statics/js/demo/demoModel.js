@@ -32,6 +32,10 @@ Thing.prototype.inDemo = function(demo){
     }.bind(this));
     return this; //chaining
 }
+Thing.prototype.announce = function() {
+    this.constructor.new.emit(this);
+    return this;
+};
 
 var Demo = extend(Thing, function(name, options){
     Thing.apply(this, arguments);
@@ -62,10 +66,6 @@ Packet.prototype.copy = function(i) {
                 this.mode
         
            ).inDemo(this.demo);
-};
-Packet.prototype.announce = function() {
-    Packet.new.emit(this);
-    return this;
 };
 Packet.new = singleEventPubSub('new');
 Packet.prototype.move = function(fromXY, toXY, latency){

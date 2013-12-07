@@ -54,21 +54,7 @@ var DemoView = extend(ThingView, function(subject){
         jLightbox = jControls.find('.lightbox'),
         jReset = jControls.find('.reset').hide();
 
-    var height = subject.height || 200; 
-
-    // this should really be more template-esque
-    // but can't find a tempting engine that handles
-    // SVG elements well. Need to find a DOM-based engine
-    // that starts by doing Element.clone().
-    this.jDom.attr('height', height);
-    this.jDom.find('.fade').attr('height', height);
-    
-    // The container div should have the height set on
-    // the server-side to avoid the page reflowing.
-    containerDiv.css('height', height);
-    jControls.find('.reset').css('translateY', height);
-    jControls.find('.play').attr('y', height / 2);
-    
+    this.setHeight(subject.height || 200, containerDiv);
     
     containerDiv.append( this.jDom );
 
@@ -113,6 +99,21 @@ var DemoView = extend(ThingView, function(subject){
         
     listenForPlay();
 });
+
+DemoView.prototype.setHeight = function(height, containerDiv){
+    // this should really be more template-esque
+    // but can't find a tempting engine that handles
+    // SVG elements well. Need to find a DOM-based engine
+    // that starts by doing Element.clone().
+    this.jDom.attr('height', height);
+    this.jDom.find('.fade').attr('height', height);
+
+    // The container div should have the height set on
+    // the server-side to avoid the page reflowing.
+    containerDiv.css('height', height);
+    this.jDom.find('.reset').css('translateY', height);
+    this.jDom.find('.play').attr('y', height / 2);
+};
 
 function unitClass(packet) {
     return 'unit-' + (packet.ordering.i % 10);

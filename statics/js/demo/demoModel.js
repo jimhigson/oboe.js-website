@@ -301,32 +301,35 @@ Server.prototype.openOutboundMessages = function(direction, createPacket){
     announceAll(messages);
 };
 
-Server.prototype.sendResponse = function() {
+Server.prototype.responsePacketGenerator = function() {
 
     var firstPacketCreated = false;
     
-    this.openOutboundMessages('downstream', nextPacket);
-    
-    function nextPacket(curPacketNumber){
+    return function(curPacketNumber) {
         // unannounced packet to use as a template for others
         var ordering = {
             i:       curPacketNumber,
             isFirst: !firstPacketCreated,
             isLast:  curPacketNumber >= (this.messageSize -1)
         };
-        
+
         var packet = new Packet(
             'response' + curPacketNumber
-        ,   'JSON'
-        ,   'downstream'
-        ,   ordering
-        ,   this.packetMode(curPacketNumber)
+            ,   'JSON'
+            ,   'downstream'
+            ,   ordering
+            ,   this.packetMode(curPacketNumber)
         ).inDemo(this.demo);
 
         firstPacketCreated = true;
-        
+
         return packet;
     }
+};
+
+Server.prototype.sendResponse = function() {
+
+    this.openOutboundMessages('downstream', this.responsePacketGenerator());
     
     function sendNext(previousPacketNumber){
 

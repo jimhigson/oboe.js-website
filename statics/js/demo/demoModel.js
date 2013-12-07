@@ -288,7 +288,7 @@ Server.prototype.sendResponse = function() {
 
         // unannounced packet to use as a template for others
         var basePacket =
-                new Packet('response' + packetNumber, 'JSON', 'downstream', ordering, this.packetMode(previousPacketNumber))
+                new Packet('response' + packetNumber, 'JSON', 'downstream', ordering, this.packetMode(packetNumber))
                     .inDemo(this.demo);
          
         // schedule the next packet if there is one:

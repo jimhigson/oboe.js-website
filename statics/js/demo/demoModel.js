@@ -270,23 +270,24 @@ Server.prototype.createMessagesTo = function(destinations) {
     }.bind(this));
 };
 
+Server.prototype.sendCopies = function(basePacket, messages, nextLocations){
+    
+    var packetCopies = this.createCopiesForDestinations( basePacket, nextLocations );
+
+    messages.forEach(function( message, i ){
+        message.includes(packetCopies[i]);
+    });
+
+    announceAll(packetCopies);
+
+    this.sendPacketsToDestinations(packetCopies, nextLocations);
+}
+
 Server.prototype.sendResponse = function() {
 
     var nextLocations = this.nextLocationsInDirection('downstream'),
         messages = this.createMessagesTo(nextLocations),
         firstSent = false;
-    
-    function sendCopiesOf(basePacket){
-        var packetCopies = this.createCopiesForDestinations( basePacket, nextLocations );
-
-        messages.forEach(function( message, i ){
-            message.includes(packetCopies[i]);
-        });
-
-        announceAll(packetCopies);
-
-        this.sendPacketsToDestinations(packetCopies, nextLocations);
-    }
     
     function next(previousPacketNumber){
 
@@ -303,7 +304,7 @@ Server.prototype.sendResponse = function() {
                 new Packet('response' + curPacketNumber, 'JSON', 'downstream', ordering, this.packetMode(curPacketNumber))
                     .inDemo(this.demo);
          
-        sendCopiesOf.call(this, basePacket);
+        this.sendCopies(basePacket, messages, nextLocations);
 
         firstSent = true;
 

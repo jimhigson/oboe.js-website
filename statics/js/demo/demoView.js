@@ -1,39 +1,4 @@
-/* allow svg properties to be set like css by jQuery. Apply a simple
- * idea of SVG transforms that ignores order and other transforms */
- $.cssHooks.translateX = {
-    get: function( elem, computed, extra ) {
-        var baseVal = elem.transform.baseVal;
-        if( !baseVal.numberOfItems ) {
-            return 0;
-        }
-        return baseVal.getItem(0).matrix.e;
-    },
-    set: function( elem, value ) {
-        var baseVal = elem.transform.baseVal;
-        if( !baseVal.numberOfItems ) {
-            elem.setAttribute('transform', 'translate(0,0)')
-        }
-        baseVal.getItem(0).matrix.e = value; 
-    }
-};
-$.cssHooks.translateY = {
-    get: function( elem, computed, extra ) {
-        var baseVal = elem.transform.baseVal;
-        if( !baseVal.numberOfItems ) {
-            return 0;
-        }        
-        return baseVal.getItem(0).matrix.f;
-    },
-    set: function( elem, value ) {
-        var baseVal = elem.transform.baseVal;
-        if( !baseVal.numberOfItems ) {
-            elem.setAttribute('transform', 'translate(0,0)')
-        }
-        baseVal.getItem(0).matrix.f = value;
-    }
-};
-$.cssNumber.translateX = true;
-$.cssNumber.translateY = true;
+
 
 /* jQuery doesn't like adding classes to SVG elements */
 function addClass(jEle, klass) {

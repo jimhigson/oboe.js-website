@@ -94,13 +94,13 @@ line.messageInner {
   stroke-linecap: round;
 }
 
+g.client .frame,
 rect.server {
     fill: $midTone;
+    stroke:$shadedBackgroundColor;
+    stroke-width:3;
 }
 
-g.client .frame {
-  fill: $midTone;
-}
 g.client .viewPort {
   fill: $backgroundColor;
 }

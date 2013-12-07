@@ -210,7 +210,7 @@ var getScenario = (function () {
                     "name": "origin-slow",
                     "type": "server",
                     "options": {
-                        "timeBetweenPackets": 1000,
+                        "timeBetweenPackets": 2000,
                         "initialDelay": 500,
                         "messageSize": 7,
                         "packetSequence": evenNumberedPackets
@@ -222,14 +222,14 @@ var getScenario = (function () {
                     "next":["aggregator"],
                     "options": {
                         "bandwidth": 500,
-                        "latency": 600
+                        "latency": 1200
                     }
                 },                
                 {
                     "name": "origin-fast",
                     "type": "server",
                     "options": {
-                        "timeBetweenPackets": 500,
+                        "timeBetweenPackets": 750,
                         "initialDelay": 250,
                         "messageSize": 5,
                         "packetSequence": oddNumberedPackets
@@ -241,7 +241,7 @@ var getScenario = (function () {
                     "type": "wire",
                     "options": {
                         "bandwidth": 500,
-                        "latency": 400
+                        "latency": 800
                     }
                 },                
                 {
@@ -259,7 +259,7 @@ var getScenario = (function () {
                     "type": "wire",
                     "options": {
                         "bandwidth": 500,
-                        "latency": 500
+                        "latency": 1000
                     }
                 },
                 {

@@ -296,9 +296,9 @@ Server.prototype.sendResponse = function() {
         var curPacketNumber = this.packetNumberAfter(previousPacketNumber);
                 
         var ordering = {
-            i:curPacketNumber,
+            i:       curPacketNumber,
             isFirst: !firstSent,
-            isLast: curPacketNumber >= (this.messageSize -1)
+            isLast:  curPacketNumber >= (this.messageSize -1)
         };
 
         // unannounced packet to use as a template for others
@@ -326,17 +326,25 @@ Server.prototype.sendResponse = function() {
 
 
 var AggregatingServer = extend(Server, function(name, locations, options){
-    Server.apply(this, arguments);    
+    Server.apply(this, arguments);
+
+    var nextLocations = this.nextLocationsInDirection('downstream'),
+        messages;
+
+    this.accept = function(packet){
+        if( packet.direction == 'upstream' ) {
+
+            this.propagate(packet);
+            
+            messages = this.createMessagesOut('downstream');
+            announceAll(messages);
+        } else {
+
+            this.sendCopies(packet, messages, nextLocations);
+            packet.done();
+        }        
+    };
 });
-AggregatingServer.prototype.accept = function(packet) {
-    if( packet.direction == 'upstream' ) {
-        this.propagate(packet);
-    } else {
-        // TODO: this only describes the Oboe case, not the standard case,
-        // will need to wait for all inbound messages to complete
-        this.propagate(packet); 
-    }
-};
 
 var Client = extend( PacketHolder, function(name, locations, options) {
     

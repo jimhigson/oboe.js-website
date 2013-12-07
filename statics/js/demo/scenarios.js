@@ -291,7 +291,7 @@ var getScenario = (function () {
                     "type": "wire",
                     "options": {
                         "bandwidth": 500,
-                        "latency": 500
+                        "latency": 1000
                     }
                 },
                 {
@@ -383,7 +383,7 @@ var getScenario = (function () {
     
     function fastTimingThenStream(i){
 
-        return (i < 6 ? 50 : randomBetween(500, 2500));
+        return (i < 6 ? 100 : randomBetween(500, 2500));
     }
 
     function historicPacketsThenLive(i) {

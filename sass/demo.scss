@@ -52,13 +52,17 @@ rect.fade {
     cursor: pointer;
 }
 .controls:hover text.play,
-.controls text.reset:hover {
+.controls .reset:hover text {
     @include hovered-link;
 }
 .controls:active text.play,
-.controls text.reset:active{
+.controls .reset:active text{
    @include active-link;
 }
+.clickableArea {
+   opacity:0;
+}
+
 
 .pie-divide {
     fill:none;

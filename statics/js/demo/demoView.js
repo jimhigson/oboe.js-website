@@ -54,20 +54,21 @@ var DemoView = extend(ThingView, function(subject){
         jLightbox = jControls.find('.lightbox'),
         jReset = jControls.find('.reset').hide();
 
-    if( subject.height ){
-        // this should really be more template-esque
-        // but can't find a tempting engine that handles
-        // SVG elements well. Need to find a DOM-based engine
-        // that starts by doing Element.clone().
-        this.jDom.attr('height', subject.height);
-        this.jDom.find('.fade').attr('height', subject.height);
-        
-        // The container div should have the height set on
-        // the server-side to avoid the page reflowing.
-        containerDiv.css('height', subject.height);
-        this.jDom.find('.reset').attr('y', subject.height - 10);
-        this.jDom.find('.play').attr('y', subject.height / 2);
-    }
+    var height = subject.height || 200; 
+
+    // this should really be more template-esque
+    // but can't find a tempting engine that handles
+    // SVG elements well. Need to find a DOM-based engine
+    // that starts by doing Element.clone().
+    this.jDom.attr('height', height);
+    this.jDom.find('.fade').attr('height', height);
+    
+    // The container div should have the height set on
+    // the server-side to avoid the page reflowing.
+    containerDiv.css('height', height);
+    jControls.find('.reset').css('translateY', height);
+    jControls.find('.play').attr('y', height / 2);
+    
     
     containerDiv.append( this.jDom );
 

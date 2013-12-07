@@ -291,14 +291,6 @@ Server.prototype.sendResponse = function() {
                 new Packet('response' + curPacketNumber, 'JSON', 'downstream', ordering, this.packetMode(curPacketNumber))
                     .inDemo(this.demo);
          
-        // schedule the next packet if there is one:
-        if( !ordering.isLast ) {
-            var nextPacketNumber = this.packetNumberAfter(curPacketNumber);
-            this.schedule(  next.bind(this, curPacketNumber)
-                         ,  this.timeBetweenPackets(nextPacketNumber)
-                         );
-        }
-
         var packetCopies = this.createCopiesForDestinations( basePacket, nextLocations );
         
         messages.forEach(function( message, i ){
@@ -310,6 +302,14 @@ Server.prototype.sendResponse = function() {
         this.sendPacketsToDestinations(packetCopies, nextLocations);
 
         firstSent = true;
+
+        // schedule the next packet if there is one:
+        if( !ordering.isLast ) {
+            var nextPacketNumber = this.packetNumberAfter(curPacketNumber);
+            this.schedule(  next.bind(this, curPacketNumber)
+                ,  this.timeBetweenPackets(nextPacketNumber)
+            );
+        }
     }
     
     this.schedule( next.bind(this), this.initialDelay );

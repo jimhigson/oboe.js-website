@@ -268,7 +268,7 @@ Server.prototype.createMessagesTo = function(destinations) {
     return destinations.map(function(){
         return new Message().inDemo(this.demo).sentBy(this);
     }.bind(this));
-}
+};
 
 Server.prototype.sendResponse = function() {
 

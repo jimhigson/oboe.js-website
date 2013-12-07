@@ -216,7 +216,15 @@ var WireView = extend(ThingView, function(subject, demoView){
                     'lineY2': upstreamLocation.y 
                 });        
             },
-            mobile: function positionMobile(jDom, upstreamLocation, downstreamLocation){
+            mobile: function positionMobile(jDom, upstreamLocation, downstreamLocation) {
+                jDom.find('.upstream').css({
+                    'translateX': upstreamLocation.x,
+                    'translateY': upstreamLocation.y
+                });
+                jDom.find('.downstream').css({
+                    'translateX': downstreamLocation.x,                  
+                    'translateY': downstreamLocation.y
+                });            
             }
         },
         position = positioners[subject.medium];

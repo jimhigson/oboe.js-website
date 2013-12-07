@@ -264,7 +264,9 @@ Server.prototype.accept = function(packet){
         packet.done();
     }    
 };
-Server.prototype.createMessagesTo = function(destinations) {
+Server.prototype.createMessagesOut = function(direction) {
+    var destinations = this.nextLocationsInDirection(direction);
+    
     return destinations.map(function(){
         return new Message().inDemo(this.demo).sentBy(this);
     }.bind(this));
@@ -286,7 +288,7 @@ Server.prototype.sendCopies = function(basePacket, messages, nextLocations){
 Server.prototype.sendResponse = function() {
 
     var nextLocations = this.nextLocationsInDirection('downstream'),
-        messages = this.createMessagesTo(nextLocations),
+        messages = this.createMessagesOut('downstream'),
         firstSent = false;
     
     function next(previousPacketNumber){

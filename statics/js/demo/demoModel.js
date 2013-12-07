@@ -285,13 +285,14 @@ Server.prototype.sendCopiesOfPacket = function(basePacket, messages, nextLocatio
     this.sendPacketsToDestinations(packetCopies, nextLocations);
 };
 
-Server.prototype.openOutboundMessages = function(direction){
+Server.prototype.openOutboundMessages = function(direction, createPacket){
     
     var nextLocations = this.nextLocationsInDirection(direction),
         messages = this.createMessagesOut(direction);
 
-    this.events('timeForNextPacket').on(function(basePacket){
+    this.events('timeForNextPacket').on( function(/* any arguments */){
 
+        var basePacket = createPacket.apply(this, arguments);
         this.sendCopiesOfPacket(basePacket, messages, nextLocations);
         basePacket.done();
 
@@ -304,29 +305,30 @@ Server.prototype.sendResponse = function() {
 
     var firstSent = false;
     
-    this.openOutboundMessages('downstream');
+    this.openOutboundMessages('downstream', nextPacket);
     
-    function sendNext(previousPacketNumber){
-
-        var curPacketNumber = this.packetNumberAfter(previousPacketNumber);
-
+    function nextPacket(curPacketNumber){
+        // unannounced packet to use as a template for others
         var ordering = {
             i:       curPacketNumber,
             isFirst: !firstSent,
             isLast:  curPacketNumber >= (this.messageSize -1)
         };        
         
-        // unannounced packet to use as a template for others
-        var basePacket =
-            new Packet('response' + curPacketNumber, 'JSON', 'downstream', ordering, this.packetMode(curPacketNumber))
-                .inDemo(this.demo);        
-        
-        this.events('timeForNextPacket').emit(basePacket);
+        return new Packet('response' + curPacketNumber, 'JSON', 'downstream', ordering, this.packetMode(curPacketNumber))
+                .inDemo(this.demo);
+    }
+    
+    function sendNext(previousPacketNumber){
+
+        var curPacketNumber = this.packetNumberAfter(previousPacketNumber);
+
+        this.events('timeForNextPacket').emit(curPacketNumber);
         
         firstSent = true;
 
         // schedule the next packet if there is one:
-        if( !ordering.isLast ) {
+        if( curPacketNumber < (this.messageSize -1) ) {
             var nextPacketNumber = this.packetNumberAfter(curPacketNumber);
             this.schedule( 
                 sendNext.bind(this, curPacketNumber)
@@ -346,7 +348,7 @@ var AggregatingServer = extend(Server, function(name, locations, options){
         if( packet.direction == 'upstream' ) {
 
             this.propagate(packet);
-            this.openOutboundMessages('downstream');
+            this.openOutboundMessages('downstream', function(packet){return packet;});
         } else {
 
             this.events('timeForNextPacket').emit(packet);

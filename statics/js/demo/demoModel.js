@@ -272,7 +272,7 @@ Server.prototype.createMessagesOut = function(direction) {
     }.bind(this));
 };
 
-Server.prototype.sendCopies = function(basePacket, messages, nextLocations){
+Server.prototype.sendCopiesOfPacket = function(basePacket, messages, nextLocations){
     
     var packetCopies = this.createCopiesForDestinations( basePacket, nextLocations );
 
@@ -283,7 +283,21 @@ Server.prototype.sendCopies = function(basePacket, messages, nextLocations){
     announceAll(packetCopies);
 
     this.sendPacketsToDestinations(packetCopies, nextLocations);
-}
+};
+
+Server.prototype.startWritingMessagesOut = function(direction){
+    var nextLocations = this.nextLocationsInDirection(direction),
+        messages = this.createMessagesOut(direction);
+
+    this.events('timeForNextPacket').on(function(basePacket){
+
+        this.sendCopiesOfPacket(basePacket, messages, nextLocations);
+        basePacket.done();
+
+    }.bind(this));
+
+    announceAll(messages);
+};
 
 Server.prototype.sendResponse = function() {
 
@@ -323,19 +337,7 @@ Server.prototype.sendResponse = function() {
     
 };
 
-Server.prototype.startWritingMessagesOut = function(direction){
-    var nextLocations = this.nextLocationsInDirection(direction),
-        messages = this.createMessagesOut(direction);
-    
-    this.events('timeForNextPacket').on(function(basePacket){
 
-        this.sendCopies(basePacket, messages, nextLocations);
-        basePacket.done();
-        
-    }.bind(this));
-
-    announceAll(messages);    
-};
 
 var AggregatingServer = extend(Server, function(name, locations, options){
     Server.apply(this, arguments);

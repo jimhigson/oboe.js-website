@@ -77,7 +77,12 @@ $i: 1;
 
 line.wire {
    stroke:$highlight;
-   stroke-width:3;
+   stroke-width:4;
+}
+line.message {
+  stroke:$backgroundColor;
+  stroke-width:40;
+  stroke-linecap: round;
 }
 
 rect.server {

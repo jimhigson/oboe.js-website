@@ -76,7 +76,7 @@ var DemoView = extend(ThingView, function(subject){
         if( newMessage.demo == subject ) {
             new MessageView(newMessage, this);
         }
-    });
+    }.bind(this));
     
     function listenForPlay(){
         jLightbox.one('click', function(){
@@ -141,18 +141,10 @@ var PacketView = extend(ThingView, function (subject, demoView) {
             className
     );
 
-    subject.events('move').on(function( fromXY, toXY, duration ){
+    subject.events('move').on(function( xyFrom, xyTo, duration ){
         
-        this.jDom.css({
-            translateX:fromXY.x,
-            translateY:fromXY.y
-        });
-        this.jDom.animate({
-                translateX:toXY.x,
-                translateY:toXY.y
-            },
-            {   duration:duration}
-        );
+        animateXy(this.jDom, 'translateX', 'translateY', xyFrom, xyTo, duration)
+
     }.bind(this));
     
     subject.events('done').on(function(){
@@ -160,21 +152,44 @@ var PacketView = extend(ThingView, function (subject, demoView) {
     }.bind(this));
 });
 
+function goToXy( jDom, xProperty, yProperty, xy ) {
+    var cssObject = {};
+    
+    cssObject[xProperty] = xy.x;
+    cssObject[yProperty] = xy.y;
+
+    console.log('going straight to', cssObject);
+    
+    jDom.css(cssObject);
+}
+
+function animateXy( jDom, xProperty, yProperty, xyFrom, xyTo, duration ) {
+
+    goToXy(jDom, xProperty, yProperty, xyFrom);
+    
+    var toCssObject = {};
+    toCssObject[xProperty]   = xyTo.x;
+    toCssObject[yProperty]   = xyTo.y;
+
+    console.log('animating to', toCssObject);
+    
+    jDom.animate(toCssObject, {duration:duration, queue:false});
+}
+
 var MessageView = extend(ThingView, function(subject, demoView){
     ThingView.apply(this,arguments);
-    
-    subject.events('startMove').on(function(){
-        console.log(
-            this,
-            'the start of a message moved:',
-            arguments );
+
+    this.initDomFromTemplate('messages', 'message', subject.name);
+
+    subject.events('startMove').on(function(xyFrom, xyTo, duration){
+        
+        goToXy(   this.jDom, 'lineX2', 'lineY2', xyFrom);
+        animateXy(this.jDom, 'lineX1', 'lineY1', xyFrom, xyTo, duration);
     }.bind(this));
     
-    subject.events('endMove').on(function(){
-        console.log(
-            this,
-            'the end of a message moved:',
-            arguments );
+    subject.events('endMove').on(function(xyFrom, xyTo, duration){
+
+        animateXy(this.jDom, 'lineX2', 'lineY2', xyFrom, xyTo, duration);
     }.bind(this));    
 });
 

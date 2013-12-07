@@ -278,23 +278,24 @@ Server.prototype.sendResponse = function() {
     
     function next(previousPacketNumber){
 
-        var packetNumber = this.packetNumberAfter(previousPacketNumber);
+        var curPacketNumber = this.packetNumberAfter(previousPacketNumber);
                 
         var ordering = {
-            i:packetNumber,
+            i:curPacketNumber,
             isFirst: !firstSent,
-            isLast: packetNumber >= (this.messageSize -1)
+            isLast: curPacketNumber >= (this.messageSize -1)
         };
 
         // unannounced packet to use as a template for others
         var basePacket =
-                new Packet('response' + packetNumber, 'JSON', 'downstream', ordering, this.packetMode(packetNumber))
+                new Packet('response' + curPacketNumber, 'JSON', 'downstream', ordering, this.packetMode(curPacketNumber))
                     .inDemo(this.demo);
          
         // schedule the next packet if there is one:
         if( !ordering.isLast ) {
-            this.schedule(  next.bind(this, packetNumber)
-                         ,  this.timeBetweenPackets(packetNumber)
+            var nextPacketNumber = this.packetNumberAfter(curPacketNumber);
+            this.schedule(  next.bind(this, curPacketNumber)
+                         ,  this.timeBetweenPackets(nextPacketNumber)
                          );
         }
 

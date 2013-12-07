@@ -286,6 +286,7 @@ Server.prototype.sendCopiesOfPacket = function(basePacket, messages, nextLocatio
 };
 
 Server.prototype.openOutboundMessages = function(direction){
+    
     var nextLocations = this.nextLocationsInDirection(direction),
         messages = this.createMessagesOut(direction);
 
@@ -335,9 +336,7 @@ Server.prototype.sendResponse = function() {
     }
     
     this.schedule( sendNext.bind(this), this.initialDelay );
-    
 };
-
 
 
 var AggregatingServer = extend(Server, function(name, locations, options){

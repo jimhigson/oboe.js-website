@@ -303,7 +303,7 @@ Server.prototype.openOutboundMessages = function(direction, createPacket){
 
 Server.prototype.sendResponse = function() {
 
-    var firstSent = false;
+    var firstPacketCreated = false;
     
     this.openOutboundMessages('downstream', nextPacket);
     
@@ -311,12 +311,21 @@ Server.prototype.sendResponse = function() {
         // unannounced packet to use as a template for others
         var ordering = {
             i:       curPacketNumber,
-            isFirst: !firstSent,
+            isFirst: !firstPacketCreated,
             isLast:  curPacketNumber >= (this.messageSize -1)
-        };        
+        };
         
-        return new Packet('response' + curPacketNumber, 'JSON', 'downstream', ordering, this.packetMode(curPacketNumber))
-                .inDemo(this.demo);
+        var packet = new Packet(
+            'response' + curPacketNumber
+        ,   'JSON'
+        ,   'downstream'
+        ,   ordering
+        ,   this.packetMode(curPacketNumber)
+        ).inDemo(this.demo);
+
+        firstPacketCreated = true;
+        
+        return packet;
     }
     
     function sendNext(previousPacketNumber){
@@ -325,8 +334,6 @@ Server.prototype.sendResponse = function() {
 
         this.events('timeForNextPacket').emit(curPacketNumber);
         
-        firstSent = true;
-
         // schedule the next packet if there is one:
         if( curPacketNumber < (this.messageSize -1) ) {
             var nextPacketNumber = this.packetNumberAfter(curPacketNumber);

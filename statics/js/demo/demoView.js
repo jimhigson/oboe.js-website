@@ -18,10 +18,6 @@ function stampFromTemplate(jTemplate, klass) {
     return jCopy;
 }
 
-function transformToLocation(location){
-    return 'translate(' + location.x + ',' + location.y + ')';
-}
-
 function ThingView(subject, demoView) {
     this.subject = subject;
     this.demoView = demoView;
@@ -37,6 +33,15 @@ ThingView.prototype.initDomFromTemplate = function(containerName, templateName, 
     }
     jContainer.append(this.jDom);
     return this.jDom;
+};
+
+ThingView.prototype.moveTo = function(where) {
+    this.jDom.css({
+        translateX: where.x
+    ,   translateY: where.y
+    });
+    
+    return this; // chaining
 };
 
 var DemoView = extend(ThingView, function(subject){
@@ -210,7 +215,7 @@ var ServerView = extend(ThingView, function(subject, demoView){
     
     this.initDomFromTemplate( 'places', 'server', subject.name);
     
-    this.jDom.attr('transform', transformToLocation(subject.locations.where));
+    this.moveTo( subject.locations.where );
 });
 
 var ClientView = extend(ThingView, function(subject, demoView){
@@ -219,7 +224,7 @@ var ClientView = extend(ThingView, function(subject, demoView){
     var templateName = 'client-' + subject.page;
     this.initDomFromTemplate( 'places', templateName, subject.name);
     
-    this.jDom.attr('transform', transformToLocation(subject.locations.where));
+    this.moveTo(subject.locations.where);
     
     clientPage(subject.page, this.jDom, subject.events);
 });

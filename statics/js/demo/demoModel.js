@@ -232,6 +232,7 @@ var Wire = extend( PacketHolder, function(name, locations, options) {
     PacketHolder.apply(this, arguments);
     this.latency = options.latency;
     this.bandwidth = options.bandwidth;
+    this.medium = options.medium;
 });
 Wire.prototype.accept = function(packet){
         

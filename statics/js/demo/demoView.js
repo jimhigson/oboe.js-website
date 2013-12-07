@@ -205,7 +205,7 @@ var MessageView = extend(ThingView, function(subject, demoView){
 var WireView = extend(ThingView, function(subject, demoView){
     ThingView.apply(this,arguments);
     
-    this.initDomFromTemplate( 'wires', 'wire', subject.name);
+    this.initDomFromTemplate( 'wires', 'wire-' + subject.medium, subject.name);
     
     this.jDom.attr('x1', subject.locations.downstream.x );
     this.jDom.attr('y1', subject.locations.downstream.y );

@@ -100,6 +100,7 @@ var getScenario = (function () {
                     "name": "internet-gsm",
                     "type": "wire",
                     "options": {
+                        "medium":"mobile",
                         "bandwidth": 500,
                         "latency": 800,
                         "messageSize": 7
@@ -144,6 +145,7 @@ var getScenario = (function () {
                     "name": "internet-gsm",
                     "type": "wire",
                     "options": {
+                        "medium":"mobile",
                         "bandwidth": 500,
                         "latency": 800,
                         "messageSize": 7
@@ -374,11 +376,18 @@ var getScenario = (function () {
             }
         });
 
-        // give wires their location:
+
         rawJson.items.forEach(function (item, i, items) {
 
             if( item.type == 'wire' ) {
+
+                // wires default to cable (could also be mobile) - the only difference
+                // is in the view, work in the same way
+                if( !item.options.medium ) {
+                    item.options.medium = 'cable';
+                }
                 
+                // give wires their location:
                 if( !item.locations ) {
                     item.locations = {};
                 }

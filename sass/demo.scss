@@ -79,9 +79,14 @@ line.wire {
    stroke:$highlight;
    stroke-width:4;
 }
-line.message {
+line.messageOuter {
+  stroke:$highlight;
+  stroke-width:41;
+  stroke-linecap: round;
+}
+line.messageInner {
   stroke:$backgroundColor;
-  stroke-width:40;
+  stroke-width:35;
   stroke-linecap: round;
 }
 

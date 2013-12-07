@@ -356,12 +356,18 @@ var getScenario = (function () {
         rawJson.items.forEach(function (item, i, items) {
 
             if( item.type == 'wire' ) {
-                var upstreamItem   = items[i - 1].locations.where,
-                    downstreamItem = itemsByName[item.next[0]].locations.where;
+                
+                if( !item.locations ) {
+                    item.locations = {};
+                }
+                
+                if( !item.locations.upstream ) {
+                    item.locations.upstream = items[i - 1].locations.where;
+                }
 
-                item.locations = {
-                    upstream:   upstreamItem,                    
-                    downstream: downstreamItem
+                if( !item.locations.downstream ) {
+                    var nextItem = itemsByName[item.next[0]];
+                    item.locations.downstream = nextItem.locations.where;
                 }
             }
         });

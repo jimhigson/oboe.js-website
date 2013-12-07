@@ -88,12 +88,24 @@ var getScenario = (function () {
                     }
                 },
                 {
-                    "name": "internet",
+                    "name": "internet-wire",
                     "type": "wire",
                     "options": {
                         "bandwidth": 500,
                         "latency": 800,
                         "messageSize": 7
+                    }
+                },
+                {
+                    "name": "internet-gsm",
+                    "type": "wire",
+                    "options": {
+                        "bandwidth": 500,
+                        "latency": 800,
+                        "messageSize": 7
+                    },
+                    locations:{
+                        upstream: {x: 275, y: 145}
                     }
                 },
                 {
@@ -120,11 +132,24 @@ var getScenario = (function () {
                     }
                 },
                 {
-                    "name": "internet",
+                    "name": "internet-wire",
                     "type": "wire",
                     "options": {
                         "bandwidth": 500,
-                        "latency": 800
+                        "latency": 800,
+                        "messageSize": 7
+                    }
+                },
+                {
+                    "name": "internet-gsm",
+                    "type": "wire",
+                    "options": {
+                        "bandwidth": 500,
+                        "latency": 800,
+                        "messageSize": 7
+                    },
+                    locations:{
+                        upstream: {x: 275, y: 145}
                     }
                 },
                 {
@@ -359,12 +384,13 @@ var getScenario = (function () {
                 }
                 
                 if( !item.locations.upstream ) {
-                    item.locations.upstream = items[i - 1].locations.where;
+                    var previousItemLocations = items[i - 1].locations;
+                    item.locations.upstream = previousItemLocations.downstream || previousItemLocations.where;
                 }
 
                 if( !item.locations.downstream ) {
-                    var nextItem = itemsByName[item.next[0]];
-                    item.locations.downstream = nextItem.locations.where;
+                    var nextItemLocations = itemsByName[item.next[0]].locations;
+                    item.locations.downstream = nextItemLocations.upstream || nextItemLocations.where;
                 }
             }
         });

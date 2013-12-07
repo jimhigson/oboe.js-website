@@ -31,7 +31,7 @@ Thing.prototype.inDemo = function(demo){
         this.events('reset').emit();
     }.bind(this));
     return this; //chaining
-};;
+};
 Thing.prototype.announce = function() {
     this.constructor.new.emit(this);
     return this;

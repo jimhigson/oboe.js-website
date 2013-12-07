@@ -285,7 +285,7 @@ Server.prototype.sendCopiesOfPacket = function(basePacket, messages, nextLocatio
     this.sendPacketsToDestinations(packetCopies, nextLocations);
 };
 
-Server.prototype.startWritingMessagesOut = function(direction){
+Server.prototype.openOutboundMessages = function(direction){
     var nextLocations = this.nextLocationsInDirection(direction),
         messages = this.createMessagesOut(direction);
 
@@ -303,7 +303,7 @@ Server.prototype.sendResponse = function() {
 
     var firstSent = false;
     
-    this.startWritingMessagesOut('downstream');
+    this.openOutboundMessages('downstream');
     
     function sendNext(previousPacketNumber){
 
@@ -327,8 +327,9 @@ Server.prototype.sendResponse = function() {
         // schedule the next packet if there is one:
         if( !ordering.isLast ) {
             var nextPacketNumber = this.packetNumberAfter(curPacketNumber);
-            this.schedule(  sendNext.bind(this, curPacketNumber)
-                ,  this.timeBetweenPackets(nextPacketNumber)
+            this.schedule( 
+                sendNext.bind(this, curPacketNumber)
+            ,  this.timeBetweenPackets(nextPacketNumber)
             );
         }        
     }
@@ -346,7 +347,7 @@ var AggregatingServer = extend(Server, function(name, locations, options){
         if( packet.direction == 'upstream' ) {
 
             this.propagate(packet);
-            this.startWritingMessagesOut('downstream');
+            this.openOutboundMessages('downstream');
         } else {
 
             this.events('timeForNextPacket').emit(packet);

@@ -353,18 +353,19 @@ Server.prototype.sendResponse = function() {
 
 var AggregatingServer = extend(Server, function(name, locations, options){
     Server.apply(this, arguments);
-
-    this.accept = function(packet){
-        if( packet.direction == 'upstream' ) {
-
-            this.propagate(packet);
-            this.openOutboundMessages('downstream', this.responsePacketGenerator());
-        } else {
-
-            this.events('timeForNextPacket').emit(packet);
-        }
-    };
 });
+
+AggregatingServer.prototype.accept = function(receivedPacket){
+    
+    if( receivedPacket.direction == 'upstream' ) {
+
+        this.propagate(receivedPacket);
+        this.openOutboundMessages('downstream', this.responsePacketGenerator());
+    } else {
+
+        this.events('timeForNextPacket').emit(receivedPacket);
+    }
+};
 
 AggregatingServer.prototype.responsePacketGenerator = function(){
     

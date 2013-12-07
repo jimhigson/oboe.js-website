@@ -85,7 +85,10 @@ var getScenario = (function () {
                         "timeBetweenPackets": inconsistent_packet_spacing,
                         "initialDelay": 500,
                         "messageSize": 7
-                    }
+                    },
+                    locations:{
+                        where: {x: 40, y: 93}
+                    }                    
                 },
                 {
                     "name": "internet-wire",
@@ -106,7 +109,7 @@ var getScenario = (function () {
                         "messageSize": 7
                     },
                     locations:{
-                        upstream: {x: 275, y: 145}
+                        upstream: {x: 250, y: 40}
                     }
                 },
                 {
@@ -115,6 +118,9 @@ var getScenario = (function () {
                     "options": {
                         "parseStrategy": "discrete",
                         "page": "singlePageSite"
+                    },
+                    "locations":{
+                        "upstream":{x: 467, y: 90}
                     }
                 }
             ]
@@ -130,6 +136,9 @@ var getScenario = (function () {
                         "timeBetweenPackets": inconsistent_packet_spacing,
                         "initialDelay": 500,
                         "messageSize": 7
+                    },
+                    locations:{
+                        where: {x: 40, y: 93}
                     }
                 },
                 {
@@ -151,7 +160,7 @@ var getScenario = (function () {
                         "messageSize": 7
                     },
                     locations:{
-                        upstream: {x: 275, y: 145}
+                        upstream: {x: 250, y: 40}
                     }
                 },
                 {
@@ -160,7 +169,10 @@ var getScenario = (function () {
                     "options": {
                         "parseStrategy": "progressive",
                         "page": "singlePageSite"
-                    }
+                    },
+                    "locations":{
+                        "upstream":{x: 467, y: 90}
+                    }                    
                 }
             ]
         },        
@@ -348,9 +360,9 @@ var getScenario = (function () {
 
         switch (item.type) {
             case 'client':
-                return {    where: DEFAULT_CLIENT_LOCATION };
+                return DEFAULT_CLIENT_LOCATION;
             case 'server':
-                return {    where: DEFAULT_SERVER_LOCATION };
+                return DEFAULT_SERVER_LOCATION;
         }
     }
     
@@ -370,36 +382,41 @@ var getScenario = (function () {
                                 : [];
             }
             
-            // fill in locations json by sensible defaults if not given:
+
             if (!rawItem.locations) {
-                rawItem.locations = defaultLocationForItem(rawItem);
+                rawItem.locations = {};
+            }
+
+            // fill in locations json by sensible defaults if not given:
+            if( !rawItem.locations.where ) {
+                rawItem.locations.where = defaultLocationForItem(rawItem); 
             }
         });
 
 
-        rawJson.items.forEach(function (item, i, items) {
+        rawJson.items.forEach(function (wire, i, items) {
 
-            if( item.type == 'wire' ) {
+            if( wire.type == 'wire' ) {
 
                 // wires default to cable (could also be mobile) - the only difference
                 // is in the view, work in the same way
-                if( !item.options.medium ) {
-                    item.options.medium = 'cable';
+                if( !wire.options.medium ) {
+                    wire.options.medium = 'cable';
                 }
                 
                 // give wires their location:
-                if( !item.locations ) {
-                    item.locations = {};
+                if( !wire.locations ) {
+                    wire.locations = {};
                 }
                 
-                if( !item.locations.upstream ) {
+                if( !wire.locations.upstream ) {
                     var previousItemLocations = items[i - 1].locations;
-                    item.locations.upstream = previousItemLocations.downstream || previousItemLocations.where;
+                    wire.locations.upstream = previousItemLocations.downstream || previousItemLocations.where;
                 }
 
-                if( !item.locations.downstream ) {
-                    var nextItemLocations = itemsByName[item.next[0]].locations;
-                    item.locations.downstream = nextItemLocations.upstream || nextItemLocations.where;
+                if( !wire.locations.downstream ) {
+                    var nextItemLocations = itemsByName[wire.next[0]].locations;
+                    wire.locations.downstream = nextItemLocations.upstream || nextItemLocations.where;
                 }
             }
         });

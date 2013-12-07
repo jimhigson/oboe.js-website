@@ -164,8 +164,6 @@ function goToXy( jDom, xProperty, yProperty, xy ) {
     cssObject[xProperty] = xy.x;
     cssObject[yProperty] = xy.y;
 
-    console.log('going straight to', cssObject);
-    
     jDom.css(cssObject);
 }
 
@@ -177,8 +175,6 @@ function animateXy( jDom, xProperty, yProperty, xyFrom, xyTo, duration ) {
     toCssObject[xProperty]   = xyTo.x;
     toCssObject[yProperty]   = xyTo.y;
 
-    console.log('animating to', toCssObject);
-    
     jDom.animate(toCssObject, {duration:duration, queue:false});
 }
 

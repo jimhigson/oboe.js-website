@@ -207,10 +207,21 @@ var WireView = extend(ThingView, function(subject, demoView){
     
     this.initDomFromTemplate( 'wires', 'wire-' + subject.medium, subject.name);
     
-    this.jDom.attr('x1', subject.locations.downstream.x );
-    this.jDom.attr('y1', subject.locations.downstream.y );
-    this.jDom.attr('x2', subject.locations.upstream.x );
-    this.jDom.attr('y2', subject.locations.upstream.y );
+    var positioners = {
+            cable: function positionCable(jDom, upstreamLocation, downstreamLocation){
+                jDom.css({
+                    'lineX1': downstreamLocation.x,
+                    'lineY1': downstreamLocation.y,
+                    'lineX2': upstreamLocation.x,
+                    'lineY2': upstreamLocation.y 
+                });        
+            },
+            mobile: function positionMobile(jDom, upstreamLocation, downstreamLocation){
+            }
+        },
+        position = positioners[subject.medium];
+
+    position( this.jDom, subject.locations.upstream, subject.locations.downstream);
 });
 
 var ServerView = extend(ThingView, function(subject, demoView){

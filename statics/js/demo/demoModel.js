@@ -64,15 +64,25 @@ var Packet = extend(Thing, function (name, type, direction, ordering, mode){
     this.type = type;
     this.mode = mode;
 });
-Packet.prototype.copy = function(i) {
+Packet.prototype.copy = function(additionalName) {
+    
+    var orderingCopy = {
+        i: this.ordering.i,
+        isFirst: this.ordering.isFirst,
+        isLast: this.ordering.isLast
+    };
+    
+    var copyName =  ( additionalName !== undefined )
+                    ?   this.name + '-' + additionalName 
+                    :   this.name; 
+    
     return new Packet(
-                this.name + '-' + i,
-                this.type, 
-                this.direction, 
-                this.ordering,
-                this.mode
-        
-           ).inDemo(this.demo);
+        copyName,
+        this.type, 
+        this.direction,
+        orderingCopy,
+        this.mode
+    ).inDemo(this.demo);
 };
 Packet.new = singleEventPubSub('new');
 Packet.prototype.move = function(fromXY, toXY, latency){
@@ -376,8 +386,25 @@ AggregatingServer.prototype.accept = function(receivedPacket){
 
 AggregatingServer.prototype.responsePacketGenerator = function(){
     
-    return function(packet){
-        return packet;
+    var numberOfResponsesExpected = this.nextLocationsInDirection('upstream').length,
+        numberOfResponsesCompleted = 0,
+        responsesStarted = false;
+    
+    return function(incomingPacket){
+
+        var outgoing = incomingPacket.copy();
+        incomingPacket.done();
+        
+        if( incomingPacket.ordering.isLast ) {
+            numberOfResponsesCompleted++;
+        }
+
+        outgoing.ordering.isFirst = !responsesStarted;
+        outgoing.ordering.isLast  = ( numberOfResponsesCompleted == numberOfResponsesExpected );
+
+        responsesStarted = true;
+        
+        return outgoing;
     }
 };
 

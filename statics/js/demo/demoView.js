@@ -61,6 +61,7 @@ var DemoView = extend(ThingView, function(subject){
         // the server-side to avoid the page reflowing.
         containerDiv.css('height', subject.height);
         this.jDom.find('.reset').attr('y', subject.height - 10);
+        this.jDom.find('.play').attr('y', subject.height / 2);
     }
     
     containerDiv.append( this.jDom );

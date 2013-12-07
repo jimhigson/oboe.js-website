@@ -329,7 +329,7 @@ Server.prototype.sendResponse = function() {
             var nextPacketNumber = this.packetNumberAfter(curPacketNumber);
             this.schedule( 
                 sendNext.bind(this, curPacketNumber)
-            ,  this.timeBetweenPackets(nextPacketNumber)
+            ,   this.timeBetweenPackets(nextPacketNumber)
             );
         }        
     }

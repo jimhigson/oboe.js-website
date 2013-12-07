@@ -330,6 +330,7 @@ Server.prototype.startWritingMessagesOut = function(direction){
     this.events('timeForNextPacket').on(function(basePacket){
 
         this.sendCopies(basePacket, messages, nextLocations);
+        basePacket.done();
         
     }.bind(this));
 
@@ -343,25 +344,14 @@ var AggregatingServer = extend(Server, function(name, locations, options){
         if( packet.direction == 'upstream' ) {
 
             this.propagate(packet);
-            this.startAggregatedResponses();
+            this.startWritingMessagesOut('downstream');
         } else {
 
-            this.events('aggregatablePacketArrive').emit(packet);
+            this.events('timeForNextPacket').emit(packet);
         }
     };
 });
 
-AggregatingServer.prototype.startAggregatedResponses = function() {
-    var nextLocations = this.nextLocationsInDirection('downstream'),
-        messages = this.createMessagesOut('downstream');
-    
-    this.events('aggregatablePacketArrive').on( function newReceived(packet) {
-        this.sendCopies(packet, messages, nextLocations);
-        packet.done();        
-    }.bind(this));
-
-    announceAll(messages);    
-};
 
 var Client = extend( PacketHolder, function(name, locations, options) {
     

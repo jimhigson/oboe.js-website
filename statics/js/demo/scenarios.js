@@ -30,8 +30,7 @@ var getScenario = (function () {
                     "type": "wire",
                     "options": {
                         "bandwidth": 500,
-                        "latency": 1500,
-                        "messageSize": 7
+                        "latency": 1500
                     }
                 },
                 {
@@ -62,8 +61,7 @@ var getScenario = (function () {
                     "type": "wire",
                     "options": {
                         "bandwidth": 500,
-                        "latency": 1500,
-                        "messageSize": 7
+                        "latency": 1500
                     }
                 },
                 {
@@ -126,8 +124,7 @@ var getScenario = (function () {
                     "type": "wire",
                     "options": {
                         "bandwidth": 500,
-                        "latency": 800,
-                        "messageSize": 7
+                        "latency": 800
                     }
                 },
                 {

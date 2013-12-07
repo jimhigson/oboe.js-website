@@ -288,15 +288,22 @@ Server.prototype.sendCopiesOfPacket = function(basePacket, messages, nextLocatio
 Server.prototype.openOutboundMessages = function(direction, createPacket){
     
     var nextLocations = this.nextLocationsInDirection(direction),
-        messages = this.createMessagesOut(direction);
+        messages = this.createMessagesOut(direction),
+        timeForNextPacket = this.events('timeForNextPacket');
 
-    this.events('timeForNextPacket').on( function(/* any arguments */){
+    var sendNext = function(/* any arguments */){
 
         var basePacket = createPacket.apply(this, arguments);
         this.sendCopiesOfPacket(basePacket, messages, nextLocations);
         basePacket.done();
 
-    }.bind(this));
+    }.bind(this);
+
+    timeForNextPacket.on( sendNext );
+    
+    this.events('reset').on(function() {
+        timeForNextPacket.un(sendNext);
+    });
 
     announceAll(messages);
 };

@@ -240,7 +240,7 @@ var getScenario = (function () {
 
         "aggregated-progressive": {
             "name": "aggregated-progressive", 
-            "options":{"height":300},
+            "options":{"height":257},
             "items": [
                 {
                     "name": "origin-slow",

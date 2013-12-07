@@ -276,6 +276,18 @@ Server.prototype.sendResponse = function() {
         messages = this.createMessagesTo(nextLocations),
         firstSent = false;
     
+    function sendCopiesOf(basePacket){
+        var packetCopies = this.createCopiesForDestinations( basePacket, nextLocations );
+
+        messages.forEach(function( message, i ){
+            message.includes(packetCopies[i]);
+        });
+
+        announceAll(packetCopies);
+
+        this.sendPacketsToDestinations(packetCopies, nextLocations);
+    }
+    
     function next(previousPacketNumber){
 
         var curPacketNumber = this.packetNumberAfter(previousPacketNumber);
@@ -291,15 +303,7 @@ Server.prototype.sendResponse = function() {
                 new Packet('response' + curPacketNumber, 'JSON', 'downstream', ordering, this.packetMode(curPacketNumber))
                     .inDemo(this.demo);
          
-        var packetCopies = this.createCopiesForDestinations( basePacket, nextLocations );
-        
-        messages.forEach(function( message, i ){
-            message.includes(packetCopies[i]);
-        });
-
-        announceAll(packetCopies);
-
-        this.sendPacketsToDestinations(packetCopies, nextLocations);
+        sendCopiesOf.call(this, basePacket);
 
         firstSent = true;
 

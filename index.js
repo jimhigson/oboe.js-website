@@ -11,6 +11,7 @@ var express = require('express'),
         "/jquery/jquery.js"
     ,   "/js/jquery.sticky.js"
     ,   "/js/internalNav.js"
+    ,   "/js/demo/cssHooks.js"
     ,   "/js/demo/functional.js"
     ,   "/js/demo/lists.js"
     ,   "/js/demo/singleEventPubSub.js"

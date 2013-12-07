@@ -383,7 +383,7 @@ var getScenario = (function () {
     
     function fastTimingThenStream(i){
 
-        return (i < 6 ? 100 : randomBetween(500, 2500));
+        return (i < 6 ? 100 : randomBetween(750, 2500));
     }
 
     function historicPacketsThenLive(i) {

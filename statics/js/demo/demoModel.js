@@ -358,13 +358,20 @@ var AggregatingServer = extend(Server, function(name, locations, options){
         if( packet.direction == 'upstream' ) {
 
             this.propagate(packet);
-            this.openOutboundMessages('downstream', function(packet){return packet;});
+            this.openOutboundMessages('downstream', this.responsePacketGenerator());
         } else {
 
             this.events('timeForNextPacket').emit(packet);
         }
     };
 });
+
+AggregatingServer.prototype.responsePacketGenerator = function(){
+    
+    return function(packet){
+        return packet;
+    }
+};
 
 
 var Client = extend( PacketHolder, function(name, locations, options) {

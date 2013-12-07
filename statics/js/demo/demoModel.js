@@ -287,43 +287,54 @@ Server.prototype.sendCopies = function(basePacket, messages, nextLocations){
 
 Server.prototype.sendResponse = function() {
 
-    var nextLocations = this.nextLocationsInDirection('downstream'),
-        messages = this.createMessagesOut('downstream'),
-        firstSent = false;
+    var firstSent = false;
     
-    function next(previousPacketNumber){
+    this.startWritingMessagesOut('downstream');
+    
+    function sendNext(previousPacketNumber){
 
         var curPacketNumber = this.packetNumberAfter(previousPacketNumber);
-                
+
         var ordering = {
             i:       curPacketNumber,
             isFirst: !firstSent,
             isLast:  curPacketNumber >= (this.messageSize -1)
-        };
-
+        };        
+        
         // unannounced packet to use as a template for others
         var basePacket =
-                new Packet('response' + curPacketNumber, 'JSON', 'downstream', ordering, this.packetMode(curPacketNumber))
-                    .inDemo(this.demo);
-         
-        this.sendCopies(basePacket, messages, nextLocations);
-
+            new Packet('response' + curPacketNumber, 'JSON', 'downstream', ordering, this.packetMode(curPacketNumber))
+                .inDemo(this.demo);        
+        
+        this.events('timeForNextPacket').emit(basePacket);
+        
         firstSent = true;
 
         // schedule the next packet if there is one:
         if( !ordering.isLast ) {
             var nextPacketNumber = this.packetNumberAfter(curPacketNumber);
-            this.schedule(  next.bind(this, curPacketNumber)
+            this.schedule(  sendNext.bind(this, curPacketNumber)
                 ,  this.timeBetweenPackets(nextPacketNumber)
             );
-        }
+        }        
     }
     
-    this.schedule( next.bind(this), this.initialDelay );
+    this.schedule( sendNext.bind(this), this.initialDelay );
     
-    announceAll(messages);
 };
 
+Server.prototype.startWritingMessagesOut = function(direction){
+    var nextLocations = this.nextLocationsInDirection(direction),
+        messages = this.createMessagesOut(direction);
+    
+    this.events('timeForNextPacket').on(function(basePacket){
+
+        this.sendCopies(basePacket, messages, nextLocations);
+        
+    }.bind(this));
+
+    announceAll(messages);    
+};
 
 var AggregatingServer = extend(Server, function(name, locations, options){
     Server.apply(this, arguments);
@@ -343,13 +354,13 @@ var AggregatingServer = extend(Server, function(name, locations, options){
 AggregatingServer.prototype.startAggregatedResponses = function() {
     var nextLocations = this.nextLocationsInDirection('downstream'),
         messages = this.createMessagesOut('downstream');
-
-    announceAll(messages);
     
     this.events('aggregatablePacketArrive').on( function newReceived(packet) {
         this.sendCopies(packet, messages, nextLocations);
         packet.done();        
     }.bind(this));
+
+    announceAll(messages);    
 };
 
 var Client = extend( PacketHolder, function(name, locations, options) {

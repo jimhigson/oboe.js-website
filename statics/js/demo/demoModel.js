@@ -328,23 +328,29 @@ Server.prototype.sendResponse = function() {
 var AggregatingServer = extend(Server, function(name, locations, options){
     Server.apply(this, arguments);
 
-    var nextLocations = this.nextLocationsInDirection('downstream'),
-        messages;
-
     this.accept = function(packet){
         if( packet.direction == 'upstream' ) {
 
             this.propagate(packet);
-            
-            messages = this.createMessagesOut('downstream');
-            announceAll(messages);
+            this.startAggregatedResponses();
         } else {
 
-            this.sendCopies(packet, messages, nextLocations);
-            packet.done();
-        }        
+            this.events('aggregatablePacketArrive').emit(packet);
+        }
     };
 });
+
+AggregatingServer.prototype.startAggregatedResponses = function() {
+    var nextLocations = this.nextLocationsInDirection('downstream'),
+        messages = this.createMessagesOut('downstream');
+
+    announceAll(messages);
+    
+    this.events('aggregatablePacketArrive').on( function newReceived(packet) {
+        this.sendCopies(packet, messages, nextLocations);
+        packet.done();        
+    }.bind(this));
+};
 
 var Client = extend( PacketHolder, function(name, locations, options) {
     

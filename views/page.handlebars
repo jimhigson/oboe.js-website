@@ -15,13 +15,21 @@
     </head>
     <body>
         <div id="header">
-           <!--<div class="button2 wee"></div>-->
-           <!--<div class="button2 wee"></div>-->
-           <!--<div class="button2 wee"></div>-->
-           <!--<div class="button2"></div>-->
-           <!--<div class="button2"></div>-->
-           <!--<div class="button2"></div>-->
-           <!--<div class="button2"></div>-->
+            {{#if experimental}}
+                 <div class="button2 wee"></div>
+                 <div class="button2 wee"></div>
+                 <div class="button2 wee"></div>
+                 <div class="button2"></div>
+                 <div class="button2"></div>
+                 <div class="button2"></div>
+                 <div class="button2"></div>
+            {{/if}}
+            
+            <nav>
+                {{#pages}}
+                    <a href="{{name}}">{{title}}</a>                     
+                {{/pages}}
+            </nav>
         </div>
         <div id="pagearea">
            <header class="row">
@@ -57,16 +65,18 @@
                        </ul>
                     {{/if}}
                  </div>
-                 
-                 <!--<div class="siteNav">-->
-                 	<!--<ul class="sections site">-->
-                 		<!--<li><a href="api">API</a></li>-->
-                 		<!--<li><a href="examples">Examples</a></li>-->
-                 		<!--<li><a href="installing">Installing</a></li>-->
-                 		<!--<li><a href="useCases">Use cases</a></li>-->
-                 		<!--<li><a href="why">Why Oboe.js?</a></li>-->
-                 	<!--</ul>-->
-                 <!--</div>-->
+
+                 {{#if experimental}}
+                    <div class="siteNav">
+                     <ul class="sections site">
+                        <li><a href="api">API</a></li>
+                        <li><a href="examples">Examples</a></li>
+                        <li><a href="installing">Installing</a></li>
+                        <li><a href="useCases">Use cases</a></li>
+                        <li><a href="why">Why Oboe.js?</a></li>
+                     </ul>
+                    </div>
+                 {{/if}}
         
                  {{#home}}               
                      <ul class="links">

@@ -5,6 +5,7 @@ var express = require('express'),
     consolidate = require('consolidate'),
     readContent = require('./read-content.js'),
     readPages = require('./read-pages-list.js'),
+    barrier = require('./barrier.js'),
     
     PORT = '8888',
 
@@ -48,32 +49,34 @@ function renderClientSideDemoTemplates(res, callback){
 function respondWithMarkdown(req, res, markdownFilename, opts){
     
     var view = req.query.mode == 'raw'? 'raw' : 'page';
-    
+
     opts = opts || {};
     opts.scripts     = UNMINIFIED_SCRIPTS;
     opts.stylesheets = CSS_STYLESHEETS;
     opts.latestTag   = LATEST_TAG;
-
-    readPages(function(pages){
-        opts.pages = pages;
-
-
-        readContent(markdownFilename, function( outline ){
-    
-            opts.content = outline.content;
-            opts.heading = outline.heading;
-            opts.sections = outline.sections;
-            
-            renderClientSideDemoTemplates(res, function(templateHtml) {
-            
-                opts.templates = templateHtml;
-    
-                res.status(outline.status);
-                res.render(view, opts);
-            });
-        });
-
+        
+    var bar = barrier(function(){
+        res.render(view, opts);
     });
+    
+    
+    readPages(bar.add(function(pages){
+        
+        opts.pages = pages;
+    }));
+
+    readContent(markdownFilename, bar.add(function( outline ){
+
+        opts.content = outline.content;
+        opts.heading = outline.heading;
+        opts.sections = outline.sections;
+        res.status(outline.status);
+    }));
+
+    renderClientSideDemoTemplates(res, bar.add(function(templateHtml) {
+        
+        opts.templates = templateHtml;
+    }));    
 }
 
 app

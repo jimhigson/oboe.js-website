@@ -15,21 +15,23 @@
     </head>
     <body>
         <div id="header">
-            {{#if experimental}}
-                 <div class="button2 wee"></div>
-                 <div class="button2 wee"></div>
-                 <div class="button2 wee"></div>
-                 <div class="button2"></div>
-                 <div class="button2"></div>
-                 <div class="button2"></div>
-                 <div class="button2"></div>
-            {{/if}}
-            
-            <nav id="siteNav">
-                {{#pages}}
-                    <a href="/{{path}}">{{title}}</a>
-                {{/pages}}
-            </nav>
+            <div id="headerContents">
+               {{#if experimental}}
+                    <div class="button2 wee"></div>
+                    <div class="button2 wee"></div>
+                    <div class="button2 wee"></div>
+                    <div class="button2"></div>
+                    <div class="button2"></div>
+                    <div class="button2"></div>
+                    <div class="button2"></div>
+               {{/if}}
+               
+               <nav id="siteNav">
+                   {{#pages}}
+                       <a href="/{{path}}">{{title}}</a>
+                   {{/pages}}
+               </nav>
+            </div>
         </div>
         <div id="pagearea">
            <header class="row">

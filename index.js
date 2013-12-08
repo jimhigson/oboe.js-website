@@ -47,9 +47,7 @@ function renderClientSideDemoTemplates(res, callback){
 
 function respondWithMarkdown(req, res, markdownFilename, opts){
     
-    function getMarkupView(req){
-        return req.query.mode == 'raw'? 'raw' : 'page';
-    }
+    var view = req.query.mode == 'raw'? 'raw' : 'page';
     
     opts = opts || {};
     opts.scripts     = UNMINIFIED_SCRIPTS;
@@ -71,7 +69,7 @@ function respondWithMarkdown(req, res, markdownFilename, opts){
                 opts.templates = templateHtml;
     
                 res.status(outline.status);
-                res.render(getMarkupView(req), opts);
+                res.render(view, opts);
             });
         });
 

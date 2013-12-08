@@ -35,7 +35,7 @@ app.set('view engine', 'handlebars');
 app.set('views', __dirname + '/views');
 
 /* create <template> elements to send to the client side */
-function renderClientSideTemplates(res, callback){
+function renderClientSideDemoTemplates(res, callback){
     var DEMO_TEMPLATE_OPTIONS = {packetRadius: 15};
 
     res.render('demoTemplate', DEMO_TEMPLATE_OPTIONS,
@@ -58,7 +58,7 @@ function respondWithMarkdown(req, res, markdownFilename, opts){
 
     readContent(markdownFilename, function( outline ){
         
-        renderClientSideTemplates(res, function(templateHtml) {
+        renderClientSideDemoTemplates(res, function(templateHtml) {
         
             opts.templates = templateHtml;
             opts.content = outline.content;

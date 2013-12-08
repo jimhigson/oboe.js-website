@@ -7,7 +7,7 @@ module.exports = function (grunt) {
     
         watch:{
             sources:{
-                files:['index.js', 'sass/*.scss'],
+                files:['*.js', 'sass/*.scss'],
                 tasks:['develop:server', 'build'],
                 options: { nospawn: true }
             }

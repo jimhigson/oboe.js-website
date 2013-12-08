@@ -1,4 +1,3 @@
-
 # Streaming JSON loading for Node and browsers
 
 <figure data-demo="aggregated-progressive"></figure>

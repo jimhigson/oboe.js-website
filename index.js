@@ -4,6 +4,7 @@ var express = require('express'),
     app = express(),
     consolidate = require('consolidate'),
     readContent = require('./read-content.js'),
+    readPages = require('./read-pages-list.js'),
     
     PORT = '8888',
 
@@ -25,7 +26,7 @@ var express = require('express'),
     CSS_STYLESHEETS = [
         "all.css"
     ],
-    
+        
     LATEST_TAG = 'v1.11.0';
 
 require('colors');
@@ -45,7 +46,7 @@ function renderClientSideDemoTemplates(res, callback){
 }
 
 function respondWithMarkdown(req, res, markdownFilename, opts){
-
+    
     function getMarkupView(req){
         return req.query.mode == 'raw'? 'raw' : 'page';
     }
@@ -55,18 +56,25 @@ function respondWithMarkdown(req, res, markdownFilename, opts){
     opts.stylesheets = CSS_STYLESHEETS;
     opts.latestTag   = LATEST_TAG;
 
+    readPages(function(pages){
+        opts.pages = pages;
 
-    readContent(markdownFilename, function( outline ){
-        
-        renderClientSideDemoTemplates(res, function(templateHtml) {
-        
-            opts.templates = templateHtml;
+
+        readContent(markdownFilename, function( outline ){
+    
             opts.content = outline.content;
             opts.heading = outline.heading;
             opts.sections = outline.sections;
-            res.status(outline.status);
-            res.render(getMarkupView(req), opts);
+            
+            renderClientSideDemoTemplates(res, function(templateHtml) {
+            
+                opts.templates = templateHtml;
+    
+                res.status(outline.status);
+                res.render(getMarkupView(req), opts);
+            });
         });
+
     });
 }
 
@@ -75,9 +83,7 @@ app
    .use(express.static('bower_components'))
    .use(slashes())    
    .get('/', function(req, res){
-        respondWithMarkdown(req, res, 'index', {
-            home:'true'
-        });
+        respondWithMarkdown(req, res, 'index', { home:'true' });
    })
    .get('/:page', function(req, res){
        respondWithMarkdown(req, res, req.params.page);

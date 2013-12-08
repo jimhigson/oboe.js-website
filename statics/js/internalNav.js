@@ -1,7 +1,8 @@
 $(function(){
-   // make internal nav sticky
+
    if( $( window ).width() > 780 ) {
-   
+
+      // make internal nav sticky
       $('.internalNav').sticky({
          topSpacing:10
       ,  getWidthFrom:'.col1'

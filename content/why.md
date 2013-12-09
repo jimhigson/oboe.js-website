@@ -1,4 +1,4 @@
-# Why Stream-load REST?
+# Why Stream-loading?
 
 ## Downloading from standard REST
 

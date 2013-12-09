@@ -88,24 +88,34 @@ em {
    font-style: normal;
 }
 
+#header {
+  height:140px;
+}
+
 #header, footer {
    background: $nearBlack;
 }
-#headerContents {
-  max-width: $maxPageWidth;
-  height:140px;
-  margin-left:auto;
-  margin-right:auto;
-}
-
 #siteNav {
    text-align:right;
+   max-width: $maxPageWidth;
+  margin-left:auto;
+  margin-right:auto;
+  padding-top:0.5em;
+  padding-bottom:0.5em;
+  background-color:$backgroundColor;
+  z-index:1;
+  border-bottom: 1px $backgroundColor solid;
+  transition:border-bottom-color 1s;
+}
+
+.is-sticky #siteNav {
+  border-bottom-color:$highlight;
 }
 
 #siteNav a {
    display: inline-block;
-   margin-right:1em;
-   color: $backgroundColor;
+   margin-left:1em;
+   color: $midTone;
 }
 
 #pagearea {

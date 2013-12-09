@@ -1,6 +1,6 @@
 {
   "name": "oboe.js-demo",
-  "version": "0.0.0-112",
+  "version": "0.0.0-114",
   "description": "A website for Oboe.js",
   "main": "index.js",
   "dependencies": {
@@ -17,9 +17,7 @@
     "grunt-develop": "~0.2.2",
     "grunt-cli": "~0.1.11",
     "mustache": "~0.7.3",
-    "connect-slashes": "~1.0.2"
-  },
-  "devDependencies": {
+    "connect-slashes": "~1.0.2",
     "line-reader": "~0.2.3"
   },
   "scripts": {

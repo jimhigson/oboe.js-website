@@ -19,7 +19,9 @@
     "mustache": "~0.7.3",
     "connect-slashes": "~1.0.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "line-reader": "~0.2.3"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "predeploy": "grunt build",

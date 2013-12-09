@@ -47,17 +47,19 @@ ThingView.prototype.moveTo = function(where) {
 var DemoView = extend(ThingView, function(subject){
     ThingView.apply(this,arguments);
 
+    var DEFAULT_WIDTH = 500;
+    var DEFAULT_HEIGHT = 200;
+
     this.jDom = stampFromTemplate($('#demo'));
         
-    var containerDiv = $("[data-demo=" + subject.name + "]"),
-        jControls = this.jDom.find('.controls'),
-        jLightbox = jControls.find('.lightbox'),
-        jReset = jControls.find('.reset').hide();
+    var containerDiv = $("[data-demo=" + subject.name + "]");
 
-    this.setHeight(subject.height || 200, containerDiv);
-    
     containerDiv.append( this.jDom );
-
+    
+    this.baseWidth  = subject.width  || DEFAULT_WIDTH;
+    this.baseHeight = subject.height || DEFAULT_HEIGHT;
+    this.setDimensions(this.baseHeight, this.baseWidth, this.scalingFactor());
+    
     Packet.new.on( function(newPacket){
         
         if( newPacket.demo == subject )        
@@ -71,6 +73,19 @@ var DemoView = extend(ThingView, function(subject){
         }
     }.bind(this));
     
+    $( window ).resize(function() {
+        this.setDimensions(this.baseHeight, this.baseWidth, this.scalingFactor());
+    }.bind(this));
+    
+    this.setupControls();
+});
+
+DemoView.prototype.setupControls = function(){
+    var jControls = this.jDom.find('.controls'),
+        jLightbox = jControls.find('.lightbox'),
+        jReset = jControls.find('.reset').hide(),
+        subject = this.subject;
+        
     function listenForPlay(){
         jLightbox.one('click', function(){
 
@@ -84,33 +99,47 @@ var DemoView = extend(ThingView, function(subject){
             jReset.fadeIn();
 
             listenForReset();
-        });        
+        });
     }
-    
+
     function listenForReset(){
         jReset.one('click', function(){
-            
+
             subject.reset();
             jLightbox.fadeIn();
             jReset.fadeOut();
-            listenForPlay();            
+            listenForPlay();
         });
     }
-        
-    listenForPlay();
-});
 
-DemoView.prototype.setHeight = function(height, containerDiv){
+    listenForPlay();
+}
+
+DemoView.prototype.scalingFactor = function(){
+    var spaceAvailable = this.jDom.parents('main').width();
+    return spaceAvailable / this.baseWidth;
+};
+
+DemoView.prototype.setDimensions = function(height, width, scalingFactor){
+    
+    var container = this.jDom.parents('figure'),
+        dimensions = {  width: width * scalingFactor,
+                        height: height * scalingFactor};
+
+    container.css(dimensions);
+    this.jDom.attr(dimensions);
+    
+    this.jDom.find('.scaling').attr('transform', 'scale(' + scalingFactor + ')');    
+    
     // this should really be more template-esque
     // but can't find a tempting engine that handles
     // SVG elements well. Need to find a DOM-based engine
     // that starts by doing Element.clone().
-    this.jDom.attr('height', height);
+    this.jDom.attr('height', height * scalingFactor);
     this.jDom.find('.fade').attr('height', height);
 
     // The container div should have the height set on
     // the server-side to avoid the page reflowing.
-    containerDiv.css('height', height);
     this.jDom.find('.reset').css('translateY', height);
     this.jDom.find('.play').attr('y', height / 2);
 };

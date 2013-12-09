@@ -6,7 +6,8 @@ small, strike, strong, sub, sup, tt, var,
 b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td {
+table, caption, tbody, tfoot, thead, tr, th, td,
+figure{
    margin: 0;
    padding: 0;
    border: 0;
@@ -95,13 +96,9 @@ em {
   height:140px;
   margin-left:auto;
   margin-right:auto;
-  position:relative;
 }
 
 #siteNav {
-   position:absolute;
-   bottom:0.5em;
-   right: 0;
    text-align:right;
 }
 

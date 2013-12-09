@@ -1,5 +1,11 @@
 $(function(){
 
+    // make internal nav sticky
+    $('#siteNav').sticky({
+        getWidthFrom:'#pageArea',
+        topSpacing:0
+    });
+    
    if( $( window ).width() > 780 ) {
 
       // make internal nav sticky
@@ -8,11 +14,6 @@ $(function(){
       ,  getWidthFrom:'.col1'
       });
 
-       // make internal nav sticky
-       $('#siteNav').sticky({
-           getWidthFrom:'#pageArea',
-           topSpacing:0
-       });
 
       // highlight active item on internal nav 
        var prev;

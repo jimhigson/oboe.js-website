@@ -1,16 +1,25 @@
 $(function(){
-
+    var jWindow = $(window),
+        jReducedLogo = $('.reducedLogo');
+    
     // make internal nav sticky
     $('#siteNav').sticky({
         getWidthFrom:'#pageArea',
         topSpacing:0
     });
+
     
-   if( $( window ).width() > 950 ) {
+    jWindow.scroll(function() {
+        var pos = jWindow.scrollTop();
+
+        jReducedLogo.toggleClass('show', pos > 240);
+    });    
+    
+   if( jWindow.width() > 950 ) {
 
       // make internal nav sticky
       $('.internalNav').sticky({
-         topSpacing:10
+         topSpacing:28
       ,  getWidthFrom:'.col1'
       });
 
@@ -27,7 +36,7 @@ $(function(){
        
        function closest() {
            var h;
-           var top = $(window).scrollTop() +20;
+           var top = jWindow.scrollTop() +20;
            var i = headings.length;
            while (i--) {
                h = headings[i];
@@ -73,3 +82,4 @@ $(function(){
        });       
    }
 });
+

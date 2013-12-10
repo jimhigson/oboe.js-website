@@ -104,6 +104,7 @@ em {
   border-bottom: 1px $backgroundColor solid;
   left:0;
   right:0;
+  overflow:hidden;
 }
 
 .is-sticky #siteNav {
@@ -116,11 +117,23 @@ em {
   margin-right:auto;
 }
 
+.reducedLogo {
+  float:left;
+  margin-left:20px;
+  position:relative;
+  top:-40px;
+  transition:top 0.5s;
+}
+.reducedLogo.show {
+  top:0;
+}
+
+
 #siteNav li {
   display:inline-block;
 }
 
-#siteNav a {
+#siteNav a.siteLink {
    margin-left:1em;
    color: $midTone;
 }
@@ -188,7 +201,9 @@ a:active {
    border-left: 1px solid $backgroundColor;
 }
 
-h1 a, h1 a:hover {
+h1 a,
+h1 a:hover,
+li.reducedLogo a {
    color: $nearBlack;
    text-decoration: none;
 }

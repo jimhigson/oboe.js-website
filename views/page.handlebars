@@ -27,8 +27,15 @@
         </div>
         <nav id="siteNav">
            <ul>
+              {{#home}}
+                  <li class="reducedLogo">Oboe.js</li>
+              {{/home}}
+              {{^home}}
+                  <li class="reducedLogo"><a href="/">Oboe.js</a></li>
+              {{/home}}
+                              
               {{#pages}}
-                  <li><a href="/{{path}}">{{title}}</a></li>
+                  <li><a class="siteLink" href="/{{path}}">{{title}}</a></li>
               {{/pages}}
            </ul>
         </nav>        

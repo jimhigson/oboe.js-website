@@ -106,6 +106,8 @@ em {
   z-index:1;
   border-bottom: 1px $backgroundColor solid;
   transition:border-bottom-color 1s;
+  left:0;
+  right:0;
 }
 
 .is-sticky #siteNav {

@@ -14,6 +14,10 @@ function readFirstLine(file, callback){
 
 }
 
+function markdownTitleContent(markdownLine) {
+    return markdownLine.replace(/#+ +(.*)/, '$1');;
+}
+
 function readPagesList(callback) {
 
     
@@ -33,7 +37,7 @@ function readPagesList(callback) {
                         
             readFirstLine(file, bar.add(function(firstLine){
                 // de-markdown the title from the file:
-                obj.title = firstLine.replace(/#+ +(.*)/, '$1');
+                obj.title = markdownTitleContent(firstLine); 
                 
                 result.push(obj);
             }));

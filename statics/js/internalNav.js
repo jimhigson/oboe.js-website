@@ -6,7 +6,7 @@ $(function(){
         topSpacing:0
     });
     
-   if( $( window ).width() > 780 ) {
+   if( $( window ).width() > 950 ) {
 
       // make internal nav sticky
       $('.internalNav').sticky({

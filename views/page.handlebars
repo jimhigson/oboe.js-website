@@ -26,9 +26,11 @@
                {{/if}}
         </div>
         <nav id="siteNav">
-           {{#pages}}
-               <a href="/{{path}}">{{title}}</a>
-           {{/pages}}
+           <ul>
+              {{#pages}}
+                  <li><a href="/{{path}}">{{title}}</a></li>
+              {{/pages}}
+           </ul>
         </nav>        
         <div id="pagearea">
            <header class="row">

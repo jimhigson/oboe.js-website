@@ -97,15 +97,11 @@ em {
 }
 #siteNav {
    text-align:right;
-   max-width: $maxPageWidth;
-  margin-left:auto;
-  margin-right:auto;
   padding-top:0.5em;
   padding-bottom:0.5em;
-  background-color:$backgroundColor;
+  background-color:$shadedBackgroundColor;
   z-index:1;
   border-bottom: 1px $backgroundColor solid;
-  transition:border-bottom-color 1s;
   left:0;
   right:0;
 }
@@ -114,8 +110,17 @@ em {
   border-bottom-color:$highlight;
 }
 
+#siteNav ul {
+  max-width: $maxPageWidth;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+#siteNav li {
+  display:inline-block;
+}
+
 #siteNav a {
-   display: inline-block;
    margin-left:1em;
    color: $midTone;
 }
@@ -123,7 +128,7 @@ em {
 #pagearea {
    display:table;
    max-width: $maxPageWidth;
-   margin: 30px auto;
+   margin: 10px auto;
    padding: 0 20px;
    padding-bottom: 100px;
 }

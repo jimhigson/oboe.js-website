@@ -89,7 +89,8 @@ em {
 }
 
 #header {
-  height:140px;
+  height:120px;
+  transition: height 0.5s; // for when screen size changes
 }
 
 #header, footer {
@@ -380,6 +381,10 @@ footer #sw {
 /* Small screens - 1 column */
 @media only screen and (max-width: 950px) {
 
+   #header, footer {
+      height: 60px;
+   }
+  
    #pagearea {
       display:block;
    }
@@ -432,7 +437,7 @@ footer #sw {
             top: 18px;
       }
       #header, footer {
-         padding: 30px;
+         height: 30px;
       }
       
    #download {

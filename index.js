@@ -20,7 +20,14 @@ var express = require('express'),
     ,   "/js/demo/pubSub.js"
     ,   '/js/demo/scenarios.js'
     ,   '/js/demo/demoModel.js'
-    ,   "/js/demo/demoView.js"
+    ,   "/js/demo/view/viewUtils.js"        
+    ,   "/js/demo/view/ThingView.js"
+    ,   "/js/demo/view/ClientView.js"
+    ,   "/js/demo/view/DemoView.js"
+    ,   "/js/demo/view/MessageView.js"
+    ,   "/js/demo/view/ServerView.js"
+    ,   "/js/demo/view/WireView.js"
+    ,   "/js/demo/view/PacketView.js"
     ,   "/js/demo/wire.js"
     ],
 

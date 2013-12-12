@@ -88,6 +88,9 @@ Packet.new = singleEventPubSub('new');
 Packet.prototype.move = function(fromXY, toXY, latency){
     this.events('move').emit(fromXY, toXY, latency);
 };
+Packet.prototype.isOn = function(holder){
+    this.events('isOn').emit(holder);
+};
 Packet.prototype.reset =
 Packet.prototype.done = function(){
     this.events('done').emit();
@@ -235,8 +238,9 @@ var Wire = extend( PacketHolder, function(name, locations, options) {
     this.medium = options.medium;
 });
 Wire.prototype.accept = function(packet){
-        
-    this.movePacket(packet);
+    
+    packet.isOn(this);
+    this.movePacket(packet);    
 
     this.propagateAfterLatency(packet);
 };

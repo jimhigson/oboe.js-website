@@ -46,7 +46,9 @@ PacketView.prototype.movementAnimator = function(packet, holder){
 
             this.goToXy('translateX', 'translateY', xyFrom);
             this.jDom.animate(
-                {circleRadius: transmissionDistance},
+                {circleRadius: transmissionDistance,
+                 opacity: 0.1
+                },
                 {duration:duration, queue:false}
             );
         };
@@ -61,7 +63,7 @@ PacketView.prototype.movementAnimator = function(packet, holder){
 
 PacketView.prototype.templateName = function(packet, holder){
     if( holder.medium == 'mobile' ) {
-        return 'airbornePacket';
+        return 'airwavePacket';
     }
     
     switch(packet.type) {

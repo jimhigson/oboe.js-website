@@ -26,17 +26,16 @@ var PacketView = extend(ThingView, function (subject, demoView) {
 
         if( holder.medium == 'mobile' ) {
 
-            var downstreamLocation = holder.locations.downstream,
-                upstreamLocation = holder.locations.downstream,
-                radius = distance( downstreamLocation, upstreamLocation );
-            
+            var locations = holder.locations,
+                transmissionDistance = distance( locations.downstream, locations.downstream );
+
             
             
         } else {
 
             subject.events('move').on(function( xyFrom, xyTo, duration ){
 
-                animateXy(this.jDom, 'translateX', 'translateY', xyFrom, xyTo, duration)
+                this.animateXy('translateX', 'translateY', xyFrom, xyTo, duration)
 
             }.bind(this));
         }

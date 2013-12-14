@@ -6,13 +6,13 @@ var MessageView = extend(ThingView, function(subject, demoView){
 
     subject.events('startMove').on(function(xyFrom, xyTo, duration){
         this.jDom.show();
-        goToXy(   this.jDom, 'lineX2', 'lineY2', xyFrom);
-        animateXy(this.jDom, 'lineX1', 'lineY1', xyFrom, xyTo, duration);
+        this.goToXy(   'lineX2', 'lineY2', xyFrom);
+        this.animateXy('lineX1', 'lineY1', xyFrom, xyTo, duration);
     }.bind(this));
 
     subject.events('endMove').on(function(xyFrom, xyTo, duration){
 
-        animateXy(this.jDom, 'lineX2', 'lineY2', xyFrom, xyTo, duration);
+        this.animateXy('lineX2', 'lineY2', xyFrom, xyTo, duration);
     }.bind(this));
 
     subject.events('reset').on(function(){

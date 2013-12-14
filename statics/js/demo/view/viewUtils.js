@@ -22,27 +22,6 @@ function unitClass(packet) {
     return 'unit-' + (packet.ordering.i % 10);
 }
 
-function goToXy( jDom, xProperty, yProperty, xy ) {
-    var cssObject = {};
-    
-    cssObject[xProperty] = xy.x;
-    cssObject[yProperty] = xy.y;
-
-    jDom.css(cssObject);
-}
-
-function animateXy( jDom, xProperty, yProperty, xyFrom, xyTo, duration ) {
-
-    goToXy(jDom, xProperty, yProperty, xyFrom);
-    
-    var toCssObject = {};
-    toCssObject[xProperty]   = xyTo.x;
-    toCssObject[yProperty]   = xyTo.y;
-
-    jDom.animate(toCssObject, {duration:duration, queue:false});
-}
-
-
 
 
 

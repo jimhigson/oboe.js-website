@@ -18,7 +18,7 @@ function markdownTitleContent(markdownLine) {
     return markdownLine.replace(/#+ +(.*)/, '$1');;
 }
 
-function readPagesList(callback) {
+module.exports = function readPagesList(callback) {
 
     
     fs.readdir(CONTENT_DIR, function(err, files){
@@ -46,4 +46,3 @@ function readPagesList(callback) {
     
 }
 
-module.exports = readPagesList;

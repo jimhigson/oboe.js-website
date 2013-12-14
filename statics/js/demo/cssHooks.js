@@ -46,6 +46,7 @@ $.cssHooks.lineX1 = getOrSetAttributeCssHook('x1');
 $.cssHooks.lineY1 = getOrSetAttributeCssHook('y1');
 $.cssHooks.lineX2 = getOrSetAttributeCssHook('x2');
 $.cssHooks.lineY2 = getOrSetAttributeCssHook('y2');
+$.cssHooks.circleRadius = getOrSetAttributeCssHook('r');
 
 // Setting cssNumber.foo to true tells jquery not to put 'px' on the
 // end of these properties when animating them:
@@ -54,4 +55,6 @@ $.cssNumber.translateY =
 $.cssNumber.x1 = 
 $.cssNumber.y1 = 
 $.cssNumber.x2 = 
-$.cssNumber.y2 = true;
+$.cssNumber.y2 = 
+$.cssNumber.circleRadius = 
+        true;

@@ -5,7 +5,6 @@ var PacketView = extend(ThingView, function (subject, demoView) {
 
 
     subject.events('isOn').on(function( holder ){
-        console.log(subject.name, 'on', holder.medium);
 
         this.initDomFromTemplate(
             'packets',

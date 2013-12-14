@@ -69,6 +69,12 @@ function respondWithMarkdown(req, res, markdownFilename, opts){
     
     readPagesList(bar.add(function(pages){
         
+        // mark one as current:
+        pages.forEach(function(page){
+            console.log(page.path, markdownFilename, page.path == markdownFilename);
+            page.current = ( page.path == markdownFilename ); 
+        });
+        
         opts.pages = pages;
     }));
 

@@ -134,7 +134,7 @@ em {
   display:inline-block;
 }
 
-#siteNav a.siteLink {
+#siteNav .siteLink {
    margin-left:1em;
    color: $midTone;
 }
@@ -143,6 +143,9 @@ em {
 }
 #siteNav a.siteLink:active {
   color: $highlightPressed;
+}
+#siteNav span.siteLink {
+  text-decoration: underline; 
 }
 
 #pagearea {

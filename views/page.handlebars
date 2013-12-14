@@ -35,7 +35,14 @@
               {{/home}}
                               
               {{#pages}}
-                  <li><a class="siteLink" href="/{{path}}">{{title}}</a></li>
+                  <li>
+                     {{#if current}}
+                         <span class="siteLink">{{title}}</span>
+                     {{else}}
+                         <a class="siteLink" href="/{{path}}">{{title}}</a>
+                     {{/if}}
+                  </li>
+
               {{/pages}}
            </ul>
         </nav>        

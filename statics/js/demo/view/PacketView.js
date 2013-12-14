@@ -60,6 +60,10 @@ PacketView.prototype.movementAnimator = function(packet, holder){
 };
 
 PacketView.prototype.templateName = function(packet, holder){
+    if( holder.medium == 'mobile' ) {
+        return 'airbornePacket';
+    }
+    
     switch(packet.type) {
         case 'GET':
             return 'getRequest';

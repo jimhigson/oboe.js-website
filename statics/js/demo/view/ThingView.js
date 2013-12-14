@@ -3,10 +3,14 @@ function ThingView(subject, demoView) {
     this.demoView = demoView;
 }
 
+ThingView.prototype.find = function(selector) {
+    return this.demoView.jDom.find(selector);
+};
+
 ThingView.prototype.initDomFromTemplate = function(containerName, templateName, className) {
     this.jDom = stampFromTemplate($('#' + templateName), className);
 
-    var jContainer = this.demoView.jDom.find('.' + containerName);
+    var jContainer = this.find('.' + containerName);
 
     if( jContainer.length != 1 ) {
         throw new Error('no one place to put the thing');
@@ -24,13 +28,17 @@ ThingView.prototype.moveTo = function(where) {
     return this; // chaining
 };
 
-ThingView.prototype.goToXy = function( xProperty, yProperty, xy ) {
+function putAtXy(jDom, xProperty, yProperty, xy){
     var cssObject = {};
 
     cssObject[xProperty] = xy.x;
     cssObject[yProperty] = xy.y;
 
-    this.jDom.css(cssObject);
+    jDom.css(cssObject);
+}
+
+ThingView.prototype.goToXy = function( xProperty, yProperty, xy ) {
+    putAtXy(this.jDom, xProperty, yProperty, xy);
 };
 
 ThingView.prototype.animateXy = function( xProperty, yProperty, xyFrom, xyTo, duration ) {

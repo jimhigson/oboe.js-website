@@ -3,11 +3,6 @@ var PacketView = extend(ThingView, function (subject, demoView) {
     
     ThingView.apply(this,arguments);
 
-    var className = [
-        subject.name
-        // since we only have categorical colours...
-        ,   unitClass(subject)
-    ].join(' ');
 
     subject.events('isOn').on(function( holder ){
         console.log(subject.name, 'on', holder.medium);
@@ -15,7 +10,7 @@ var PacketView = extend(ThingView, function (subject, demoView) {
         this.initDomFromTemplate(
             'packets',
             this.templateName(subject, holder),
-            className
+            this.className(subject)
         );
 
         subject.events('move').on(this.movementAnimator(subject, holder).bind(this));
@@ -33,6 +28,14 @@ function distance(xy1, xy2){
     return Math.sqrt(sq(xy2.x - xy1.x) + sq(xy2.y - xy1.y));
 }
 
+PacketView.prototype.className = function(subject){
+    return [
+        subject.name
+        // since we only have categorical colours...
+        ,   unitClass(subject)
+    ].join(' ');
+};
+
 PacketView.prototype.movementAnimator = function(packet, holder){
     
     if( holder.medium == 'mobile' ) {
@@ -40,21 +43,27 @@ PacketView.prototype.movementAnimator = function(packet, holder){
         return function( xyFrom, xyTo, duration ){
             var OVERHANG = 1.66,           
                 transmissionDistance = distance( xyFrom, xyTo),
-                jDom = this.jDom;
+                jPacketInTransit = this.jDom;
             
             this.goToXy('translateX', 'translateY', xyFrom);
             
-            jDom.animate(
+            jPacketInTransit.animate(
                 {   circleRadius: transmissionDistance * OVERHANG,
                     opacity: 0
                 },
                 {   duration:duration * OVERHANG,
                     queue:false,
                     complete:function(){
-                        jDom.remove();
+                        jPacketInTransit.remove();
                     }
                 }
             );
+
+            // show indicator on start
+            this.flashAerial(packet, xyFrom);
+            
+            // show indicator on complete
+            window.setTimeout(this.flashAerial.bind(this, packet, xyTo), duration);
         };
     } else {
         
@@ -64,6 +73,21 @@ PacketView.prototype.movementAnimator = function(packet, holder){
         };
     }
 };
+
+PacketView.prototype.flashAerial = function(packet, location) {
+
+    var airwaveDoneTemplate = $('#airwaveDone'),
+        jPacketAtDestination = stampFromTemplate(airwaveDoneTemplate, this.className(packet)),
+        jPackets = this.find('.packets');
+    
+    jPackets.append(jPacketAtDestination);
+
+    putAtXy(jPacketAtDestination, 'translateX', 'translateY', location);
+
+    window.setTimeout(function(){
+        jPacketAtDestination.remove();
+    }, 150);
+}
 
 PacketView.prototype.doneAction = function(packet, holder){
     if( holder.medium == 'mobile' ) {

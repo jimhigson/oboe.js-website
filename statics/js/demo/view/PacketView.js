@@ -1,4 +1,6 @@
 var PacketView = extend(ThingView, function (subject, demoView) {
+    "use strict";
+    
     ThingView.apply(this,arguments);
 
     var className = [
@@ -6,14 +8,6 @@ var PacketView = extend(ThingView, function (subject, demoView) {
         // since we only have categorical colours...
         ,   unitClass(subject)
     ].join(' ');
-
-    function distance(xy1, xy2){
-        function sq(n){
-            return Math.pow(n, 2);
-        }
-        
-        return Math.sqrt(sq(xy2.x - xy1.x) + sq(xy2.x - xy1.x));
-    }
 
     subject.events('isOn').on(function( holder ){
         console.log(subject.name, 'on', holder.medium);
@@ -24,27 +18,46 @@ var PacketView = extend(ThingView, function (subject, demoView) {
             className
         );
 
-        if( holder.medium == 'mobile' ) {
+        subject.events('move').on(this.movementAnimator(subject, holder).bind(this));
 
-            var locations = holder.locations,
-                transmissionDistance = distance( locations.downstream, locations.downstream );
-
-            
-            
-        } else {
-
-            subject.events('move').on(function( xyFrom, xyTo, duration ){
-
-                this.animateXy('translateX', 'translateY', xyFrom, xyTo, duration)
-
-            }.bind(this));
-        }
     }.bind(this));
     
     subject.events('done').on(function(){
         this.jDom && this.jDom.remove();
     }.bind(this));
 });
+
+function distance(xy1, xy2){
+    function sq(n){
+        return Math.pow(n, 2);
+    }
+
+    return Math.sqrt(sq(xy2.x - xy1.x) + sq(xy2.y - xy1.y));
+}
+
+PacketView.prototype.movementAnimator = function(packet, holder){
+    
+    if( holder.medium == 'mobile' ) {
+        
+        return function( xyFrom, xyTo, duration ){
+           
+            var transmissionDistance = distance( xyFrom, xyTo );
+            console.log(xyFrom, xyTo, transmissionDistance);
+
+            this.goToXy('translateX', 'translateY', xyFrom);
+            this.jDom.animate(
+                {circleRadius: transmissionDistance},
+                {duration:duration, queue:false}
+            );
+        };
+    } else {
+        
+        return function( xyFrom, xyTo, duration ){
+
+            this.animateXy('translateX', 'translateY', xyFrom, xyTo, duration)
+        };
+    }
+};
 
 PacketView.prototype.templateName = function(packet, holder){
     switch(packet.type) {

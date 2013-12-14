@@ -138,6 +138,12 @@ em {
    margin-left:1em;
    color: $midTone;
 }
+#siteNav a.siteLink:hover {
+  color: $highlight;
+}
+#siteNav a.siteLink:active {
+  color: $highlightPressed;
+}
 
 #pagearea {
    display:table;

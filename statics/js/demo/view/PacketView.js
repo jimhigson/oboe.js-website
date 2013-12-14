@@ -41,13 +41,13 @@ PacketView.prototype.movementAnimator = function(packet, holder){
         
         return function( xyFrom, xyTo, duration ){
            
-            var transmissionDistance = distance( xyFrom, xyTo );
-            console.log(xyFrom, xyTo, transmissionDistance);
+            var transmissionDistance = distance( xyFrom, xyTo),
+                overhungDistance = transmissionDistance * 1.2;
 
             this.goToXy('translateX', 'translateY', xyFrom);
             this.jDom.animate(
-                {circleRadius: transmissionDistance,
-                 opacity: 0.1
+                {circleRadius: overhungDistance,
+                 opacity: 0
                 },
                 {duration:duration, queue:false}
             );

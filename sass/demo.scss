@@ -77,7 +77,13 @@ $i: 1;
   .unit-#{$i - 1},
   g.client.received-#{$i - 1} .part#{$i - 1} {
     fill:nth($categoricalColors, $i);
+  }
+  
+  .packet.airwave.unit-#{$i - 1} {
+    fill:none;
+    stroke:nth($categoricalColors, $i);
   }  
+  
   $i: $i + 1;
 }
 

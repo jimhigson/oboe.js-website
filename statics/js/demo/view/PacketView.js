@@ -20,11 +20,9 @@ var PacketView = extend(ThingView, function (subject, demoView) {
 
         subject.events('move').on(this.movementAnimator(subject, holder).bind(this));
 
+        subject.events('done').on(this.doneAction(subject, holder).bind(this));
     }.bind(this));
-    
-    subject.events('done').on(function(){
-        this.jDom && this.jDom.remove();
-    }.bind(this));
+
 });
 
 function distance(xy1, xy2){
@@ -40,16 +38,22 @@ PacketView.prototype.movementAnimator = function(packet, holder){
     if( holder.medium == 'mobile' ) {
         
         return function( xyFrom, xyTo, duration ){
-            var OVERHANG = 1.2,           
-                transmissionDistance = distance( xyFrom, xyTo);
+            var OVERHANG = 1.66,           
+                transmissionDistance = distance( xyFrom, xyTo),
+                jDom = this.jDom;
             
-            this.goToXy('translateX', 'translateY', xyFrom);            
-            this.jDom.animate(
+            this.goToXy('translateX', 'translateY', xyFrom);
+            
+            jDom.animate(
                 {   circleRadius: transmissionDistance * OVERHANG,
                     opacity: 0
                 },
                 {   duration:duration * OVERHANG,
-                    queue:false}
+                    queue:false,
+                    complete:function(){
+                        jDom.remove();
+                    }
+                }
             );
         };
     } else {
@@ -60,6 +64,16 @@ PacketView.prototype.movementAnimator = function(packet, holder){
         };
     }
 };
+
+PacketView.prototype.doneAction = function(packet, holder){
+    if( holder.medium == 'mobile' ) {
+        return function(){};
+    } else {
+        return function(){
+            this.jDom.remove()
+        }
+    }
+}
 
 PacketView.prototype.templateName = function(packet, holder){
     if( holder.medium == 'mobile' ) {

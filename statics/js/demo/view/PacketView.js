@@ -40,16 +40,16 @@ PacketView.prototype.movementAnimator = function(packet, holder){
     if( holder.medium == 'mobile' ) {
         
         return function( xyFrom, xyTo, duration ){
-           
-            var transmissionDistance = distance( xyFrom, xyTo),
-                overhungDistance = transmissionDistance * 1.2;
-
-            this.goToXy('translateX', 'translateY', xyFrom);
+            var OVERHANG = 1.2,           
+                transmissionDistance = distance( xyFrom, xyTo);
+            
+            this.goToXy('translateX', 'translateY', xyFrom);            
             this.jDom.animate(
-                {circleRadius: overhungDistance,
-                 opacity: 0
+                {   circleRadius: transmissionDistance * OVERHANG,
+                    opacity: 0
                 },
-                {duration:duration, queue:false}
+                {   duration:duration * OVERHANG,
+                    queue:false}
             );
         };
     } else {

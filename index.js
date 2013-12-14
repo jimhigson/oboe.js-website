@@ -4,7 +4,7 @@ var express = require('express'),
     app = express(),
     consolidate = require('consolidate'),
     readContent = require('./read-content.js'),
-    readPages = require('./read-pages-list.js'),
+    readPagesList = require('./read-pages-list.js'),
     barrier = require('./barrier.js'),
     
     PORT = '8888',
@@ -67,7 +67,7 @@ function respondWithMarkdown(req, res, markdownFilename, opts){
     });
     
     
-    readPages(bar.add(function(pages){
+    readPagesList(bar.add(function(pages){
         
         opts.pages = pages;
     }));

@@ -86,6 +86,9 @@ $i: 1;
   
   $i: $i + 1;
 }
+.packet.airwave {
+  stroke-width:5px;
+}
 
 line.wire.cable {
    stroke:$highlight;

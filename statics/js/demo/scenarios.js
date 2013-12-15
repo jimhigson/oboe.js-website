@@ -186,7 +186,11 @@ var scenarios = (function () {
             "baseOn":"mobile-layout",
             "extensions":{
                 "items": [
-                    ,,,
+                    ,,
+                    {   "locations": {
+                            "upstream":{x:190, y:80}
+                        }
+                    },
                     {
                         "options": {
                             "parseStrategy": "discrete"
@@ -200,10 +204,14 @@ var scenarios = (function () {
             "baseOn":"mobile-layout",
             "extensions":{
                 "items": [
-                    ,,,
+                    ,,
+                    {   "locations": {
+                        "upstream":{x:190, y:80}
+                    }
+                    },
                     {
                         "options": {
-                            "parseStrategy": "progressive"
+                            "parseStrategy": "discrete"
                         }
                     }
                 ]

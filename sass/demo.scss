@@ -115,8 +115,13 @@ rect.server {
     stroke-width:3;
 }
 
-.tower, .wall {
+.tower, 
+.barrier .wall,
+.barrier .shadow {
   fill: $midTone;
+}
+.barrier .shadow {
+  opacity: 0.1;
 }
 
 .barrier .upstream,

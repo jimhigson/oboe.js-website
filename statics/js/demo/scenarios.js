@@ -1,5 +1,41 @@
 var scenarios = (function () {
 
+    function inconsistent_packet_spacing(i) {
+
+        switch(i){
+            case 0:
+            case 1:
+            case 5:
+            case 6:
+                return 50; // fast    
+        }
+        return 500; //slow
+    }
+
+    function randomBetween(min, max) {
+        var range = (max - min);
+        return min + (Math.random() * range);
+    }
+    
+    function fastTimingThenStream(i){
+
+        return (i < 6 ? 100 : randomBetween(750, 2500));
+    }
+
+    function historicPacketsThenLive(i) {
+        return (i < 6 ? 'historic' : 'live');
+    }
+
+    function evenNumberedPackets(i) {
+        return (i === undefined)?
+            0 : i+=2;
+    }
+
+    function oddNumberedPackets(i) {
+        return (i === undefined)?
+            1 : i+=2;
+    }
+    
     /* some more:
      * jQ fast
      * Oboe fast
@@ -13,7 +49,7 @@ var scenarios = (function () {
      * creating an aggregation (Insight) Oboe
      */
 
-    var scenarios = {
+    return {
         "2-node-layout":{            
             "items": [
                 {
@@ -334,119 +370,5 @@ var scenarios = (function () {
             ]
         }
     };
-
-    function randomBetween(min, max) {
-        var range = (max - min);
-        return min + (Math.random() * range);
-    }
-
-    function translateLocation(location, delta) {
-        return {
-            x: location.x + (delta.x | 0 ), y: location.y + (delta.y | 0 )
-        };
-    }
-
-    function defaultLocationForItem(item) {
-        // fill in default positions
-        var DEFAULT_SERVER_LOCATION = {x: 40, y: 55},
-            DEFAULT_CLIENT_LOCATION = {x: 440, y: 145};
-
-        switch (item.type) {
-            case 'client':
-                return DEFAULT_CLIENT_LOCATION;
-            case 'server':
-                return DEFAULT_SERVER_LOCATION;
-        }
-    }
     
-    function fillInScenarioDescription(rawJson) {
-
-        var itemsByName = {};
- 
-        rawJson.items.forEach(function (item, i, items) {
-            itemsByName[item.name] = item;
-        });
-        
-        rawJson.items.forEach(function (rawItem, i, items) {
-            // fill in next property if not explicitly given:
-            if( ! rawItem.next ) {
-                rawItem.next    = (i < items.length-1)
-                                ? [items[i + 1].name] 
-                                : [];
-            }
-            
-
-            if (!rawItem.locations) {
-                rawItem.locations = {};
-            }
-
-            // fill in locations json by sensible defaults if not given:
-            if( !rawItem.locations.where ) {
-                rawItem.locations.where = defaultLocationForItem(rawItem); 
-            }
-        });
-
-
-        rawJson.items.forEach(function (wire, i, items) {
-
-            if( wire.type == 'wire' ) {
-
-                // wires default to cable (could also be mobile) - the only difference
-                // is in the view, work in the same way
-                if( !wire.options.medium ) {
-                    wire.options.medium = 'cable';
-                }
-                
-                // give wires their location:
-                if( !wire.locations ) {
-                    wire.locations = {};
-                }
-                
-                if( !wire.locations.upstream ) {
-                    var previousItemLocations = items[i - 1].locations;
-                    wire.locations.upstream = previousItemLocations.downstream || previousItemLocations.where;
-                }
-
-                if( !wire.locations.downstream ) {
-                    var nextItemLocations = itemsByName[wire.next[0]].locations;
-                    wire.locations.downstream = nextItemLocations.upstream || nextItemLocations.where;
-                }
-            }
-        });
-
-        return rawJson;
-    }
-
-    function inconsistent_packet_spacing(i) {
-        
-        switch(i){
-            case 0:
-            case 1:
-            case 5:
-            case 6:
-                return 50; // fast    
-        }
-        return 500; //slow
-    }
-    
-    function fastTimingThenStream(i){
-
-        return (i < 6 ? 100 : randomBetween(750, 2500));
-    }
-
-    function historicPacketsThenLive(i) {
-        return (i < 6 ? 'historic' : 'live');
-    }
-
-    function evenNumberedPackets(i) {
-        return (i === undefined)?
-            0 : i+=2;
-    }
-
-    function oddNumberedPackets(i) {
-        return (i === undefined)?
-            1 : i+=2;
-    }    
-    
-    return scenarios;
 })();   

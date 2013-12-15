@@ -37,20 +37,29 @@ var getScenario = (function () {
         return base;
     }
     
-    function baseOn(templateName, extensions) {
-        var copy = deepCopy(scenarios[templateName]);
+    function fillInTemplate(template, extensions) {
+        var copy = deepCopy(template);
         
         return extend(copy, extensions);
     }
     
-    function fillInScenarioDescription(name, rawJson) {
+    function fillInFromBaseScenario( name ){
+        var rawJson = scenarios[name],
+            baseName = rawJson.baseOn;
+
+        if(baseName) {
+            return fillInTemplate( fillInFromBaseScenario(baseName), rawJson.extensions);
+        } else {
+            return rawJson;
+        }
+    }
+    
+    function fillInScenarioDescription(name) {
+        
+        var rawJson = fillInFromBaseScenario(name);
 
         var itemsByName = {};
-        
-        if(rawJson.baseOn) {
-            rawJson = baseOn(rawJson.baseOn, rawJson.extensions);
-        }
-        
+                
         rawJson.name = name;
         
         rawJson.items.forEach(function (item, i, items) {
@@ -108,7 +117,7 @@ var getScenario = (function () {
     }
 
     return function (name) {
-        return scenarios[name] && fillInScenarioDescription( name, scenarios[name] );
+        return scenarios[name] && fillInScenarioDescription( name );
     }    
 
 })();   

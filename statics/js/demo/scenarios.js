@@ -182,7 +182,7 @@ var scenarios = (function () {
             }
         },
 
-        "mobile-fail-discrete": {
+        "mobile-fail":{
             "baseOn":"mobile-layout",
             "extensions":{
                 "items": [
@@ -190,7 +190,16 @@ var scenarios = (function () {
                     {   "locations": {
                             "upstream":{x:190, y:80}
                         }
-                    },
+                    }
+                ]
+            }            
+        },
+        
+        "mobile-fail-discrete": {
+            "baseOn":"mobile-fail",
+            "extensions":{
+                "items": [
+                    ,,,
                     {
                         "options": {
                             "parseStrategy": "discrete"
@@ -201,17 +210,13 @@ var scenarios = (function () {
         },
 
         "mobile-fail-progressive": {
-            "baseOn":"mobile-layout",
+            "baseOn":"mobile-fail",
             "extensions":{
                 "items": [
-                    ,,
-                    {   "locations": {
-                        "upstream":{x:190, y:80}
-                    }
-                    },
+                    ,,,
                     {
                         "options": {
-                            "parseStrategy": "discrete"
+                            "parseStrategy": "progressive"
                         }
                     }
                 ]

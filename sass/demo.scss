@@ -111,6 +111,11 @@ line.messageInner {
 g.client .frame,
 rect.server {
     fill: $midTone;
+}
+
+circle.aerial,
+g.client .frame,
+rect.server {
     stroke:$shadedBackgroundColor;
     stroke-width:3;
 }

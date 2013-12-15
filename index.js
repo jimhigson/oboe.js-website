@@ -93,7 +93,10 @@ app
    .use(gzippo.staticGzip('bower_components'))
    .use(slashes())    
    .get('/', function(req, res){
-        respondWithMarkdown(req, res, readMarkdownFromFile, { home:'true' });
+        respondWithMarkdown(req, res, readMarkdownFromFile,
+            {   home: true,
+                twitter: true
+            });
    })
    .get('/:page', function(req, res){
        respondWithMarkdown( req, res, readMarkdownFromFile);

@@ -29,14 +29,24 @@ module.exports = function (grunt) {
         
     ,
         uglify: {
-            options:{
-                wrap:'enclose'
-            },
+            
             clientSideJs:{
+                options:{
+                    wrap:'enclose'
+                },
+                
                 files:{
                     'statics/js-concat/all.js': require('./sourceList.js').map(function(name){
                         return 'statics' + name;
                     })
+                }
+            }
+        }
+    ,
+        cssmin:{
+            minifyCss:{
+                files:{
+                    'statics/css/all-min.css':['statics/css/all.css']
                 }
             }
         }
@@ -49,9 +59,10 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-develop');
     grunt.loadNpmTasks('grunt-sass');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
 
     // register a few tasks
-    grunt.registerTask('build', ['sass:all', 'uglify:clientSideJs']);
+    grunt.registerTask('build', ['sass:all', 'uglify:clientSideJs', 'cssmin:minifyCss']);
     grunt.registerTask('start-dev', ['develop:server', 'sass:all', 'watch:sources']);
     //grunt.registerTask('start-real', ???);
 

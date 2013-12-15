@@ -48,6 +48,7 @@ rect.fade {
 }
 .controls text.play {
   @include svg-text-centered;
+  font-size: 125%;
 }
 
 .controls:hover {

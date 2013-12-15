@@ -68,18 +68,18 @@
                         id="download" title="Get the code">
                         Download <span id="version">{{latestTag}}</span>
                      </a>
-                 {{/if}}
-                
-                 <div class="internalNav">
-                    {{#if sections}}         
+                 {{else}}                 
+                    <div class="internalNav">
                        <h2>{{heading.text}}</h2>
-                       <ul class="sections">
-                          {{#sections}}
-                             <li><a href="#{{id}}">{{text}}</a></li>
-                          {{/sections}}
-                       </ul>
-                    {{/if}}
-                 </div>
+                       {{#if sections}}         
+                          <ul class="sections">
+                             {{#sections}}
+                                <li><a href="#{{id}}">{{text}}</a></li>
+                             {{/sections}}
+                          </ul>
+                       {{/if}}
+                    </div>
+                 {{/if}}
 
                  {{#if experimental}}
                     <div class="siteNav">

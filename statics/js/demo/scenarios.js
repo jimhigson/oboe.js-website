@@ -126,7 +126,10 @@ var scenarios = (function () {
                         "bandwidth": 500,
                         "latency": 800,
                         "messageSize": 7
-                    }
+                    },
+                    locations:{
+                        downstream: {x: 235, y: 90}
+                    }                    
                 },
                 {
                     "name": "internet-gsm",

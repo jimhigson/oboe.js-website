@@ -104,9 +104,11 @@ if( environment == 'dev' ) {
    app.get('/demo/:demo', function(req, res){
         
        function readMarkdownFromFile(req, callback){
+           var demoName = req.params.demo;
+           
            callback({
-               content:'<figure data-demo="' + req.params.demo  + '"></figure>'
-           ,   heading:[]
+               content:'<figure data-demo="' + demoName  + '"></figure>'
+           ,   heading: {text:'Demo: ' + demoName}
            ,   sections:[]
            ,   status:200
            });

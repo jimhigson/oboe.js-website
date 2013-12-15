@@ -22,7 +22,7 @@ ThingView.prototype.initDomFromTemplate = function(containerName, templateName, 
 ThingView.prototype.moveTo = function(where) {
     this.jDom.css({
         translateX: where.x
-        ,   translateY: where.y
+    ,   translateY: where.y
     });
 
     return this; // chaining

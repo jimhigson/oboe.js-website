@@ -1,6 +1,6 @@
 module.exports = [
-        "/jquery/jquery.js"
-    ,   "/js/jquery.sticky.js"
+
+        "/js/jquery.sticky.js"
     ,   "/js/internalNav.js"
     ,   "/js/demo/cssHooks.js"
     ,   "/js/demo/functional.js"

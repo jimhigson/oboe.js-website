@@ -6,10 +6,13 @@ var express = require('express'),
     readContent = require('./read-content.js'),
     readPagesList = require('./read-pages-list.js'),
     barrier = require('./barrier.js'),
+    environment = require('optimist')
+                    .demand(['env'])
+                    .argv.env,
     
     PORT = '8888',
 
-    UNMINIFIED_SCRIPTS = require('./sourceList.js'),
+    SCRIPTS = environment == 'prod'? ['/js/all.js'] : require('./sourceList.js'),
 
     CSS_STYLESHEETS = [
         "all.css"
@@ -18,6 +21,8 @@ var express = require('express'),
     LATEST_TAG = 'v1.11.0';
 
 require('colors');
+
+console.log('starting up for environment', environment.cyan );
 
 app.engine('handlebars', consolidate.handlebars);
 app.set('view engine', 'handlebars');
@@ -38,7 +43,7 @@ function respondWithMarkdown(req, res, markdownFilename, opts){
     var view = req.query.mode == 'raw'? 'raw' : 'page';
 
     opts = opts || {};
-    opts.scripts     = UNMINIFIED_SCRIPTS;
+    opts.scripts     = SCRIPTS;
     opts.stylesheets = CSS_STYLESHEETS;
     opts.latestTag   = LATEST_TAG;
         

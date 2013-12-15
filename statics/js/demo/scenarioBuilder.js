@@ -13,10 +13,44 @@ var getScenario = (function () {
         }
     }
 
+    function deepCopy(obj){
+        return jQuery.extend(true, {}, obj);
+    }
+
+    function extend(base, extension) {
+        for( var k in extension ) {
+            
+            if( extension[k] instanceof Object ) {
+                
+                // objects, arrays - recursive case
+                if( !base[k] ) {
+                    base[k] = {};
+                }
+                
+                extend(base[k], extension[k]);
+            } else {
+                
+                // strings, numbers etc
+                base[k] = extension[k];
+            }
+        }
+        return base;
+    }
+    
+    function baseOn(templateName, extensions) {
+        var copy = deepCopy(scenarios[templateName]);
+        
+        return extend(copy, extensions);
+    }
+    
     function fillInScenarioDescription(rawJson) {
 
         var itemsByName = {};
-
+        
+        if(rawJson.baseOn) {
+            rawJson = baseOn(rawJson.baseOn, rawJson.extensions);
+        }
+        
         rawJson.items.forEach(function (item, i, items) {
             itemsByName[item.name] = item;
         });

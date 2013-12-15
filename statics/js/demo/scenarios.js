@@ -75,8 +75,7 @@ var scenarios = (function () {
             ]
         },
 
-        "mobile-discrete": {
-            "name": "mobile-discrete",
+        "mobile-layout":{
             "items": [
                 {
                     "name": "sever",
@@ -88,7 +87,7 @@ var scenarios = (function () {
                     },
                     locations:{
                         where: {x: 40, y: 93}
-                    }                    
+                    }
                 },
                 {
                     "name": "internet-wire",
@@ -116,65 +115,43 @@ var scenarios = (function () {
                     "name": "client",
                     "type": "client",
                     "options": {
-                        "parseStrategy": "discrete",
                         "page": "singlePageSite"
                     },
                     "locations":{
                         "upstream":{x: 467, y: 90}
                     }
                 }
-            ]
+            ]            
+        },
+        
+        "mobile-discrete": {
+            "baseOn":"mobile-layout",
+            "extensions":{
+                "name": "mobile-discrete",
+                "items": [
+                    ,,,
+                    {
+                        "options": {
+                            "parseStrategy": "discrete"
+                        }
+                    }
+                ]
+            }
         },
 
         "mobile-progressive": {
-            "name": "mobile-progressive",
-            "items": [
-                {
-                    "name": "sever",
-                    "type": "server",
-                    "options": {
-                        "timeBetweenPackets": inconsistent_packet_spacing,
-                        "initialDelay": 500,
-                        "messageSize": 7
-                    },
-                    locations:{
-                        where: {x: 40, y: 93}
+            "baseOn":"mobile-layout",
+            "extensions":{
+                "name": "mobile-progressive",
+                "items": [
+                    ,,,
+                    {
+                        "options": {
+                            "parseStrategy": "progressive"
+                        }                    
                     }
-                },
-                {
-                    "name": "internet-wire",
-                    "type": "wire",
-                    "options": {
-                        "bandwidth": 500,
-                        "latency": 800,
-                        "messageSize": 7
-                    }
-                },
-                {
-                    "name": "internet-gsm",
-                    "type": "wire",
-                    "options": {
-                        "medium":"mobile",
-                        "bandwidth": 500,
-                        "latency": 800,
-                        "messageSize": 7
-                    },
-                    locations:{
-                        upstream: {x: 250, y: 40}
-                    }
-                },
-                {
-                    "name": "client",
-                    "type": "client",
-                    "options": {
-                        "parseStrategy": "progressive",
-                        "page": "singlePageSite"
-                    },
-                    "locations":{
-                        "upstream":{x: 467, y: 90}
-                    }                    
-                }
-            ]
+                ]
+            }
         },
 
         "mobile-fail-discrete": {

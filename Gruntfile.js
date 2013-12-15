@@ -34,7 +34,7 @@ module.exports = function (grunt) {
             },
             clientSideJs:{
                 files:{
-                    'statics/js/all.js': require('./sourceList.js').map(function(name){
+                    'statics/js-concat/all.js': require('./sourceList.js').map(function(name){
                         return 'statics' + name;
                     })
                 }

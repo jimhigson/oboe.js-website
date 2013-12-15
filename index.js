@@ -12,7 +12,7 @@ var express = require('express'),
     
     PORT = '8888',
 
-    SCRIPTS = environment == 'prod'? ['/js/all.js'] : require('./sourceList.js'),
+    SCRIPTS = environment == 'prod'? ['/js-concat/all.js'] : require('./sourceList.js'),
 
     CSS_STYLESHEETS = ["all.css"],
         

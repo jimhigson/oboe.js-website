@@ -210,65 +210,6 @@ var scenarios = (function () {
             }
         },        
         
-        "slow-ajax-discrete": { 
-            "items": [
-                {
-                    "name": "server",
-                    "type": "server",
-                    "options": {
-                        "timeBetweenPackets": 100,
-                        "initialDelay": 500,
-                        "messageSize": 7
-                    }
-                },
-                {
-                    "name": "internet",
-                    "type": "wire",
-                    "options": {
-                        "bandwidth": 500,
-                        "latency": 3000
-                    }
-                },
-                {
-                    "name": "client",
-                    "type": "client",
-                    "options": {
-                        "parseStrategy": "discrete",
-                        "page": "singlePageSite"
-                    }
-                }
-            ]
-        },
-    
-        "slow-ajax-progressive": { 
-            "items": [
-                {
-                    "name": "sever",
-                    "type": "server",
-                    "options": {
-                        "timeBetweenPackets": 100,
-                        "initialDelay": 500
-                    }
-                },
-                {
-                    "name": "internet",
-                    "type": "wire",
-                    "options": {
-                        "bandwidth": 500,
-                        "latency": 3000
-                    }
-                },
-                {
-                    "name": "client",
-                    "type": "client",
-                    "options": {
-                        "parseStrategy": "progressive",
-                        "page": "singlePageSite"
-                    }
-                }
-            ]
-        },
-
         "aggregated-progressive": { 
             "options":{"height":257},
             "items": [

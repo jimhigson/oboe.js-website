@@ -3,13 +3,16 @@ var getScenario = (function () {
     function defaultLocationForItem(item) {
         // fill in default positions
         var DEFAULT_SERVER_LOCATION = {x: 40, y: 55},
-            DEFAULT_CLIENT_LOCATION = {x: 440, y: 145};
+            DEFAULT_CLIENT_LOCATION = {x: 440, y: 145},
+            DEFAULT_BARRIER_LOCATION = {x: 410, y: 145};
 
         switch (item.type) {
             case 'client':
                 return DEFAULT_CLIENT_LOCATION;
             case 'server':
                 return DEFAULT_SERVER_LOCATION;
+            case 'barrier':
+                return DEFAULT_BARRIER_LOCATION;            
         }
     }
 

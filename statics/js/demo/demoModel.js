@@ -18,9 +18,12 @@ function oppositeDirectionTo(dir) {
     throw new Error('unknown direction' + dir);
 }
 
-function Thing(name){
+function Thing(name, locations){
+  
+    
     this.name = name;
     this.events = pubSub();
+    this.locations = locations || {};    
 }
 Thing.prototype.reset = function(){
 };
@@ -137,15 +140,18 @@ Message.prototype.includes = function(packet) {
 
 
 var PacketHolder = extend(Thing, function(name, locations){
+
+    if( !locations ) {
+        throw new Error("don't know where " + name + " is");
+    }    
+    
     Thing.apply(this, arguments);
     if( !locations ) {
         throw new Error("don't know where " + name + " is");
     }
 
     this.timeouts = [];
-    this.name = name;
     this.latency = 0;
-    this.locations = locations || {};
     this.adjacents = {
         downstream: []
     ,   upstream:   []

@@ -23,6 +23,7 @@ var express = require('express'),
     ,   '/js/demo/demoModel.js'
     ,   "/js/demo/view/viewUtils.js"        
     ,   "/js/demo/view/ThingView.js"
+    ,   "/js/demo/view/BarrierView.js"
     ,   "/js/demo/view/ClientView.js"
     ,   "/js/demo/view/DemoView.js"
     ,   "/js/demo/view/MessageView.js"

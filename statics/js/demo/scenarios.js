@@ -149,7 +149,8 @@ var scenarios = (function () {
                     },
                     "locations":{
                         "upstream":{x: 467, y: 90}
-                    }
+                    },
+                    "next":[]
                 }
             ]            
         },
@@ -190,6 +191,11 @@ var scenarios = (function () {
                     {   "locations": {
                             "upstream":{x:190, y:80}
                         }
+                    }
+                    ,,
+                    {
+                        "name":"barrier",
+                        "type":"barrier"
                     }
                 ]
             }            

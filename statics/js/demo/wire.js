@@ -28,6 +28,7 @@ function loadScenario(scenarioId) {
             case "wire":                return Wire;
             case "client":              return Client;
             case "aggregatingServer":   return AggregatingServer;
+            case "barrier":             return Thing;
         }
         throw new Error('unknown type ' + scenarioType);
     }
@@ -41,6 +42,8 @@ function loadScenario(scenarioId) {
                     return WireView;
             case "client":  
                     return ClientView;
+            case "barrier":             
+                    return BarrierView;
         }
         throw new Error('unknown type ' + scenarioType);
     }

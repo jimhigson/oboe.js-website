@@ -175,6 +175,108 @@ var getScenario = (function () {
                     }                    
                 }
             ]
+        },
+
+        "mobile-fail-discrete": {
+            "name": "mobile-progressive",
+            "items": [
+                {
+                    "name": "sever",
+                    "type": "server",
+                    "options": {
+                        "timeBetweenPackets": inconsistent_packet_spacing,
+                        "initialDelay": 500,
+                        "messageSize": 7
+                    },
+                    locations:{
+                        where: {x: 40, y: 93}
+                    }
+                },
+                {
+                    "name": "internet-wire",
+                    "type": "wire",
+                    "options": {
+                        "bandwidth": 500,
+                        "latency": 800,
+                        "messageSize": 7
+                    }
+                },
+                {
+                    "name": "internet-gsm",
+                    "type": "wire",
+                    "options": {
+                        "medium":"mobile",
+                        "bandwidth": 500,
+                        "latency": 800,
+                        "messageSize": 7
+                    },
+                    locations:{
+                        upstream: {x: 250, y: 40}
+                    }
+                },
+                {
+                    "name": "client",
+                    "type": "client",
+                    "options": {
+                        "parseStrategy": "progressive",
+                        "page": "singlePageSite"
+                    },
+                    "locations":{
+                        "upstream":{x: 467, y: 90}
+                    }
+                }
+            ]
+        },
+
+        "mobile-fail-progressive": {
+            "name": "mobile-progressive",
+            "items": [
+                {
+                    "name": "sever",
+                    "type": "server",
+                    "options": {
+                        "timeBetweenPackets": inconsistent_packet_spacing,
+                        "initialDelay": 500,
+                        "messageSize": 7
+                    },
+                    locations:{
+                        where: {x: 40, y: 93}
+                    }
+                },
+                {
+                    "name": "internet-wire",
+                    "type": "wire",
+                    "options": {
+                        "bandwidth": 500,
+                        "latency": 800,
+                        "messageSize": 7
+                    }
+                },
+                {
+                    "name": "internet-gsm",
+                    "type": "wire",
+                    "options": {
+                        "medium":"mobile",
+                        "bandwidth": 500,
+                        "latency": 800,
+                        "messageSize": 7
+                    },
+                    locations:{
+                        upstream: {x: 250, y: 40}
+                    }
+                },
+                {
+                    "name": "client",
+                    "type": "client",
+                    "options": {
+                        "parseStrategy": "progressive",
+                        "page": "singlePageSite"
+                    },
+                    "locations":{
+                        "upstream":{x: 467, y: 90}
+                    }
+                }
+            ]
         },        
         
         "slow-ajax-discrete": {

@@ -115,8 +115,13 @@ rect.server {
     stroke-width:3;
 }
 
-.tower, .barrier {
+.tower, .wall {
   fill: $midTone;
+}
+
+.barrier .upstream,
+.barrier .downstream {
+  display:none;
 }
 
 g.client .viewPort {

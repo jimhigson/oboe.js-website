@@ -14,9 +14,7 @@ var express = require('express'),
 
     SCRIPTS = environment == 'prod'? ['/js/all.js'] : require('./sourceList.js'),
 
-    CSS_STYLESHEETS = [
-        "all.css"
-    ],
+    CSS_STYLESHEETS = ["all.css"],
         
     LATEST_TAG = 'v1.11.0';
 

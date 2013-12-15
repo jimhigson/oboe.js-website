@@ -14,7 +14,7 @@ var scenarios = (function () {
      */
 
     var scenarios = {
-        "basic-layout":{            
+        "2-node-layout":{            
             "items": [
                 {
                     "name": "sever",
@@ -44,7 +44,7 @@ var scenarios = (function () {
         },
         
         "fast-ajax-discrete": {
-            "baseOn":"basic-layout",
+            "baseOn":"2-node-layout",
             "extensions":{
                 "items":[
                     ,,{
@@ -57,7 +57,7 @@ var scenarios = (function () {
         }, 
         
         "fast-ajax-progressive": {
-            "baseOn":"basic-layout",
+            "baseOn":"2-node-layout",
             "extensions":{
                 "items":[
                     ,,{

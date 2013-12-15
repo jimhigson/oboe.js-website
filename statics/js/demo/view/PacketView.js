@@ -75,7 +75,8 @@ PacketView.prototype.movementAnimator = function(packet, holder){
 
 PacketView.prototype.flashAerial = function(packet, location) {
 
-    var airwaveDoneTemplate = $('#airwaveDone'),
+    var FLASH_DURATION = 200,
+        airwaveDoneTemplate = $('#airwaveDone'),
         jPacketAtDestination = stampFromTemplate(airwaveDoneTemplate, this.className(packet)),
         jPackets = this.find('.packets');
     
@@ -85,7 +86,7 @@ PacketView.prototype.flashAerial = function(packet, location) {
 
     window.setTimeout(function(){
         jPacketAtDestination.remove();
-    }, 150);
+    }, FLASH_DURATION);
 }
 
 PacketView.prototype.doneAction = function(packet, holder){

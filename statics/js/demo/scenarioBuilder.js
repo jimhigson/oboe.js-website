@@ -43,13 +43,15 @@ var getScenario = (function () {
         return extend(copy, extensions);
     }
     
-    function fillInScenarioDescription(rawJson) {
+    function fillInScenarioDescription(name, rawJson) {
 
         var itemsByName = {};
         
         if(rawJson.baseOn) {
             rawJson = baseOn(rawJson.baseOn, rawJson.extensions);
         }
+        
+        rawJson.name = name;
         
         rawJson.items.forEach(function (item, i, items) {
             itemsByName[item.name] = item;
@@ -106,7 +108,7 @@ var getScenario = (function () {
     }
 
     return function (name) {
-        return scenarios[name] && fillInScenarioDescription( scenarios[name] );
+        return scenarios[name] && fillInScenarioDescription( name, scenarios[name] );
     }    
 
 })();   

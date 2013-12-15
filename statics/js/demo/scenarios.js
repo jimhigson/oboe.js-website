@@ -14,38 +14,7 @@ var scenarios = (function () {
      */
 
     var scenarios = {
-        "fast-ajax-discrete": {
-            "name": "fast-ajax-discrete", "items": [
-                {
-                    "name": "sever",
-                    "type": "server",
-                    "options": {
-                        "timeBetweenPackets": 100,
-                        "initialDelay": 500,
-                        "messageSize": 7
-                    }
-                },
-                {
-                    "name": "internet",
-                    "type": "wire",
-                    "options": {
-                        "bandwidth": 500,
-                        "latency": 1500
-                    }
-                },
-                {
-                    "name": "client",
-                    "type": "client",
-                    "options": {
-                        "parseStrategy": "discrete",
-                        "page": "singlePageSite"
-                    }
-                }
-            ]
-        }, 
-        
-        "fast-ajax-progressive": {
-            "name": "fast-ajax-progressive", 
+        "basic-layout":{            
             "items": [
                 {
                     "name": "sever",
@@ -68,11 +37,36 @@ var scenarios = (function () {
                     "name": "client",
                     "type": "client",
                     "options": {
-                        "parseStrategy": "progressive",
                         "page": "singlePageSite"
                     }
                 }
-            ]
+            ]            
+        },
+        
+        "fast-ajax-discrete": {
+            "baseOn":"basic-layout",
+            "extensions":{
+                "items":[
+                    ,,{
+                        options:{
+                            parseStrategy:"discrete"
+                        }
+                    }
+                ]
+            }
+        }, 
+        
+        "fast-ajax-progressive": {
+            "baseOn":"basic-layout",
+            "extensions":{
+                "items":[
+                    ,,{
+                        options:{
+                            parseStrategy:"progressive"
+                        }
+                    }
+                ]
+            }
         },
 
         "mobile-layout":{
@@ -127,7 +121,6 @@ var scenarios = (function () {
         "mobile-discrete": {
             "baseOn":"mobile-layout",
             "extensions":{
-                "name": "mobile-discrete",
                 "items": [
                     ,,,
                     {
@@ -142,7 +135,6 @@ var scenarios = (function () {
         "mobile-progressive": {
             "baseOn":"mobile-layout",
             "extensions":{
-                "name": "mobile-progressive",
                 "items": [
                     ,,,
                     {
@@ -155,109 +147,34 @@ var scenarios = (function () {
         },
 
         "mobile-fail-discrete": {
-            "name": "mobile-progressive",
-            "items": [
-                {
-                    "name": "sever",
-                    "type": "server",
-                    "options": {
-                        "timeBetweenPackets": inconsistent_packet_spacing,
-                        "initialDelay": 500,
-                        "messageSize": 7
-                    },
-                    locations:{
-                        where: {x: 40, y: 93}
+            "baseOn":"mobile-layout",
+            "extensions":{
+                "items": [
+                    ,,,
+                    {
+                        "options": {
+                            "parseStrategy": "discrete"
+                        }
                     }
-                },
-                {
-                    "name": "internet-wire",
-                    "type": "wire",
-                    "options": {
-                        "bandwidth": 500,
-                        "latency": 800,
-                        "messageSize": 7
-                    }
-                },
-                {
-                    "name": "internet-gsm",
-                    "type": "wire",
-                    "options": {
-                        "medium":"mobile",
-                        "bandwidth": 500,
-                        "latency": 800,
-                        "messageSize": 7
-                    },
-                    locations:{
-                        upstream: {x: 250, y: 40}
-                    }
-                },
-                {
-                    "name": "client",
-                    "type": "client",
-                    "options": {
-                        "parseStrategy": "progressive",
-                        "page": "singlePageSite"
-                    },
-                    "locations":{
-                        "upstream":{x: 467, y: 90}
-                    }
-                }
-            ]
+                ]
+            }
         },
 
         "mobile-fail-progressive": {
-            "name": "mobile-progressive",
-            "items": [
-                {
-                    "name": "sever",
-                    "type": "server",
-                    "options": {
-                        "timeBetweenPackets": inconsistent_packet_spacing,
-                        "initialDelay": 500,
-                        "messageSize": 7
-                    },
-                    locations:{
-                        where: {x: 40, y: 93}
+            "baseOn":"mobile-layout",
+            "extensions":{
+                "items": [
+                    ,,,
+                    {
+                        "options": {
+                            "parseStrategy": "progressive"
+                        }
                     }
-                },
-                {
-                    "name": "internet-wire",
-                    "type": "wire",
-                    "options": {
-                        "bandwidth": 500,
-                        "latency": 800,
-                        "messageSize": 7
-                    }
-                },
-                {
-                    "name": "internet-gsm",
-                    "type": "wire",
-                    "options": {
-                        "medium":"mobile",
-                        "bandwidth": 500,
-                        "latency": 800,
-                        "messageSize": 7
-                    },
-                    locations:{
-                        upstream: {x: 250, y: 40}
-                    }
-                },
-                {
-                    "name": "client",
-                    "type": "client",
-                    "options": {
-                        "parseStrategy": "progressive",
-                        "page": "singlePageSite"
-                    },
-                    "locations":{
-                        "upstream":{x: 467, y: 90}
-                    }
-                }
-            ]
+                ]
+            }
         },        
         
-        "slow-ajax-discrete": {
-            "name": "slow-ajax-discrete", 
+        "slow-ajax-discrete": { 
             "items": [
                 {
                     "name": "server",
@@ -287,8 +204,7 @@ var scenarios = (function () {
             ]
         },
     
-        "slow-ajax-progressive": {
-            "name": "slow-ajax", 
+        "slow-ajax-progressive": { 
             "items": [
                 {
                     "name": "sever",
@@ -317,8 +233,7 @@ var scenarios = (function () {
             ]
         },
 
-        "aggregated-progressive": {
-            "name": "aggregated-progressive", 
+        "aggregated-progressive": { 
             "options":{"height":257},
             "items": [
                 {
@@ -389,7 +304,6 @@ var scenarios = (function () {
         },
         
         "historic-and-live": {
-            "name": "historic-and-live",
             "items": [
                 {
                     "name": "sever",

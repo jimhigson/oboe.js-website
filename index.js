@@ -71,7 +71,6 @@ function respondWithMarkdown(req, res, markdownFilename, opts){
         
         // mark one as current:
         pages.forEach(function(page){
-            console.log(page.path, markdownFilename, page.path == markdownFilename);
             page.current = ( page.path == markdownFilename ); 
         });
         

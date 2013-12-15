@@ -19,6 +19,7 @@ var express = require('express'),
     ,   "/js/demo/singleEventPubSub.js"
     ,   "/js/demo/pubSub.js"
     ,   '/js/demo/scenarios.js'
+    ,   '/js/demo/scenarioBuilder.js'
     ,   '/js/demo/demoModel.js'
     ,   "/js/demo/view/viewUtils.js"        
     ,   "/js/demo/view/ThingView.js"

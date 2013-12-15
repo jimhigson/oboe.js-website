@@ -1,4 +1,4 @@
-var getScenario = (function () {
+var scenarios = (function () {
 
     /* some more:
      * jQ fast
@@ -556,9 +556,6 @@ var getScenario = (function () {
         return (i === undefined)?
             1 : i+=2;
     }    
-
-    return function (name) {
-
-        return scenarios[name] && fillInScenarioDescription( scenarios[name] );
-    }
+    
+    return scenarios;
 })();   

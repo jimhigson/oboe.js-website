@@ -1,5 +1,6 @@
 
 var express = require('express'),
+    gzippo = require('gzippo'),
     slashes = require('connect-slashes'),
     app = express(),
     consolidate = require('consolidate'),
@@ -75,8 +76,8 @@ function respondWithMarkdown(req, res, markdownFilename, opts){
 }
 
 app
-   .use(express.static('statics'))
-   .use(express.static('bower_components'))
+   .use(gzippo.staticGzip('statics'))
+   .use(gzippo.staticGzip('bower_components'))
    .use(slashes())    
    .get('/', function(req, res){
         respondWithMarkdown(req, res, 'index', { home:'true' });

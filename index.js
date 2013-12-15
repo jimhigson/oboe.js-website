@@ -37,14 +37,26 @@ function renderClientSideDemoTemplates(res, callback){
         });
 }
 
-function respondWithMarkdown(req, res, markdownFilename, opts){
-    
-    var view = req.query.mode == 'raw'? 'raw' : 'page';
-
+function defaultOpts(opts) {
     opts = opts || {};
     opts.scripts     = SCRIPTS;
     opts.stylesheets = CSS_STYLESHEETS;
     opts.latestTag   = LATEST_TAG;
+    
+    return opts;
+}
+
+function readMarkdownFromFile(req, callback) {
+    var mdFile = req.params.page || 'index';
+    
+    readContent(mdFile, callback);
+}
+
+function respondWithMarkdown(req, res, getContentFn, opts){
+    
+    var view = req.query.mode == 'raw'? 'raw' : 'page';
+
+    opts = defaultOpts(opts);
         
     var bar = barrier(function(){
         res.render(view, opts);
@@ -52,16 +64,17 @@ function respondWithMarkdown(req, res, markdownFilename, opts){
     
     
     readPagesList(bar.add(function(pages){
+        var mdFile = req.params.page || 'index';
         
         // mark one as current:
         pages.forEach(function(page){
-            page.current = ( page.path == markdownFilename ); 
+            page.current = ( page.path == mdFile ); 
         });
         
         opts.pages = pages;
     }));
 
-    readContent(markdownFilename, bar.add(function( outline ){
+    getContentFn(req, bar.add(function( outline ){
 
         opts.content = outline.content;
         opts.heading = outline.heading;
@@ -80,11 +93,29 @@ app
    .use(gzippo.staticGzip('bower_components'))
    .use(slashes())    
    .get('/', function(req, res){
-        respondWithMarkdown(req, res, 'index', { home:'true' });
+        respondWithMarkdown(req, res, readMarkdownFromFile, { home:'true' });
    })
    .get('/:page', function(req, res){
-       respondWithMarkdown(req, res, req.params.page);
-   })    
-   .listen(PORT);
+       respondWithMarkdown( req, res, readMarkdownFromFile);
+   });
+
+// allow single demos to be viewed but only if we are in dev:
+if( environment == 'dev' ) {
+   app.get('/demo/:demo', function(req, res){
+        
+       function readMarkdownFromFile(req, callback){
+           callback({
+               content:'<figure data-demo="' + req.params.demo  + '"></figure>'
+           ,   heading:[]
+           ,   sections:[]
+           ,   status:200
+           });
+       }
+        
+       respondWithMarkdown( req, res, readMarkdownFromFile);
+   })
+}
+
+app.listen(PORT);
 
 console.log('started on port', PORT.cyan);

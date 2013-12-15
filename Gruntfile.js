@@ -50,6 +50,19 @@ module.exports = function (grunt) {
                 }
             }
         }
+    ,
+        compress: {
+            main: {
+                options: {
+                    mode: 'gzip'
+                },
+                expand: true,
+                cwd: 'statics',
+                src: ['**/*'],
+                dest: 'statics.gz'
+            }
+        }
+    
         
     });
 
@@ -60,9 +73,10 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-sass');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-compress');
 
     // register a few tasks
-    grunt.registerTask('build', ['sass:all', 'uglify:clientSideJs', 'cssmin:minifyCss']);
+    grunt.registerTask('build', ['sass:all', 'uglify:clientSideJs', 'cssmin:minifyCss', 'compress:main']);
     grunt.registerTask('start-dev', ['develop:server', 'sass:all', 'watch:sources']);
     //grunt.registerTask('start-real', ???);
 

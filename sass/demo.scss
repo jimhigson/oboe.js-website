@@ -115,6 +115,10 @@ rect.server {
     stroke-width:3;
 }
 
+.tower {
+  fill: $midTone;
+}
+
 g.client .viewPort {
   fill: $backgroundColor;
 }

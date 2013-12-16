@@ -9,7 +9,7 @@ var scenarios = (function () {
             case 6:
                 return 75; // fast    
         }
-        return 500; //slow
+        return 750; //slow
     }
 
     function randomBetween(min, max) {

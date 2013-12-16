@@ -17,8 +17,14 @@ Message.prototype.withLast = function(lastPacket){
 
     lastPacket.events('move').on(function(){
 
-        this.events('endMove').emit.apply(this, arguments);;
+        this.events('endMove').emit.apply(this, arguments);
     }.bind(this));
+
+    lastPacket.events('done').on(function(){
+
+        this.events('done').emit.apply(this, arguments);
+    }.bind(this));    
+    
     return this; // chaining
 };
 Message.prototype.includes = function(packet) {

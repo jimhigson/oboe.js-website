@@ -14,8 +14,11 @@ var MessageView = extend(ThingView, function(subject, demoView){
 
         this.animateXy('lineX2', 'lineY2', xyFrom, xyTo, duration);
     }.bind(this));
-
-    subject.events('reset').on(function(){
+        
+    var remove = function(){
         this.jDom.remove();
-    }.bind(this));
+    }.bind(this);
+    
+    subject.events('reset').on(remove);
+    subject.events('done').on(remove);
 });

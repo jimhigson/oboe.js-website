@@ -2,12 +2,20 @@ var Relay = extend(PacketHolder, function(name, locations, options){
     PacketHolder.apply(this, arguments);
 
     this.timeBetweenPackets = options.timeBetweenPackets;
-    this.buffers = {
-        upstream:[]
-    ,   downstream:[]
-    };
+    this.initBuffers();
+    
+    this.events('reset').on(function(){
+        this.initBuffers();
+    }.bind(this));
     
 });
+
+Relay.prototype.initBuffers = function(){
+    this.buffers = {
+        upstream:[]
+        ,   downstream:[]
+    };
+};
 
 Relay.prototype.accept = function(receivedPacket){
 

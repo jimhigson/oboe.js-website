@@ -58,7 +58,7 @@ var scenarios = (function () {
                     "options": {
                         "timeBetweenPackets": 100,
                         "initialDelay": 500,
-                        "messageSize": 7
+                        "messageSize": 9
                     }
                 },
                 {

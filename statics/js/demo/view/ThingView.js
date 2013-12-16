@@ -1,6 +1,7 @@
 function ThingView(subject, demoView) {
     this.subject = subject;
     this.demoView = demoView;
+    subject.hasView(this);
 }
 
 ThingView.prototype.find = function(selector) {

@@ -8,3 +8,6 @@ function oppositeDirectionTo(dir) {
     }
     throw new Error('unknown direction' + dir);
 }
+function sameDirectionAs(dir) {
+    return dir;
+}

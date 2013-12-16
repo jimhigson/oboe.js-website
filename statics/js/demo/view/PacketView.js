@@ -1,9 +1,7 @@
 var PacketView = (function(){
     "use strict";
 
-    var MOBILE_WAVE_OVERSHOOT = 1.66,
-        MOBILE_AERIAL_FLASH_DURATION = 200;
-
+    var MOBILE_WAVE_OVERSHOOT = 1.66;
     
     var PacketView = extend(ThingView, function (subject, demoView) {
         
@@ -16,7 +14,7 @@ var PacketView = (function(){
                                  : PacketOnWireView
                                  ;
     
-            new ProxyConstructor(subject, demoView);
+            new ProxyConstructor(subject, demoView, holder);
             
         }.bind(this));
     
@@ -24,8 +22,8 @@ var PacketView = (function(){
 
     //---------------------------------------------    
     
-    var PacketViewRenderer = extend(ThingView, function (subject, demoView) {
-        ThingView.apply(this,arguments);
+    var PacketViewRenderer = extend(ThingView, function (subject, demoView, holder) {
+        ThingView.call(this,subject, demoView);
 
         this.initDomFromTemplate(
             'packets',
@@ -77,8 +75,20 @@ var PacketView = (function(){
 
     //---------------------------------------------    
     
-    var PacketOnMobileView = extend(PacketViewRenderer, function(subject, demoView){
+    var PacketOnMobileView = extend(PacketViewRenderer, function(subject, demoView, holder){
         PacketViewRenderer.apply(this, arguments);
+
+        if( holder.blockage ) {
+            console.log(subject, 'is on a wire blocked by', holder.blockage, 'which is drawn by',
+                holder.blockage.view );
+
+            //var clipId = holder.blockage.view.identifyClip( subject.direction );
+            var clipId = oppositeDirectionTo( subject.direction ) + '-clip';
+
+            console.log(this.jDom[0], clipId);
+
+            this.jDom[0].setAttribute('clip-path', 'url(#' + clipId + ')');
+        }        
     });
 
     PacketOnMobileView.prototype.animateMove = function( xyFrom, xyTo, duration ){
@@ -93,9 +103,9 @@ var PacketView = (function(){
         
         var packet = this.subject,
             transmissionDistance = distance( xyFrom, xyTo),
-            jPacketInTransit = this.jDom;
+            jPacketInTransit = this.jDom.find('.packet');
 
-        this.goToXy('translateX', 'translateY', xyFrom);
+        putAtXy( jPacketInTransit, 'circleX', 'circleY', xyFrom);
 
         jPacketInTransit.animate(
             {   circleRadius: transmissionDistance * MOBILE_WAVE_OVERSHOOT,
@@ -104,31 +114,10 @@ var PacketView = (function(){
             {   duration:duration * MOBILE_WAVE_OVERSHOOT,
                 queue:false,
                 complete:function(){
-                    jPacketInTransit.remove();
-                }
+                    this.jDom.remove();
+                }.bind(this)
             }
         );
-
-        // show indicator on start
-        this.flashAerial(packet, xyFrom);
-
-        // show indicator on complete
-        window.setTimeout(this.flashAerial.bind(this, packet, xyTo), duration);
-    };
-
-    PacketOnMobileView.prototype.flashAerial = function(packet, location) {
-
-        var airwaveDoneTemplate = $('#airwaveDone'),
-            jPacketAtDestination = stampFromTemplate(airwaveDoneTemplate, this.className(packet)),
-            jPackets = this.find('.packets');
-
-        jPackets.append(jPacketAtDestination);
-
-        putAtXy(jPacketAtDestination, 'translateX', 'translateY', location);
-
-        window.setTimeout(function(){
-            jPacketAtDestination.remove();
-        }, MOBILE_AERIAL_FLASH_DURATION);
     };
 
     PacketOnMobileView.prototype.done = function() {};

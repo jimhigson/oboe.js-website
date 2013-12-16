@@ -27,11 +27,6 @@ rect.fade {
     opacity: 0.9;
 }
 
-
-.packet.request {
-    fill:nth($categoricalColors, 10);
-}
-
 @mixin svg-text-centered {
   text-anchor: middle;
   alignment-baseline:middle;
@@ -73,6 +68,10 @@ rect.fade {
     stroke-width:1;
 }
 
+.aerial {
+  fill: $highlight;
+}
+
 $i: 1;
 @while $i <= length($categoricalColors) {
   .unit-#{$i - 1},
@@ -80,7 +79,7 @@ $i: 1;
     fill:nth($categoricalColors, $i);
   }
   
-  .packet.airwave.unit-#{$i - 1} {
+  .unit-#{$i - 1} .packet.airwave {
     fill:none;
     stroke:nth($categoricalColors, $i);
   }  
@@ -88,15 +87,13 @@ $i: 1;
   $i: $i + 1;
 }
 .packet.airwave {
+
   stroke-width:5px;
 }
 
 line.wire.cable {
    stroke:$highlight;
    stroke-width:4;
-}
-.aerial {
-  fill: $highlight;
 }
 line.messageOuter {
   stroke:$highlight;
@@ -135,12 +132,7 @@ rect.server {
   fill: $midTone;
 }
 .barrier .shadow {
-  opacity: 0.1;
-}
-
-.barrier .upstream,
-.barrier .downstream {
-  display:none;
+  opacity: 0.25;
 }
 
 g.client .viewPort {

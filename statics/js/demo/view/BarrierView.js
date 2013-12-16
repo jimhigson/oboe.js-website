@@ -3,10 +3,14 @@ var BarrierView = extend(ThingView, function(subject, demoView){
 
     this.initDomFromTemplate( 'barriers', 'barrier', subject.name);
     this.moveTo(subject.locations.where);
-    this.jDom.hide();
     
+    var jClipPathContents = this.jDom.find('clipPath').children();
+    putAtXy(jClipPathContents, 'translateX', 'translateY', subject.locations.where); 
+    
+    this.jDom.hide();
+       
     subject.events('activated').on(function(){
-        this.jDom.show();        
+        this.jDom.show();
     }.bind(this));
 
     subject.events('reset').on(function(){

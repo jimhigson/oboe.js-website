@@ -4,6 +4,15 @@ function addClass(jEle, klass) {
     var ele = jEle[0];
     ele.setAttribute('class', ele.getAttribute('class') + ' ' + klass);
 }
+function removeClass(jEle, klass) {
+    var ele = jEle[0];
+    ele.setAttribute('class', 
+            ele.getAttribute('class')
+                .split(' ')
+                .filter(function(c){return c != klass})
+                .join(' ')
+    );
+}
 
 function stampFromTemplate(jTemplate, klass) {
     if( !jTemplate.length )

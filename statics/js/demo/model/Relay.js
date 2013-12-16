@@ -1,12 +1,43 @@
 var Relay = extend(PacketHolder, function(name, locations, options){
     PacketHolder.apply(this, arguments);
+
+    this.timeBetweenPackets = options.timeBetweenPackets;
+    this.buffers = {
+        upstream:[]
+    ,   downstream:[]
+    };
+    
 });
 
 Relay.prototype.accept = function(receivedPacket){
 
-    var PROPAGATE_DELAY = 250;
+    var direction = receivedPacket.direction,
+        buffer = this.buffers[direction];
     
-    this.schedule( function(){
-        this.propagate(receivedPacket);
-    }, PROPAGATE_DELAY);
+    buffer.push(receivedPacket);
+    
+    if( receivedPacket.ordering.isFirst ) {
+        this.slot(direction, 0);
+    }
+};
+
+Relay.prototype.slot = function(direction, i) {
+    
+    var buffer = this.buffers[direction],
+        frontOfQueuePacket = buffer.shift();
+        
+    if( frontOfQueuePacket ) {
+        this.propagate(frontOfQueuePacket);
+    }
+
+    if( !(frontOfQueuePacket && frontOfQueuePacket.ordering.isLast) ) {
+        var nextSlotIn = this.timeBetweenPackets(i);    
+        
+        this.schedule( 
+            function(){
+                this.slot(direction, i+1);
+            },
+            nextSlotIn
+        );
+    }
 };

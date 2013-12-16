@@ -7,7 +7,7 @@ var scenarios = (function () {
             case 1:
             case 5:
             case 6:
-                return 50; // fast    
+                return 75; // fast    
         }
         return 500; //slow
     }
@@ -111,7 +111,7 @@ var scenarios = (function () {
                     "name": "sever",
                     "type": "server",
                     "options": {
-                        "timeBetweenPackets": inconsistent_packet_spacing,
+                        "timeBetweenPackets": 50,
                         "initialDelay": 500,
                         "messageSize": 7
                     },
@@ -131,7 +131,10 @@ var scenarios = (function () {
                 {
                     "name": "tower",
                     "type": "relay",
-                    "locations":{ "where":{x: 235, y: 90} }
+                    "locations":{ "where":{x: 235, y: 90} },
+                    "options":{
+                        "timeBetweenPackets": inconsistent_packet_spacing
+                    }
                 },                
                 {
                     "name": "internet-gsm",

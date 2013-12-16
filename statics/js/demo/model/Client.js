@@ -45,6 +45,8 @@ Client.prototype.makeRequest = function(){
 };
 Client.prototype.accept = function(packet){
 
+    this.addToScript('accepted', packet);
+    
     this.parseStrategy(packet);
 
     packet.done();

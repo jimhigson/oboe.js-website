@@ -202,7 +202,12 @@ var scenarios = (function () {
                     ,,,
                     {
                         "name":"barrier",
-                        "type":"barrier"
+                        "type":"barrier",
+                        "script": {
+                            "client_accepted_response2": function(){
+                                this.appear();
+                            }
+                        }
                     }
                 ]
             }            

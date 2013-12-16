@@ -39,8 +39,11 @@ var getScenario = (function () {
 
     function extend(base, extension) {
         for( var k in extension ) {
-            
-            if( extension[k] instanceof Object ) {
+            if( extension[k] instanceof Function ) {
+                // functions - copy directly
+                base[k] = extension[k];
+            }
+            else if( extension[k] instanceof Object ) {
                 
                 // objects, arrays - recursive case
                 if( !base[k] ) {

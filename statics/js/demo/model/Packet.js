@@ -14,12 +14,8 @@ Packet.prototype.copy = function(additionalName) {
         isLast: this.ordering.isLast
     };
 
-    var copyName =  ( additionalName !== undefined )
-        ?   this.name + '-' + additionalName
-        :   this.name;
-
     return new Packet(
-        copyName,
+        this.name,
         this.type,
         this.direction,
         orderingCopy,

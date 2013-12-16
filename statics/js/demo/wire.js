@@ -28,7 +28,7 @@ function loadScenario(scenarioId) {
             case "wire":                return Wire;
             case "client":              return Client;
             case "aggregatingServer":   return AggregatingServer;
-            case "barrier":             return Thing;
+            case "barrier":             return Barrier;
             case "relay":               return Relay;
         }
         throw new Error('unknown type ' + scenarioType);
@@ -59,7 +59,11 @@ function loadScenario(scenarioId) {
     
     scenario.items.forEach(function (scenarioItem){
 
-        modelItems[scenarioItem.name] = makeModel(scenarioItem).inDemo(demo);
+        var script = scenarioItem.script || {};
+        
+        modelItems[scenarioItem.name] = makeModel(scenarioItem)
+                                            .inDemo(demo)
+                                            .followingScript(script);
     });
     
 

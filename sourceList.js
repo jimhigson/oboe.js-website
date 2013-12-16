@@ -13,6 +13,7 @@ module.exports = [
     ,   '/js/demo/model/announce.js'
     ,   '/js/demo/model/direction.js'
     ,   '/js/demo/model/Thing.js'
+    ,   '/js/demo/model/Barrier.js'
     ,   '/js/demo/model/PacketHolder.js'
     ,   '/js/demo/model/Demo.js'
     ,   '/js/demo/model/Server.js'

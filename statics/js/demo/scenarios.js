@@ -199,9 +199,15 @@ var scenarios = (function () {
                             "where":     {x:190, y:80}
                         }
                     }
-                    ,,,
+                    ,
                     {
-                        "name":"barrier",
+                        "relationships":{
+                            "blockedBy":"tunnel"
+                        }
+                    }
+                    ,,
+                    {
+                        "name":"tunnel",
                         "type":"barrier",
                         "script": {
                             "client_accepted_response2": function(){

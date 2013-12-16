@@ -5,6 +5,7 @@ function Thing(name, locations){
     this.events = pubSub();
     this.locations = locations || {};
 }
+Thing.prototype.with = {};
 Thing.prototype.reset = function(){
 };
 Thing.prototype.inDemo = function(demo){

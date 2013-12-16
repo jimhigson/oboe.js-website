@@ -67,7 +67,7 @@ function loadScenario(scenarioId) {
     });
     
 
-    // link up model items to each other
+    // link up- / downstream model items to each other
     scenario.items.forEach(function(scenarioItem){
         var modelItem = modelItems[scenarioItem.name];    
 
@@ -75,7 +75,21 @@ function loadScenario(scenarioId) {
 
             modelItem.withDownstream( modelItems[nextScenarioName] );
         });
-    });    
+    });
+
+    // link up model items which refer to each other by name:
+    scenario.items.forEach(function(scenarioItem){
+        
+        var modelItem = modelItems[scenarioItem.name],
+            links = scenarioItem.relationships || {};
+        
+        for( var relationship in links ){
+            var otherItemName = links[relationship],
+                otherModelItem = modelItems[ otherItemName ];
+            
+            modelItem.with[relationship].call(modelItem ,otherModelItem);
+        }
+    });
     
     
     // make some views:

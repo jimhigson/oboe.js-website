@@ -12,6 +12,11 @@ Wire.prototype.accept = function(packet){
 
     this.propagateAfterLatency(packet);
 };
+Wire.prototype.with = {
+    'blockedBy':function( barrier ){
+        console.log(this, 'is blocked by', barrier);
+    }
+};
 Wire.prototype.propagateAfterLatency = function(packet){
 
     this.schedule(function(){

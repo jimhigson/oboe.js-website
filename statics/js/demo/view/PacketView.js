@@ -42,7 +42,7 @@ var PacketView = (function(){
         return [
             subject.name
             // since we only have categorical colours...
-            ,   unitClass(subject)
+        ,   unitClass(subject)
         ].join(' ');
     };
 

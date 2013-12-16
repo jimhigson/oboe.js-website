@@ -4,8 +4,8 @@ var Barrier = (function(){
         Thing.apply(this, arguments);
     });
     
-    Barrier.prototype.appear = function(){
-        console.log(this);
+    Barrier.prototype.activate = function(){
+        this.events('activated').emit();
     };
     
     return Barrier;

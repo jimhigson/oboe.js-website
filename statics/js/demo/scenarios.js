@@ -205,7 +205,7 @@ var scenarios = (function () {
                         "type":"barrier",
                         "script": {
                             "client_accepted_response2": function(){
-                                this.appear();
+                                this.activate();
                             }
                         }
                     }

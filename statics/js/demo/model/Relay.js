@@ -4,7 +4,9 @@ var Relay = extend(PacketHolder, function(name, locations, options){
 
 Relay.prototype.accept = function(receivedPacket){
 
+    var PROPAGATE_DELAY = 250;
+    
     this.schedule( function(){
         this.propagate(receivedPacket);
-    }, 500);
+    }, PROPAGATE_DELAY);
 };

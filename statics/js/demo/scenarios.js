@@ -113,7 +113,7 @@ var scenarios = (function () {
                     "options": {
                         "timeBetweenPackets": 50,
                         "initialDelay": 500,
-                        "messageSize": 7,
+                        "messageSize": 10,
                         "packetMode": "historic"
                     },
                     locations:{
@@ -151,7 +151,7 @@ var scenarios = (function () {
                     "name": "client",
                     "type": "client",
                     "options": {
-                        "page": "singlePageSite"
+                        "page": "twitter"
                     },
                     "locations":{
                         "upstream":{x: 467, y: 90}
@@ -199,12 +199,7 @@ var scenarios = (function () {
                             "where":     {x:190, y:80}
                         }
                     }
-                    ,,
-                    {   
-                        "options":{
-                            "page": "twitter"
-                        }
-                    },
+                    ,,,
                     {
                         "name":"barrier",
                         "type":"barrier"

@@ -113,7 +113,8 @@ var scenarios = (function () {
                     "options": {
                         "timeBetweenPackets": 50,
                         "initialDelay": 500,
-                        "messageSize": 7
+                        "messageSize": 7,
+                        "packetMode": "historic"
                     },
                     locations:{
                         where: {x: 40, y: 93}
@@ -198,7 +199,12 @@ var scenarios = (function () {
                             "where":     {x:190, y:80}
                         }
                     }
-                    ,,,
+                    ,,
+                    {   
+                        "options":{
+                            "page": "twitter"
+                        }
+                    },
                     {
                         "name":"barrier",
                         "type":"barrier"

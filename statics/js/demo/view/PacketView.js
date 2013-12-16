@@ -1,7 +1,7 @@
 var PacketView = (function(){
+    "use strict";
 
     var PacketView = extend(ThingView, function (subject, demoView) {
-        "use strict";
         
         ThingView.apply(this,arguments);
     

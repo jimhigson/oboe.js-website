@@ -84,7 +84,7 @@ PacketHolder.prototype.schedule = function(fn, time) {
 
         // stop remembering this timeout, it is done now:
         this.removeTimeout(timeout);
-        fn();
+        fn.apply(this);
 
     }.bind(this), time);
 

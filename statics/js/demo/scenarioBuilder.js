@@ -15,6 +15,23 @@ var getScenario = (function () {
                 return DEFAULT_BARRIER_LOCATION;            
         }
     }
+    
+    function setRelativePositions(item) {
+        var locations = item.locations;
+        var baseXy = locations.where;
+        
+        switch (item.type) {
+            case 'relay':
+                locations.upstream   = translate(baseXy, {x:-20, y:40});
+        }
+    }
+    
+    function translate( xy, xyDelta ) {
+        return {
+            x: xy.x + xyDelta.x,
+            y: xy.y + xyDelta.y
+        };
+    }
 
     function deepCopy(obj){
         return jQuery.extend(true, {}, obj);
@@ -86,6 +103,8 @@ var getScenario = (function () {
             if( !rawItem.locations.where ) {
                 rawItem.locations.where = defaultLocationForItem(rawItem);
             }
+            
+            setRelativePositions(rawItem);
         });
 
 

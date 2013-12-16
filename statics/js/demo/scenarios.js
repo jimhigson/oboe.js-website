@@ -126,11 +126,13 @@ var scenarios = (function () {
                         "bandwidth": 500,
                         "latency": 800,
                         "messageSize": 7
-                    },
-                    locations:{
-                        downstream: {x: 235, y: 90}
                     }                    
                 },
+                {
+                    "name": "tower",
+                    "type": "relay",
+                    "locations":{ "where":{x: 235, y: 90} }
+                },                
                 {
                     "name": "internet-gsm",
                     "type": "wire",
@@ -139,9 +141,6 @@ var scenarios = (function () {
                         "bandwidth": 500,
                         "latency": 800,
                         "messageSize": 7
-                    },
-                    locations:{
-                        upstream: {x: 250, y: 40}
                     }
                 },
                 {
@@ -162,7 +161,7 @@ var scenarios = (function () {
             "baseOn":"mobile-layout",
             "extensions":{
                 "items": [
-                    ,,,
+                    ,,,,
                     {
                         "options": {
                             "parseStrategy": "discrete"
@@ -176,7 +175,7 @@ var scenarios = (function () {
             "baseOn":"mobile-layout",
             "extensions":{
                 "items": [
-                    ,,,
+                    ,,,,
                     {
                         "options": {
                             "parseStrategy": "progressive"
@@ -191,11 +190,12 @@ var scenarios = (function () {
             "extensions":{
                 "items": [
                     ,,
-                    {   "locations": {
-                            "upstream":{x:190, y:80}
+                    {
+                        "locations": {
+                            "where":     {x:190, y:80}
                         }
                     }
-                    ,,
+                    ,,,
                     {
                         "name":"barrier",
                         "type":"barrier"
@@ -208,7 +208,7 @@ var scenarios = (function () {
             "baseOn":"mobile-fail",
             "extensions":{
                 "items": [
-                    ,,,
+                    ,,,,
                     {
                         "options": {
                             "parseStrategy": "discrete"
@@ -222,7 +222,7 @@ var scenarios = (function () {
             "baseOn":"mobile-fail",
             "extensions":{
                 "items": [
-                    ,,,
+                    ,,,,
                     {
                         "options": {
                             "parseStrategy": "progressive"

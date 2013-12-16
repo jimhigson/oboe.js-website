@@ -21,6 +21,7 @@ module.exports = [
     ,   '/js/demo/model/Message.js'
     ,   '/js/demo/model/Wire.js'
     ,   '/js/demo/model/Client.js'
+    ,   '/js/demo/model/Relay.js'
     ,   "/js/demo/view/viewUtils.js"
     ,   "/js/demo/view/ThingView.js"
     ,   "/js/demo/view/BarrierView.js"
@@ -30,5 +31,6 @@ module.exports = [
     ,   "/js/demo/view/ServerView.js"
     ,   "/js/demo/view/WireView.js"
     ,   "/js/demo/view/PacketView.js"
+    ,   "/js/demo/view/RelayView.js"
     ,   "/js/demo/wire.js"
 ];

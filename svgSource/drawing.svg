@@ -25,11 +25,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2"
-     inkscape:cx="-40.773463"
-     inkscape:cy="150.50862"
+     inkscape:zoom="2.8284271"
+     inkscape:cx="-22.599176"
+     inkscape:cy="35.768109"
      inkscape:document-units="px"
-     inkscape:current-layer="layer4"
+     inkscape:current-layer="layer3"
      showgrid="true"
      inkscape:window-width="1633"
      inkscape:window-height="1016"
@@ -57,7 +57,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -167,7 +167,7 @@
        inkscape:connector-curvature="0"
        id="path4093"
        d="m 150,-110 -250,0 20,155 -60,60 330,0 -60,-60 z"
-       style="opacity:0.47413793;color:#000000;fill:#ffaacc;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       style="opacity:0.47413797;color:#000000;fill:#ffaacc;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        sodipodi:nodetypes="ccccccc" />
     <path
        style="opacity:0.70689655;color:#000000;fill:#93a7ac;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
@@ -185,7 +185,14 @@
      inkscape:groupmode="layer"
      id="layer3"
      inkscape:label="mast"
-     style="display:none">
+     style="display:inline">
+    <path
+       sodipodi:nodetypes="ccccccc"
+       inkscape:connector-curvature="0"
+       id="path3011"
+       d="M 0,7.6e-6 C -14.47705,36.152936 -28.53261,71.811962 -43,107.96876 l 12,0 c 8.5283,-22.206871 19.49886,-34.235737 31,-40.500002 11.50114,6.264265 22.4717,18.293131 31,40.500002 l 12,0 C 28.53261,71.811962 14.47705,36.152936 0,7.6e-6 z"
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#00ff00;fill-opacity:1;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
+       transform="translate(0,-1.0000076)" />
     <path
        transform="translate(0,-1.0000076)"
        style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#707070;fill-opacity:1;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"

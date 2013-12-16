@@ -22,7 +22,7 @@ var getScenario = (function () {
         
         switch (item.type) {
             case 'relay':
-                locations.upstream   = translate(baseXy, {x:-20, y:40});
+                locations.upstream   = translate(baseXy, {x:0, y:40});
         }
     }
     

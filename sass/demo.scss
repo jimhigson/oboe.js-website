@@ -117,12 +117,19 @@ rect.server {
 .aerial circle,
 circle.aerial,
 g.client .frame,
+.tower .area,
 rect.server {
     stroke:$shadedBackgroundColor;
     stroke-width:3;
+    stroke-linejoin: round;
 }
 
-.tower, 
+.tower .area {
+  fill:$shadedBackgroundColor;
+  stroke-width:9;
+}
+
+.tower .structure, 
 .barrier .wall,
 .barrier .shadow {
   fill: $midTone;

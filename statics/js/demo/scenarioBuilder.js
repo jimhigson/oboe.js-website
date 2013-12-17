@@ -23,6 +23,16 @@ var getScenario = (function () {
         switch (item.type) {
             case 'relay':
                 locations.upstream   = translate(baseXy, {x:0, y:40});
+                break;
+            case 'client':
+                switch( item.options.deviceType ){
+                    case 'mobile':
+                        locations.upstream   = translate(baseXy, {x:30, y:-53});
+                        break;
+                    case 'desktop':
+                    default:
+                        locations.upstream   = translate(baseXy, {x:-18, y:0});
+                }
         }
     }
     

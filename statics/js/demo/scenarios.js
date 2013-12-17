@@ -37,7 +37,8 @@ var scenarios = (function () {
                     "name": "client",
                     "type": "client",
                     "options": {
-                        "page": "singlePageSite"
+                        "page": "singlePageSite",
+                        "deviceType":"desktop"
                     }
                 }
             ]            
@@ -115,10 +116,8 @@ var scenarios = (function () {
                     "name": "client",
                     "type": "client",
                     "options": {
-                        "page": "map"
-                    },
-                    "locations":{
-                        "upstream":{x: 467, y: 90}
+                        "page": "map",
+                        "deviceType":"mobile"
                     },
                     "next":[]
                 }
@@ -275,7 +274,8 @@ var scenarios = (function () {
                     "type": "client",
                     "options": {
                         "parseStrategy": "progressive",
-                        "page": "singlePageSite"
+                        "page": "singlePageSite",
+                        "deviceType":"desktop"
                     }
                 }
             ]
@@ -306,7 +306,8 @@ var scenarios = (function () {
                     "type": "client",
                     "options": {
                         "parseStrategy": "progressive",
-                        "page": "twitter"
+                        "page": "twitter",
+                        "deviceType":"desktop"
                     }
                 }
             ]

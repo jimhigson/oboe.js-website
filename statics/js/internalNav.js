@@ -68,13 +68,15 @@ $(function(){
 
        // set up smooth scrolling for internal links
        // http://css-tricks.com/snippets/jquery/smooth-scrolling/
-       $('a[href*=#]:not([href=#])').click(function() {
+       var jHtmlBody = $('html,body');
+       
+       $('ul.sections a').click(function() {
            if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
                var target = $(this.hash);
                target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
                if (target.length) {
-                   $('html,body').animate({
-                       scrollTop: target.offset().top
+                   jHtmlBody.animate({
+                       scrollTop: (target.offset().top - 70)
                    }, 500);
                    return false;
                }

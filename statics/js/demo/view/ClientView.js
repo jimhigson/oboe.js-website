@@ -13,10 +13,11 @@ var ClientView = (function(){
 
         function type(pageName){
             switch(pageName){
+                case "singlePageSite":
+                case "map":
+                    return SimpleClient;                
                 case "twitter":
                     return TwitterPageClient;
-                case "singlePageSite":
-                    return SinglePageClient;
                 default:
                     throw Error("unknown page type " + pageName);
             }
@@ -28,7 +29,9 @@ var ClientView = (function(){
 
     // ---------------------------------
     
-    var SinglePageClient = extend(ClientView, function(subject, demoView){
+    /* simple client turns on classes when packets are received, works for
+     * any class/hiding based client svg */
+    var SimpleClient = extend(ClientView, function(subject, demoView){
         ClientView.apply(this, arguments);
         
         subject.events('receive').on(function( packet ){

@@ -2,9 +2,11 @@ var ClientView = (function(){
 
     var ClientView = extend(ThingView, function(subject, demoView){
         ThingView.apply(this,arguments);
-    
-        var templateName = 'client-' + subject.page;
-        this.initDomFromTemplate( 'places', templateName, subject.name);
+
+        this.initDomFromTemplate( 'places', 'client', subject.name);
+        
+        var browserTemplateName = 'client-' + subject.page;
+        this.stampContentsFromTemplate( 'browserContents', browserTemplateName);
     
         this.moveTo(subject.locations.where);
     });

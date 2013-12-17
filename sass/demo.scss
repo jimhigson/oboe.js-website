@@ -116,7 +116,7 @@ rect.server {
 
 .aerial circle,
 circle.aerial,
-g.client .frame,
+.browser .frame,
 .tower .area,
 rect.server {
     stroke:$shadedBackgroundColor;
@@ -126,7 +126,17 @@ rect.server {
 
 .tower .area {
   fill:$shadedBackgroundColor;
+  stroke:$shadedBackgroundColor;
   stroke-width:9;
+}
+.browser .background {
+  stroke:$shadedBackgroundColor;
+  stroke-width:3;
+}
+
+.browser .frame {
+  stroke:$shadedBackgroundColor;
+  stroke-width:1;
 }
 
 .tower .structure, 
@@ -151,7 +161,7 @@ g.client .part {
 }
 
 
-.map .background {
+.browser .background {
   fill:$backgroundColor;
 }
 .map .water {

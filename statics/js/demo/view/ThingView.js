@@ -8,15 +8,20 @@ ThingView.prototype.find = function(selector) {
     return this.demoView.jDom.find(selector);
 };
 
-ThingView.prototype.initDomFromTemplate = function(containerName, templateName, className) {
-    this.jDom = stampFromTemplate($('#' + templateName), className);
+ThingView.prototype.stampContentsFromTemplate = function(containerName, templateName, className) {
+    var jDom = stampFromTemplate($('#' + templateName), className);
 
     var jContainer = this.find('.' + containerName);
 
     if( jContainer.length != 1 ) {
         throw new Error('no one place to put the thing');
     }
-    jContainer.append(this.jDom);
+    jContainer.append(jDom);
+    return jDom;
+}
+
+ThingView.prototype.initDomFromTemplate = function(containerName, templateName, className) {
+    this.jDom = this.stampContentsFromTemplate(containerName, templateName, className);
     return this.jDom;
 };
 

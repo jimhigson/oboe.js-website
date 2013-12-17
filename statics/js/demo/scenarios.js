@@ -1,40 +1,4 @@
 var scenarios = (function () {
-
-    function inconsistent_packet_spacing(i) {
-
-        switch(i){
-            case 0:
-            case 1:
-            case 5:
-            case 6:
-                return 75; // fast    
-        }
-        return 600; //slow
-    }
-
-    function randomBetween(min, max) {
-        var range = (max - min);
-        return min + (Math.random() * range);
-    }
-    
-    function fastTimingThenStream(i){
-
-        return (i < 6 ? 100 : randomBetween(750, 2500));
-    }
-
-    function historicPacketsThenLive(i) {
-        return (i < 6 ? 'historic' : 'live');
-    }
-
-    function evenNumberedPackets(i) {
-        return (i === undefined)?
-            0 : i+=2;
-    }
-
-    function oddNumberedPackets(i) {
-        return (i === undefined)?
-            1 : i+=2;
-    }
     
     /* some more:
      * jQ fast
@@ -348,5 +312,42 @@ var scenarios = (function () {
             ]
         }
     };
+
+    function inconsistent_packet_spacing(i) {
+
+        switch(i){
+            case 0:
+            case 1:
+            case 5:
+            case 6:
+                return 75; // fast    
+        }
+        return 600; //slow
+    }
+
+    function randomBetween(min, max) {
+        var range = (max - min);
+        return min + (Math.random() * range);
+    }
+
+    function fastTimingThenStream(i){
+
+        return (i < 6 ? 100 : randomBetween(750, 2500));
+    }
+
+    function historicPacketsThenLive(i) {
+        return (i < 6 ? 'historic' : 'live');
+    }
+
+    function evenNumberedPackets(i) {
+        return (i === undefined)?
+            0 : i+=2;
+    }
+
+    function oddNumberedPackets(i) {
+        return (i === undefined)?
+            1 : i+=2;
+    }
+    
     
 })();   

@@ -12,7 +12,7 @@ var DemoView = extend(ThingView, function(subject){
 
     this.baseWidth  = subject.width  || DEFAULT_WIDTH;
     this.baseHeight = subject.height || DEFAULT_HEIGHT;
-    this.setDimensions(this.baseHeight, this.baseWidth, this.scalingFactor());
+    this.setDimensions(this.baseHeight, this.scalingFactor());
 
     Packet.new.on( function(newPacket){
 
@@ -28,7 +28,7 @@ var DemoView = extend(ThingView, function(subject){
     }.bind(this));
 
     $( window ).resize(function() {
-        this.setDimensions(this.baseHeight, this.baseWidth, this.scalingFactor());
+        this.setDimensions(this.baseHeight, this.scalingFactor());
     }.bind(this));
 
     this.setupControls();
@@ -74,22 +74,11 @@ DemoView.prototype.scalingFactor = function(){
     return spaceAvailable / this.baseWidth;
 };
 
-DemoView.prototype.setDimensions = function(height, width, scalingFactor){
+DemoView.prototype.setDimensions = function(height, scalingFactor){
 
-    var container = this.jDom.parents('figure'),
-        dimensions = {  width: width * scalingFactor,
-            height: height * scalingFactor};
-
-    container.css(dimensions);
-    this.jDom.attr(dimensions);
-
-    this.jDom.find('.scaling').attr('transform', 'scale(' + scalingFactor + ')');
-
-    // this should really be more template-esque
-    // but can't find a tempting engine that handles
-    // SVG elements well. Need to find a DOM-based engine
-    // that starts by doing Element.clone().
     this.jDom.attr('height', height * scalingFactor);
+
+    this.jDom.find('.scaling').attr('transform', 'scale(' + scalingFactor + ')');   
     this.jDom.find('.fade').attr('height', height);
 
     // The container div should have the height set on

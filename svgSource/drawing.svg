@@ -40,7 +40,7 @@
      fit-margin-left="0"
      fit-margin-right="0"
      fit-margin-bottom="0"
-     inkscape:snap-grids="true">
+     inkscape:snap-grids="false">
     <inkscape:grid
        type="xygrid"
        id="grid2985"
@@ -553,7 +553,8 @@
          sodipodi:type="arc" />
     </g>
     <g
-       id="g4218">
+       id="g4218"
+       transform="translate(18.541667,23.875)">
       <path
          style="opacity:0.20416667;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
          d="M -0.33333333,0 5.6666667,-3 11,-9 4.3333333,-9 -1,-3 z"
@@ -563,7 +564,7 @@
          inkscape:connector-curvature="0"
          id="path4197"
          d="m 0,0 5,-5 0,-10 -10,0 0,10 z"
-         style="fill:#31a7b0;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;color:#000000;fill-opacity:1;fill-rule:nonzero;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+         style="color:#000000;fill:#31a7b0;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     </g>
   </g>
 </svg>

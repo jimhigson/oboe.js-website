@@ -146,3 +146,24 @@ g.client .part {
   fill:$backgroundColor;
   opacity:0.5;
 }
+
+
+.map .background {
+  fill:$backgroundColor;
+}
+.map .water {
+  fill:#3F8FB4;
+}
+.map .parks {
+  fill:$highlight; 
+}
+.map .roads {
+  fill:none;
+  stroke:$shadow;
+}
+.map .roads.minor {
+  stroke-width:1;
+}
+.map .roads.major {
+  stroke-width:3;
+}

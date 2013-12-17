@@ -4,6 +4,11 @@
    position:relative;
 }
 
+.marked,
+.marked pre {
+  max-width: 672px;
+}
+
 code {
    color: #3d3935;
    font-size:80%;
@@ -21,10 +26,14 @@ code {
 
 .marked pre {
    background-color:$shadedBackgroundColor;
-   overflow:auto;
+   overflow:scroll;
    padding:1em;
    line-height: 1.2em;
-   margin:0em 0 2em 0; 
+   margin:0em 0 2em 0;
+}
+
+code {
+  font-family: Computer Modern mono, monospace;
 }
 
 /* inline code examples */
@@ -34,11 +43,6 @@ code {
    border-radius: 2px;
    padding: 2px 5px; 
 }
-
-code {
-   font-family: Computer Modern mono, monospace;
-}
-
 
 code .comment {
    color: #4eb974;
@@ -60,6 +64,7 @@ code .keyword {
 .marked li {
    margin:0.5em 0;
    padding-left:0;
+   line-height: 1.5; 
 }   
    
 .marked li:before {
@@ -67,4 +72,12 @@ code .keyword {
     padding-right: 0;
     position:absolute;
     left:1em;
+}
+
+@media only screen and (max-width: $minSizeForTwoCol) {
+
+  .marked,
+  .marked pre {
+    max-width: 100%;
+  }
 }

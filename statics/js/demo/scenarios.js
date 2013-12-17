@@ -115,7 +115,7 @@ var scenarios = (function () {
                     "name": "client",
                     "type": "client",
                     "options": {
-                        "page": "twitter"
+                        "page": "map"
                     },
                     "locations":{
                         "upstream":{x: 467, y: 90}

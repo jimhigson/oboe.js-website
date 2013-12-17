@@ -98,8 +98,13 @@ function loadScenario(scenarioId) {
     scenario.items.forEach(function(scenarioItem){
         var modelItem = modelItems[scenarioItem.name],
             ViewType = viewType(scenarioItem.type);
-        
-        itemViews[scenarioItem.name] = new ViewType(modelItem, demoView);
+
+        // in instantiation: use factory method if available, otherwise
+        // use constructor
+        itemViews[scenarioItem.name] = 
+            ViewType.factory
+            ?   ViewType.factory(modelItem, demoView) 
+            :   new ViewType(modelItem, demoView);
     });
 
     // TODO: get from scenario or something:

@@ -218,9 +218,9 @@ var scenarios = (function () {
                     }
                 ]
             }
-        },        
-        
-        "aggregated-progressive": { 
+        },
+
+        "aggregated-layout":{
             "options":{"height":257},
             "items": [
                 {
@@ -241,7 +241,7 @@ var scenarios = (function () {
                         "bandwidth": 500,
                         "latency": 1200
                     }
-                },                
+                },
                 {
                     "name": "origin-fast",
                     "type": "server",
@@ -251,8 +251,8 @@ var scenarios = (function () {
                         "messageSize": 5,
                         "packetSequence": oddNumberedPackets
                     },
-                    "locations":{ "where":{x:100, y:200} }                    
-                },                
+                    "locations":{ "where":{x:100, y:200} }
+                },
                 {
                     "name": "origin-fast-wire",
                     "type": "wire",
@@ -260,7 +260,7 @@ var scenarios = (function () {
                         "bandwidth": 500,
                         "latency": 800
                     }
-                },                
+                },
                 {
                     "name": "aggregator",
                     "type": "aggregatingServer",
@@ -289,6 +289,34 @@ var scenarios = (function () {
                     }
                 }
             ]
+        },
+        
+        "aggregated-discrete": {
+            
+            "baseOn":"aggregated-layout",
+            "extensions":{
+                "items":[
+                    ,,,,,,{
+                        "options":{
+                            "parseStrategy": "discrete"
+                        }
+                    }
+                ]
+            }
+        },
+        
+        "aggregated-progressive": {
+
+            "baseOn":"aggregated-layout",
+            "extensions":{
+                "items":[
+                    ,,,,,,{
+                        "options":{
+                            "parseStrategy": "progressive"
+                        }
+                    }
+                ]                
+            }
         },
         
         "historic-and-live": {

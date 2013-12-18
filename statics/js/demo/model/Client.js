@@ -36,14 +36,18 @@ Client.prototype.makeParseStrategy = function(strategyName){
     }
 };
 
-Client.prototype.makeRequest = function(){
+Client.prototype.makeRequest = function( attemptNumber ){
+    attemptNumber = attemptNumber || 0;
+
+    this.addToScript('requestAttempt', attemptNumber);
+    
     var packet =
         new Packet('request', 'GET', 'upstream', {isFirst:true, isLast:true, i:0})
             .inDemo(this.demo)
             .announce();
 
     this.retryIfNoResponse = this.schedule(function retry(){
-        this.makeRequest();
+        this.makeRequest( attemptNumber +1 );
     }.bind(this), this.retryAfter);
     
     this.propagate(packet);

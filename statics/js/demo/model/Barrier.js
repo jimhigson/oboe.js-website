@@ -7,6 +7,10 @@ var Barrier = (function(){
     Barrier.prototype.activate = function(){
         this.events('activated').emit();
     };
+
+    Barrier.prototype.deactivate = function(){
+        this.events('deactivated').emit();
+    };    
     
     return Barrier;
 }());

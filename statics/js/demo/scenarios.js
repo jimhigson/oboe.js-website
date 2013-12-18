@@ -180,6 +180,9 @@ var scenarios = (function () {
                         "script": {
                             "client_accepted_response2": function(){
                                 this.activate();
+                            },
+                            "client_requestAttempt_2": function(){
+                                this.deactivate();
                             }
                         }
                     }

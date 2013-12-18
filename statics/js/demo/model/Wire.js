@@ -26,6 +26,11 @@ Wire.prototype.with = {
             
             this.blockage = barrier;            
         }.bind(this));
+
+        barrier.events('deactivated').on(function(){
+
+            this.blockage = null;
+        }.bind(this));        
     }
 };
 Wire.prototype.propagateAfterLatency = function(packet){

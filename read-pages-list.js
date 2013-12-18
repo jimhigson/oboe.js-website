@@ -1,7 +1,6 @@
 var fs = require('fs'),
     lineReader = require('line-reader'),
     CONTENT_DIR = 'content',
-    EXCLUSIONS = ['index.md', '404.md'],
     MARKDOWN_FILENAME_PATTERN = /(.*)\.md/,
     barrier = require('./barrier');
 
@@ -20,29 +19,34 @@ function markdownTitleContent(markdownLine) {
 
 module.exports = function readPagesList(callback) {
 
+    fs.readFile(CONTENT_DIR + '/listing', 'utf8', function(err, content){
+
+        var files = content.split('\n');
+
+        readFileList(files);
+    });
     
-    fs.readdir(CONTENT_DIR, function(err, files){
-        
-        var result = [],
-            markdownFiles = files.filter(function( f ){
-                return f.match(MARKDOWN_FILENAME_PATTERN) && (EXCLUSIONS.indexOf(f) == -1);
-            });
+    function readFileList(markdownFiles){
+
+        var result = [];
 
         var bar = barrier(function(){
             callback(result);
         });
 
-        markdownFiles.forEach(function(file){
+        markdownFiles.forEach(function(file, i){
+            if( !file )
+                return // skip blank lines
+            
             var obj = {path:file.match(MARKDOWN_FILENAME_PATTERN)[1]};
-                        
+
             readFirstLine(file, bar.add(function(firstLine){
                 // de-markdown the title from the file:
-                obj.title = markdownTitleContent(firstLine); 
-                
-                result.push(obj);
+                obj.title = markdownTitleContent(firstLine);
+
+                result[i] = obj;
             }));
         });
-    });
-    
+    }
 }
 

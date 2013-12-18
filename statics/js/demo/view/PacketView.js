@@ -79,8 +79,6 @@ var PacketView = (function(){
         PacketViewRenderer.apply(this, arguments);
 
         if( holder.blockage ) {
-            console.log(subject, 'is on a wire blocked by', holder.blockage, 'which is drawn by',
-                holder.blockage.view );
 
             //var clipId = holder.blockage.view.identifyClip( subject.direction );
             var clipId = oppositeDirectionTo( subject.direction ) + '-clip';

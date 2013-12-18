@@ -1,17 +1,44 @@
 var AggregatingServer = extend(Server, function(name, locations, options){
     Server.apply(this, arguments);
+  
+    this.parseStrategyName = options.parseStrategy;
+    this.aggregateParsedPackets();
 });
 
-AggregatingServer.prototype.accept = function(receivedPacket){
-
+AggregatingServer.prototype.accept = function(receivedPacket, sender){
+    
     if( receivedPacket.direction == 'upstream' ) {
 
         this.propagate(receivedPacket);
         this.openOutboundMessages('downstream', this.responsePacketGenerator());
+
+        this.parsers = this.createParsersForPacketsFromEachUpstreamNode(this.parseStrategyName);
+        
     } else {
 
-        this.events('timeForNextPacket').emit(receivedPacket);
+        this.parsers[sender.name](receivedPacket);
     }
+};
+
+AggregatingServer.prototype.createParsersForPacketsFromEachUpstreamNode = function(parseStrategyName){
+    var parsers = {},
+        nextLocations = this.nextLocationsInDirection('upstream'),
+        emitPacketParsed = this.events('packetParsed').emit;
+    
+    nextLocations.forEach(function(loc){
+        parsers[loc.name] = Parser(parseStrategyName, emitPacketParsed); 
+    });
+     
+    return parsers;
+};
+
+/* receive parsed packets from multiple streams, output all according to our parse strategy: either straight
+   away or when all parsers have finished.
+ */
+AggregatingServer.prototype.aggregateParsedPackets = function(){
+    this.events('packetParsed').on(function(packet) {
+        this.events('packetReadyToDispatch').emit(packet);
+    }.bind(this));
 };
 
 AggregatingServer.prototype.responsePacketGenerator = function(){
@@ -20,6 +47,11 @@ AggregatingServer.prototype.responsePacketGenerator = function(){
         numberOfResponsesCompleted = 0,
         responsesStarted = false;
 
+    /* Takes packets. Returns packets which are very similar but have had the ordering
+       changed, so that their isFirst/isLast is set to be correct post-aggregation
+       (only one first, only one last, even if read from multiple streams where each 
+       stream yielded a first and last packet)
+     */
     return function(incomingPacket){
 
         var outgoing = incomingPacket.copy();

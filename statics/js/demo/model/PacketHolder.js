@@ -38,7 +38,7 @@ PacketHolder.prototype.createCopiesForDestinations = function(packetSource, dest
 };
 PacketHolder.prototype.sendPacketsToDestinations = function(packets, destinations){
     destinations.forEach(function( destination, i){
-        destination.accept( packets[i] );
+        destination.accept( packets[i], this );
     }.bind(this))
 };
 

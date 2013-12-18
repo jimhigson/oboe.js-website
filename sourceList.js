@@ -21,7 +21,7 @@ module.exports = [
     ,   '/js/demo/model/Packet.js'
     ,   '/js/demo/model/Message.js'
     ,   '/js/demo/model/Wire.js'
-    ,   '/js/demo/model/ParseStrategy.js'
+    ,   '/js/demo/model/Parser.js'
     ,   '/js/demo/model/Client.js'
     ,   '/js/demo/model/Relay.js'
     ,   "/js/demo/view/viewUtils.js"

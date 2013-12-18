@@ -5,7 +5,7 @@ var Client = extend( PacketHolder, function(name, locations, options) {
     this.retryAfter = options.retryAfter || Number.POSITIVE_INFINITY;
     this.parseStrategy = this.makeParseStrategy(options.parseStrategy);
 
-    this.events('receive').on(function(packet){
+    this.events('gotData').on(function(packet){
         this.receivedUpTo = packet.ordering.i;
     }.bind(this));
 
@@ -20,7 +20,7 @@ var Client = extend( PacketHolder, function(name, locations, options) {
 
 Client.prototype.makeParseStrategy = function(strategyName){
 
-    return ParseStrategy(strategyName, this.events('receive').emit);
+    return Parser(strategyName, this.events('gotData').emit);
 };
 
 Client.prototype.makeRequest = function(){

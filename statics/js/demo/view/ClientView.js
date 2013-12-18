@@ -36,7 +36,7 @@ var ClientView = (function(){
     var SimpleClient = extend(ClientView, function(subject, demoView){
         ClientView.apply(this, arguments);
         
-        subject.events('receive').on(function( packet ){
+        subject.events('gotData').on(function( packet ){
             addClass(this.jDom, 'received-' + packet.ordering.i);
         }.bind(this));
 
@@ -60,7 +60,7 @@ var ClientView = (function(){
             livePacketsReceived = 0,
             MAX_DISPLAYABLE = 5;
 
-        subject.events('receive').on(function( packet ){
+        subject.events('gotData').on(function( packet ){
 
             packetsReceived++;
 

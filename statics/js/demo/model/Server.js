@@ -59,9 +59,9 @@ var Server = (function(){
     
         var nextLocations = this.nextLocationsInDirection(direction),
             messages = this.createMessagesOut(direction),
-            timeForNextPacket = this.events('timeForNextPacket'),
+            packetReadyToDispatch = this.events('packetReadyToDispatch'),
     
-            sendNext = function(/* any arguments */){
+            newPacketForAllOutboundMessages = function(/* any arguments */){
     
                 var basePacket = createPacket.apply(this, arguments);
                 this.sendCopiesOfPacket(basePacket, messages, nextLocations);
@@ -70,10 +70,10 @@ var Server = (function(){
             }.bind(this),
             
             stopSending = function() {
-                timeForNextPacket.un(sendNext);
+                packetReadyToDispatch.un(newPacketForAllOutboundMessages);
             };
     
-        timeForNextPacket.on( sendNext );
+        packetReadyToDispatch.on( newPacketForAllOutboundMessages );
 
         this.events('messageEnd').on(stopSending);
         this.events('reset').on(stopSending);
@@ -118,7 +118,7 @@ var Server = (function(){
             var curPacketNumber = this.packetNumberAfter(previousPacketNumber),
                 lastPacket = curPacketNumber >= (this.messageSize - 1);
     
-            this.events('timeForNextPacket').emit(curPacketNumber);
+            this.events('packetReadyToDispatch').emit(curPacketNumber);
     
             if( lastPacket ) {
                 this.events('messageEnd').emit();

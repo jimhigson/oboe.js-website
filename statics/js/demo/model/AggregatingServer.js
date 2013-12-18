@@ -12,7 +12,7 @@ AggregatingServer.prototype.accept = function(receivedPacket, sender){
         this.propagate(receivedPacket);
         this.openOutboundMessages('downstream', this.responsePacketGenerator());
 
-        this.parsers = this.createParsersForPacketsFromEachUpstreamNode(this.parseStrategyName);
+        this.parsers = this.createInputParsersForEachUpstreamNode(this.parseStrategyName);
         
     } else {
 
@@ -20,7 +20,7 @@ AggregatingServer.prototype.accept = function(receivedPacket, sender){
     }
 };
 
-AggregatingServer.prototype.createParsersForPacketsFromEachUpstreamNode = function(parseStrategyName){
+AggregatingServer.prototype.createInputParsersForEachUpstreamNode = function(parseStrategyName){
     var parsers = {},
         nextLocations = this.nextLocationsInDirection('upstream'),
         emitPacketParsed = this.events('packetParsed').emit;

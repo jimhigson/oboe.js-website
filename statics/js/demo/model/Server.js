@@ -59,21 +59,24 @@ var Server = (function(){
     
         var nextLocations = this.nextLocationsInDirection(direction),
             messages = this.createMessagesOut(direction),
-            timeForNextPacket = this.events('timeForNextPacket');
+            timeForNextPacket = this.events('timeForNextPacket'),
     
-        var sendNext = function(/* any arguments */){
+            sendNext = function(/* any arguments */){
     
-            var basePacket = createPacket.apply(this, arguments);
-            this.sendCopiesOfPacket(basePacket, messages, nextLocations);
-            basePacket.done();
-    
-        }.bind(this);
+                var basePacket = createPacket.apply(this, arguments);
+                this.sendCopiesOfPacket(basePacket, messages, nextLocations);
+                basePacket.done();
+        
+            }.bind(this),
+            
+            stopSending = function() {
+                timeForNextPacket.un(sendNext);
+            };
     
         timeForNextPacket.on( sendNext );
-    
-        this.events('reset').on(function() {
-            timeForNextPacket.un(sendNext);
-        });
+
+        this.events('messageEnd').on(stopSending);
+        this.events('reset').on(stopSending);
     
         announceAll(messages);
     };
@@ -110,12 +113,16 @@ var Server = (function(){
     
         function sendNext(previousPacketNumber){
     
-            var curPacketNumber = this.packetNumberAfter(previousPacketNumber);
+            var curPacketNumber = this.packetNumberAfter(previousPacketNumber),
+                lastPacket = curPacketNumber >= (this.messageSize - 1);
     
             this.events('timeForNextPacket').emit(curPacketNumber);
     
-            // schedule the next packet if there is one:
-            if( curPacketNumber < (this.messageSize -1) ) {
+            if( lastPacket ) {
+                this.events('messageEnd').emit();
+                
+            } else {
+                
                 var nextPacketNumber = this.packetNumberAfter(curPacketNumber);
                 this.schedule(
                     sendNext.bind(this, curPacketNumber)

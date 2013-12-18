@@ -4,6 +4,11 @@ var Client = extend( PacketHolder, function(name, locations, options) {
     this.page = options.page;
     this.parseStrategy = this.makeParseStrategy(options.parseStrategy);
     this.retryAfter = options.retryAfter || Number.POSITIVE_INFINITY;
+    this.attemptNumber = 0;
+    
+    this.events('reset').on(function(){
+        this.attemptNumber = 0;
+    }.bind(this));
 });
 
 Client.prototype.makeParseStrategy = function(strategyName){
@@ -36,30 +41,38 @@ Client.prototype.makeParseStrategy = function(strategyName){
     }
 };
 
-Client.prototype.makeRequest = function( attemptNumber ){
-    attemptNumber = attemptNumber || 0;
+Client.prototype.makeRequest = function(){
 
-    this.addToScript('requestAttempt', attemptNumber);
+    this.addToScript('requestAttempt', this.attemptNumber);
     
     var packet =
         new Packet('request', 'GET', 'upstream', {isFirst:true, isLast:true, i:0})
             .inDemo(this.demo)
             .announce();
 
-    this.retryIfNoResponse = this.schedule(function retry(){
-        this.makeRequest( attemptNumber +1 );
-    }.bind(this), this.retryAfter);
+    this.scheduleRetry();
     
     this.propagate(packet);
 };
+
+Client.prototype.scheduleRetry = function() {
+    
+    this.retryIfNoResponse = this.schedule(function retry(){
+        this.attemptNumber++;
+        this.makeRequest();
+    }.bind(this), this.retryAfter);
+};
+
 Client.prototype.accept = function(packet){
 
     this.addToScript('accepted', packet);
     
     this.parseStrategy(packet);
+
+    this.unschedule(this.retryIfNoResponse);
     
-    if( packet.ordering.isLast ) {
-        this.unschedule(this.retryIfNoResponse);
+    if( !packet.ordering.isLast ) {
+        this.scheduleRetry();
     }
 
     packet.done();

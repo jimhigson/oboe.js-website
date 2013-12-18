@@ -170,7 +170,7 @@ var scenarios = (function () {
                     }
                     ,
                     {   "options":{
-                            "retryAfter": seconds(8)
+                            "retryAfter": seconds(5)
                         }
                     }
                     ,
@@ -179,7 +179,7 @@ var scenarios = (function () {
                         "type":"barrier",
                         "script": {
                             "client_accepted_response2": function(){
-                                this.activate();
+                                this.activateIfNeverShownBefore();
                             },
                             "client_requestAttempt_2": function(){
                                 this.deactivate();

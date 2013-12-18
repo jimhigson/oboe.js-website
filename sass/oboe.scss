@@ -106,6 +106,7 @@ em {
   left:0;
   right:0;
   overflow:hidden;
+  transition: padding 0.5s;
 }
 
 .is-sticky #siteNav {
@@ -162,8 +163,6 @@ footer {
    position: relative;
    z-index: 10;
    height: 20px;
-   margin-top: -20px;
-
 }
 
 .footer-contents {
@@ -473,6 +472,12 @@ footer #sw {
    #pagearea {
       padding: 0 20px;
    }
+
+  #siteNav {
+    text-align:right;
+    padding-top:0.2em;
+    padding-bottom:0.2em;
+  }
 
 }
 

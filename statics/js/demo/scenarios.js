@@ -296,7 +296,14 @@ var scenarios = (function () {
             "baseOn":"aggregated-layout",
             "extensions":{
                 "items":[
-                    ,,,,,,{
+                    ,,,,
+                    {
+                        "options": {
+                            "parseStrategy": "discrete"
+                        }
+                    }
+                    ,,
+                    {
                         "options":{
                             "parseStrategy": "discrete"
                         }
@@ -310,7 +317,13 @@ var scenarios = (function () {
             "baseOn":"aggregated-layout",
             "extensions":{
                 "items":[
-                    ,,,,,,{
+                    ,,,,
+                    {
+                        "options": {
+                            "parseStrategy": "progressive"
+                        }
+                    }
+                    ,,{
                         "options":{
                             "parseStrategy": "progressive"
                         }

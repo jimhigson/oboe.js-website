@@ -1,4 +1,4 @@
-function Parser (strategyName, emitter){
+function Parser (strategyName, callback){
 
     if( !strategyName )
         throw Error('no parsing strategy given');
@@ -6,7 +6,7 @@ function Parser (strategyName, emitter){
     switch(strategyName){
         case 'progressive':
             return function(packet){
-                emitter(packet);
+                callback(packet);
             };
     
         case 'discrete':
@@ -16,7 +16,7 @@ function Parser (strategyName, emitter){
     
                 if( packet.ordering.isLast ) {
                     packetsSoFar.forEach(function(packet){
-                        emitter(packet);
+                        callback(packet);
                     });
                 }
             };

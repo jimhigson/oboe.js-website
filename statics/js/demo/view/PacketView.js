@@ -83,8 +83,6 @@ var PacketView = (function(){
             //var clipId = holder.blockage.view.identifyClip( subject.direction );
             var clipId = oppositeDirectionTo( subject.direction ) + '-clip';
 
-            console.log(this.jDom[0], clipId);
-
             this.jDom[0].setAttribute('clip-path', 'url(#' + clipId + ')');
         }        
     });

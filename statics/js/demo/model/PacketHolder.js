@@ -10,7 +10,6 @@ var PacketHolder = extend(Thing, function(name, locations){
         throw new Error("don't know where " + name + " is");
     }
 
-    this.timeouts = [];
     this.latency = 0;
     this.adjacents = {
         downstream: []
@@ -63,49 +62,4 @@ PacketHolder.prototype.movePacket = function(packet){
     toXY   = this.locations[toLocation];
 
     packet.move(fromXY, toXY, this.latency);
-};
-PacketHolder.prototype.removeTimeout = function(timeout){
-
-    this.timeouts = this.timeouts.filter(function( storedTimeout ){
-        return storedTimeout != timeout;
-    });
-};
-PacketHolder.prototype.cancelTimeouts = function(){
-
-    // cancel all scheduled events:
-    this.timeouts.forEach(function(timeout){
-        window.clearTimeout(timeout);
-    });
-
-    this.timeouts = [];
-}
-PacketHolder.prototype.schedule = function(fn, time) {
-    
-    if( time == Number.POSITIVE_INFINITY ) {
-        // Waiting forever to do something interpreted
-        // as never doing it. The browser would natural
-        // schedule it straight away (silly!)
-        return undefined;
-    }
-    
-    var timeout = window.setTimeout(function(){
-
-        // stop remembering this timeout, it is done now:
-        this.removeTimeout(timeout);
-        fn.apply(this);
-
-    }.bind(this), time);
-
-    this.timeouts.push( timeout );
-    
-    return timeout;
-};
-PacketHolder.prototype.unschedule = function(unscheduledTimeout) {
-    
-    window.clearTimeout(unscheduledTimeout);
-    this.removeTimeout(unscheduledTimeout);
-};
-
-PacketHolder.prototype.reset = function(){
-    this.cancelTimeouts();
 };

@@ -181,8 +181,10 @@ var scenarios = (function () {
                             "client_accepted_response2": function(){
                                 this.activateIfNeverShownBefore();
                             },
-                            "client_requestAttempt_2": function(){
-                                this.deactivate();
+                            "client_requestAttempt_1": function(){
+                                this.schedule(function(){
+                                    this.deactivate();
+                                }, seconds(3));
                             }
                         }
                     }

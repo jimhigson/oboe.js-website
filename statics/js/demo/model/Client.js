@@ -16,34 +16,14 @@ var Client = extend( PacketHolder, function(name, locations, options) {
 
 Client.prototype.makeParseStrategy = function(strategyName){
 
-    if( !strategyName )
-        throw Error('no parsing strategy given');
+    var receiveEvent = this.events('receive'),    
+        parseFn = ParseStrategy(strategyName, receiveEvent.emit);
 
-    var receive = this.events('receive');
-
-    switch(strategyName){
-        case 'progressive':
-            return function(packet){
-                this.receivedUpTo = packet.ordering.i;
-                receive.emit(packet);
-            };
-
-        case 'discrete':
-            var packetsSoFar = [];
-            return function(packet){
-                packetsSoFar.push(packet);
-
-                if( packet.ordering.isLast ) {
-                    packetsSoFar.forEach(function(packet){
-                        receive.emit(packet);
-                    });
-                    this.receivedUpTo = packetsSoFar.length -1;
-                }
-            };
-
-        default:
-            throw Error('what is ' + strategyName + '?');
-    }
+    receiveEvent.on(function(packet){
+        this.receivedUpTo = packet.ordering.i;
+    }.bind(this));
+    
+    return parseFn;
 };
 
 Client.prototype.makeRequest = function(){

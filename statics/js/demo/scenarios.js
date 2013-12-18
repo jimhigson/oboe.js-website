@@ -178,7 +178,7 @@ var scenarios = (function () {
                         "name":"tunnel",
                         "type":"barrier",
                         "script": {
-                            "client_accepted_response2": function(){
+                            "client_accepted_response6": function(){
                                 this.activateIfNeverShownBefore();
                             },
                             "client_requestAttempt_1": function(){
@@ -351,12 +351,12 @@ var scenarios = (function () {
     }
 
     function evenNumberedPackets(i) {
-        return (i === undefined)?
+        return (i === -1)?
             0 : i+=2;
     }
 
     function oddNumberedPackets(i) {
-        return (i === undefined)?
+        return (i === -1)?
             1 : i+=2;
     }
     

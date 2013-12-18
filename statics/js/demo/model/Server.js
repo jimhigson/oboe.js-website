@@ -10,7 +10,7 @@ var Server = (function(){
         this.initialDelay = options.initialDelay;
         this.messageSize = options.messageSize;
         this.packetNumberAfter = options.packetSequence || function(previousPacketNumber){
-            return      (previousPacketNumber === undefined)
+            return      (previousPacketNumber === -1)
                 ?   0
                 :   previousPacketNumber+1;
         };
@@ -30,7 +30,7 @@ var Server = (function(){
     Server.prototype.accept = function(packet){
     
         if( packet.direction == 'upstream' ) {
-            this.sendResponse();
+            this.sendResponse(packet.gotAlreadyUpTo);
             packet.done();
         }
     };
@@ -107,8 +107,10 @@ var Server = (function(){
         }
     };
     
-    Server.prototype.sendResponse = function() {
+    Server.prototype.sendResponse = function(startingAt) {
     
+        console.log('will send starting at', startingAt);
+        
         this.openOutboundMessages('downstream', this.responsePacketGenerator());
     
         function sendNext(previousPacketNumber){
@@ -131,7 +133,7 @@ var Server = (function(){
             }
         }
     
-        this.schedule( sendNext.bind(this), this.initialDelay );
+        this.schedule( sendNext.bind(this, startingAt -1), this.initialDelay );
     };
 
     return Server;

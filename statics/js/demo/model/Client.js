@@ -4,10 +4,13 @@ var Client = extend( PacketHolder, function(name, locations, options) {
     this.page = options.page;
     this.parseStrategy = this.makeParseStrategy(options.parseStrategy);
     this.retryAfter = options.retryAfter || Number.POSITIVE_INFINITY;
+    
     this.attemptNumber = 0;
+    this.receivedUpTo = -1;
     
     this.events('reset').on(function(){
         this.attemptNumber = 0;
+        this.receivedUpTo = -1;
     }.bind(this));
 });
 
@@ -21,6 +24,7 @@ Client.prototype.makeParseStrategy = function(strategyName){
     switch(strategyName){
         case 'progressive':
             return function(packet){
+                this.receivedUpTo = packet.ordering.i;
                 receive.emit(packet);
             };
 
@@ -33,6 +37,7 @@ Client.prototype.makeParseStrategy = function(strategyName){
                     packetsSoFar.forEach(function(packet){
                         receive.emit(packet);
                     });
+                    this.receivedUpTo = packetsSoFar.length -1;
                 }
             };
 
@@ -48,6 +53,7 @@ Client.prototype.makeRequest = function(){
     var packet =
         new Packet('request', 'GET', 'upstream', {isFirst:true, isLast:true, i:0})
             .inDemo(this.demo)
+            .startingAt(this.receivedUpTo +1)
             .announce();
 
     this.scheduleRetry();
@@ -69,8 +75,7 @@ Client.prototype.accept = function(packet){
     
     this.parseStrategy(packet);
 
-    this.unschedule(this.retryIfNoResponse);
-    
+    this.unschedule(this.retryIfNoResponse);        
     if( !packet.ordering.isLast ) {
         this.scheduleRetry();
     }

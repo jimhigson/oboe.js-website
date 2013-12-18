@@ -168,7 +168,12 @@ var scenarios = (function () {
                             "blockedBy":"tunnel"
                         }
                     }
-                    ,,
+                    ,
+                    {   "options":{
+                            "retryAfter": seconds(8)
+                        }
+                    }
+                    ,
                     {
                         "name":"tunnel",
                         "type":"barrier",
@@ -348,6 +353,10 @@ var scenarios = (function () {
     function oddNumberedPackets(i) {
         return (i === undefined)?
             1 : i+=2;
+    }
+    
+    function seconds(s){
+        return 1000 * s;
     }
     
     

@@ -3,6 +3,7 @@ var Client = extend( PacketHolder, function(name, locations, options) {
     PacketHolder.apply(this, arguments);
     this.page = options.page;
     this.parseStrategy = this.makeParseStrategy(options.parseStrategy);
+    this.retryAfter = options.retryAfter || Number.POSITIVE_INFINITY;
 });
 
 Client.prototype.makeParseStrategy = function(strategyName){
@@ -41,6 +42,10 @@ Client.prototype.makeRequest = function(){
             .inDemo(this.demo)
             .announce();
 
+    this.retryIfNoResponse = this.schedule(function retry(){
+        this.makeRequest();
+    }.bind(this), this.retryAfter);
+    
     this.propagate(packet);
 };
 Client.prototype.accept = function(packet){
@@ -48,6 +53,10 @@ Client.prototype.accept = function(packet){
     this.addToScript('accepted', packet);
     
     this.parseStrategy(packet);
+    
+    if( packet.ordering.isLast ) {
+        this.unschedule(this.retryIfNoResponse);
+    }
 
     packet.done();
 };

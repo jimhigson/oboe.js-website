@@ -80,6 +80,14 @@ PacketHolder.prototype.cancelTimeouts = function(){
     this.timeouts = [];
 }
 PacketHolder.prototype.schedule = function(fn, time) {
+    
+    if( time == Number.POSITIVE_INFINITY ) {
+        // Waiting forever to do something interpreted
+        // as never doing it. The browser would natural
+        // schedule it straight away (silly!)
+        return undefined;
+    }
+    
     var timeout = window.setTimeout(function(){
 
         // stop remembering this timeout, it is done now:
@@ -89,7 +97,15 @@ PacketHolder.prototype.schedule = function(fn, time) {
     }.bind(this), time);
 
     this.timeouts.push( timeout );
+    
+    return timeout;
 };
+PacketHolder.prototype.unschedule = function(unscheduledTimeout) {
+    
+    window.clearTimeout(unscheduledTimeout);
+    this.removeTimeout(unscheduledTimeout);
+};
+
 PacketHolder.prototype.reset = function(){
     this.cancelTimeouts();
 };

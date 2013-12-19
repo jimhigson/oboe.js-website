@@ -1,27 +1,34 @@
-function Parser (strategyName, callback){
+function Parser (strategyName){
 
-    if( !strategyName )
-        throw Error('no parsing strategy given');
+    var events = pubSub(),
+        read;
     
     switch(strategyName){
         case 'progressive':
-            return function(packet){
-                callback(packet);
+            read = function(packet){
+                events('packetParsed').emit(packet);
             };
+            break;
     
         case 'discrete':
             var packetsSoFar = [];
-            return function(packet){
+            read = function(packet){
                 packetsSoFar.push(packet);
     
                 if( packet.ordering.isLast ) {
                     packetsSoFar.forEach(function(packet){
-                        callback(packet);
+                        events('packetParsed').emit(packet);
                     });
                 }
             };
+            break;
     
         default:
             throw Error('wtf is ' + strategyName + '?');
     } 
+    
+    return {
+        read: read,
+        events: events
+    };
 }

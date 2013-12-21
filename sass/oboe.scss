@@ -384,7 +384,9 @@ footer #sw {
    top: -10px;
 }
 
-
+svg.menuButton {
+  display:none;
+}
 svg.menuButton rect.background {
   fill:$backgroundColor;
 }
@@ -449,6 +451,10 @@ svg.menuButton:hover rect.rung {
 /* Even Smaller screens */
 @media only screen and (max-width: $sizeRequiringPhoneLayout) {
 
+   svg.menuButton {
+      display:inline;
+   }  
+  
       .button2, .button2.wee {
             margin-left:0px;
             margin-right:8px;

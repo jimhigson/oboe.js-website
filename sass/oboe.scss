@@ -384,6 +384,18 @@ footer #sw {
    top: -10px;
 }
 
+
+svg.menuButton rect.background {
+  fill:$backgroundColor;
+}
+svg.menuButton rect.rung {
+  fill:$midTone;
+}
+svg.menuButton:hover rect.rung {
+  fill:$highlight;
+  cursor:pointer;
+}
+
 /* Small screens - 1 column */
 @media only screen and (max-width: $minSizeForTwoCol) {
 

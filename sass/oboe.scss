@@ -407,17 +407,27 @@ svg.menuButton {
    margin-right: $menuMarginRight;
    cursor: pointer;
 
-  rect.background {
+  .background {
     fill: $shadedBackgroundColor;
   }
   
-  rect.rung {
+  .rung {
     fill: $midTone;
   }
     
 }
-svg.menuButton:hover rect.rung {
+svg.menuButton:hover .rung {
     fill: $highlight;
+}
+svg.menuButton:active {
+  
+  .background {
+    fill: $backgroundColor;
+  }
+  
+  .rung {
+    fill: $nearBlack;
+  }
 }
 
 

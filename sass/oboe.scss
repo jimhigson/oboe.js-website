@@ -416,6 +416,8 @@ svg.menuButton {
   }
     
 }
+
+.open svg.menuButton .rung,
 svg.menuButton:hover .rung {
     fill: $highlight;
 }

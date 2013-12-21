@@ -404,7 +404,8 @@ footer #sw {
 
 svg.menuButton {
    display: none;
-   margin-right:10px;
+   margin-right: $menuMarginRight;
+   cursor: pointer;
 
   rect.background {
     fill: $shadedBackgroundColor;
@@ -413,12 +414,12 @@ svg.menuButton {
   rect.rung {
     fill: $midTone;
   }
-  
-  rect.rung {
-    fill: $highlight;
-    cursor: pointer;
-  }  
+    
 }
+svg.menuButton:hover rect.rung {
+    fill: $highlight;
+}
+
 
 
 
@@ -483,6 +484,11 @@ svg.menuButton {
   
    #siteNav li {
       display: block;
+      margin-top:0.2em;
+   }
+
+  #siteNav .siteLink {
+     margin-right: $menuMarginRight;     
    }
 
    #siteNav li.reducedLogo {

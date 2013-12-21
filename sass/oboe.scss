@@ -405,20 +405,22 @@ footer #sw {
 svg.menuButton {
    display: none;
    margin-right:10px;
+
+  rect.background {
+    fill: $shadedBackgroundColor;
+  }
+  
+  rect.rung {
+    fill: $midTone;
+  }
+  
+  rect.rung {
+    fill: $highlight;
+    cursor: pointer;
+  }  
 }
 
-svg.menuButton rect.background {
-   fill: $shadedBackgroundColor;
-}
 
-svg.menuButton rect.rung {
-   fill: $midTone;
-}
-
-svg.menuButton:hover rect.rung {
-   fill: $highlight;
-   cursor: pointer;
-}
 
 /* Small screens - 1 column */
 @media only screen and (max-width: $minSizeForTwoCol) {

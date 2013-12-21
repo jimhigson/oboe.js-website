@@ -413,6 +413,7 @@ svg.menuButton {
   
   .rung {
     fill: $midTone;
+    transition: all 0.5s;
   }
     
 }
@@ -429,6 +430,7 @@ svg.menuButton:active {
   
   .rung {
     fill: $nearBlack;
+    transition: all 0.2s;
   }
 }
 

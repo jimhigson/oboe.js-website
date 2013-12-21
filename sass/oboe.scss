@@ -404,10 +404,11 @@ footer #sw {
 
 svg.menuButton {
    display: none;
+   margin-right:10px;
 }
 
 svg.menuButton rect.background {
-   fill: $backgroundColor;
+   fill: $shadedBackgroundColor;
 }
 
 svg.menuButton rect.rung {
@@ -472,6 +473,18 @@ svg.menuButton:hover rect.rung {
 
    svg.menuButton {
       display: inline;
+   }
+
+   #siteNav:not(.open) ul {
+      display:none;
+   }
+  
+   #siteNav li {
+      display: block;
+   }
+
+   #siteNav li.reducedLogo {
+      display:none;
    }
 
    .button2, .button2.wee {

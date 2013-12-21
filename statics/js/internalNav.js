@@ -1,12 +1,21 @@
 $(function(){
     var jWindow = $(window),
-        jReducedLogo = $('.reducedLogo');
-    
+        jReducedLogo = $('.reducedLogo'),
+        jSiteNav = $('#siteNav'),
+        
+        siteNavStickyOptions = {
+            getWidthFrom: '#pageArea',
+            topSpacing: 0
+        };
+
     // make internal nav sticky
-    $('#siteNav').sticky({
-        getWidthFrom:'#pageArea',
-        topSpacing:0
-    });
+    jSiteNav.sticky(siteNavStickyOptions);
+
+    $('svg.menuButton').click(function() {
+        jSiteNav.toggleClass('open')
+
+        jSiteNav.sticky('restick', siteNavStickyOptions);
+    });    
 
     
     jWindow.scroll(function() {
@@ -81,7 +90,10 @@ $(function(){
                    return false;
                }
            }
-       });       
+       });
+
+
+
    }
 });
 

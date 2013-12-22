@@ -109,8 +109,6 @@ var Server = (function(){
     
     Server.prototype.sendResponse = function(startingAt) {
     
-        console.log('will send starting at', startingAt);
-        
         this.openOutboundMessages('downstream', this.responsePacketGenerator());
     
         function sendNext(previousPacketNumber){

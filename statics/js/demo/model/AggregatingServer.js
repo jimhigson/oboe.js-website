@@ -12,7 +12,8 @@ AggregatingServer.prototype.accept = function(receivedPacket, sender){
         this.openOutboundMessages('downstream', this.responsePacketGenerator());
 
         this.parsers = this.createInputParsersForEachUpstreamNode(this.parseStrategyName);
-        this.aggregateOutputFromMultipleParsers(this.parsers);
+
+        multiplex(parsers, this.events('packetReadyToDispatch').emit);
         
     } else {
 
@@ -32,20 +33,6 @@ AggregatingServer.prototype.createInputParsersForEachUpstreamNode = function(par
     return parsers;
 };
 
-/* receive parsed packets from multiple streams, output all according to our parse strategy: either straight
-   away or when all parsers have finished.
- */
-AggregatingServer.prototype.aggregateOutputFromMultipleParsers = function( parsers ){
-
-    var handleParsedPacket = function (packet) {
-        this.events('packetReadyToDispatch').emit(packet);
-    }.bind(this);    
-    
-    for( var origin in parsers ) {
-
-        parsers[origin].events('packetParsed').on(handleParsedPacket);
-    }
-};
 
 AggregatingServer.prototype.responsePacketGenerator = function(){
 

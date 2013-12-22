@@ -1,4 +1,4 @@
-var Relay = extend(PacketHolder, function(name, locations, options){
+var Relay = extend(PacketHolder, function Relay(name, locations, options){
     PacketHolder.apply(this, arguments);
 
     this.timeBetweenPackets = options.timeBetweenPackets;

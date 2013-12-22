@@ -1,7 +1,7 @@
-var Message = extend(Thing, function() {
+var Message = extend(Thing, function Message() {
     Thing.apply(this, arguments);
 });
-Message.new = singleEventPubSub('new');
+
 Message.prototype.sentBy = function(sender){
     return this; // chaining
 };

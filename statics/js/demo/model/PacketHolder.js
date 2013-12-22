@@ -1,5 +1,5 @@
 
-var PacketHolder = extend(Thing, function(name, locations){
+var PacketHolder = extend(Thing, function PacketHolder(name, locations){
 
     if( !locations ) {
         throw new Error("don't know where " + name + " is");

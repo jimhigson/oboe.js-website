@@ -39,7 +39,8 @@ var Thing = (function(){
     };
     
     Thing.prototype.announce = function() {
-        this.constructor.new.emit(this);
+        console.log('have a new', this.constructor.name);
+        this.demo.events(this.constructor.name).emit(this);
         return this;
     };
     

@@ -1,4 +1,4 @@
-var Packet = extend(Thing, function (name, type, direction, ordering, mode){
+var Packet = extend(Thing, function Packet(name, type, direction, ordering, mode){
     Thing.apply(this, arguments);
 
     this.direction = direction;
@@ -7,6 +7,7 @@ var Packet = extend(Thing, function (name, type, direction, ordering, mode){
     this.mode = mode;
     this.gotAlreadyUpTo = 0;
 });
+
 Packet.prototype.copy = function(additionalName) {
 
     var orderingCopy = {
@@ -29,7 +30,6 @@ Packet.prototype.startingAt = function( firstPacketNumber ) {
     this.gotAlreadyUpTo = firstPacketNumber;
     return this; // chaining
 };
-Packet.new = singleEventPubSub('new');
 Packet.prototype.move = function(fromXY, toXY, latency){
     this.events('move').emit(fromXY, toXY, latency);
 };

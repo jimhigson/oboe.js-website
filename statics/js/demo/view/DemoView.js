@@ -1,4 +1,4 @@
-var DemoView = extend(ThingView, function(subject){
+var DemoView = extend(ThingView, function(demo){
     ThingView.apply(this,arguments);
 
     var DEFAULT_WIDTH = 500;
@@ -6,25 +6,20 @@ var DemoView = extend(ThingView, function(subject){
 
     this.jDom = stampFromTemplate($('#demo'));
 
-    var containerDiv = $("[data-demo=" + subject.name + "]");
+    var containerDiv = $("[data-demo=" + demo.name + "]");
 
     containerDiv.append( this.jDom );
 
-    this.baseWidth  = subject.width  || DEFAULT_WIDTH;
-    this.baseHeight = subject.height || DEFAULT_HEIGHT;
+    this.baseWidth  = demo.width  || DEFAULT_WIDTH;
+    this.baseHeight = demo.height || DEFAULT_HEIGHT;
     this.setDimensions(this.baseHeight, this.scalingFactor());
 
-    Packet.new.on( function(newPacket){
-
-        if( newPacket.demo == subject )
-            new PacketView(newPacket, this);
-
+    demo.events(Packet.name).on( function(newPacket){
+        new PacketView(newPacket, this);
     }.bind(this));
 
-    Message.new.on(function(newMessage){
-        if( newMessage.demo == subject ) {
-            new MessageView(newMessage, this);
-        }
+    demo.events(Message.name).on(function(newMessage){
+        new MessageView(newMessage, this);
     }.bind(this));
 
     $( window ).resize(function() {

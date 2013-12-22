@@ -1,4 +1,4 @@
-var AggregatingServer = extend(Server, function(name, locations, options){
+var AggregatingServer = extend(Server, function AggregatingServer(name, locations, options){
     Server.apply(this, arguments);
   
     this.parseStrategyName = options.parseStrategy;

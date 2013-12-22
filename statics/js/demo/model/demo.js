@@ -1,5 +1,5 @@
 
-var Demo = extend(Thing, function(name, options){
+var Demo = extend(Thing, function Demo(name, options){
     Thing.apply(this, arguments);
 
     this.height = options.height;

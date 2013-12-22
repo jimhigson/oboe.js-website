@@ -1,4 +1,4 @@
-var Wire = extend( PacketHolder, function(name, locations, options) {
+var Wire = extend( PacketHolder, function Wire(name, locations, options) {
 
     PacketHolder.apply(this, arguments);
     this.latency = options.latency;

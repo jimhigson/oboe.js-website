@@ -1,4 +1,4 @@
-var Client = extend( PacketHolder, function(name, locations, options) {
+var Client = extend( PacketHolder, function Client(name, locations, options) {
 
     PacketHolder.apply(this, arguments);
     this.page = options.page;

@@ -1,6 +1,6 @@
 var Barrier = (function(){
     
-    var Barrier = extend(Thing, function(name, locations){
+    var Barrier = extend(Thing, function Barrier(name, locations){
         Thing.apply(this, arguments);
         
         this.events('reset').on(function(){

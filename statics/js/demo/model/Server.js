@@ -1,6 +1,6 @@
 var Server = (function(){
 
-    var Server = extend( PacketHolder, function(name, locations, options) {
+    var Server = extend( PacketHolder, function Server(name, locations, options) {
     
         PacketHolder.apply(this, arguments);
 

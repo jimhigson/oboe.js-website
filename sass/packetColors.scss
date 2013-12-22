@@ -1,14 +1,35 @@
-/* categorical colors for packets */
 
-$i: 1;
-@while $i <= length($categoricalColors) {
-  .unit-#{$i - 1} {
-    fill:nth($categoricalColors, $i);
+.categorical {
+  /* categorical colors for packets */
+  
+  $i: 1;
+  @while $i <= length($categoricalColors) {
+    .unit-#{$i - 1} {
+      fill:nth($categoricalColors, $i);
+    }
+  
+    .unit-#{$i - 1} .packet.airwave {
+      stroke:nth($categoricalColors, $i);
+    }
+  
+    $i: $i + 1;
   }
+}
 
-  .unit-#{$i - 1} .packet.airwave {
-    stroke:nth($categoricalColors, $i);
+$evenColor: nth($categoricalColors, 2);
+$oddColor:  nth($categoricalColors, 5);
+
+.twoSeries {
+
+  $i: 1;
+  @while $i <= 10 {
+    $isEven: ($i % 2 == 0);
+    $seriesColor: if($isEven, $evenColor, $oddColor);
+
+    .unit-#{$i - 1} {
+      fill:$seriesColor;
+    }
+ 
+    $i: $i + 1;
   }
-
-  $i: $i + 1;
 }

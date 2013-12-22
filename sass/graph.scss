@@ -8,22 +8,8 @@ $barColor: nth($categoricalColors, 2);
     stroke-width: 4;
   }
   
-  .bars {
-    fill: $barColor;
-  }
-
-  .bars rect:nth-child(even) {
-    fill: darken($barColor, 10%);
-  }
-  
-  .points {
-    circle {
-      fill: darken($pointColor,10%);
-    }
-
-    line {
-      stroke: $pointColor;
-      stroke-width: 2;
-    }
+  .points line {
+    stroke:black;
+    stroke-width: 2;
   }
 }

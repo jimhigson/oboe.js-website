@@ -2,12 +2,11 @@
 var Demo = extend(Thing, function Demo(name, options){
     Thing.apply(this, arguments);
 
-    this.height = options.height;
-    
+    this.height = options.height;    
     this.script = pubSub();
+    this.colors = options.colors || 'categorical';
     
-    // we are our own demo
-    this.demo = this;
+    this.demo = this;  // we are our own demo
 });
 Demo.prototype.start = function(){
     this.startSimulation();

@@ -221,8 +221,10 @@ var scenarios = (function () {
         },
 
         "aggregated-layout":{
-            "options":{"height":257},
-            "colors":"twoSeries",
+            "options":{
+                "height":257,
+                "colors":"twoSeries"
+            },
             "items": [
                 {
                     "name": "origin-slow",

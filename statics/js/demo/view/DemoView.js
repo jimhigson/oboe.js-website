@@ -4,7 +4,7 @@ var DemoView = extend(ThingView, function(demo){
     var DEFAULT_WIDTH = 500;
     var DEFAULT_HEIGHT = 200;
 
-    this.jDom = stampFromTemplate($('#demo'));
+    this.jDom = stampFromTemplate($('#demo'), demo.colors);
 
     var containerDiv = $("[data-demo=" + demo.name + "]");
 

@@ -157,28 +157,3 @@ g.client .part {
   fill:$backgroundColor;
 }
 
-.map {
-  .water {
-    fill:#3F8FB4;
-  }
-  .parks {
-    fill:$highlight; 
-  }
-  .roads {
-    fill:none;
-    stroke:$shadow;
-  }
-  .roads.minor {
-    stroke-width:1;
-  }
-  .roads.major {
-    stroke-width:3;
-  }
-  .pins .shadow {
-    fill:$nearBlack;
-    opacity:0.2;
-  }
-  .pins .pointer {
-    stroke: $backgroundColor;
-  }
-}

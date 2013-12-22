@@ -9,8 +9,7 @@ function loadScenario(scenarioId) {
     
     console.log('setting up demo', scenario);
     
-    var modelItems = {},
-        itemViews = {};
+    var modelItems = {};
 
     function makeModel(scenarioItem){
         var Type = modelType(scenarioItem.type);
@@ -33,24 +32,6 @@ function loadScenario(scenarioId) {
         }
         throw new Error('unknown type ' + scenarioType);
     }
-
-    function viewType(scenarioType){
-        switch(scenarioType){
-            case "aggregatingServer":  
-            case "server":  
-                    return ServerView;
-            case "wire":    
-                    return WireView;
-            case "client":  
-                    return ClientView;
-            case "barrier":             
-                    return BarrierView;
-            case "relay":
-                    return RelayView;            
-        }
-        throw new Error('no view for type ' + scenarioType);
-    }
-
    
     // init the model items
     var demo

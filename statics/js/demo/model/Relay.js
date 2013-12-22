@@ -13,7 +13,7 @@ var Relay = extend(PacketHolder, function Relay(name, locations, options){
 Relay.prototype.initBuffers = function(){
     this.buffers = {
         upstream:[]
-        ,   downstream:[]
+    ,   downstream:[]
     };
 };
 

@@ -272,7 +272,7 @@ var scenarios = (function () {
                         "initialDelay": 500,
                         "messageSize": Number.POSITIVE_INFINITY
                     },
-                    "locations":{ "where":{x:240, y:100} }
+                    "locations":{ "where":{x:240, y:125} }
                 },
                 {
                     "name": "client-internet",
@@ -290,7 +290,8 @@ var scenarios = (function () {
                         "page": "graph",
                         "aspect": "landscape",
                         "deviceType":"desktop"
-                    }
+                    },
+                    "locations":{ "where":{x:420, y:125} }
                 }
             ]
         },

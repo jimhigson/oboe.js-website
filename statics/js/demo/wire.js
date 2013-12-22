@@ -56,6 +56,8 @@ function loadScenario(scenarioId) {
     var demo
         = modelItems.demo
         = new Demo(scenarioId, (scenario.options || {}));
+
+    new DemoView(demo);
     
     scenario.items.forEach(function (scenarioItem){
 
@@ -90,24 +92,12 @@ function loadScenario(scenarioId) {
             modelItem.with[relationship].call(modelItem ,otherModelItem);
         }
     });
-    
-    
-    // make some views:
-    var demoView = new DemoView(demo);
-    
+
+    // announce all the new model items
     scenario.items.forEach(function(scenarioItem){
-        var modelItem = modelItems[scenarioItem.name],
-            ViewType = viewType(scenarioItem.type);
-
-        // in instantiation: use factory method if available, otherwise
-        // use constructor
-        itemViews[scenarioItem.name] = 
-            ViewType.factory
-            ?   ViewType.factory(modelItem, demoView) 
-            :   new ViewType(modelItem, demoView);
+        modelItems[scenarioItem.name].announce();
     });
-
-    // TODO: get from scenario or something:
+    
     demo.startSimulation = function(){
         modelItems.client.makeRequest();
     }

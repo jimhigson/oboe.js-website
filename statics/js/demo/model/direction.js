@@ -1,4 +1,9 @@
 
+var Direction = {
+    upstream: 'upstream',
+    downstream: 'downstream'
+}
+
 function oppositeDirectionTo(dir) {
     switch(dir){
         case 'upstream':

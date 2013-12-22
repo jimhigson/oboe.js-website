@@ -10,9 +10,7 @@ var Server = (function(){
         this.initialDelay = options.initialDelay;
         this.messageSize = options.messageSize;
         this.packetNumberAfter = options.packetSequence || function(previousPacketNumber){
-            return      (previousPacketNumber === -1)
-                ?   0
-                :   previousPacketNumber+1;
+            return previousPacketNumber+1;
         };
     });
     

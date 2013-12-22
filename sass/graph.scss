@@ -12,4 +12,7 @@ $barColor: nth($categoricalColors, 2);
     stroke:black;
     stroke-width: 2;
   }
+  .points circle {
+    stroke: $backgroundColor;
+  }
 }

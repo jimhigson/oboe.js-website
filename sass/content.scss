@@ -9,21 +9,6 @@
   max-width: 672px;
 }
 
-code {
-   color: #3d3935;
-   font-size:80%;
-}
-
-/* code blocks */
-
-@font-face {
-   font-family: "Computer Modern mono";
-   src: url("/type/cmuntt.eot");
-   src: url("/type/cmuntt.ttf");
-   src: url("/type/cmuntt.svg");
-   src: url("/type/cmuntt.woff");
-}
-
 .marked pre {
    background-color:$shadedBackgroundColor;
    overflow:scroll;
@@ -34,24 +19,26 @@ code {
 
 code {
   font-family: Computer Modern mono, monospace;
+  color: #3d3935;
+  font-size:80%;
+
+  .comment {
+     color: #4eb974;
+  }
+  .string {
+     color: #d8615a;
+  }
+  .keyword {
+     color: #50c3db;
+  }
 }
 
 /* inline code examples */
 :not(pre) > code {
-   display:inline-block;
-   background-color: $shadedBackgroundColor;
-   border-radius: 2px;
-   padding: 2px 5px; 
-}
-
-code .comment {
-   color: #4eb974;
-}
-code .string {
-   color: #d8615a;
-}
-code .keyword {
-   color: #50c3db;
+  display:inline-block;
+  background-color: $shadedBackgroundColor;
+  border-radius: 2px;
+  padding: 2px 5px;
 }
 
 .marked ul {
@@ -75,7 +62,6 @@ code .keyword {
 }
 
 @media only screen and (max-width: $minSizeForTwoCol) {
-
   .marked,
   .marked pre {
     max-width: 100%;

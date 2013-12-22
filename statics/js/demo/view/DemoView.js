@@ -14,13 +14,8 @@ var DemoView = extend(ThingView, function(demo){
     this.baseHeight = demo.height || DEFAULT_HEIGHT;
     this.setDimensions(this.baseHeight, this.scalingFactor());
 
-    demo.events(Packet.name).on( function(newPacket){
-        new PacketView(newPacket, this);
-    }.bind(this));
-
-    demo.events(Message.name).on(function(newMessage){
-        new MessageView(newMessage, this);
-    }.bind(this));
+    this.createNewViewsForNewModelItems(Packet, PacketView);
+    this.createNewViewsForNewModelItems(Message, MessageView);
 
     $( window ).resize(function() {
         this.setDimensions(this.baseHeight, this.scalingFactor());
@@ -28,6 +23,12 @@ var DemoView = extend(ThingView, function(demo){
 
     this.setupControls();
 });
+
+DemoView.prototype.createNewViewsForNewModelItems = function(ModelType, ViewType){
+    this.subject.events(ModelType.name).on(function(newMessage){
+        new ViewType(newMessage, this);
+    }.bind(this));
+};
 
 DemoView.prototype.setupControls = function(){
     var jControls = this.jDom.find('.controls'),

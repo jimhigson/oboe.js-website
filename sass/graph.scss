@@ -1,0 +1,23 @@
+$pointColor: nth($categoricalColors, 1);
+$barColor: nth($categoricalColors, 2);
+
+.graph {
+  .axes {
+    fill:none;
+    stroke: $shadow;
+    stroke-width: 4;
+  }
+  
+  .bars {
+    fill: $barColor;
+  }
+  
+  .points rect {
+    fill: $pointColor;
+  }
+
+  .points path {
+    stroke: $pointColor;
+    stroke-width: 2;
+  }
+}

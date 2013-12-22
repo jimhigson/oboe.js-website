@@ -16,12 +16,16 @@ var DemoView = extend(ThingView, function(demo){
 
     this.initSubviewCreation();
  
-    $( window ).resize(function() {
-        this.setDimensions(this.baseHeight, this.scalingFactor());
-    }.bind(this));
+    this.resizeWithWindow();
 
     this.setupControls();
 });
+
+DemoView.prototype.resizeWithWindow = function(ModelType, ViewType){
+    $( window ).resize(function() {
+        this.setDimensions(this.baseHeight, this.scalingFactor());
+    }.bind(this));
+};
 
 DemoView.prototype.initSubviewCreation = function(ModelType, ViewType){
     this.createNewViewsForNewModelItems(Packet, PacketView);

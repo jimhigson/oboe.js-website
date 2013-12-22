@@ -13,7 +13,7 @@ AggregatingServer.prototype.accept = function(receivedPacket, sender){
 
         this.parsers = this.createInputParsersForEachUpstreamNode(this.parseStrategyName);
 
-        multiplex(parsers, this.events('packetReadyToDispatch').emit);
+        multiplex(this.parsers, this.events('packetReadyToDispatch').emit);
         
     } else {
 

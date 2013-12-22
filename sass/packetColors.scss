@@ -1,0 +1,14 @@
+/* categorical colors for packets */
+
+$i: 1;
+@while $i <= length($categoricalColors) {
+  .unit-#{$i - 1} {
+    fill:nth($categoricalColors, $i);
+  }
+
+  .unit-#{$i - 1} .packet.airwave {
+    stroke:nth($categoricalColors, $i);
+  }
+
+  $i: $i + 1;
+}

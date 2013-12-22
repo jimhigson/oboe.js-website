@@ -66,18 +66,15 @@ rect.fade {
 
 $i: 1;
 @while $i <= length($categoricalColors) {
-  .unit-#{$i - 1} {
-    fill:nth($categoricalColors, $i);
-  }
   
   g.client.received-#{$i - 1} .part.unit-#{$i - 1} {
     display:inline;  
   }
-  
+
   .unit-#{$i - 1} .packet.airwave {
     fill:none;
-    stroke:nth($categoricalColors, $i);
-  }  
+    stroke:black;
+  }
   
   $i: $i + 1;
 }

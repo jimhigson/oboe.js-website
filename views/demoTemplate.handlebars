@@ -91,30 +91,32 @@
 <template id="client-graph">
    <g class="map graph">
       <g class="bars">
-         <rect x="-26" y="-18" width="8" height="42"/>
-         <rect x="-14" y="-11" width="8" height="35"/>
-         <rect x="-2"  y="7"   width="8" height="17"/>
-         <rect x="10"  y="-1"  width="8" height="25"/>
-         <rect x="22"  y="4"   width="8" height="20"/>
+         <rect transform="translate(-26)" y="-18" width="8" height="42"/>
+         <rect transform="translate(-14)" y="-11" width="8" height="35"/>
+         <rect transform="translate(-2)"  y="7"   width="8" height="17"/>
+         <rect transform="translate(10)"  y="-1"  width="8" height="25"/>
+         <rect transform="translate(22)"  y="4"   width="8" height="20"/>
       </g>
       
-      <g class="points">
-         <rect x="-24" y="-16" width="4" height="4"/>
-         <g>
-            <rect x="-12" y="-23" width="4" height="4"/>
-            <path d="m -21,-12 12,-7"/>
+      <g class="points" transform="translate(4,3)">
+         <g transform="translate(-26)"> 
+            <rect transform="translate(-2,-2)" y="-16" width="4" height="4"/>
          </g>
-         <g>
-            <rect x="0" y="-24" width="4" height="4"/>
-            <path d="M -9,-19 3,-20"/>
+         <g transform="translate(-14)">
+            <rect transform="translate(-2,-2)" y="-23" width="4" height="4"/>
+            <line x1="-12" y1="-16" y2="-23"/>
          </g>
-         <g>
-            <rect x="12" y="-12" width="4" height="4"/>
-            <path d="M 3,-20 15,-8"/>
+         <g transform="translate(-2)">
+            <rect transform="translate(-2,-2)" y="-24" width="4" height="4"/>
+            <line x1="-12" y1="-23" y2="-24"/>             
          </g>
-         <g>
-            <rect x="24" y="-5" width="4" height="4" />
-            <path d="m 15,-8 12,7"/>
+         <g transform="translate(10)">
+            <rect transform="translate(-2,-2)" y="-12" width="4" height="4"/>
+            <line x1="-12" y1="-24" y2="-12"/>             
+         </g>
+         <g transform="translate(22)">
+            <rect transform="translate(-2,-2)" y="-5" width="4" height="4"/>
+            <line x1="-12" y1="-12" y2="-5"/>
          </g>
       </g>
       

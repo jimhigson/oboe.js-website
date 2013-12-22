@@ -16,7 +16,7 @@ $barColor: nth($categoricalColors, 2);
     fill: $pointColor;
   }
 
-  .points path {
+  .points line {
     stroke: $pointColor;
     stroke-width: 2;
   }

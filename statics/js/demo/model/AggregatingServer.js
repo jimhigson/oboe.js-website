@@ -28,7 +28,7 @@ AggregatingServer.prototype.setupResponse = function(){
     );
 
     this.openOutboundMessages('downstream', this.responsePacketGenerator());
-}
+};
 
 AggregatingServer.prototype.createInputParsersForEachUpstreamNode = function(parseStrategyName){
     var parsers = {},

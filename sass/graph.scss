@@ -17,7 +17,7 @@ $barColor: nth($categoricalColors, 2);
   }
   
   .points {
-    rect {
+    circle {
       fill: darken($pointColor,10%);
     }
 

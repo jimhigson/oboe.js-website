@@ -229,7 +229,7 @@ var scenarios = (function () {
                     "options": {
                         "timeBetweenPackets": 2000,
                         "initialDelay": 500,
-                        "messageSize": 7,
+                        "messageSize": 9,
                         "packetSequence": evenNumberedPackets
                     }
                 },
@@ -248,7 +248,7 @@ var scenarios = (function () {
                     "options": {
                         "timeBetweenPackets": 750,
                         "initialDelay": 250,
-                        "messageSize": 5,
+                        "messageSize": 10,
                         "packetSequence": oddNumberedPackets
                     },
                     "locations":{ "where":{x:100, y:200} }

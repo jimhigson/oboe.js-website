@@ -14,6 +14,16 @@ var DemoView = extend(ThingView, function(demo){
     this.baseHeight = demo.height || DEFAULT_HEIGHT;
     this.setDimensions(this.baseHeight, this.scalingFactor());
 
+    this.initSubviewCreation();
+ 
+    $( window ).resize(function() {
+        this.setDimensions(this.baseHeight, this.scalingFactor());
+    }.bind(this));
+
+    this.setupControls();
+});
+
+DemoView.prototype.initSubviewCreation = function(ModelType, ViewType){
     this.createNewViewsForNewModelItems(Packet, PacketView);
     this.createNewViewsForNewModelItems(Message, MessageView);
     this.createNewViewsForNewModelItems(AggregatingServer, ServerView);
@@ -22,13 +32,7 @@ var DemoView = extend(ThingView, function(demo){
     this.createNewViewsForNewModelItems(Client, ClientView);
     this.createNewViewsForNewModelItems(Relay, RelayView);
     this.createNewViewsForNewModelItems(Barrier, BarrierView);
-
-    $( window ).resize(function() {
-        this.setDimensions(this.baseHeight, this.scalingFactor());
-    }.bind(this));
-
-    this.setupControls();
-});
+}
 
 DemoView.prototype.createNewViewsForNewModelItems = function(ModelType, ViewType){
     this.subject.events(ModelType.name).on(function(modelItem){

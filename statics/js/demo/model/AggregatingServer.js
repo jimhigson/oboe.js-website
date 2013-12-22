@@ -3,6 +3,7 @@ var AggregatingServer = extend(Server, function AggregatingServer(name, location
   
     this.parseStrategyName = options.parseStrategy;
 });
+AggregatingServer.newEvent = 'AggregatingServer';
 
 AggregatingServer.prototype.accept = function(receivedPacket, sender){
     

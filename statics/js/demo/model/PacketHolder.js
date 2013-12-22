@@ -16,6 +16,9 @@ var PacketHolder = extend(Thing, function PacketHolder(name, locations){
         ,   upstream:   []
     };
 });
+
+PacketHolder.newEvent = 'PacketHolder';
+
 PacketHolder.prototype.accept = abstract;
 
 PacketHolder.prototype.withDownstream = function(downstream){

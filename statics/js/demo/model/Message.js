@@ -2,6 +2,8 @@ var Message = extend(Thing, function Message() {
     Thing.apply(this, arguments);
 });
 
+Message.newEvent = 'Message';
+
 Message.prototype.sentBy = function(sender){
     return this; // chaining
 };

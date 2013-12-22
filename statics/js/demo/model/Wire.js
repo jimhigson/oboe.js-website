@@ -9,6 +9,9 @@ var Wire = extend( PacketHolder, function Wire(name, locations, options) {
         this.blockage = undefined;
     }.bind(this));
 });
+
+Wire.newEvent = 'Wire';
+
 Wire.prototype.accept = function(packet){
 
     packet.isOn(this);

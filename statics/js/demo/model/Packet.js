@@ -8,6 +8,8 @@ var Packet = extend(Thing, function Packet(name, type, direction, ordering, mode
     this.gotAlreadyUpTo = 0;
 });
 
+Packet.newEvent = 'Packet';
+
 Packet.prototype.copy = function(additionalName) {
 
     var orderingCopy = {

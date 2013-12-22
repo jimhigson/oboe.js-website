@@ -10,6 +10,9 @@ var Thing = (function(){
             this.cancelTimeouts();
         }.bind(this));
     }
+
+    Thing.newEvent = 'Thing';
+    
     Thing.prototype.with = {};
     
     Thing.prototype.hasView = function(view){
@@ -40,7 +43,11 @@ var Thing = (function(){
     
     Thing.prototype.announce = function() {
 
-        this.demo.events(this.constructor.name).emit(this);
+        if( !this.constructor.newEvent ) {
+            throw new Error('cannot announce type without .newEvent set');
+        }
+        
+        this.demo.events(this.constructor.newEvent).emit(this);
         return this;
     };
     

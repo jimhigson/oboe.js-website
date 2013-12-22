@@ -39,7 +39,11 @@ DemoView.prototype.initSubviewCreation = function(ModelType, ViewType){
 };
 
 DemoView.prototype.createNewViewsForNewModelItems = function(ModelType, ViewType){
-    this.subject.events(ModelType.name).on(function(modelItem){
+    if( !ModelType.newEvent ) {
+        throw new Error('constructors must have .newEvent set to be listened to'); 
+    }
+    
+    this.subject.events(ModelType.newEvent).on(function(modelItem){
         ViewType.factory
             ?   ViewType.factory(modelItem, this)
             :   new ViewType(modelItem, this);

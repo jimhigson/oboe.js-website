@@ -20,6 +20,8 @@ var Client = extend( PacketHolder, function Client(name, locations, options) {
     }.bind(this));
 });
 
+Client.newEvent = 'Client';
+
 Client.prototype.makeRequest = function(){
 
     this.addToScript('requestAttempt', this.attemptNumber);

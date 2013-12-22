@@ -13,6 +13,8 @@ var Server = (function(){
             return previousPacketNumber+1;
         };
     });
+
+    Server.newEvent = 'Server';
     
     function asFunction(givenValue, defaultValue) {
         

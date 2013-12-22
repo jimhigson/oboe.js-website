@@ -339,7 +339,7 @@ var scenarios = (function () {
         "historic-and-live": {
             "items": [
                 {
-                    "name": "sever",
+                    "name": "server",
                     "type": "server",
                     "options": {
                         "timeBetweenPackets": fastTimingThenStream,

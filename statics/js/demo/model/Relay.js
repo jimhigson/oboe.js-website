@@ -9,6 +9,8 @@ var Relay = extend(PacketHolder, function Relay(name, locations, options){
     }.bind(this));
 });
 
+Relay.newEvent = 'Relay';
+
 Relay.prototype.initThrottle = function(){
 
     this.throttledOutputStreams = {

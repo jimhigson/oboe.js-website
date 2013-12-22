@@ -7,6 +7,8 @@ var Barrier = (function(){
             this.hasBeenShown = false;
         }.bind(this));
     });
+
+    Barrier.newEvent = 'Barrier';
     
     Barrier.prototype.activate = function(){
         this.events('activated').emit();

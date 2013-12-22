@@ -21,13 +21,19 @@ AggregatingServer.prototype.setupResponse = function(){
     
     this.parsers = this.createInputParsersForEachUpstreamNode(this.parseStrategyName);
 
+    this.throttledOutput = throttle( 
+        functor(500), 
+        this.events('packetReadyToDispatch').emit,
+        this
+    );
+    
     multiplex(
         this.parseStrategyName,
         this.parsers,
-        this.events('packetReadyToDispatch').emit
+        this.throttledOutput.read
     );
 
-    this.openOutboundMessages('downstream', this.responsePacketGenerator());
+    this.openOutboundMessages('downstream', function(packet){return packet});
 };
 
 AggregatingServer.prototype.createInputParsersForEachUpstreamNode = function(parseStrategyName){
@@ -40,34 +46,4 @@ AggregatingServer.prototype.createInputParsersForEachUpstreamNode = function(par
     });
      
     return parsers;
-};
-
-
-AggregatingServer.prototype.responsePacketGenerator = function(){
-
-    var numberOfResponsesExpected = this.nextLocationsInDirection('upstream').length,
-        numberOfResponsesCompleted = 0,
-        responsesStarted = false;
-
-    /* Takes packets. Returns packets which are very similar but have had the ordering
-       changed, so that their isFirst/isLast is set to be correct post-aggregation
-       (only one first, only one last, even if read from multiple streams where each 
-       stream yielded a first and last packet)
-     */
-    return function(incomingPacket){
-
-        var outgoing = incomingPacket.copy();
-        incomingPacket.done();
-
-        if( incomingPacket.ordering.isLast ) {
-            numberOfResponsesCompleted++;
-        }
-
-        outgoing.ordering.isFirst = !responsesStarted;
-        outgoing.ordering.isLast  = ( numberOfResponsesCompleted == numberOfResponsesExpected );
-
-        responsesStarted = true;
-
-        return outgoing;
-    }
 };

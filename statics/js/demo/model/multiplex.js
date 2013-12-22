@@ -4,6 +4,36 @@
 
 var multiplex = (function(){
 
+    /* Packets from multiple sources will not have .isFirst and .isLast correctly set
+       after multiplexing unless these properties are changed. Do that. 
+     */
+    function resequence(numberOfResponsesExpected){
+        var numberOfResponsesCompleted = 0,
+            responsesStarted = false;
+
+        /* Takes packets. Returns packets which are very similar but have had the ordering
+         changed, so that their isFirst/isLast is set to be correct post-multiplexing
+         (only one first, only one last, even if read from multiple streams where each 
+         stream yielded a first and last packet)
+         */
+        return function(incomingPacket){
+
+            var outgoing = incomingPacket.copy();
+            incomingPacket.done();
+
+            if( incomingPacket.ordering.isLast ) {
+                numberOfResponsesCompleted++;
+            }
+
+            outgoing.ordering.isFirst = !responsesStarted;
+            outgoing.ordering.isLast  = ( numberOfResponsesCompleted == numberOfResponsesExpected );
+
+            responsesStarted = true;
+
+            return outgoing;
+        }
+    }
+    
     function multiplexProgressively(parsers, output) {
         for (var i in parsers) {
 
@@ -38,11 +68,17 @@ var multiplex = (function(){
     }
 
     return function( strategyName, parsers, output ){
-
+        var numberOfResponsesExpected = Object.keys(parsers).length,
+            reseq = resequence(numberOfResponsesExpected);
+        
+        function renumberedOutput(packet){
+            output(reseq(packet));
+        }
+        
         if( strategyName == 'progressive' ) {
-            multiplexProgressively(parsers, output);
+            multiplexProgressively(parsers, renumberedOutput);
         } else {
-            multiplexDiscretely(parsers, output);
+            multiplexDiscretely(parsers, renumberedOutput);
         }
     };
     

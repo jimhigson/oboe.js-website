@@ -1,8 +1,12 @@
 
 /* jQuery doesn't like adding classes to SVG elements */
 function addClass(jEle, klass) {
-    var ele = jEle[0];
-    ele.setAttribute('class', ele.getAttribute('class') + ' ' + klass);
+    var ele = jEle[0],
+        newClasses = ele.hasAttribute('class')
+                   ? ele.getAttribute('class') + ' ' + klass 
+                   : klass
+                   ;
+    ele.setAttribute('class', newClasses);
 }
 function removeClass(jEle, klass) {
     var ele = jEle[0];

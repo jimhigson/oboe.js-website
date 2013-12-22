@@ -16,8 +16,8 @@
   }
 }
 
-$evenColor: nth($categoricalColors, 2);
-$oddColor:  nth($categoricalColors, 5);
+$evenColor: nth($categoricalColors, 1);
+$oddColor:  nth($categoricalColors, 4);
 
 .twoSeries {
 

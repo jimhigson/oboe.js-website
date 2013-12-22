@@ -4,6 +4,7 @@ var Client = extend( PacketHolder, function Client(name, locations, options) {
     this.page = options.page;
     this.retryAfter = options.retryAfter || Number.POSITIVE_INFINITY;
     this.parser = Parser(options.parseStrategy);
+    this.aspect = options.aspect || 'portrait';
 
     this.parser.events('packetParsed').on( function(packet) {
         this.events('gotData').emit(packet);

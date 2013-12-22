@@ -44,11 +44,19 @@
     <rect class="server" x="-22.5" y="-40" width="45" height="80"/>
 </template>
 
-<template id="client">
+<template id="client-portrait">
     <g class="browser">
         <rect class="background" width="85" height="95" x="-40" y="-50"/>
         <g class="browserContents" />
-        <path class="frame" d="M -40 -50 L -40 45 L 45 45 L 45 -50 L -40 -50 z M -35 -40 L 40 -40 L 40 40 L -35 40 L -35 -40 z "/>
+        <path class="frame" d="M -40 -50 L -40 45 L 45 45 L 45 -50 L -40 -50 z M -35 -40 L 40 -40 L 40 40 L -35 40 L -35 -40 z"/>
+    </g>
+</template>
+
+<template id="client-landscape">
+    <g class="browser">
+        <rect class="background" width="95" height="85" x="-45" y="-45"/>
+        <g class="browserContents" />
+        <path class="frame" d="m 50,-45 -95,0 0,85 95,0 z m -5,10 0,70 -85,0 0,-70 z"/>
     </g>
 </template>
 

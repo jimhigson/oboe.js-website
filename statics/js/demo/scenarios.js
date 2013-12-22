@@ -285,6 +285,7 @@ var scenarios = (function () {
                     "options": {
                         "parseStrategy": "progressive",
                         "page": "graph",
+                        "aspect": "landscape",
                         "deviceType":"desktop"
                     }
                 }

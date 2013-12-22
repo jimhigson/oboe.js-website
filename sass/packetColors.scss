@@ -21,10 +21,13 @@ $oddColor:  nth($categoricalColors, 5);
 
 .twoSeries {
 
-  $i: 1;
+  $i: 1; 
   @while $i <= 10 {
     $isEven: ($i % 2 == 0);
+    $isDark: ($i % 4 == 0) or ($i % 4 == 1);
+    
     $seriesColor: if($isEven, $evenColor, $oddColor);
+    $seriesColor: if($isDark, darken($seriesColor, 10%), lighten($seriesColor, 10%));
 
     .unit-#{$i - 1} {
       fill:$seriesColor;

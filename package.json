@@ -27,8 +27,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "predeploy": "grunt build",
-    "start": "node index.js --env=prod",
-    "start-dev": "grunt start-dev"      
+    "start": "node index.js --env=prod"
   },
   "repository": {
     "type": "git",

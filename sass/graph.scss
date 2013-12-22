@@ -1,4 +1,4 @@
-$pointColor: nth($categoricalColors, 1);
+$pointColor: nth($categoricalColors, 5);
 $barColor: nth($categoricalColors, 2);
 
 .graph {
@@ -11,13 +11,19 @@ $barColor: nth($categoricalColors, 2);
   .bars {
     fill: $barColor;
   }
-  
-  .points rect {
-    fill: $pointColor;
-  }
 
-  .points line {
-    stroke: $pointColor;
-    stroke-width: 2;
+  .bars rect:nth-child(even) {
+    fill: darken($barColor, 10%);
+  }
+  
+  .points {
+    rect {
+      fill: darken($pointColor,10%);
+    }
+
+    line {
+      stroke: $pointColor;
+      stroke-width: 2;
+    }
   }
 }

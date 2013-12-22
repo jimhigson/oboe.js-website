@@ -38,12 +38,15 @@ var WireView = extend(ThingView, function(subject, demoView){
         };
         
         function flash( packet, resolveDirection ){
-            var klass = unitClass(packet);
+            var unit = unitClass(packet),
+                name = packet.name;
 
-            addClass( aerials[ resolveDirection(packet.direction) ], klass );
+            addClass( aerials[ resolveDirection(packet.direction) ], unit );
+            addClass( aerials[ resolveDirection(packet.direction) ], name );
 
             window.setTimeout(function(){
-                removeClass( aerials[ resolveDirection(packet.direction) ], klass );
+                removeClass( aerials[ resolveDirection(packet.direction) ], unit );
+                removeClass( aerials[ resolveDirection(packet.direction) ], name );
             }, MOBILE_AERIAL_FLASH_DURATION);
         }
         

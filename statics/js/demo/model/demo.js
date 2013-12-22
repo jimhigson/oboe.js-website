@@ -8,6 +8,9 @@ var Demo = extend(Thing, function Demo(name, options){
     
     this.demo = this;  // we are our own demo
 });
+
+Demo.newEvent = 'Demo';
+
 Demo.prototype.start = function(){
     this.startSimulation();
 };

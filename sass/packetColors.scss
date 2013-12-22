@@ -28,6 +28,10 @@ $oddColor:  nth($categoricalColors, 5);
 
     .unit-#{$i - 1} {
       fill:$seriesColor;
+      
+      line {
+        stroke: $seriesColor;
+      }
     }
  
     $i: $i + 1;

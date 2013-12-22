@@ -16,6 +16,7 @@ var ClientView = (function(){
         function type(pageName){
             switch(pageName){
                 case "singlePageSite":
+                case "graph":
                 case "map":
                     return SimpleClient;                
                 case "twitter":

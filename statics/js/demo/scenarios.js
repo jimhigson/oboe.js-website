@@ -284,7 +284,7 @@ var scenarios = (function () {
                     "type": "client",
                     "options": {
                         "parseStrategy": "progressive",
-                        "page": "singlePageSite",
+                        "page": "graph",
                         "deviceType":"desktop"
                     }
                 }

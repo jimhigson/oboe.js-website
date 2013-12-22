@@ -9,7 +9,6 @@ AggregatingServer.prototype.accept = function(receivedPacket, sender){
     if( receivedPacket.direction == 'upstream' ) {
 
         this.propagate(receivedPacket);
-        this.openOutboundMessages('downstream', this.responsePacketGenerator());
 
         this.parsers = this.createInputParsersForEachUpstreamNode(this.parseStrategyName);
 
@@ -18,6 +17,8 @@ AggregatingServer.prototype.accept = function(receivedPacket, sender){
             this.parsers, 
             this.events('packetReadyToDispatch').emit
         );
+
+        this.openOutboundMessages('downstream', this.responsePacketGenerator());
         
     } else {
 

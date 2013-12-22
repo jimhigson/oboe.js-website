@@ -11,17 +11,12 @@
   user-select: none;
 
   margin: 0.5em 0 1em 0;
-}
-
-[data-demo] {
   background-color: $shadedBackgroundColor;
 }
 
 rect.fade {
-   fill: $shadedBackgroundColor;
-}
-rect.fade {
-    opacity: 0.9;
+  fill: $shadedBackgroundColor;
+  opacity: 0.9;
 }
 
 @mixin svg-text-centered {

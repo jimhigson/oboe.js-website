@@ -34,7 +34,7 @@ var getScenario = (function () {
                 "deviceType":"desktop"
             },
             locations:{
-                where: {x: 440, y: 145}
+                where: {x: 430, y: 145}
             }
         },
         

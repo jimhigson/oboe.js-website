@@ -5,6 +5,10 @@ var Wire = extend( PacketHolder, function Wire(name, locations, options) {
     this.bandwidth = options.bandwidth;
     this.medium = options.medium;
     
+    if( !options.medium ) {
+        throw new Error('no medium for wire ' + name);
+    }
+    
     this.events('reset').on(function(){
         this.blockage = undefined;
     }.bind(this));

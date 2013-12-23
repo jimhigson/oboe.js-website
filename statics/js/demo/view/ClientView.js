@@ -5,8 +5,10 @@ var ClientView = (function(){
 
         this.initDomFromTemplate( 'places', 'client-' + subject.aspect, subject.name);
         
-        var browserTemplateName = 'client-' + subject.page;
-        this.stampContentsFromTemplate( 'browserContents', browserTemplateName);
+        var browserContentsPaneSelector = '.' + subject.name + ' .browserContents', 
+            browserTemplateName = 'client-' + subject.page;
+        
+        this.stampContentsFromTemplate( browserContentsPaneSelector, browserTemplateName);
     
         this.moveTo(subject.locations.where);
     });

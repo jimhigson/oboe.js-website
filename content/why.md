@@ -79,4 +79,4 @@ divergent code to write.
 
 I'll write it later
 
-<figure data-demo="slow-ajax-discrete"></figure>
+<figure data-demo="caching"></figure>

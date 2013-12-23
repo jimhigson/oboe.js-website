@@ -1,10 +1,28 @@
 var getScenario = (function () {
 
+    var DEFAULTS = {
+        wire: {
+            options:{
+                bandwidth: 500,
+                latency: 1000,
+                medium: 'cable'
+            },
+            locations: {}
+        },
+    
+        relay: {
+            options:{
+                "timeBetweenPackets": 500
+            }
+        }
+    }
+    
     function defaultLocationForItem(item) {
         // fill in default positions
         var DEFAULT_SERVER_LOCATION = {x: 40, y: 55},
             DEFAULT_CLIENT_LOCATION = {x: 440, y: 145},
-            DEFAULT_BARRIER_LOCATION = {x: 410, y: 145};
+            DEFAULT_BARRIER_LOCATION = {x: 410, y: 145},
+            DEFAULT_RELAY_LOCATION = {x: 235, y: 90};
 
         switch (item.type) {
             case 'client':
@@ -12,7 +30,9 @@ var getScenario = (function () {
             case 'server':
                 return DEFAULT_SERVER_LOCATION;
             case 'barrier':
-                return DEFAULT_BARRIER_LOCATION;            
+                return DEFAULT_BARRIER_LOCATION;
+            case 'relay':
+                return DEFAULT_RELAY_LOCATION;            
         }
     }
     
@@ -47,27 +67,44 @@ var getScenario = (function () {
         return jQuery.extend(true, {}, obj);
     }
 
-    function extend(base, extension) {
-        for( var k in extension ) {
-            if( extension[k] instanceof Function ) {
+    function fillInDefaults(obj, defaults) {
+        return _extend(obj, defaults, false);        
+    }
+
+    function extend(obj, extension) {
+        return _extend(obj, extension, true);
+    }
+    
+    function _extend(to, from, overwrite) {
+        
+        if( !to ) {
+            to = {};
+        }
+        
+        for( var k in from ) {
+            
+            if( from[k] instanceof Function ) {
+                
                 // functions - copy directly
-                base[k] = extension[k];
+                if( overwrite || !to[k] )
+                    to[k] = from[k];
             }
-            else if( extension[k] instanceof Object ) {
+            else if( from[k] instanceof Object ) {
                 
                 // objects, arrays - recursive case
-                if( !base[k] ) {
-                    base[k] = {};
+                if( !to[k] ) {
+                    to[k] = {};
                 }
                 
-                extend(base[k], extension[k]);
+                _extend(to[k], from[k]);
             } else {
                 
                 // strings, numbers etc
-                base[k] = extension[k];
+                if( overwrite || !to[k] )                
+                    to[k] = from[k];
             }
         }
-        return base;
+        return to;
     }
     
     function fillInTemplate(template, extensions) {
@@ -102,11 +139,13 @@ var getScenario = (function () {
         rawJson.items.forEach(function (rawItem, i, items) {
             // fill in next property if not explicitly given:
             if( ! rawItem.next ) {
-                rawItem.next    = (i < items.length-1)
+                rawItem.next 
+                    = (i < items.length-1)
                     ? [items[i + 1].name]
                     : [];
             }
 
+            fillInDefaults(rawItem, DEFAULTS[rawItem.type]);
 
             if (!rawItem.locations) {
                 rawItem.locations = {};
@@ -124,17 +163,6 @@ var getScenario = (function () {
         rawJson.items.forEach(function (wire, i, items) {
 
             if( wire.type == 'wire' ) {
-
-                // wires default to cable (could also be mobile) - the only difference
-                // is in the view, work in the same way
-                if( !wire.options.medium ) {
-                    wire.options.medium = 'cable';
-                }
-
-                // give wires their location:
-                if( !wire.locations ) {
-                    wire.locations = {};
-                }
 
                 if( !wire.locations.upstream ) {
                     var previousItemLocations = items[i - 1].locations;

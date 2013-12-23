@@ -13,7 +13,7 @@ var PacketHolder = extend(Thing, function PacketHolder(name, locations){
     this.latency = 0;
     this.adjacents = {
         downstream: []
-        ,   upstream:   []
+    ,   upstream:   []
     };
 });
 
@@ -21,10 +21,12 @@ PacketHolder.newEvent = 'PacketHolder';
 
 PacketHolder.prototype.accept = abstract;
 
-PacketHolder.prototype.withDownstream = function(downstream){
+PacketHolder.prototype.withDownstream = function(downstreamLocation){
 
-    this.adjacents.downstream.push(downstream);
-    downstream.adjacents.upstream.push(this);
+    console.log('adding', downstreamLocation, 'as downstream of', this.name);
+    
+    this.adjacents.downstream.push(downstreamLocation);
+    downstreamLocation.adjacents.upstream.push(this);
 
     return this;
 };

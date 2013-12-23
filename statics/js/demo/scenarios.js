@@ -97,7 +97,6 @@ var scenarios = (function () {
                 {
                     "name": "tower",
                     "type": "relay",
-                    "locations":{ "where":{x: 235, y: 90} },
                     "options":{
                         "timeBetweenPackets": inconsistent_packet_spacing
                     }
@@ -365,6 +364,64 @@ var scenarios = (function () {
                         "page": "twitter",
                         "deviceType":"desktop"
                     }
+                }
+            ]
+        },
+
+        "caching": {
+            "options":{
+                "height":257,
+                "colors":"twoSeries"
+            },
+            "items": [
+                {
+                    "name": "server",
+                    "type": "server",
+                    "options": {
+                        "messageSize": 10
+                    }
+                },
+                {
+                    "name": "server-wire",
+                    "type": "wire",
+                    "options": {
+                        "bandwidth": 500,
+                        "latency": 1000
+                    }
+                },
+                {
+                    "name": "cache",
+                    "type": "relay",
+                    "next": ["internet1", "internet2"]
+                },
+                {
+                    "name": "internet1",
+                    "type": "wire"
+                },
+                {
+                    "name": "client",
+                    "type": "client",
+                    "options": {
+                        "parseStrategy": "progressive",
+                        "page": "twitter",
+                        "deviceType":"desktop"
+                    },
+                    "locations":{ "where":{x:420, y:75} },
+                    "next": []
+                },
+                {
+                    "name": "internet2",
+                    "type": "wire"
+                },
+                {
+                    "name": "client2",
+                    "type": "client",
+                    "options": {
+                        "parseStrategy": "progressive",
+                        "page": "twitter",
+                        "deviceType":"desktop"
+                    },
+                    "locations":{ "where":{x:420, y:200} }
                 }
             ]
         }

@@ -1,4 +1,9 @@
 function throttle(timeBetweenPackets, send, scheduler){
+    
+    if( !timeBetweenPackets ) {
+        throw new Error('no timing given');
+    }
+    
     var buffer = [];
     
     function accept(receivedPacket){

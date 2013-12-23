@@ -25,9 +25,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.8284271"
-     inkscape:cx="25.83965"
-     inkscape:cy="85.325582"
+     inkscape:zoom="8"
+     inkscape:cx="-0.80561441"
+     inkscape:cy="105.08205"
      inkscape:document-units="px"
      inkscape:current-layer="layer6"
      showgrid="true"
@@ -578,9 +578,10 @@
      style="display:inline">
     <path
        style="color:#000000;fill:#827e7a;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       d="m 50,-45 -95,0 0,85 95,0 0,-85 z m -10,5 0,75 -80,0 0,-75 80,0 z"
+       d="m 50,-45 -95,0 0,85 95,0 z m -5,10 0,70 -85,0 0,-70 z"
        id="rect3024-8"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccccccc" />
     <rect
        style="color:#000000;fill:#e98967;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect3860"

@@ -4,8 +4,8 @@ var Server = (function(){
     
         PacketHolder.apply(this, arguments);
 
-        this.timeBetweenPackets = asFunction(options.timeBetweenPackets);
-        this.packetMode = asFunction(options.packetMode);
+        this.timeBetweenPackets = Thing.asFunction(options.timeBetweenPackets);
+        this.packetMode = Thing.asFunction(options.packetMode);
     
         this.initialDelay = options.initialDelay;
         this.messageSize = options.messageSize;
@@ -13,18 +13,7 @@ var Server = (function(){
     });
 
     Server.newEvent = 'Server';
-    
-    function asFunction(givenValue, defaultValue) {
-        
-        if (typeof givenValue == 'function') {
-            return givenValue;
-        }
-        
-        var constantValue = ( givenValue !== undefined )? givenValue : defaultValue;
-        
-        return function(){return constantValue};
-    }
-    
+
     Server.prototype.accept = function(packet){
     
         if( packet.direction == 'upstream' ) {

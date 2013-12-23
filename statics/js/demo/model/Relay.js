@@ -1,7 +1,7 @@
 var Relay = extend(PacketHolder, function Relay(name, locations, options){
     PacketHolder.apply(this, arguments);
 
-    this.timeBetweenPackets = options.timeBetweenPackets;
+    this.timeBetweenPackets = Thing.asFunction(options.timeBetweenPackets);
     this.initThrottle();
     
     this.events('reset').on(function(){

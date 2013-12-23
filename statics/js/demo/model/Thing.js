@@ -106,11 +106,23 @@ var Thing = (function(){
 
         return timeout;
     };
+    
     Thing.prototype.unschedule = function(unscheduledTimeout) {
 
         window.clearTimeout(unscheduledTimeout);
         this.removeTimeout(unscheduledTimeout);
-    };    
+    };
     
+    Thing.asFunction = function (givenValue, defaultValue) {
+
+        if (typeof givenValue == 'function') {
+            return givenValue;
+        }
+
+        var constantValue = ( givenValue !== undefined )? givenValue : defaultValue;
+
+        return function(){return constantValue};
+    };
+
     return Thing;
 }());

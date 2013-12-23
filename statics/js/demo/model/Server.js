@@ -5,13 +5,11 @@ var Server = (function(){
         PacketHolder.apply(this, arguments);
 
         this.timeBetweenPackets = asFunction(options.timeBetweenPackets);
-        this.packetMode = asFunction( options.packetMode, 'live' );
+        this.packetMode = asFunction(options.packetMode);
     
         this.initialDelay = options.initialDelay;
         this.messageSize = options.messageSize;
-        this.packetNumberAfter = options.packetSequence || function(previousPacketNumber){
-            return previousPacketNumber+1;
-        };
+        this.packetNumberAfter = options.packetSequence;
     });
 
     Server.newEvent = 'Server';

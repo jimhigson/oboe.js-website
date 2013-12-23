@@ -1,17 +1,14 @@
 var DemoView = extend(ThingView, function(demo){
     ThingView.apply(this,arguments);
 
-    var DEFAULT_WIDTH = 500;
-    var DEFAULT_HEIGHT = 200;
-
     this.jDom = stampFromTemplate($('#demo'), demo.colors);
 
     var containerDiv = $("[data-demo=" + demo.name + "]");
 
     containerDiv.append( this.jDom );
 
-    this.baseWidth  = demo.width  || DEFAULT_WIDTH;
-    this.baseHeight = demo.height || DEFAULT_HEIGHT;
+    this.baseWidth  = demo.width;
+    this.baseHeight = demo.height;
     this.setDimensions(this.baseHeight, this.scalingFactor());
 
     this.initSubviewCreation();

@@ -1,6 +1,13 @@
 var getScenario = (function () {
 
     var DEFAULTS = {
+        demo: {
+            options: {
+                colors: 'categorical',
+                width: 500,
+                height: 200
+            }
+        },
         wire: {
             options:{
                 bandwidth: 500,
@@ -20,6 +27,10 @@ var getScenario = (function () {
         },
         
         client: {
+            options:{
+                retryAfter: Number.POSITIVE_INFINITY,
+                aspect: 'portrait'
+            },
             locations:{
                 where: {x: 440, y: 145}
             }
@@ -32,6 +43,12 @@ var getScenario = (function () {
         },
         
         server: {
+            options:{
+                packetSequence: function(previousPacketNumber){
+                    return previousPacketNumber+1;
+                },
+                packetMode:'live'
+            },
             locations:{
                 where: {x: 40, y: 55}
             }
@@ -129,6 +146,7 @@ var getScenario = (function () {
     function fillInScenarioDescription(name) {
         
         var rawJson = fillInFromBaseScenario(name);
+        fillInDefaults(rawJson, DEFAULTS.demo);
 
         var itemsByName = {};
                 

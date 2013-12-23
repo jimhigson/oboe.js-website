@@ -21,7 +21,6 @@ var scenarios = (function () {
                     "type": "server",
                     "options": {
                         "timeBetweenPackets": 100,
-                        "initialDelay": 500,
                         "messageSize": 9
                     }
                 },
@@ -77,12 +76,10 @@ var scenarios = (function () {
                     "type": "server",
                     "options": {
                         "timeBetweenPackets": 50,
-                        "initialDelay": 500,
-                        "messageSize": 10,
                         "packetMode": "historic"
                     },
                     locations:{
-                        where: {x: 40, y: 93}
+                        where: {y: 93}
                     }
                 },
                 {
@@ -90,8 +87,7 @@ var scenarios = (function () {
                     "type": "wire",
                     "options": {
                         "bandwidth": 500,
-                        "latency": 800,
-                        "messageSize": 7
+                        "latency": 800
                     }                    
                 },
                 {
@@ -107,8 +103,7 @@ var scenarios = (function () {
                     "options": {
                         "medium":"mobile",
                         "bandwidth": 500,
-                        "latency": 800,
-                        "messageSize": 7
+                        "latency": 800
                     }
                 },
                 {
@@ -230,7 +225,6 @@ var scenarios = (function () {
                     "type": "server",
                     "options": {
                         "timeBetweenPackets": 2000,
-                        "initialDelay": 500,
                         "messageSize": 9,
                         "packetSequence": evenNumberedPackets
                     }
@@ -250,7 +244,6 @@ var scenarios = (function () {
                     "options": {
                         "timeBetweenPackets": 750,
                         "initialDelay": 250,
-                        "messageSize": 10,
                         "packetSequence": oddNumberedPackets
                     },
                     "locations":{ "where":{x:100, y:200} }
@@ -268,7 +261,6 @@ var scenarios = (function () {
                     "type": "aggregatingServer",
                     "options": {
                         "timeBetweenPackets": 1000,
-                        "initialDelay": 500,
                         "messageSize": Number.POSITIVE_INFINITY
                     },
                     "locations":{ "where":{x:240, y:125} }
@@ -344,7 +336,6 @@ var scenarios = (function () {
                     "options": {
                         "timeBetweenPackets": fastTimingThenStream,
                         "packetMode": historicPacketsThenLive,
-                        "initialDelay": 500,
                         "messageSize": Number.POSITIVE_INFINITY
                     }
                 },
@@ -376,10 +367,7 @@ var scenarios = (function () {
             "items": [
                 {
                     "name": "server",
-                    "type": "server",
-                    "options": {
-                        "messageSize": 10
-                    }
+                    "type": "server"
                 },
                 {
                     "name": "server-wire",

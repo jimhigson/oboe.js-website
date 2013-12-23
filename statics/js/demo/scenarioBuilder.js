@@ -47,6 +47,9 @@ var getScenario = (function () {
                 packetSequence: function(previousPacketNumber){
                     return previousPacketNumber+1;
                 },
+                "timeBetweenPackets": 500,
+                "initialDelay": 500,
+                "messageSize": 10,
                 packetMode:'live'
             },
             locations:{

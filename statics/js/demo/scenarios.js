@@ -388,7 +388,7 @@ var scenarios = (function () {
                         "parseStrategy": "progressive",
                         "page": "twitter"
                     },
-                    "locations":{ "where":{x:420, y:75} },
+                    "locations":{ "where":{y:75} },
                     "next": []
                 },
                 {
@@ -402,7 +402,7 @@ var scenarios = (function () {
                         "parseStrategy": "progressive",
                         "page": "twitter"
                     },
-                    "locations":{ "where":{x:420, y:200} }
+                    "locations":{ "where":{y:195} }
                 }
             ]
         }

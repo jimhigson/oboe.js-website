@@ -379,7 +379,10 @@ var scenarios = (function () {
                 },
                 {
                     "name": "internet1",
-                    "type": "wire"
+                    "type": "wire",
+                    "options":{
+                        latency: 750
+                    }
                 },
                 {
                     "name": "client",
@@ -393,7 +396,10 @@ var scenarios = (function () {
                 },
                 {
                     "name": "internet2",
-                    "type": "wire"
+                    "type": "wire",
+                    "options":{
+                        latency: 1500
+                    }
                 },
                 {
                     "name": "client2",

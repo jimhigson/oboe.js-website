@@ -172,23 +172,6 @@ var getScenario = (function () {
             setRelativePositions(rawItem);
         });
 
-
-        rawJson.items.forEach(function (wire, i, items) {
-
-            if( wire.type == 'wire' ) {
-
-                if( !wire.locations.upstream ) {
-                    var previousItemLocations = items[i - 1].locations;
-                    wire.locations.upstream = previousItemLocations.downstream || previousItemLocations.where;
-                }
-
-                if( !wire.locations.downstream ) {
-                    var nextItemLocations = itemsByName[wire.next[0]].locations;
-                    wire.locations.downstream = nextItemLocations.upstream || nextItemLocations.where;
-                }
-            }
-        });
-
         return rawJson;
     }
 

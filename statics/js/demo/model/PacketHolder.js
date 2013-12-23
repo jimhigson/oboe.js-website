@@ -26,10 +26,15 @@ PacketHolder.prototype.withDownstream = function(downstreamLocation){
     console.log('adding', downstreamLocation, 'as downstream of', this.name);
     
     this.adjacents.downstream.push(downstreamLocation);
-    downstreamLocation.adjacents.upstream.push(this);
+    downstreamLocation._withUpstream(this);
 
     return this;
 };
+
+PacketHolder.prototype._withUpstream = function(upstreamLocation){
+    this.adjacents.upstream.push(upstreamLocation);
+};
+
 PacketHolder.prototype.nextLocationsInDirection = function(direction){
     return this.adjacents[direction];
 };

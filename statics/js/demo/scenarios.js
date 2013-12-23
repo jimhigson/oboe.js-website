@@ -314,7 +314,8 @@ var scenarios = (function () {
                             "parseStrategy": "progressive"
                         }
                     }
-                    ,,{
+                    ,,
+                    {
                         "options":{
                             "parseStrategy": "progressive"
                         }

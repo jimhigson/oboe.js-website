@@ -92,14 +92,14 @@ var getScenario = (function () {
     }
 
     function fillInDefaults(obj, defaults) {
-        return _extend(obj, defaults, false);        
+        return superimpose(obj, defaults, false);        
     }
 
     function extend(obj, extension) {
-        return _extend(obj, extension, true);
+        return superimpose(obj, extension, true);
     }
     
-    function _extend(to, from, overwrite) {
+    function superimpose(to, from, overwrite) {
         
         if( !to ) {
             to = {};
@@ -120,7 +120,7 @@ var getScenario = (function () {
                     to[k] = {};
                 }
                 
-                _extend(to[k], from[k]);
+                superimpose(to[k], from[k], overwrite);
             } else {
                 
                 // strings, numbers etc
@@ -151,6 +151,7 @@ var getScenario = (function () {
     function fillInScenarioDescription(name) {
         
         var rawJson = fillInFromBaseScenario(name);
+        
         fillInDefaults(rawJson, DEFAULTS.demo);
 
         var itemsByName = {};

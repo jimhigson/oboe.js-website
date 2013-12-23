@@ -23,8 +23,6 @@ PacketHolder.prototype.accept = abstract;
 
 PacketHolder.prototype.withDownstream = function(downstreamLocation){
 
-    console.log('adding', downstreamLocation, 'as downstream of', this.name);
-    
     this.adjacents.downstream.push(downstreamLocation);
     downstreamLocation._withUpstream(this);
 

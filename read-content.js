@@ -1,3 +1,5 @@
+"use strict";
+
 var supermarked = require('supermarked'), 
     fs = require('fs'),
     cheerio = require('cheerio');
@@ -5,12 +7,12 @@ var supermarked = require('supermarked'),
 function outline(html){
 
    var $ = cheerio.load(html),
-       mainHeadingEle = $('h1').first()   
+       mainHeadingEle = $('h1').first(),
    
        mainHeading = {
          text: mainHeadingEle.text(),
          id:   mainHeadingEle.attr('id')
-       };
+       },
        
        sectionHeadings = 
             $('h2').map(function(i, element){

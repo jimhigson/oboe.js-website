@@ -29,7 +29,9 @@ var getScenario = (function () {
         client: {
             options:{
                 retryAfter: Number.POSITIVE_INFINITY,
-                aspect: 'portrait'
+                aspect: 'portrait',
+                "page": "singlePageSite",
+                "deviceType":"desktop"
             },
             locations:{
                 where: {x: 440, y: 145}

@@ -34,11 +34,7 @@ var scenarios = (function () {
                 },
                 {
                     "name": "client",
-                    "type": "client",
-                    "options": {
-                        "page": "singlePageSite",
-                        "deviceType":"desktop"
-                    }
+                    "type": "client"
                 }
             ]            
         },
@@ -279,8 +275,7 @@ var scenarios = (function () {
                     "options": {
                         "parseStrategy": "progressive",
                         "page": "graph",
-                        "aspect": "landscape",
-                        "deviceType":"desktop"
+                        "aspect": "landscape"
                     },
                     "locations":{ "where":{x:420, y:125} }
                 }
@@ -352,8 +347,7 @@ var scenarios = (function () {
                     "type": "client",
                     "options": {
                         "parseStrategy": "progressive",
-                        "page": "twitter",
-                        "deviceType":"desktop"
+                        "page": "twitter"
                     }
                 }
             ]
@@ -391,8 +385,7 @@ var scenarios = (function () {
                     "type": "client",
                     "options": {
                         "parseStrategy": "progressive",
-                        "page": "twitter",
-                        "deviceType":"desktop"
+                        "page": "twitter"
                     },
                     "locations":{ "where":{x:420, y:75} },
                     "next": []
@@ -406,8 +399,7 @@ var scenarios = (function () {
                     "type": "client",
                     "options": {
                         "parseStrategy": "progressive",
-                        "page": "twitter",
-                        "deviceType":"desktop"
+                        "page": "twitter"
                     },
                     "locations":{ "where":{x:420, y:200} }
                 }

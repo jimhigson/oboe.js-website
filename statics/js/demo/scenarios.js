@@ -357,7 +357,10 @@ var scenarios = (function () {
         "caching": {
             "options":{
                 "height":257,
-                "colors":"twoSeries"
+                "colors":"twoSeries",
+                "startSimulation":function(modelItems){
+                    modelItems.client1.makeRequest();
+                }
             },
             "items": [
                 {
@@ -385,7 +388,7 @@ var scenarios = (function () {
                     }
                 },
                 {
-                    "name": "client",
+                    "name": "client1",
                     "type": "client",
                     "options": {
                         "parseStrategy": "progressive",

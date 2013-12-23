@@ -79,8 +79,8 @@ function loadScenario(scenarioId) {
         modelItems[scenarioItem.name].announce();
     });
     
-    demo.startSimulation = function(){
-        modelItems.client.makeRequest();
+    demo.startSimulation = function() {
+        scenario.options.startSimulation(modelItems);
     }
 }
 

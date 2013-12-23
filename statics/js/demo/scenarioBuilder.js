@@ -5,7 +5,10 @@ var getScenario = (function () {
             options: {
                 colors: 'categorical',
                 width: 500,
-                height: 200
+                height: 200,
+                startSimulation: function(modelItems){
+                    modelItems.client.makeRequest();
+                }
             }
         },
         wire: {

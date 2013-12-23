@@ -13,28 +13,30 @@ var getScenario = (function () {
         relay: {
             options:{
                 "timeBetweenPackets": 500
+            },
+            locations:{
+                where: {x: 235, y: 90}
+            }
+        },
+        
+        client: {
+            locations:{
+                where: {x: 440, y: 145}
+            }
+        },
+        
+        barrier: {
+            locations:{
+                where: {x: 410, y: 145}
+            }
+        },
+        
+        server: {
+            locations:{
+                where: {x: 40, y: 55}
             }
         }
-    }
-    
-    function defaultLocationForItem(item) {
-        // fill in default positions
-        var DEFAULT_SERVER_LOCATION = {x: 40, y: 55},
-            DEFAULT_CLIENT_LOCATION = {x: 440, y: 145},
-            DEFAULT_BARRIER_LOCATION = {x: 410, y: 145},
-            DEFAULT_RELAY_LOCATION = {x: 235, y: 90};
-
-        switch (item.type) {
-            case 'client':
-                return DEFAULT_CLIENT_LOCATION;
-            case 'server':
-                return DEFAULT_SERVER_LOCATION;
-            case 'barrier':
-                return DEFAULT_BARRIER_LOCATION;
-            case 'relay':
-                return DEFAULT_RELAY_LOCATION;            
-        }
-    }
+    };
     
     function setRelativePositions(item) {
         var locations = item.locations;
@@ -145,15 +147,8 @@ var getScenario = (function () {
                     : [];
             }
 
-            fillInDefaults(rawItem, DEFAULTS[rawItem.type]);
-
-            if (!rawItem.locations) {
-                rawItem.locations = {};
-            }
-
-            // fill in locations json by sensible defaults if not given:
-            if( !rawItem.locations.where ) {
-                rawItem.locations.where = defaultLocationForItem(rawItem);
+            if( DEFAULTS[rawItem.type] ) {
+                fillInDefaults(rawItem, DEFAULTS[rawItem.type]);
             }
             
             setRelativePositions(rawItem);

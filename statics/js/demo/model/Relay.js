@@ -1,28 +1,33 @@
-var Relay = extend(PacketHolder, function Relay(name, locations, options){
-    PacketHolder.apply(this, arguments);
+var Relay = (function(){
 
-    this.timeBetweenPackets = Thing.asFunction(options.timeBetweenPackets);
-    this.initThrottle();
+    var Relay = extend(PacketHolder, function Relay(name, locations, options){
+        PacketHolder.apply(this, arguments);
     
-    this.events('reset').on(function(){
+        this.timeBetweenPackets = Thing.asFunction(options.timeBetweenPackets);
         this.initThrottle();
-    }.bind(this));
-});
-
-Relay.newEvent = 'Relay';
-
-Relay.prototype.initThrottle = function(){
-
-    this.throttledOutputStreams = {
-        'upstream'   : throttle(this.timeBetweenPackets, this.propagate.bind(this), this )
-    ,   'downstream' : throttle(this.timeBetweenPackets, this.propagate.bind(this), this )
-    }
-};
-
-Relay.prototype.accept = function(receivedPacket){
-
-    var direction = receivedPacket.direction,
-        outputStream = this.throttledOutputStreams[direction];
+        
+        this.events('reset').on(function(){
+            this.initThrottle();
+        }.bind(this));
+    });
     
-    outputStream.read(receivedPacket);
-};
+    Relay.newEvent = 'Relay';
+    
+    Relay.prototype.initThrottle = function(){
+    
+        this.throttledOutputStreams = {
+            'upstream'   : throttle(this.timeBetweenPackets, this.propagate.bind(this), this )
+        ,   'downstream' : throttle(this.timeBetweenPackets, this.propagate.bind(this), this )
+        }
+    };
+    
+    Relay.prototype.accept = function(receivedPacket){
+    
+        var direction = receivedPacket.direction,
+            outputStream = this.throttledOutputStreams[direction];
+        
+        outputStream.read(receivedPacket);
+    };
+    
+    return Relay;
+}())

@@ -39,7 +39,7 @@ var AggregatingServer = (function(){
     
     AggregatingServer.prototype.createInputParsersForEachUpstreamNode = function(parseStrategyName){
         var parsers = {},
-            nextLocations = this.nextLocationsInDirection('upstream'),
+            nextLocations = this.adjacents['upstream'],
             emitPacketParsed = this.events('packetParsed').emit;
         
         nextLocations.forEach(function(loc){

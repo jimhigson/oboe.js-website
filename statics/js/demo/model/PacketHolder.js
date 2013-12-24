@@ -43,10 +43,6 @@ var PacketHolder = (function(){
         this.adjacents.upstream.push(upstreamLocation);
         this.listenToAdjacentForPackets(upstreamLocation, 'upstream');        
     };
-    
-    PacketHolder.prototype.nextLocationsInDirection = function(direction){
-        return this.adjacents[direction];
-    };
 
     PacketHolder.prototype.listenToAdjacentForPackets = function(adjacent, direction) {
         var directionAtSource = oppositeDirectionTo(direction),

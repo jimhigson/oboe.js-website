@@ -411,7 +411,12 @@ var scenarios = (function () {
                         "parseStrategy": "progressive",
                         "page": "twitter"
                     },
-                    "locations":{ "where":{y:195} }
+                    "locations":{ "where":{y:195} },
+                    "script": {
+                        "client1_accepted_response8": function(){
+                            this.makeRequest();
+                        }
+                    }
                 }
             ]
         }

@@ -21,14 +21,13 @@ var Server = (function(){
             packet.done();
         }
     };
-    Server.prototype.createMessagesOut = function(direction) {
-        var destinations = this.nextLocationsInDirection(direction);
-    
+
+    Server.prototype.createMessagesToAdjacentDestinations = function(destinations) {
         return destinations.map(function(){
             return new Message().inDemo(this.demo).sentBy(this);
         }.bind(this));
     };
-    
+
     Server.prototype.sendCopiesOfPacket = function(basePacket, messages, nextLocations){
     
         var packetCopies = this.createCopiesForDestinations( basePacket, nextLocations );
@@ -41,31 +40,38 @@ var Server = (function(){
     
         this.sendPacketsToDestinations(packetCopies, nextLocations);
     };
-    
-    Server.prototype.openOutboundMessages = function(direction, createPacket){
-    
-        var nextLocations = this.nextLocationsInDirection(direction),
-            messages = this.createMessagesOut(direction),
-            packetReadyToDispatch = this.events('packetReadyToDispatch'),
-    
+
+    Server.prototype.openMessagesToAdjacents = function(nextLocations, createPacket){
+
+        var messages = this.createMessagesToAdjacentDestinations(nextLocations),
+            timeToDispatch = this.events('packetReadyToDispatch'),
+
             newPacketForAllOutboundMessages = function(/* any arguments */){
-    
+
                 var basePacket = createPacket.apply(this, arguments);
                 this.sendCopiesOfPacket(basePacket, messages, nextLocations);
                 basePacket.done();
-        
+
             }.bind(this),
-            
+
             stopSending = function() {
-                packetReadyToDispatch.un(newPacketForAllOutboundMessages);
+                timeToDispatch.un(newPacketForAllOutboundMessages);
             };
-    
-        packetReadyToDispatch.on( newPacketForAllOutboundMessages );
+
+        timeToDispatch.on( newPacketForAllOutboundMessages );
 
         this.events('messageEnd').on(stopSending);
         this.events('reset').on(stopSending);
+
+        announceAll(messages);        
+    };
     
-        announceAll(messages);
+    Server.prototype.openOutboundMessages = function(direction, createPacket){
+    
+        this.openMessagesToAdjacents(
+            this.nextLocationsInDirection(direction),
+            createPacket
+        );
     };
     
     Server.prototype.responsePacketGenerator = function() {

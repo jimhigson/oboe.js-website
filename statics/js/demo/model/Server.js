@@ -17,7 +17,7 @@ var Server = (function(){
     Server.prototype.accept = function(packet){
     
         if( packet.direction == 'upstream' ) {
-            this.sendResponse(packet.gotAlreadyUpTo);
+            this.generateResponse(packet.gotAlreadyUpTo);
             packet.done();
         }
     };
@@ -100,7 +100,10 @@ var Server = (function(){
         }
     };
     
-    Server.prototype.sendResponse = function(startingAt) {
+    /**
+     *  Start a new, original response originating from this server
+     */ 
+    Server.prototype.generateResponse = function(startingAt) {
     
         this.openOutboundMessages('downstream', this.responsePacketGenerator());
     

@@ -9,24 +9,22 @@ var AggregatingServer = (function(){
     });
     AggregatingServer.newEvent = 'AggregatingServer';
     
-    AggregatingServer.prototype.accept = function(receivedPacket, sender){
+    AggregatingServer.prototype.acceptFromDownstream = function(receivedPacket){
         
-        if( receivedPacket.direction == 'upstream' ) {
-    
-            this.propagate(receivedPacket);
-    
-            this.setupResponse();
-        } else {
-    
-            this.parsers[sender.name].read(receivedPacket);
-        }
+        this.propagate(receivedPacket);
+
+        this.setupResponse();
+    };
+
+    AggregatingServer.prototype.acceptFromUpstream = function(receivedPacket, sender){
+        this.parsers[sender.name].read(receivedPacket);
     };
     
     AggregatingServer.prototype.setupResponse = function(){
         
         this.parsers = this.createInputParsersForEachUpstreamNode(this.parseStrategyName);
     
-        this.throttledOutput = throttle( 
+        var throttledOutput = throttle( 
             functor(500), 
             this.propagate.bind(this),
             this
@@ -35,7 +33,7 @@ var AggregatingServer = (function(){
         multiplex(
             this.parseStrategyName,
             this.parsers,
-            this.throttledOutput.read
+            throttledOutput.read
         );
     };
     

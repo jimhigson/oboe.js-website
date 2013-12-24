@@ -23,8 +23,12 @@ var PacketHolder = (function(){
     });
     
     PacketHolder.newEvent = 'PacketHolder';
-    
-    PacketHolder.prototype.accept = abstract;
+     
+    /* things which want to handle packets arriving can override
+       these methods */
+    PacketHolder.prototype.accept =
+    PacketHolder.prototype.acceptFromDownstream =
+    PacketHolder.prototype.acceptFromUpstream = function(){};
     
     PacketHolder.prototype.withDownstream = function(downstreamLocation){
     
@@ -43,29 +47,29 @@ var PacketHolder = (function(){
     PacketHolder.prototype.nextLocationsInDirection = function(direction){
         return this.adjacents[direction];
     };
-    
-    PacketHolder.prototype.createCopiesForDestinations = function(packetSource, destinations) {
-    
-        return destinations.map( function() {
-    
-            return packetSource.copy();
-        });
-    };
-    
+
     PacketHolder.prototype.listenToAdjacentForPackets = function(adjacent, direction) {
-        var eventName = oppositeDirectionTo(direction) + 'Packet';
+        var sourceDirection = oppositeDirectionTo(direction);
         
-        adjacent.events(eventName).on( function( incomingPacket ){
+        var directionalHandlerMethodName = 
+                (   direction == 'upstream'
+                    ?   'acceptFromUpstream' 
+                    :   'acceptFromDownstream'
+                ),
+            directionSpecificHandler = this[directionalHandlerMethodName]; 
+        
+        adjacent.events(sourceDirection).on( function( incomingPacket ){
             
-            var packetCopy = incomingPacket.copy();
-            packetCopy.announce();
+            var packetCopy = incomingPacket.copy().announce();
+            
+            directionSpecificHandler.call(this, packetCopy, adjacent);
             this.accept(packetCopy, adjacent);
         }.bind(this));
     };
 
     PacketHolder.prototype.propagate = function(basePacket){
     
-        this.events(basePacket.direction + 'Packet').emit(basePacket);
+        this.events(basePacket.direction).emit(basePacket);
         basePacket.done();
     };
     

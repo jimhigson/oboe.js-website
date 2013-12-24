@@ -45,7 +45,7 @@ Client.prototype.scheduleRetry = function() {
     }.bind(this), this.retryAfter);
 };
 
-Client.prototype.accept = function(packet){
+Client.prototype.acceptFromUpstream = function(packet){
 
     this.addToScript('accepted', packet);
     

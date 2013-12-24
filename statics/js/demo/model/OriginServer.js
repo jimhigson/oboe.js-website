@@ -15,13 +15,11 @@ var OriginServer = (function(){
 
     OriginServer.newEvent = 'OriginServer';
 
-    OriginServer.prototype.accept = function(packet){
+    OriginServer.prototype.acceptFromDownstream = function(packet){
 
-        if( packet.direction == 'upstream' ) {
-            var startingAt = packet.gotAlreadyUpTo;
-            this.responseGenerator.generateResponse(startingAt);
-            packet.done();
-        }
+        var startingAt = packet.gotAlreadyUpTo;
+        this.responseGenerator.generateResponse(startingAt);
+        packet.done();
     };
 
     OriginServer.prototype.inDemo = function(demo){

@@ -6,9 +6,6 @@ var Server = (function(){
 
         Super.apply(this, arguments);
 
-        this.packetMode = Thing.asFunction(options.packetMode);
-
-        this.messageSize = options.messageSize;
         this.responseGenerator = new ResponseGenerator(options);
         
         this.responseGenerator.events('packetGenerated').on(
@@ -83,38 +80,12 @@ var Server = (function(){
             createPacket
         );
     };
-    
-    Server.prototype.responsePacketGenerator = function() {
-    
-        var firstPacketCreated = false;
-    
-        return function(curPacketNumber) {
-            // unannounced packet to use as a template for others
-            var ordering = {
-                i:       curPacketNumber,
-                isFirst: !firstPacketCreated,
-                isLast:  curPacketNumber >= (this.messageSize -1)
-            };
-    
-            var packet = new Packet(
-                'response' + curPacketNumber
-                ,   'JSON'
-                ,   'downstream'
-                ,   ordering
-                ,   this.packetMode(curPacketNumber)
-            ).inDemo(this.demo);
-    
-            firstPacketCreated = true;
-    
-            return packet;
-        }
-    };
-    
+        
     /**
      *  Start a new, original response originating from this server
      */ 
     Server.prototype.generateResponse = function(startingAt) {
-        this.openOutboundMessages('downstream', this.responsePacketGenerator());
+        this.openOutboundMessages('downstream', function(packet){return packet;});
         
         this.responseGenerator.generateResponse(startingAt);
     };

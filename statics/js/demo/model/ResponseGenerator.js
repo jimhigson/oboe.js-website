@@ -7,17 +7,43 @@ var ResponseGenerator = (function(){
         this.timeBetweenPackets = Thing.asFunction(options.timeBetweenPackets);
         this.initialDelay = options.initialDelay;
         this.messageSize = options.messageSize;
-        this.packetNumberAfter = options.packetSequence;        
+        this.packetNumberAfter = options.packetSequence;
+        this.packetMode = Thing.asFunction(options.packetMode);
     });
     
     ResponseGenerator.prototype.generateResponse = function(startingAt) {
-    
+
+        var self = this,
+            firstPacketCreated = false;
+
+        function packetNumbered(curPacketNumber) {
+            // unannounced packet to use as a template for others
+            var ordering = {
+                i:       curPacketNumber,
+                isFirst: !firstPacketCreated,
+                isLast:  curPacketNumber >= (self.messageSize -1)
+            };
+
+            var packet = new Packet(
+                'response' + curPacketNumber
+                ,   'JSON'
+                ,   'downstream'
+                ,   ordering
+                ,   self.packetMode(curPacketNumber)
+            ).inDemo(self.demo);
+
+            firstPacketCreated = true;
+
+            return packet;
+        }
+        
+        
         function sendNext(previousPacketNumber){
     
             var curPacketNumber = this.packetNumberAfter(previousPacketNumber),
                 lastPacket = curPacketNumber >= (this.messageSize - 1);
     
-            this.events('packetGenerated').emit(curPacketNumber);
+            this.events('packetGenerated').emit(packetNumbered(curPacketNumber));
     
             if( lastPacket ) {
                 this.events('messageEnd').emit();

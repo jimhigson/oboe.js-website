@@ -10,7 +10,7 @@ var Packet = extend(Thing, function Packet(name, type, direction, ordering, mode
 
 Packet.newEvent = 'Packet';
 
-Packet.prototype.copy = function(additionalName) {
+Packet.prototype.copy = function() {
 
     var orderingCopy = {
         i: this.ordering.i,

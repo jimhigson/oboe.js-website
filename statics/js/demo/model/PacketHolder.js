@@ -43,9 +43,9 @@ var PacketHolder = (function(){
     
     PacketHolder.prototype.createCopiesForDestinations = function(packetSource, destinations) {
     
-        return destinations.map( function(place, i) {
+        return destinations.map( function() {
     
-            return packetSource.copy(i);
+            return packetSource.copy();
         });
     };
     PacketHolder.prototype.sendPacketsToDestinations = function(packets, destinations){

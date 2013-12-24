@@ -11,7 +11,7 @@ var Server = (function(){
 
     Server.prototype.createMessagesToAdjacentDestinations = function(destinations) {
         return destinations.map(function(){
-            return new Message().inDemo(this.demo).sentBy(this);
+            return new Message().inDemo(this.demo);
         }.bind(this));
     };
 

@@ -1,4 +1,5 @@
 var PacketHolder = (function(){
+    "use strict";
 
     var Super = Thing;
     
@@ -28,6 +29,7 @@ var PacketHolder = (function(){
     PacketHolder.prototype.withDownstream = function(downstreamLocation){
     
         this.adjacents.downstream.push(downstreamLocation);
+        this.listenToAdjacentForPackets(downstreamLocation, 'downstream');
         downstreamLocation._withUpstream(this);
     
         return this;
@@ -35,6 +37,7 @@ var PacketHolder = (function(){
     
     PacketHolder.prototype._withUpstream = function(upstreamLocation){
         this.adjacents.upstream.push(upstreamLocation);
+        this.listenToAdjacentForPackets(upstreamLocation, 'upstream');        
     };
     
     PacketHolder.prototype.nextLocationsInDirection = function(direction){
@@ -48,30 +51,29 @@ var PacketHolder = (function(){
             return packetSource.copy();
         });
     };
-    PacketHolder.prototype.sendPacketsToDestinations = function(packets, destinations){
-        destinations.forEach(function( destination, i){
-            destination.accept( packets[i], this );
-        }.bind(this))
-    };
     
+    PacketHolder.prototype.listenToAdjacentForPackets = function(adjacent, direction) {
+        var eventName = oppositeDirectionTo(direction) + 'Packet';
+        
+        adjacent.events(eventName).on( function( incomingPacket ){
+            
+            var packetCopy = incomingPacket.copy();
+            packetCopy.announce();
+            this.accept(packetCopy);
+        }.bind(this));
+    };
+
     PacketHolder.prototype.propagate = function(basePacket){
     
-        var nextPacketHolders = this.nextLocationsInDirection(basePacket.direction),
-            packetCopies = this.createCopiesForDestinations( basePacket, nextPacketHolders );
-    
-        announceAll(packetCopies);
-    
-        this.sendPacketsToDestinations(packetCopies, nextPacketHolders);
-    
+        this.events(basePacket.direction + 'Packet').emit(basePacket);
         basePacket.done();
-    
-        return packetCopies;
     };
+    
     PacketHolder.prototype.movePacket = function(packet){
         var fromLocation = oppositeDirectionTo(packet.direction),
             toLocation = packet.direction,
-            fromXY = this.locations[fromLocation];
-        toXY   = this.locations[toLocation];
+            fromXY = this.locations[fromLocation],
+            toXY   = this.locations[toLocation];
     
         packet.move(fromXY, toXY, this.latency);
     };

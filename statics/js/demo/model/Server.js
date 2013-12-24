@@ -15,19 +15,6 @@ var Server = (function(){
         }.bind(this));
     };
 
-    Server.prototype.sendCopiesOfPacket = function(basePacket, messages, nextLocations){
-    
-        var packetCopies = this.createCopiesForDestinations( basePacket, nextLocations );
-    
-        messages.forEach(function( message, i ){
-            message.includes(packetCopies[i]);
-        });
-    
-        announceAll(packetCopies);
-    
-        this.sendPacketsToDestinations(packetCopies, nextLocations);
-    };
-
     Server.prototype.openMessagesToAdjacents = function(adjacentLocations){
 
         var messages = this.createMessagesToAdjacentDestinations(adjacentLocations),
@@ -35,8 +22,7 @@ var Server = (function(){
 
             newPacketForAllOutboundMessages = function(basePacket){
 
-                this.sendCopiesOfPacket(basePacket, messages, adjacentLocations);
-                basePacket.done();
+                this.propagate(basePacket);
 
             }.bind(this),
 

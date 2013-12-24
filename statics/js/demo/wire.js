@@ -1,5 +1,15 @@
 
 function loadScenario(scenarioId) {
+
+    var MODEL_TYPES = {
+        "server":              Server,
+        "wire":                Wire,
+        "client":              Client,
+        "aggregatingServer":   AggregatingServer,
+        "barrier":             Barrier,
+        "relay":               Relay
+    };
+    
     var scenario = getScenario(scenarioId);
     
     if( !scenario ) {
@@ -12,25 +22,13 @@ function loadScenario(scenarioId) {
     var modelItems = {};
 
     function makeModel(scenarioItem){
-        var Type = modelType(scenarioItem.type);
+        var Type = MODEL_TYPES[scenarioItem.type];
 
         return new Type(
             scenarioItem.name,
             scenarioItem.locations,
             (scenarioItem.options || {})
         );
-    }
-
-    function modelType(scenarioType){
-        switch(scenarioType){
-            case "server":              return Server;
-            case "wire":                return Wire;
-            case "client":              return Client;
-            case "aggregatingServer":   return AggregatingServer;
-            case "barrier":             return Barrier;
-            case "relay":               return Relay;
-        }
-        throw new Error('unknown type ' + scenarioType);
     }
    
     // init the model items

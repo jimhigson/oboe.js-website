@@ -1,15 +1,19 @@
 var Server = (function(){
 
-    var Server = extend( PacketHolder, function Server(name, locations, options) {
+    var Super = PacketHolder;
     
-        PacketHolder.apply(this, arguments);
+    var Server = extend( Super, function Server(name, locations, options) {
 
-        this.timeBetweenPackets = Thing.asFunction(options.timeBetweenPackets);
+        Super.apply(this, arguments);
+
         this.packetMode = Thing.asFunction(options.packetMode);
-    
-        this.initialDelay = options.initialDelay;
+
         this.messageSize = options.messageSize;
-        this.packetNumberAfter = options.packetSequence;
+        this.responseGenerator = new ResponseGenerator(options);
+        
+        this.responseGenerator.events('packetGenerated').on(
+            this.events('packetReadyToDispatch').emit
+        );
     });
 
     Server.newEvent = 'Server';
@@ -20,6 +24,12 @@ var Server = (function(){
             this.generateResponse(packet.gotAlreadyUpTo);
             packet.done();
         }
+    };
+
+    Server.prototype.inDemo = function(demo){
+        Super.prototype.inDemo.apply(this, arguments);
+        this.responseGenerator.inDemo(demo);
+        return this;
     };
 
     Server.prototype.createMessagesToAdjacentDestinations = function(destinations) {
@@ -44,7 +54,7 @@ var Server = (function(){
     Server.prototype.openMessagesToAdjacents = function(nextLocations, createPacket){
 
         var messages = this.createMessagesToAdjacentDestinations(nextLocations),
-            timeToDispatch = this.events('packetReadyToDispatch'),
+            readyToDispatch = this.events('packetReadyToDispatch'),
 
             newPacketForAllOutboundMessages = function(/* any arguments */){
 
@@ -55,12 +65,12 @@ var Server = (function(){
             }.bind(this),
 
             stopSending = function() {
-                timeToDispatch.un(newPacketForAllOutboundMessages);
+                readyToDispatch.un(newPacketForAllOutboundMessages);
             };
 
-        timeToDispatch.on( newPacketForAllOutboundMessages );
+        readyToDispatch.on( newPacketForAllOutboundMessages );
 
-        this.events('messageEnd').on(stopSending);
+        this.responseGenerator.events('messageEnd').on(stopSending);
         this.events('reset').on(stopSending);
 
         announceAll(messages);        
@@ -104,30 +114,9 @@ var Server = (function(){
      *  Start a new, original response originating from this server
      */ 
     Server.prototype.generateResponse = function(startingAt) {
-    
         this.openOutboundMessages('downstream', this.responsePacketGenerator());
-    
-        function sendNext(previousPacketNumber){
-    
-            var curPacketNumber = this.packetNumberAfter(previousPacketNumber),
-                lastPacket = curPacketNumber >= (this.messageSize - 1);
-    
-            this.events('packetReadyToDispatch').emit(curPacketNumber);
-    
-            if( lastPacket ) {
-                this.events('messageEnd').emit();
-                
-            } else {
-                
-                var nextPacketNumber = this.packetNumberAfter(curPacketNumber);
-                this.schedule(
-                    sendNext.bind(this, curPacketNumber)
-                    ,   this.timeBetweenPackets(nextPacketNumber)
-                );
-            }
-        }
-    
-        this.schedule( sendNext.bind(this, startingAt -1), this.initialDelay );
+        
+        this.responseGenerator.generateResponse(startingAt);
     };
 
     return Server;

@@ -48,23 +48,23 @@ var Server = (function(){
         this.sendPacketsToDestinations(packetCopies, nextLocations);
     };
 
-    Server.prototype.openMessagesToAdjacents = function(nextLocations){
+    Server.prototype.openMessagesToAdjacents = function(adjacentLocations){
 
-        var messages = this.createMessagesToAdjacentDestinations(nextLocations),
-            readyToDispatch = this.events('packetReadyToDispatch'),
+        var messages = this.createMessagesToAdjacentDestinations(adjacentLocations),
+            packetReadyToDispatchEvent = this.events('packetReadyToDispatch'),
 
             newPacketForAllOutboundMessages = function(basePacket){
 
-                this.sendCopiesOfPacket(basePacket, messages, nextLocations);
+                this.sendCopiesOfPacket(basePacket, messages, adjacentLocations);
                 basePacket.done();
 
             }.bind(this),
 
             stopSending = function() {
-                readyToDispatch.un(newPacketForAllOutboundMessages);
+                packetReadyToDispatchEvent.un(newPacketForAllOutboundMessages);
             };
 
-        readyToDispatch.on( newPacketForAllOutboundMessages );
+        packetReadyToDispatchEvent.on( newPacketForAllOutboundMessages );
 
         this.responseGenerator.events('messageEnd').on(stopSending);
         this.events('reset').on(stopSending);

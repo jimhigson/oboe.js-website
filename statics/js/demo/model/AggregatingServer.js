@@ -37,8 +37,10 @@ var AggregatingServer = (function(){
             this.parsers,
             this.throttledOutput.read
         );
-    
-        this.openOutboundMessages('downstream');
+
+        this.openMessagesToAdjacents(
+            this.nextLocationsInDirection('downstream')
+        );
     };
     
     AggregatingServer.prototype.createInputParsersForEachUpstreamNode = function(parseStrategyName){

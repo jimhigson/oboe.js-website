@@ -71,19 +71,14 @@ var Server = (function(){
 
         announceAll(messages);        
     };
-    
-    Server.prototype.openOutboundMessages = function(direction){
-    
-        this.openMessagesToAdjacents(
-            this.nextLocationsInDirection(direction)
-        );
-    };
-        
+
     /**
      *  Start a new, original response originating from this server
      */ 
     Server.prototype.generateResponse = function(startingAt) {
-        this.openOutboundMessages('downstream');
+        this.openMessagesToAdjacents(
+            this.nextLocationsInDirection('downstream')
+        );
         
         this.responseGenerator.generateResponse(startingAt);
     };

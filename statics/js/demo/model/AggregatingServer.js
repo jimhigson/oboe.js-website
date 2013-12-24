@@ -1,6 +1,6 @@
 var AggregatingServer = (function(){
 
-    var Super = Server;
+    var Super = PacketHolder;
     
     var AggregatingServer = extend(Super, function AggregatingServer(name, locations, options){
         Super.apply(this, arguments);

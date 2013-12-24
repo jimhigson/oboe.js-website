@@ -19,7 +19,6 @@ module.exports = [
     ,   '/js/demo/model/PacketHolder.js'
     ,   '/js/demo/model/Demo.js'
     ,   '/js/demo/model/ResponseGenerator.js'
-    ,   '/js/demo/model/Server.js'
     ,   '/js/demo/model/OriginServer.js'    
     ,   '/js/demo/model/AggregatingServer.js'
     ,   '/js/demo/model/Packet.js'

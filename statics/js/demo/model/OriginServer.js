@@ -1,6 +1,6 @@
 var OriginServer = (function(){
 
-    var Super = Server;
+    var Super = PacketHolder;
 
     var OriginServer = extend( Super, function OriginServer(name, locations, options) {
 

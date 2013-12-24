@@ -377,7 +377,7 @@ var scenarios = (function () {
                 },
                 {
                     "name": "cache",
-                    "type": "relay",
+                    "type": "cache",
                     "next": ["internet1", "internet2"]
                 },
                 {

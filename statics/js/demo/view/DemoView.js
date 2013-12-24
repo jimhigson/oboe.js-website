@@ -33,6 +33,7 @@ DemoView.prototype.initSubviewCreation = function(ModelType, ViewType){
     this.createNewViewsForNewModelItems(Client, ClientView);
     this.createNewViewsForNewModelItems(Relay, RelayView);
     this.createNewViewsForNewModelItems(Barrier, BarrierView);
+    this.createNewViewsForNewModelItems(Cache, ServerView);
 };
 
 DemoView.prototype.createNewViewsForNewModelItems = function(ModelType, ViewType){

@@ -28,6 +28,15 @@ var getScenario = (function () {
                 where: {x: 235, y: 90}
             }
         },
+
+        cache: {
+            options:{
+                "timeBetweenPackets": 500
+            },
+            locations:{
+                where: {x: 235, y: 90}
+            }
+        },        
         
         client: {
             options:{

@@ -26,6 +26,7 @@ module.exports = [
     ,   '/js/demo/model/Parser.js'
     ,   '/js/demo/model/Client.js'
     ,   '/js/demo/model/Relay.js'
+    ,   '/js/demo/model/Cache.js'
     ,   "/js/demo/view/viewUtils.js"
     ,   "/js/demo/view/ThingView.js"
     ,   "/js/demo/view/BarrierView.js"

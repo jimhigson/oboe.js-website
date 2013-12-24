@@ -7,7 +7,8 @@ function loadScenario(scenarioId) {
         "client":              Client,
         "aggregatingServer":   AggregatingServer,
         "barrier":             Barrier,
-        "relay":               Relay
+        "relay":               Relay,
+        "cache":               Cache
     };
     
     var scenario = getScenario(scenarioId);

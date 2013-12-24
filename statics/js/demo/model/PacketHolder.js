@@ -49,7 +49,7 @@ var PacketHolder = (function(){
     };
 
     PacketHolder.prototype.listenToAdjacentForPackets = function(adjacent, direction) {
-        var sourceDirection = oppositeDirectionTo(direction);
+        var directionAtSource = oppositeDirectionTo(direction);
         
         var directionalHandlerMethodName = 
                 (   direction == 'upstream'
@@ -58,7 +58,7 @@ var PacketHolder = (function(){
                 ),
             directionSpecificHandler = this[directionalHandlerMethodName]; 
         
-        adjacent.events(sourceDirection).on( function( incomingPacket ){
+        adjacent.events(directionAtSource).on( function( incomingPacket ){
             
             var packetCopy = incomingPacket.copy().announce();
             

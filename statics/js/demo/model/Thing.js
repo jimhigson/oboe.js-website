@@ -85,9 +85,11 @@ var Thing = (function(){
 
         this.timeouts = [];
     }
-    Thing.prototype.schedule = function(fn, time) {
+    Thing.prototype.schedule = function(fn, requestedTiming) {
 
-        if( time == Number.POSITIVE_INFINITY ) {
+        scheduleTiming = requestedTiming || 500;
+        
+        if( scheduleTiming == Number.POSITIVE_INFINITY ) {
             // Waiting forever to do something interpreted
             // as never doing it. The browser would natural
             // schedule it straight away (silly!)
@@ -100,7 +102,7 @@ var Thing = (function(){
             this.removeTimeout(timeout);
             fn.apply(this);
 
-        }.bind(this), time);
+        }.bind(this), scheduleTiming);
 
         this.timeouts.push( timeout );
 

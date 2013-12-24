@@ -413,8 +413,10 @@ var scenarios = (function () {
                     },
                     "locations":{ "where":{y:195} },
                     "script": {
-                        "client1_accepted_response8": function(){
-                            this.makeRequest();
+                        "client1_accepted_response9": function(){
+                            this.schedule(function(){
+                                this.makeRequest();
+                            });
                         }
                     }
                 }

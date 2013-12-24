@@ -49,9 +49,9 @@ var PacketHolder = (function(){
     };
 
     PacketHolder.prototype.listenToAdjacentForPackets = function(adjacent, direction) {
-        var directionAtSource = oppositeDirectionTo(direction);
+        var directionAtSource = oppositeDirectionTo(direction),
         
-        var directionalHandlerMethodName = 
+            directionalHandlerMethodName = 
                 (   direction == 'upstream'
                     ?   'acceptFromUpstream' 
                     :   'acceptFromDownstream'

@@ -48,14 +48,13 @@ var Server = (function(){
         this.sendPacketsToDestinations(packetCopies, nextLocations);
     };
 
-    Server.prototype.openMessagesToAdjacents = function(nextLocations, createPacket){
+    Server.prototype.openMessagesToAdjacents = function(nextLocations){
 
         var messages = this.createMessagesToAdjacentDestinations(nextLocations),
             readyToDispatch = this.events('packetReadyToDispatch'),
 
-            newPacketForAllOutboundMessages = function(/* any arguments */){
+            newPacketForAllOutboundMessages = function(basePacket){
 
-                var basePacket = createPacket.apply(this, arguments);
                 this.sendCopiesOfPacket(basePacket, messages, nextLocations);
                 basePacket.done();
 
@@ -73,11 +72,10 @@ var Server = (function(){
         announceAll(messages);        
     };
     
-    Server.prototype.openOutboundMessages = function(direction, createPacket){
+    Server.prototype.openOutboundMessages = function(direction){
     
         this.openMessagesToAdjacents(
-            this.nextLocationsInDirection(direction),
-            createPacket
+            this.nextLocationsInDirection(direction)
         );
     };
         
@@ -85,7 +83,7 @@ var Server = (function(){
      *  Start a new, original response originating from this server
      */ 
     Server.prototype.generateResponse = function(startingAt) {
-        this.openOutboundMessages('downstream', function(packet){return packet;});
+        this.openOutboundMessages('downstream');
         
         this.responseGenerator.generateResponse(startingAt);
     };

@@ -38,7 +38,7 @@ var AggregatingServer = (function(){
             this.throttledOutput.read
         );
     
-        this.openOutboundMessages('downstream', function(packet){return packet});
+        this.openOutboundMessages('downstream');
     };
     
     AggregatingServer.prototype.createInputParsersForEachUpstreamNode = function(parseStrategyName){

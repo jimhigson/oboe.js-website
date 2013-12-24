@@ -59,7 +59,7 @@ var PacketHolder = (function(){
             
             var packetCopy = incomingPacket.copy();
             packetCopy.announce();
-            this.accept(packetCopy);
+            this.accept(packetCopy, adjacent);
         }.bind(this));
     };
 

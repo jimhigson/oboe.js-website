@@ -23,6 +23,18 @@ var Wire = (function(){
     Wire.prototype.accept = function(packet){
     
         packet.isOn(this);
+        
+        if( packet.ordering.isFirst ) {
+            this.message = new Message().inDemo(this.demo).announce();
+        }
+        
+        this.message.includes(packet);
+        
+        if( packet.ordering.isLast ) {
+            // end of that message, don't prevent Message
+            // from being GC'd anymore:
+            this.message = null;
+        }
     
         this.events('deliveryStarted').emit(packet);
         this.movePacket(packet);

@@ -4,7 +4,7 @@ var Message = extend(Thing, function Message() {
 
 Message.newEvent = 'Message';
 
-Message.prototype.withFirst = function(firstPacket){
+Message.prototype._withFirst = function(firstPacket){
 
     firstPacket.events('move').on(function(){
 
@@ -12,7 +12,7 @@ Message.prototype.withFirst = function(firstPacket){
     }.bind(this));
     return this; // chaining
 };
-Message.prototype.withLast = function(lastPacket){
+Message.prototype._withLast = function(lastPacket){
 
     lastPacket.events('move').on(function(){
 
@@ -30,10 +30,10 @@ Message.prototype.includes = function(packet) {
     var ordering = packet.ordering;
 
     if( ordering.isFirst ) {
-        this.withFirst(packet);
+        this._withFirst(packet);
     }
     if( ordering.isLast ) {
-        this.withLast(packet);
+        this._withLast(packet);
     }
     return this; // chaining
 };

@@ -1,5 +1,6 @@
 var Server = (function(){
-
+    "use strict";
+    
     var Super = PacketHolder;
     
     var Server = extend( Super, function Server(name, locations, options) {
@@ -9,16 +10,9 @@ var Server = (function(){
 
     Server.newEvent = 'Server';
 
-    Server.prototype.createMessagesToAdjacentDestinations = function(destinations) {
-        return destinations.map(function(){
-            return new Message().inDemo(this.demo);
-        }.bind(this));
-    };
-
     Server.prototype.openMessagesToAdjacents = function(adjacentLocations){
 
-        var messages = this.createMessagesToAdjacentDestinations(adjacentLocations),
-            packetReadyToDispatchEvent = this.events('packetReadyToDispatch'),
+        var packetReadyToDispatchEvent = this.events('packetReadyToDispatch'),
 
             newPacketForAllOutboundMessages = function(basePacket){
 
@@ -34,8 +28,6 @@ var Server = (function(){
 
         this.events('allPacketsDispatched').on(stopSending);
         this.events('reset').on(stopSending);
-
-        announceAll(messages);        
     };
 
     return Server;

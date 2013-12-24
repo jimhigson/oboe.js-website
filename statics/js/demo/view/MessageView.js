@@ -1,16 +1,18 @@
-var MessageView = extend(ThingView, function(subject, demoView){
+var MessageView = extend(ThingView, function(message, demoView){
+    "use strict";
+    
     ThingView.apply(this,arguments);
-
-    this.initDomFromTemplate('messages', 'message', subject.name);
+    
+    this.initDomFromTemplate('messages', 'message', message.name);
     this.jDom.hide();
 
-    subject.events('startMove').on(function(xyFrom, xyTo, duration){
+    message.events('startMove').on(function(xyFrom, xyTo, duration){
         this.jDom.show();
         this.goToXy(   'lineX2', 'lineY2', xyFrom);
         this.animateXy('lineX1', 'lineY1', xyFrom, xyTo, duration);
     }.bind(this));
 
-    subject.events('endMove').on(function(xyFrom, xyTo, duration){
+    message.events('endMove').on(function(xyFrom, xyTo, duration){
 
         this.animateXy('lineX2', 'lineY2', xyFrom, xyTo, duration);
     }.bind(this));
@@ -19,6 +21,16 @@ var MessageView = extend(ThingView, function(subject, demoView){
         this.jDom.remove();
     }.bind(this);
     
-    subject.events('reset').on(remove);
-    subject.events('done').on(remove);
+    message.events('reset').on(remove);
+    message.events('done').on(remove);
 });
+
+MessageView.factory = function( message, demoView ){
+    
+    // at the moment, message visualisation is only supported on
+    // transmissions over cables:
+    if( message.holder.medium == 'cable' ) {
+        return new MessageView(message, demoView);
+    }
+
+}

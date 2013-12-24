@@ -4,6 +4,11 @@ var Message = extend(Thing, function Message() {
 
 Message.newEvent = 'Message';
 
+Message.prototype.transmittedOver = function(packetHolder){
+    this.holder = packetHolder;
+    return this;
+};
+
 Message.prototype._withFirst = function(firstPacket){
 
     firstPacket.events('move').on(function(){

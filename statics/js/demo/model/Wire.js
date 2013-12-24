@@ -25,7 +25,10 @@ var Wire = (function(){
         packet.isOn(this);
         
         if( packet.ordering.isFirst ) {
-            this.message = new Message().inDemo(this.demo).announce();
+            this.message = new Message()
+                            .inDemo(this.demo)
+                            .transmittedOver(this)
+                            .announce();
         }
         
         this.message.includes(packet);

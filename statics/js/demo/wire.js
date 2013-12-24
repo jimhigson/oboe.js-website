@@ -2,7 +2,7 @@
 function loadScenario(scenarioId) {
 
     var MODEL_TYPES = {
-        "server":              Server,
+        "originServer":        OriginServer,
         "wire":                Wire,
         "client":              Client,
         "aggregatingServer":   AggregatingServer,

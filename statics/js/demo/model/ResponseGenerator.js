@@ -46,7 +46,7 @@ var ResponseGenerator = (function(){
             this.events('packetGenerated').emit(packetNumbered(curPacketNumber));
     
             if( lastPacket ) {
-                this.events('messageEnd').emit();
+                this.events('responseComplete').emit();
     
             } else {
     

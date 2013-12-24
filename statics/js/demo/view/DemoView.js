@@ -28,7 +28,7 @@ DemoView.prototype.initSubviewCreation = function(ModelType, ViewType){
     this.createNewViewsForNewModelItems(Packet, PacketView);
     this.createNewViewsForNewModelItems(Message, MessageView);
     this.createNewViewsForNewModelItems(AggregatingServer, ServerView);
-    this.createNewViewsForNewModelItems(Server, ServerView);
+    this.createNewViewsForNewModelItems(OriginServer, ServerView);
     this.createNewViewsForNewModelItems(Wire, WireView);
     this.createNewViewsForNewModelItems(Client, ClientView);
     this.createNewViewsForNewModelItems(Relay, RelayView);

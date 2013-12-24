@@ -18,7 +18,7 @@ var scenarios = (function () {
             "items": [
                 {
                     "name": "sever",
-                    "type": "server",
+                    "type": "originServer",
                     "options": {
                         "timeBetweenPackets": 100,
                         "messageSize": 9
@@ -69,7 +69,7 @@ var scenarios = (function () {
             "items": [
                 {
                     "name": "sever",
-                    "type": "server",
+                    "type": "originServer",
                     "options": {
                         "timeBetweenPackets": 50,
                         "packetMode": "historic"
@@ -218,7 +218,7 @@ var scenarios = (function () {
             "items": [
                 {
                     "name": "origin-slow",
-                    "type": "server",
+                    "type": "originServer",
                     "options": {
                         "timeBetweenPackets": 2000,
                         "messageSize": 9,
@@ -236,7 +236,7 @@ var scenarios = (function () {
                 },
                 {
                     "name": "origin-fast",
-                    "type": "server",
+                    "type": "originServer",
                     "options": {
                         "timeBetweenPackets": 750,
                         "initialDelay": 250,
@@ -328,7 +328,7 @@ var scenarios = (function () {
             "items": [
                 {
                     "name": "server",
-                    "type": "server",
+                    "type": "originServer",
                     "options": {
                         "timeBetweenPackets": fastTimingThenStream,
                         "packetMode": historicPacketsThenLive,
@@ -365,7 +365,7 @@ var scenarios = (function () {
             "items": [
                 {
                     "name": "server",
-                    "type": "server"
+                    "type": "originServer"
                 },
                 {
                     "name": "server-wire",

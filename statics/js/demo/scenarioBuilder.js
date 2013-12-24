@@ -56,7 +56,7 @@ var getScenario = (function () {
             }
         },
         
-        server: {
+        originServer: {
             options:{
                 packetSequence: function(previousPacketNumber){
                     return previousPacketNumber+1;

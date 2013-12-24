@@ -5,29 +5,9 @@ var Server = (function(){
     var Server = extend( Super, function Server(name, locations, options) {
 
         Super.apply(this, arguments);
-
-        this.responseGenerator = new ResponseGenerator(options);
-        
-        this.responseGenerator.events('packetGenerated').on(
-            this.events('packetReadyToDispatch').emit
-        );
     });
 
     Server.newEvent = 'Server';
-
-    Server.prototype.accept = function(packet){
-    
-        if( packet.direction == 'upstream' ) {
-            this.generateResponse(packet.gotAlreadyUpTo);
-            packet.done();
-        }
-    };
-
-    Server.prototype.inDemo = function(demo){
-        Super.prototype.inDemo.apply(this, arguments);
-        this.responseGenerator.inDemo(demo);
-        return this;
-    };
 
     Server.prototype.createMessagesToAdjacentDestinations = function(destinations) {
         return destinations.map(function(){
@@ -66,21 +46,10 @@ var Server = (function(){
 
         packetReadyToDispatchEvent.on( newPacketForAllOutboundMessages );
 
-        this.responseGenerator.events('messageEnd').on(stopSending);
+        this.events('allPacketsDispatched').on(stopSending);
         this.events('reset').on(stopSending);
 
         announceAll(messages);        
-    };
-
-    /**
-     *  Start a new, original response originating from this server
-     */ 
-    Server.prototype.generateResponse = function(startingAt) {
-        this.openMessagesToAdjacents(
-            this.nextLocationsInDirection('downstream')
-        );
-        
-        this.responseGenerator.generateResponse(startingAt);
     };
 
     return Server;

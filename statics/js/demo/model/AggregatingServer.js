@@ -28,7 +28,7 @@ var AggregatingServer = (function(){
     
         this.throttledOutput = throttle( 
             functor(500), 
-            this.events('packetReadyToDispatch').emit,
+            this.propagate.bind(this),
             this
         );
         
@@ -36,10 +36,6 @@ var AggregatingServer = (function(){
             this.parseStrategyName,
             this.parsers,
             this.throttledOutput.read
-        );
-
-        this.openMessagesToAdjacents(
-            this.nextLocationsInDirection('downstream')
         );
     };
     

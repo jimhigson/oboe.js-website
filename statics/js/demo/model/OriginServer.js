@@ -9,11 +9,8 @@ var OriginServer = (function(){
         this.responseGenerator = new ResponseGenerator(options);
 
         this.responseGenerator.events('packetGenerated').on(
-            this.events('packetReadyToDispatch').emit
+            this.propagate.bind(this)
         );
-        this.responseGenerator.events('responseComplete').on(
-            this.events('allPacketsDispatched').emit
-        );        
     });
 
     OriginServer.newEvent = 'OriginServer';
@@ -21,7 +18,8 @@ var OriginServer = (function(){
     OriginServer.prototype.accept = function(packet){
 
         if( packet.direction == 'upstream' ) {
-            this.generateResponse(packet.gotAlreadyUpTo);
+            var startingAt = packet.gotAlreadyUpTo;
+            this.responseGenerator.generateResponse(startingAt);
             packet.done();
         }
     };
@@ -30,17 +28,6 @@ var OriginServer = (function(){
         Super.prototype.inDemo.apply(this, arguments);
         this.responseGenerator.inDemo(demo);
         return this;
-    };
-
-    /**
-     *  Start a new, original response originating from this OriginServer
-     */
-    OriginServer.prototype.generateResponse = function(startingAt) {
-        this.openMessagesToAdjacents(
-            this.nextLocationsInDirection('downstream')
-        );
-
-        this.responseGenerator.generateResponse(startingAt);
     };
 
     return OriginServer;

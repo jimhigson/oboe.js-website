@@ -44,16 +44,12 @@ var ResponseGenerator = (function(){
                 lastPacket = curPacketNumber >= (this.messageSize - 1);
     
             this.events('packetGenerated').emit(packetNumbered(curPacketNumber));
-    
-            if( lastPacket ) {
-                this.events('responseComplete').emit();
-    
-            } else {
-    
+
+            if (!lastPacket) {
                 var nextPacketNumber = this.packetNumberAfter(curPacketNumber);
                 this.schedule(
                     sendNext.bind(this, curPacketNumber)
-                    ,   this.timeBetweenPackets(nextPacketNumber)
+                    , this.timeBetweenPackets(nextPacketNumber)
                 );
             }
         }

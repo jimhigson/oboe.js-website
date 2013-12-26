@@ -10,16 +10,14 @@ var ClientView = (function(){
         this.stampContentsFromTemplate( browserContentsPaneSelector, browserTemplateName);
     
         this.moveTo(client.locations.where);
+
+        var showSpinner = this.showSpinner.bind(this),
+            hideSpinner = this.hideSpinner.bind(this);
         
-        client.events('request').on(function(){
-            addClass(jDom, 'requesting');
-        });
-        client.events('requestFail').on(function(){
-            removeClass(jDom, 'requesting');
-        });
-        client.events('requestComplete').on(function(){
-            removeClass(jDom, 'requesting');
-        });
+        client.events('request').on(showSpinner);
+        client.events('requestFail').on(hideSpinner);
+        client.events('requestComplete').on(hideSpinner);
+        client.events('reset').on(hideSpinner);
     });
 
     ClientView.factory = function(client, demoView) {
@@ -39,6 +37,13 @@ var ClientView = (function(){
         
         var Type = type(client.page);
         return new Type(client, demoView);
+    };
+
+    ClientView.prototype.showSpinner = function(){
+        addClass(this.jDom, 'requesting');
+    };
+    ClientView.prototype.hideSpinner = function(){
+        removeClass(this.jDom, 'requesting');
     };
 
     // ---------------------------------

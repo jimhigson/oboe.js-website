@@ -42,8 +42,8 @@ var WireView = extend(ThingView, function(subject, demoView){
             var unit = unitClass(packet),
                 name = packet.name;
             
-            self.flash( aerials[ resolveDirection(packet.direction) ], unit );
-            self.flash( aerials[ resolveDirection(packet.direction) ], name );
+            self.flash( aerials[ resolveDirection(packet.direction) ], unit, MOBILE_AERIAL_FLASH_DURATION );
+            self.flash( aerials[ resolveDirection(packet.direction) ], name, MOBILE_AERIAL_FLASH_DURATION );
         }
         
         subject.events('deliveryStarted').on(function(packet){

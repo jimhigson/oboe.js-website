@@ -50,7 +50,7 @@ ThingView.prototype.flash = function( jEle, klass, duration ) {
 
     window.setTimeout(function(){
         removeClass( jEle, klass );
-    }, MOBILE_AERIAL_FLASH_DURATION);
+    }, duration);
 };
 
 ThingView.prototype.goToXy = function( xProperty, yProperty, xy ) {

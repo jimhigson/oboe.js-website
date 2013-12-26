@@ -2,9 +2,11 @@ var Client = extend( PacketHolder, function Client(name, locations, options) {
 
     PacketHolder.apply(this, arguments);
     this.page = options.page;
+    this.failAfter = options.failAfter;
     this.retryAfter = options.retryAfter;
-    this.parser = Parser(options.parseStrategy);
     this.aspect = options.aspect;
+
+    this.parser = Parser(options.parseStrategy);
 
     this.parser.events('packetParsed').on( function(packet) {
         this.events('gotData').emit(packet);
@@ -33,18 +35,28 @@ Client.prototype.makeRequest = function(){
             .startingAt(this.receivedUpTo +1)
             .announce();
 
-    this.scheduleRetry();
+    this.scheduleFail();
     
     this.propagate(packet);
+    
+    this.attemptNumber++; // increment for next time
 };
 
-Client.prototype.scheduleRetry = function() {
+Client.prototype.scheduleFail = function() {
     
-    this.retryIfNoResponse = this.schedule(function retry(){
-        this.attemptNumber++;
-        this.makeRequest();
-    }.bind(this), this.retryAfter);
+    this.giveUpTimeout = this.schedule(function(){
+        
+        this.events('requestFail').emit();
+        
+        this.schedule(function(){
+            
+            this.makeRequest();
+            
+        }, this.retryAfter);
+        
+    }.bind(this), this.failAfter);
 };
+
 
 Client.prototype.acceptFromUpstream = function(packet){
 
@@ -52,12 +64,12 @@ Client.prototype.acceptFromUpstream = function(packet){
     
     this.parser.read(packet);
 
-    this.unschedule(this.retryIfNoResponse);
+    this.unschedule(this.giveUpTimeout);
 
     if (packet.ordering.isLast) {
         this.events('requestComplete').emit();
     } else {
-        this.scheduleRetry();
+        this.scheduleFail();
     }
 
     packet.done();

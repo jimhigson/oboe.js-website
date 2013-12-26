@@ -14,6 +14,9 @@ var ClientView = (function(){
         client.events('request').on(function(){
             addClass(jDom, 'requesting');
         });
+        client.events('requestFail').on(function(){
+            removeClass(jDom, 'requesting');
+        });
         client.events('requestComplete').on(function(){
             removeClass(jDom, 'requesting');
         });

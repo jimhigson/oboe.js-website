@@ -160,7 +160,8 @@ var scenarios = (function () {
                     }
                     ,
                     {   "options":{
-                            "retryAfter": seconds(5)
+                            "failAfter": seconds(4),
+                            "retryAfter": seconds(2)
                         }
                     }
                     ,

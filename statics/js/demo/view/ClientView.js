@@ -1,19 +1,19 @@
 var ClientView = (function(){
 
-    var ClientView = extend(ThingView, function(subject, demoView){
+    var ClientView = extend(ThingView, function(client, demoView){
         ThingView.apply(this,arguments);
 
-        this.initDomFromTemplate( 'places', 'client-' + subject.aspect, subject.name);
+        this.initDomFromTemplate( 'places', 'client-' + client.aspect, client.name);
         
-        var browserContentsPaneSelector = '.' + subject.name + ' .browserContents', 
-            browserTemplateName = 'client-' + subject.page;
+        var browserContentsPaneSelector = '.' + client.name + ' .browserContents', 
+            browserTemplateName = 'client-' + client.page;
         
         this.stampContentsFromTemplate( browserContentsPaneSelector, browserTemplateName);
     
-        this.moveTo(subject.locations.where);
+        this.moveTo(client.locations.where);
     });
 
-    ClientView.factory = function(subject, demoView) {
+    ClientView.factory = function(client, demoView) {
 
         function type(pageName){
             switch(pageName){
@@ -28,22 +28,22 @@ var ClientView = (function(){
             }
         }
         
-        var Type = type(subject.page);
-        return new Type(subject, demoView);
+        var Type = type(client.page);
+        return new Type(client, demoView);
     };
 
     // ---------------------------------
     
     /* simple client turns on classes when packets are received, works for
      * any class/hiding based client svg */
-    var SimpleClient = extend(ClientView, function(subject, demoView){
+    var SimpleClient = extend(ClientView, function(client, demoView){
         ClientView.apply(this, arguments);
         
-        subject.events('gotData').on(function( packet ){
+        client.events('gotData').on(function( packet ){
             addClass(this.jDom, 'received-' + packet.ordering.i);
         }.bind(this));
 
-        subject.events('reset').on(function(){
+        client.events('reset').on(function(){
             var ele = this.jDom[0],
                 oldClassAttr = ele.getAttribute('class'),
                 newClassAttr = oldClassAttr.replace(/received-\d/g, '');
@@ -54,7 +54,7 @@ var ClientView = (function(){
 
     // ---------------------------------
     
-    var TwitterPageClient = extend(ClientView, function(subject, demoView){
+    var TwitterPageClient = extend(ClientView, function(client, demoView){
         ClientView.apply(this, arguments);        
         
         var jTweetTemplate = $('#tweet'),
@@ -63,7 +63,7 @@ var ClientView = (function(){
             livePacketsReceived = 0,
             MAX_DISPLAYABLE = 5;
 
-        subject.events('gotData').on(function( packet ){
+        client.events('gotData').on(function( packet ){
 
             packetsReceived++;
 
@@ -91,7 +91,7 @@ var ClientView = (function(){
             }
         });
 
-        subject.events('reset').on(function(){
+        client.events('reset').on(function(){
             packetsReceived = 0;
             livePacketsReceived = 0;
             jTweetScroll

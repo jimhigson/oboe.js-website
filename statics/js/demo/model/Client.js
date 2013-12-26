@@ -48,11 +48,7 @@ Client.prototype.scheduleFail = function() {
         
         this.events('requestFail').emit();
         
-        this.schedule(function(){
-            
-            this.makeRequest();
-            
-        }, this.retryAfter);
+        this.schedule(this.makeRequest.bind(this), this.retryAfter);
         
     }.bind(this), this.failAfter);
 };

@@ -366,7 +366,8 @@ var scenarios = (function () {
             "items": [
                 {
                     "name": "server",
-                    "type": "originServer"
+                    "type": "originServer",
+                    "locations":{where:{y:100}}
                 },
                 {
                     "name": "server-wire",
@@ -379,8 +380,10 @@ var scenarios = (function () {
                 {
                     "name": "cache",
                     "type": "cache",
-                    "next": ["internet1", "internet2"]
+                    "locations":{where:{x: 180, y:75}},
+                    "next": ["internet1", "internet2", "internet3"]
                 },
+                
                 {
                     "name": "internet1",
                     "type": "wire",
@@ -395,9 +398,12 @@ var scenarios = (function () {
                         "parseStrategy": "progressive",
                         "page": "twitter"
                     },
-                    "locations":{ "where":{y:75} },
+                    "locations":{ "where":{x:430, y:75} },
                     "next": []
-                },
+                }
+                ,
+                
+                
                 {
                     "name": "internet2",
                     "type": "wire",
@@ -412,7 +418,33 @@ var scenarios = (function () {
                         "parseStrategy": "progressive",
                         "page": "twitter"
                     },
-                    "locations":{ "where":{y:195} },
+                    "locations":{ "where":{x:380, y:190} },
+                    "script": {
+                        "client1_accepted_response5": function(){
+                            this.schedule(function(){
+                                this.makeRequest();
+                            });
+                        }
+                    },
+                    "next": []
+                }
+                
+                ,
+                {
+                    "name": "internet3",
+                    "type": "wire",
+                    "options":{
+                        latency: 1500
+                    }
+                },
+                {
+                    "name": "client3",
+                    "type": "client",
+                    "options": {
+                        "parseStrategy": "progressive",
+                        "page": "twitter"
+                    },
+                    "locations":{ "where":{x:245, y:205} },
                     "script": {
                         "client1_accepted_response9": function(){
                             this.schedule(function(){

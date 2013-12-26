@@ -1,11 +1,10 @@
-$pointColor: nth($categoricalColors, 5);
-$barColor: nth($categoricalColors, 2);
 
 .graph {
   .axes {
     fill:none;
-    stroke: $shadow;
+    stroke: $shadedBackgroundColor;
     stroke-width: 4;
+    transition:stroke 0.5s;
   }
   
   .points line {
@@ -15,5 +14,9 @@ $barColor: nth($categoricalColors, 2);
   .points circle {
     stroke: $backgroundColor;
   }
+}
+
+.received-1 .graph .axes {
+  stroke: $shadow;
 }
 

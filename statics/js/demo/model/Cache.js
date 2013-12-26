@@ -10,6 +10,12 @@ var Cache = (function(){
         this.cacheContents = [];
         this.requestors = [];
         this.onGoingRequest = false;
+        
+        this.events('reset').on(function(){
+            this.cacheContents = [];
+            this.requestors = [];
+            this.onGoingRequest = false;
+        }.bind(this));
     });
 
     Cache.prototype.acceptFromDownstream = function( packetFromDownstream, source ){

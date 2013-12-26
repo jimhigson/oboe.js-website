@@ -157,8 +157,13 @@ g.client .part {
 .spinner {
   fill:$shadow;
 }
+.browser use.spinnerLink {
+  opacity:1;
+  transition:opacity 1s;
+  transition-delay:opacity 0.5s;
+}
 
 .browser:not(.requesting) use.spinnerLink {
-  display:none;
+  opacity:0;
 }
 

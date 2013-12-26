@@ -154,3 +154,7 @@ g.client .part {
   fill:$backgroundColor;
 }
 
+.spinner .movingPart {
+  fill:$shadow;
+  stroke:none;
+}

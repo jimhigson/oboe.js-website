@@ -1,5 +1,20 @@
 <?xml version="1.0"?>
-<svg id="demoTemplateHolder">
+<svg id="demoTemplateHolder" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+    <g id="spinner" class="spinner">
+        <path class="movingPart"
+              d="M -0.09375,-3 A 1.001098,1.001098 0 1 0 0,-1 C 0.56412939,-1 1,-0.56412939 1,0 1,0.27245181 0.8799664,0.4950336 0.6875,0.6875 A 1.016466,1.016466 0 1 0 2.125,2.125 C 2.6563912,1.5936088 3,0.83211769 3,0 3,-1.6450096 1.6450096,-3 0,-3 a 1.0001,1.0001 0 0 0 -0.09375,0 z"
+                >
+            <animateTransform attributeType="xml"
+                              attributeName="transform"
+                              type="rotate"
+                              from="0"
+                              to="360"
+                              dur="2s"
+                              repeatCount="indefinite"/>
+        </path>
+    </g>
+</defs>
 <template id="demo">
     <svg width="100%" height="200">
         <g class="scaling">
@@ -49,6 +64,8 @@
         <rect class="background" width="85" height="95" x="-40" y="-50"/>
         <g class="browserContents" />
         <path class="frame" d="M -40 -50 L -40 45 L 45 45 L 45 -50 L -40 -50 z M -35 -40 L 40 -40 L 40 40 L -35 40 L -35 -40 z"/>
+
+        <use xlink:href="#spinner" x="-30" y="-45"/>
     </g>
 </template>
 
@@ -57,6 +74,8 @@
         <rect class="background" width="95" height="85" x="-45" y="-45"/>
         <g class="browserContents" />
         <path class="frame" d="m 50,-45 -95,0 0,85 95,0 z m -5,10 0,70 -85,0 0,-70 z"/>
+
+        <use xlink:href="#spinner" x="-35" y="-40"/>        
     </g>
 </template>
 

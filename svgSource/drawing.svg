@@ -25,14 +25,14 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="8"
-     inkscape:cx="-0.80561441"
-     inkscape:cy="105.08205"
+     inkscape:zoom="64"
+     inkscape:cx="0.0048061539"
+     inkscape:cy="95.028052"
      inkscape:document-units="px"
-     inkscape:current-layer="layer6"
+     inkscape:current-layer="layer7"
      showgrid="true"
-     inkscape:window-width="1920"
-     inkscape:window-height="1152"
+     inkscape:window-width="1366"
+     inkscape:window-height="724"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="0"
@@ -570,6 +570,24 @@
          d="m 0,0 5,-5 0,-10 -10,0 0,10 z"
          style="color:#000000;fill:#31a7b0;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer7"
+     inkscape:label="spinner"
+     style="display:inline">
+    <rect
+       style="color:#000000;fill:#474747;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect3097"
+       width="10"
+       height="10"
+       x="-5"
+       y="-5" />
+    <path
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#9c9c9c;fill-opacity:1;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
+       d="M -0.09375,-3 A 1.001098,1.001098 0 1 0 0,-1 C 0.56412939,-1 1,-0.56412939 1,0 1,0.27245181 0.8799664,0.4950336 0.6875,0.6875 A 1.016466,1.016466 0 1 0 2.125,2.125 C 2.6563912,1.5936088 3,0.83211769 3,0 3,-1.6450096 1.6450096,-3 0,-3 a 1.0001,1.0001 0 0 0 -0.09375,0 z"
+       id="path3888"
+       inkscape:connector-curvature="0" />
   </g>
   <g
      inkscape:groupmode="layer"

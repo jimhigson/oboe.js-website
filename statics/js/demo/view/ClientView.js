@@ -3,14 +3,20 @@ var ClientView = (function(){
     var ClientView = extend(ThingView, function(client, demoView){
         ThingView.apply(this,arguments);
 
-        this.initDomFromTemplate( 'places', 'client-' + client.aspect, client.name);
-        
-        var browserContentsPaneSelector = '.' + client.name + ' .browserContents', 
+        var jDom = this.initDomFromTemplate( 'places', 'client-' + client.aspect, client.name),
+            browserContentsPaneSelector = '.' + client.name + ' .browserContents', 
             browserTemplateName = 'client-' + client.page;
         
         this.stampContentsFromTemplate( browserContentsPaneSelector, browserTemplateName);
     
         this.moveTo(client.locations.where);
+        
+        client.events('request').on(function(){
+            addClass(jDom, 'requesting');
+        });
+        client.events('requestComplete').on(function(){
+            removeClass(jDom, 'requesting');
+        });
     });
 
     ClientView.factory = function(client, demoView) {

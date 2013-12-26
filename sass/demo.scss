@@ -154,6 +154,11 @@ g.client .part {
   fill:$backgroundColor;
 }
 
-.spinner .movingPart {
+.spinner {
   fill:$shadow;
 }
+
+.browser:not(.requesting) use.spinnerLink {
+  display:none;
+}
+

@@ -24,6 +24,7 @@ Client.newEvent = 'Client';
 
 Client.prototype.makeRequest = function(){
 
+    this.events('request').emit();
     this.addToScript('requestAttempt', this.attemptNumber);
     
     var packet =
@@ -51,8 +52,11 @@ Client.prototype.acceptFromUpstream = function(packet){
     
     this.parser.read(packet);
 
-    this.unschedule(this.retryIfNoResponse);        
-    if( !packet.ordering.isLast ) {
+    this.unschedule(this.retryIfNoResponse);
+
+    if (packet.ordering.isLast) {
+        this.events('requestComplete').emit();
+    } else {
         this.scheduleRetry();
     }
 

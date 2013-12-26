@@ -367,7 +367,7 @@ var scenarios = (function () {
                 {
                     "name": "server",
                     "type": "originServer",
-                    "locations":{where:{y:100}}
+                    "locations":{where:{y:70}}
                 },
                 {
                     "name": "server-wire",
@@ -380,7 +380,7 @@ var scenarios = (function () {
                 {
                     "name": "cache",
                     "type": "cache",
-                    "locations":{where:{x: 180, y:75}},
+                    "locations":{where:{x: 180, y:55}},
                     "next": ["internet1", "internet2", "internet3"]
                 },
                 
@@ -418,7 +418,7 @@ var scenarios = (function () {
                         "parseStrategy": "progressive",
                         "page": "twitter"
                     },
-                    "locations":{ "where":{x:380, y:190} },
+                    "locations":{ "where":{x:375, y:185} },
                     "script": {
                         "client1_accepted_response5": function(){
                             this.schedule(function(){

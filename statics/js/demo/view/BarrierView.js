@@ -9,7 +9,7 @@ var BarrierView = extend(ThingView, function(subject, demoView){
     this.moveTo(subject.locations.where);
     
     var jClipPathContents = this.jDom.find('clipPath').children();
-    putAtXy(jClipPathContents, 'translateX', 'translateY', subject.locations.where); 
+    this.putAtXy(jClipPathContents, 'translateX', 'translateY', subject.locations.where); 
     
     hide();
        

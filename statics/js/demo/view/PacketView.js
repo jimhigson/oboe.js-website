@@ -101,7 +101,7 @@ var PacketView = (function(){
             transmissionDistance = distance( xyFrom, xyTo),
             jPacketInTransit = this.jDom.find('.packet');
 
-        putAtXy( jPacketInTransit, 'circleX', 'circleY', xyFrom);
+        this.putAtXy( jPacketInTransit, 'circleX', 'circleY', xyFrom);
 
         jPacketInTransit.animate(
             {   circleRadius: transmissionDistance * MOBILE_WAVE_OVERSHOOT,

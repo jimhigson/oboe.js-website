@@ -41,6 +41,7 @@ var getScenario = (function () {
         client: {
             options:{
                 retryAfter: Number.POSITIVE_INFINITY,
+                failAfter: Number.POSITIVE_INFINITY,
                 aspect: 'portrait',
                 "page": "singlePageSite",
                 "deviceType":"desktop"

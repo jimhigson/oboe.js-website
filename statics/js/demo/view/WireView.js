@@ -1,6 +1,5 @@
 var WireView = extend(ThingView, function(subject, demoView){
-
-    MOBILE_AERIAL_FLASH_DURATION = 200;    
+    "use strict";
     
     ThingView.apply(this,arguments);
 
@@ -32,25 +31,30 @@ var WireView = extend(ThingView, function(subject, demoView){
 
    
     if( subject.medium == 'mobile' ){
-        var self = this,
-            aerials = {
-                upstream: this.jDom.find('.upstream'),
-                downstream: this.jDom.find('.downstream')
-            };
-        
-        function flashAerial( packet, resolveDirection ){
-            var unit = unitClass(packet),
-                name = packet.name;
-            
-            self.flash( aerials[ resolveDirection(packet.direction) ], unit, MOBILE_AERIAL_FLASH_DURATION );
-            self.flash( aerials[ resolveDirection(packet.direction) ], name, MOBILE_AERIAL_FLASH_DURATION );
-        }
-        
-        subject.events('deliveryStarted').on(function(packet){
-            flashAerial(packet, oppositeDirectionTo);
-        });
-        subject.events('delivered').on(function(packet){
-            flashAerial(packet, sameDirectionAs);
-        });        
+        this.flashOnMessageStartAndEnd();
     }
 });
+
+WireView.prototype.flashOnMessageStartAndEnd = function(){
+    
+    var self = this,
+        aerials = {
+            upstream: this.jDom.find('.upstream'),
+            downstream: this.jDom.find('.downstream')
+        };
+
+    function flashAerial( packet, resolveDirection ){
+        var unit = unitClass(packet),
+            name = packet.name;
+
+        self.flash( aerials[ resolveDirection(packet.direction) ], unit );
+        self.flash( aerials[ resolveDirection(packet.direction) ], name );
+    }
+
+    this.subject.events('deliveryStarted').on(function(packet){
+        flashAerial(packet, oppositeDirectionTo);
+    });
+    this.subject.events('delivered').on(function(packet){
+        flashAerial(packet, sameDirectionAs);
+    });
+};

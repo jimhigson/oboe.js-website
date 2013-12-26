@@ -1,3 +1,5 @@
+
+
 $maxPageWidth:          1100px;
 
 $backgroundColor:       #f5f3ee;
@@ -15,7 +17,18 @@ $sizeRequiringPhoneLayout: 600px;
 $menuMarginRight: 20px;
 
 /* categorical colours from https://github.com/mbostock/d3/wiki/Ordinal-Scales */
-$categoricalColors: #1f77b4 #ff7f0e #2ca02c #d62728 #9467bd #8c564b #e377c2 #7f7f7f #bcbd22 #17becf;
+$categoricalBlue:#1f77b4;
+$categoricalOrange: #ff7f0e;
+$categoricalGreen: #2ca02c;
+$categoricalRed: #d62728;
+$categoricalPurple: #9467bd;
+$categoricalBrown: #8c564b;
+$categoricalPink: #e377c2;
+$categoricalGrey: #7f7f7f;
+$categoricalYellow: #bcbd22;
+$categoricalLightBlue: #17becf;
+  
+$categoricalColors: $categoricalBlue $categoricalOrange $categoricalGreen $categoricalRed $categoricalPurple $categoricalBrown $categoricalPink $categoricalGrey $categoricalYellow $categoricalLightBlue;
 
 @mixin link {
   color: $highlight;

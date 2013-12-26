@@ -1,12 +1,22 @@
-var Packet = extend(Thing, function Packet(name, type, direction, ordering, mode){
-    Thing.apply(this, arguments);
-
-    this.direction = direction;
-    this.ordering = ordering;
-    this.type = type;
-    this.mode = mode;
-    this.gotAlreadyUpTo = 0;
-});
+var Packet = extend(Thing,
+    /**
+     * @param name
+     * @param type
+     * @param direction
+     * @param ordering
+     * @param mode Number -> ('live'|'historic')
+     * @constructor
+     */
+    function Packet(name, type, direction, ordering, mode){
+        Thing.apply(this, arguments);
+    
+        this.direction = direction;
+        this.ordering = ordering;
+        this.type = type;
+        this.mode = mode;
+        this.gotAlreadyUpTo = 0;
+    }
+);
 
 Packet.newEvent = 'Packet';
 
@@ -27,6 +37,11 @@ Packet.prototype.copy = function() {
     )   
         .inDemo(this.demo)
         .startingAt(this.gotAlreadyUpTo);
+};
+Packet.prototype.replayedCopy = function() {
+    var copy = this.copy();
+    copy.mode = functor('historic');
+    return copy;
 };
 Packet.prototype.startingAt = function( firstPacketNumber ) {
     this.gotAlreadyUpTo = firstPacketNumber;

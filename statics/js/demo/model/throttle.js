@@ -6,7 +6,7 @@ function throttle(timeBetweenPackets, send, scheduler){
     
     var buffer = [];
     
-    function accept(receivedPacket){
+    function read(receivedPacket){
 
         buffer.push(receivedPacket);
 
@@ -20,7 +20,7 @@ function throttle(timeBetweenPackets, send, scheduler){
         var frontOfQueuePacket = buffer.shift();
 
         if( frontOfQueuePacket ) {
-            send(frontOfQueuePacket);
+            send.call(scheduler, frontOfQueuePacket);
         }
 
         if( !(frontOfQueuePacket && frontOfQueuePacket.ordering.isLast) ) {
@@ -36,6 +36,6 @@ function throttle(timeBetweenPackets, send, scheduler){
     }
     
     return {
-        read: accept
+        read: read
     }
 }

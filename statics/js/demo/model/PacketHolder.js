@@ -54,7 +54,11 @@ var PacketHolder = (function(){
                 ),
             directionSpecificHandler = this[directionalHandlerMethodName]; 
         
-        adjacent.events(directionAtSource).on( function( incomingPacket ){
+        adjacent.events(directionAtSource).on( function( incomingPacket, intendedRecipients ){
+            
+            if( intendedRecipients && (intendedRecipients.indexOf(this) == -1) ) {
+                return; // not for me, do nothing.
+            }
             
             var packetCopy = incomingPacket.copy().announce();
             
@@ -63,9 +67,9 @@ var PacketHolder = (function(){
         }.bind(this));
     };
 
-    PacketHolder.prototype.propagate = function(basePacket){
+    PacketHolder.prototype.propagate = function(basePacket, recipients){
     
-        this.events(basePacket.direction).emit(basePacket);
+        this.events(basePacket.direction).emit(basePacket, recipients);
         basePacket.done();
     };
     

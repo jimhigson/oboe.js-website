@@ -37,8 +37,7 @@ var WireView = extend(ThingView, function(subject, demoView){
 
 WireView.prototype.flashOnMessageStartAndEnd = function(){
     
-    var self = this,
-        aerials = {
+    var aerials = {
             upstream: this.jDom.find('.upstream'),
             downstream: this.jDom.find('.downstream')
         };
@@ -47,8 +46,8 @@ WireView.prototype.flashOnMessageStartAndEnd = function(){
         var unit = unitClass(packet),
             name = packet.name;
 
-        self.flash( aerials[ resolveDirection(packet.direction) ], unit );
-        self.flash( aerials[ resolveDirection(packet.direction) ], name );
+        ThingView.flash( aerials[ resolveDirection(packet.direction) ], unit );
+        ThingView.flash( aerials[ resolveDirection(packet.direction) ], name );
     }
 
     this.subject.events('deliveryStarted').on(function(packet){

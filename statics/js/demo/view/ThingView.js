@@ -49,7 +49,7 @@ var ThingView = (function(){
         jEle.css(cssObject);
     }
     
-    ThingView.prototype.flash = function( jEle, klass ) {
+    ThingView.flash = function( jEle, klass ) {
     
         addClass( jEle, klass );
     
@@ -57,6 +57,10 @@ var ThingView = (function(){
             removeClass( jEle, klass );
         }, FLASH_DURATION);
     };
+    ThingView.prototype.flash = function( klass ) {
+
+        ThingView.flash(this.jDom, klass);
+    };    
     
     ThingView.prototype.goToXy = function( xProperty, yProperty, xy ) {
         this.putAtXy(this.jDom, xProperty, yProperty, xy);

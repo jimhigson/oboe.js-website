@@ -44,6 +44,15 @@ function putAtXy(jDom, xProperty, yProperty, xy){
     jDom.css(cssObject);
 }
 
+ThingView.prototype.flash = function( jEle, klass, duration ) {
+
+    addClass( jEle, klass );
+
+    window.setTimeout(function(){
+        removeClass( jEle, klass );
+    }, MOBILE_AERIAL_FLASH_DURATION);
+};
+
 ThingView.prototype.goToXy = function( xProperty, yProperty, xy ) {
     putAtXy(this.jDom, xProperty, yProperty, xy);
 };

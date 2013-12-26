@@ -32,29 +32,25 @@ var WireView = extend(ThingView, function(subject, demoView){
 
    
     if( subject.medium == 'mobile' ){
-        var aerials = {
-            upstream: this.jDom.find('.upstream'),
-            downstream: this.jDom.find('.downstream')
-        };
+        var self = this,
+            aerials = {
+                upstream: this.jDom.find('.upstream'),
+                downstream: this.jDom.find('.downstream')
+            };
         
-        function flash( packet, resolveDirection ){
+        function flashAerial( packet, resolveDirection ){
             var unit = unitClass(packet),
                 name = packet.name;
-
-            addClass( aerials[ resolveDirection(packet.direction) ], unit );
-            addClass( aerials[ resolveDirection(packet.direction) ], name );
-
-            window.setTimeout(function(){
-                removeClass( aerials[ resolveDirection(packet.direction) ], unit );
-                removeClass( aerials[ resolveDirection(packet.direction) ], name );
-            }, MOBILE_AERIAL_FLASH_DURATION);
+            
+            self.flash( aerials[ resolveDirection(packet.direction) ], unit );
+            self.flash( aerials[ resolveDirection(packet.direction) ], name );
         }
         
         subject.events('deliveryStarted').on(function(packet){
-            flash(packet, oppositeDirectionTo);
-        }.bind(this));
+            flashAerial(packet, oppositeDirectionTo);
+        });
         subject.events('delivered').on(function(packet){
-            flash(packet, sameDirectionAs);
-        }.bind(this));        
+            flashAerial(packet, sameDirectionAs);
+        });        
     }
 });

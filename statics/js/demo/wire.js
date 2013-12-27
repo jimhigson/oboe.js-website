@@ -55,6 +55,13 @@ function loadScenario(scenarioId) {
 
         scenarioItem.next.forEach(function( nextScenarioName ){
 
+            if( !modelItems[nextScenarioName] ) {
+                throw new Error(
+                    'no such item as ' + nextScenarioName + 
+                    ' given as downstream of ' + scenarioItem.name
+                );
+            }
+            
             modelItem.withDownstream( modelItems[nextScenarioName] );
         });
     });

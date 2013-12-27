@@ -1,0 +1,15 @@
+.states {
+
+  path {
+    stroke: $backgroundColor;
+  }
+  
+  .blues path {
+    fill: $categoricalBlue; 
+  }
+  
+  .reds path {
+    fill: $categoricalRed;
+  }
+
+}

@@ -27,6 +27,7 @@ var ClientView = (function(){
                 case "singlePageSite":
                 case "graph":
                 case "map":
+                case "cartogram":
                     return SimpleClient;                
                 case "twitter":
                     return TwitterPageClient;

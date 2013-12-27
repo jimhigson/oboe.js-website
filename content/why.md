@@ -79,4 +79,6 @@ divergent code to write.
 
 I'll write it later
 
+Copied from [Wikipedia](http://en.wikipedia.org/wiki/File:Cartogram%E2%80%942012_Electoral_Vote.svg)
+
 <figure data-demo="caching"></figure>

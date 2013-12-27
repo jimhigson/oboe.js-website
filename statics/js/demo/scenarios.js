@@ -390,7 +390,8 @@ var scenarios = (function () {
                     "type": "client",
                     "options": {
                         "parseStrategy": "progressive",
-                        "page": "twitter"
+                        "page": "cartogram",
+                        "aspect": "landscape"
                     },
                     "locations":{ "where":{x:430, y:67} },
                     "next": []
@@ -411,7 +412,8 @@ var scenarios = (function () {
                     "type": "client",
                     "options": {
                         "parseStrategy": "progressive",
-                        "page": "twitter"
+                        "page": "cartogram",
+                        "aspect": "landscape"
                     },
                     "locations":{ "where":{x:375, y:185} },
                     "script": {
@@ -438,7 +440,8 @@ var scenarios = (function () {
                     "type": "client",
                     "options": {
                         "parseStrategy": "progressive",
-                        "page": "twitter"
+                        "page": "cartogram",
+                        "aspect": "landscape"
                     },
                     "locations":{ "where":{x:245, y:205} },
                     "script": {

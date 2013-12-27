@@ -20,7 +20,7 @@ var scenarios = (function () {
                     "name": "sever",
                     "type": "originServer",
                     "options": {
-                        "timeBetweenPackets": 100,
+                        "timeBetweenPackets": 0,
                         "messageSize": 9
                     }
                 },
@@ -28,7 +28,7 @@ var scenarios = (function () {
                     "name": "internet",
                     "type": "wire",
                     "options": {
-                        "bandwidth": 500,
+                        "bandwidth": 100,
                         "latency": 1500
                     }
                 },

@@ -23,17 +23,11 @@ var AggregatingServer = (function(){
     AggregatingServer.prototype.setupResponse = function(){
         
         this.parsers = this.createInputParsersForEachUpstreamNode(this.parseStrategyName);
-    
-        var throttledOutput = throttle( 
-            functor(500), 
-            this.propagate.bind(this),
-            this
-        );
-        
+            
         multiplex(
             this.parseStrategyName,
             this.parsers,
-            throttledOutput.read
+            this.propagate.bind(this)
         );
     };
     

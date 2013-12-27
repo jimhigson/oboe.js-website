@@ -71,7 +71,7 @@ var scenarios = (function () {
                     "name": "sever",
                     "type": "originServer",
                     "options": {
-                        "timeBetweenPackets": 50,
+                        "timeBetweenPackets": 0,
                         "packetMode": "historic"
                     },
                     locations:{
@@ -82,23 +82,20 @@ var scenarios = (function () {
                     "name": "internet-wire",
                     "type": "wire",
                     "options": {
-                        "bandwidth": 500,
+                        "bandwidth": 50,
                         "latency": 800
                     }                    
                 },
                 {
                     "name": "tower",
-                    "type": "relay",
-                    "options":{
-                        "timeBetweenPackets": inconsistent_packet_spacing
-                    }
+                    "type": "relay"
                 },                
                 {
                     "name": "internet-gsm",
                     "type": "wire",
                     "options": {
                         "medium":"mobile",
-                        "bandwidth": 500,
+                        "bandwidth": inconsistent_packet_spacing,
                         "latency": 800
                     }
                 },
@@ -231,7 +228,6 @@ var scenarios = (function () {
                     "type": "wire",
                     "next":["aggregator"],
                     "options": {
-                        "bandwidth": 500,
                         "latency": 1200
                     }
                 },
@@ -249,7 +245,6 @@ var scenarios = (function () {
                     "name": "origin-fast-wire",
                     "type": "wire",
                     "options": {
-                        "bandwidth": 500,
                         "latency": 800
                     }
                 },
@@ -257,7 +252,7 @@ var scenarios = (function () {
                     "name": "aggregator",
                     "type": "aggregatingServer",
                     "options": {
-                        "timeBetweenPackets": 1000,
+                        "timeBetweenPackets": 0,
                         "messageSize": Number.POSITIVE_INFINITY
                     },
                     "locations":{ "where":{x:240, y:125} }
@@ -340,7 +335,6 @@ var scenarios = (function () {
                     "name": "internet",
                     "type": "wire",
                     "options": {
-                        "bandwidth": 500,
                         "latency": 1000
                     }
                 },
@@ -369,25 +363,26 @@ var scenarios = (function () {
                     "locations":{where:{y:70}}
                 },
                 {
-                    "name": "server-wire",
+                    "name": "server-to-cache-wire",
                     "type": "wire",
                     "options": {
-                        "bandwidth": 500,
-                        "latency": 1000
+                        "latency": 1000,
+                        "bandwidth": 500
                     }
                 },
                 {
                     "name": "cache",
                     "type": "cache",
                     "locations":{where:{x: 180, y:55}},
-                    "next": ["internet1", "internet2", "internet3"]
+                    "next": ["cache-to-client1", "cache-to-client2", "cache-to-client3"]
                 },
                 
                 {
-                    "name": "internet1",
+                    "name": "cache-to-client1",
                     "type": "wire",
                     "options":{
-                        latency: 750
+                        latency: 750,
+                        "bandwidth": 500
                     }
                 },
                 {
@@ -404,10 +399,11 @@ var scenarios = (function () {
                 
                 
                 {
-                    "name": "internet2",
+                    "name": "cache-to-client2",
                     "type": "wire",
                     "options":{
-                        latency: 1500
+                        latency: 1500,
+                        "bandwidth": 500
                     }
                 },
                 {
@@ -430,10 +426,11 @@ var scenarios = (function () {
                 
                 ,
                 {
-                    "name": "internet3",
+                    "name": "cache-to-client3",
                     "type": "wire",
                     "options":{
-                        latency: 1500
+                        latency: 1200,
+                        "bandwidth": 500
                     }
                 },
                 {

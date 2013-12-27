@@ -13,7 +13,7 @@ var getScenario = (function () {
         },
         wire: {
             options:{
-                bandwidth: 500,
+                bandwidth: 0, // by default, can accept packets as quickly as received
                 latency: 1000,
                 medium: 'cable'
             },

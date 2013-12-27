@@ -358,7 +358,6 @@ var scenarios = (function () {
         "caching": {
             "options":{
                 "height":257,
-                "colors":"twoSeries",
                 "startSimulation":function(modelItems){
                     modelItems.client1.makeRequest();
                 }
@@ -420,7 +419,7 @@ var scenarios = (function () {
                     },
                     "locations":{ "where":{x:375, y:185} },
                     "script": {
-                        "client1_accepted_response5": function(){
+                        "client1_accepted_response1": function(){
                             this.schedule(function(){
                                 this.makeRequest();
                             });

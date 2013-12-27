@@ -123,7 +123,7 @@ var getScenario = (function () {
             if( from[k] instanceof Function ) {
                 
                 // functions - copy directly
-                if( overwrite || !to[k] )
+                if( overwrite || (to[k] === undefined) )
                     to[k] = from[k];
             }
             else if( from[k] instanceof Object ) {
@@ -137,7 +137,7 @@ var getScenario = (function () {
             } else {
                 
                 // strings, numbers etc
-                if( overwrite || !to[k] )                
+                if( overwrite || (to[k] === undefined) )
                     to[k] = from[k];
             }
         }

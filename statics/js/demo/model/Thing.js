@@ -1,4 +1,6 @@
 var Thing = (function(){
+    var DEFAULT_SCHEDULE_DELAY = 500;
+    
     function Thing(name, locations){
     
         this.name = name;
@@ -87,7 +89,10 @@ var Thing = (function(){
     }
     Thing.prototype.schedule = function(fn, requestedTiming) {
 
-        scheduleTiming = requestedTiming || 500;
+        scheduleTiming  = (requestedTiming === undefined)
+                        ? DEFAULT_SCHEDULE_DELAY 
+                        : requestedTiming
+                        ;
         
         if( scheduleTiming == Number.POSITIVE_INFINITY ) {
             // Waiting forever to do something interpreted

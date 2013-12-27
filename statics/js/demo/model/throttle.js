@@ -35,7 +35,12 @@ function throttle(timeBetweenPackets, send, scheduler){
         }
     }
     
+    function reset() {
+        buffer = [];
+    }
+    
     return {
-        read: read
+        read: read,
+        reset: reset
     }
 }

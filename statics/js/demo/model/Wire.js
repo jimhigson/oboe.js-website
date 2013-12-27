@@ -6,7 +6,7 @@ var Wire = (function(){
     
         Super.apply(this, arguments);
         this.latency = options.latency;
-        this.bandwidth = options.bandwidth;
+        this.bandwidth = Thing.asFunction(options.bandwidth);
         this.medium = options.medium;
         
         if( !options.medium ) {
@@ -44,6 +44,14 @@ var Wire = (function(){
     
         if( !this.blockage )
             this.propagateAfterLatency(packet);
+    };
+    
+    Wire.prototype.inputThrottle = function(handler){
+        var t = throttle( this.bandwidth, handler, this);
+        
+        this.events('reset').on(t.reset);
+        
+        return t.read;
     };
 
     Wire.prototype.withDownstream = function(downstreamLocation){

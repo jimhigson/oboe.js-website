@@ -9,37 +9,37 @@ var Cache = (function(){
         
         this.cacheContents = [];
         this.requestors = [];
-        this.onGoingRequest = false;
+        this.upstreamRequestOngoing = false;
         
         this.events('reset').on(function(){
             this.cacheContents = [];
             this.requestors = [];
-            this.onGoingRequest = false;
+            this.upstreamRequestOngoing = false;
         }.bind(this));
     });
 
     Cache.prototype.acceptFromDownstream = function( packetFromDownstream, source ){
-
+        // got request from client heading to server
+        
+        this.requestors.push(source);
+        
         if( this.cacheContents.length ) {
             
-            var t = throttle(this.timeBetweenPackets, function( cachedPacket ){
+            this.cacheContents.forEach(function( cachedPacket ){
                 this.propagate(cachedPacket, [source]);
-            }, this );
-            
-            this.cacheContents.forEach(t.read);
+            }.bind(this));
         }
         
-        if( !this.onGoingRequest ) {
-
-            this.requestors.push(source);
+        if( !this.upstreamRequestOngoing ) {
             
             this.propagate(packetFromDownstream);
 
-            this.onGoingRequest = true;
+            this.upstreamRequestOngoing = true;
         }
     };
 
     Cache.prototype.acceptFromUpstream = function( packetFromUpstream ){
+        // got response from server heading to client
 
         this.cacheContents.push(packetFromUpstream.replayedCopy());
         

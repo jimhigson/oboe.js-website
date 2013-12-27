@@ -52,21 +52,33 @@ var PacketHolder = (function(){
                     ?   'acceptFromUpstream' 
                     :   'acceptFromDownstream'
                 ),
-            directionSpecificHandler = this[directionalHandlerMethodName]; 
-        
-        adjacent.events(directionAtSource).on( function( incomingPacket, intendedRecipients ){
+            directionSpecificHandler = this[directionalHandlerMethodName],
             
-            if( intendedRecipients && (intendedRecipients.indexOf(this) == -1) ) {
-                return; // not for me, do nothing.
-            }
-            
-            var packetCopy = incomingPacket.copy().announce();
-            
-            directionSpecificHandler.call(this, packetCopy, adjacent);
-            this.accept(packetCopy, adjacent);
-        }.bind(this));
-    };
+            inputHandler = function( incomingPacket ){
 
+                var packetCopy = incomingPacket.copy().announce();
+    
+                directionSpecificHandler.call(this, packetCopy, adjacent);
+                this.accept(packetCopy, adjacent);
+            }.bind(this),
+            
+            throttledInputHandler = this.inputThrottle(inputHandler),
+            
+            filteredThrottledInputHandler = function( incomingPacket, intendedRecipients ){
+                if( intendedRecipients && (intendedRecipients.indexOf(this) == -1) ) {
+                    return; // not for me, do nothing.
+                }
+                
+                throttledInputHandler(incomingPacket);
+            }.bind(this);
+        
+        adjacent.events(directionAtSource).on( filteredThrottledInputHandler );
+    };
+    
+    PacketHolder.prototype.inputThrottle = function(handle) {
+        return handle;
+    };
+    
     PacketHolder.prototype.propagate = function(basePacket, recipients){
     
         this.events(basePacket.direction).emit(basePacket, recipients);

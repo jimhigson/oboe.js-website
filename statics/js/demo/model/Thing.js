@@ -1,4 +1,6 @@
 var Thing = (function(){
+    "use strict";
+    
     var DEFAULT_SCHEDULE_DELAY = 500;
     
     function Thing(name, locations){
@@ -59,7 +61,7 @@ var Thing = (function(){
             return (thing && (thing.name || thing.toString()));
         }
         
-        return eventName = [firstParty, action, secondParty]
+        return [firstParty, action, secondParty]
             .map(name)
             .filter(function(a){return !!a})
             .join('_');
@@ -90,10 +92,10 @@ var Thing = (function(){
     
     Thing.prototype.schedule = function(fn, requestedTiming) {
 
-        scheduleTiming  = (requestedTiming === undefined)
-                        ? DEFAULT_SCHEDULE_DELAY 
-                        : requestedTiming
-                        ;
+        var scheduleTiming  = (requestedTiming === undefined)
+                            ? DEFAULT_SCHEDULE_DELAY 
+                            : requestedTiming
+                            ;
         
         if( scheduleTiming == Number.POSITIVE_INFINITY ) {
             // Waiting forever to do something interpreted

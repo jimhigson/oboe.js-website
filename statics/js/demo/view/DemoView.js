@@ -79,9 +79,9 @@ DemoView.prototype.setupControls = function(){
             listenForPlay();
         });
     }
-
+    
     listenForPlay();
-}
+};
 
 DemoView.prototype.scalingFactor = function(){
     var spaceAvailable = this.jDom.parents('main').width();

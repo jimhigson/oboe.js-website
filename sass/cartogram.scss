@@ -1,17 +1,18 @@
-.states {
-
-  path {
+.cartogram {
+  
+  path, circle {
     stroke: $backgroundColor;
     stroke-width:0.9;
     vector-effect: non-scaling-stroke;
+    fill:$shadow;
   }
-  
-  .blues path {
+
+/*  .blues path {
     fill: $categoricalBlue; 
   }
   
   .reds path {
     fill: $categoricalRed;
-  }
+  }*/
 
 }

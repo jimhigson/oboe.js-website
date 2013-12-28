@@ -52,35 +52,42 @@ DemoView.prototype.setupControls = function(){
     var jControls = this.jDom.find('.controls'),
         jLightbox = jControls.find('.lightbox'),
         jReset = jControls.find('.reset').hide(),
-        subject = this.subject;
+        demo = this.subject,
+        demoEvents = demo.events;
 
-    function listenForPlay(){
+    demoEvents('paused').on(function(){
+        jLightbox.fadeIn();
+    });
+
+    demoEvents('unpaused').on(function(){
+        jLightbox.fadeOut();
+    });    
+    
+    demoEvents('started').on(function(){
+        jLightbox.fadeOut();
+        jReset.fadeIn();
+        listenForClickOnReset();
+    });
+
+    demoEvents('reset').on(function(){
+        jLightbox.fadeIn();
+        jReset.fadeOut();
+        listenForClickOnPlay();
+    });
+
+    function listenForClickOnPlay(){
         jLightbox.one('click', function(){
-
-            jLightbox.fadeOut();
-            jLightbox.promise().done( function(){
-                window.setTimeout( function(){
-                    subject.start();
-                }, 500);
-            });
-
-            jReset.fadeIn();
-
-            listenForReset();
+            demo.start();
         });
     }
 
-    function listenForReset(){
+    function listenForClickOnReset(){
         jReset.one('click', function(){
-
-            subject.reset();
-            jLightbox.fadeIn();
-            jReset.fadeOut();
-            listenForPlay();
+            demo.reset();
         });
     }
     
-    listenForPlay();
+    listenForClickOnPlay();
 };
 
 DemoView.prototype.scalingFactor = function(){

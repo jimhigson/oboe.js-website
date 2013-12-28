@@ -18,6 +18,15 @@ var ClientView = (function(){
         client.events('requestFail').on(hideSpinner);
         client.events('requestComplete').on(hideSpinner);
         client.events('reset').on(hideSpinner);
+
+        jDom.click(function(){
+            console.log('click');
+            if( client.demo.paused ) {
+                client.demo.unpause();
+            } else {
+                client.demo.pause();
+            }
+        });
     });
 
     ClientView.factory = function(client, demoView) {

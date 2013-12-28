@@ -86,7 +86,8 @@ var Thing = (function(){
         });
 
         this.timeouts = [];
-    }
+    };
+    
     Thing.prototype.schedule = function(fn, requestedTiming) {
 
         scheduleTiming  = (requestedTiming === undefined)

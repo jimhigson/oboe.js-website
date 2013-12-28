@@ -7,10 +7,23 @@ var ThingView = (function(){
         this.subject = subject;
         this.demoView = demoView;
         subject.hasView(this);
+
+        var demoEvents = this.subject.demo.events;
+        
+        demoEvents('paused').on(this.pause.bind(this));
+        demoEvents('unpause').on(this.unpause.bind(this));
     }
     
     ThingView.prototype.find = function(selector) {
         return this.demoView.jDom.find(selector);
+    };
+
+    ThingView.prototype.pause = function(){
+        this.jDom && this.jDom.pause();
+    };
+    
+    ThingView.prototype.unpause = function(){
+        this.jDom && this.jDom.resume();
     };
     
     ThingView.prototype.stampContentsFromTemplate = function(containerSelector, templateName, className) {

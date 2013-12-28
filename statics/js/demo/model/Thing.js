@@ -7,7 +7,7 @@ var Thing = (function(){
         this.events = pubSub();
         this.locations = locations || {};
 
-        this.scheduler = new Scheduler();
+        this.scheduler = new Scheduler(this.events);
         
         this.events('reset').on(function(){
             this.scheduler.cancelTimeouts();

@@ -3,10 +3,21 @@ var Scheduler = (function(){
 
     var DEFAULT_SCHEDULE_DELAY = 500;
     
-    function Scheduler() {
+    function Scheduler(pauseEventSource) {
         this.timeouts = [];
+
+        pauseEventSource('paused').on(this._pause.bind(this));
+        pauseEventSource('unpaused').on(this._unpause.bind(this));
     }
 
+    Scheduler.prototype._pause = function(timeout){
+        console.log('pausing this scheduler');
+    };
+    
+    Scheduler.prototype._unpause = function(timeout){
+        console.log('unpausing this scheduler');
+    };
+        
     Scheduler.prototype._removeTimeout = function(timeout){
 
         this.timeouts = this.timeouts.filter(function( storedTimeout ){

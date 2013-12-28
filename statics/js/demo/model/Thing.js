@@ -1,17 +1,16 @@
 var Thing = (function(){
     "use strict";
-    
-    var DEFAULT_SCHEDULE_DELAY = 500;
-    
+        
     function Thing(name, locations){
     
         this.name = name;
         this.events = pubSub();
         this.locations = locations || {};
-        this.timeouts = [];
+
+        this.scheduler = new Scheduler();
         
         this.events('reset').on(function(){
-            this.cancelTimeouts();
+            this.scheduler.cancelTimeouts();
         }.bind(this));
     }
 
@@ -23,15 +22,14 @@ var Thing = (function(){
         this.view = view;
     };
     
-    Thing.prototype.reset = function(){
-    };
-    
+   
     Thing.prototype.inDemo = function(demo){
         this.demo = demo;
-        this.demo.events('reset').on(function(){
-            this.reset();
-            this.events('reset').emit();
-        }.bind(this));
+        
+        this.demo.events('reset').on(
+            this.events('reset').emit
+        );
+
         return this; // chaining
     };
     
@@ -73,54 +71,17 @@ var Thing = (function(){
             .script(scriptName(this, verb, secondParty))
             .emit();
     };
-
-    Thing.prototype.removeTimeout = function(timeout){
-
-        this.timeouts = this.timeouts.filter(function( storedTimeout ){
-            return storedTimeout != timeout;
-        });
-    };
+    
     Thing.prototype.cancelTimeouts = function(){
-
-        // cancel all scheduled events:
-        this.timeouts.forEach(function(timeout){
-            window.clearTimeout(timeout);
-        });
-
-        this.timeouts = [];
+        return this.scheduler.cancelTimeouts();
     };
     
     Thing.prototype.schedule = function(fn, requestedTiming) {
-
-        var scheduleTiming  = (requestedTiming === undefined)
-                            ? DEFAULT_SCHEDULE_DELAY 
-                            : requestedTiming
-                            ;
-        
-        if( scheduleTiming == Number.POSITIVE_INFINITY ) {
-            // Waiting forever to do something interpreted
-            // as never doing it. The browser would natural
-            // schedule it straight away (silly!)
-            return undefined;
-        }
-
-        var timeout = window.setTimeout(function(){
-
-            // stop remembering this timeout, it is done now:
-            this.removeTimeout(timeout);
-            fn.apply(this);
-
-        }.bind(this), scheduleTiming);
-
-        this.timeouts.push( timeout );
-
-        return timeout;
+        return this.scheduler.schedule(fn.bind(this), requestedTiming);
     };
     
     Thing.prototype.unschedule = function(unscheduledTimeout) {
-
-        window.clearTimeout(unscheduledTimeout);
-        this.removeTimeout(unscheduledTimeout);
+        return this.scheduler.unschedule(unscheduledTimeout);
     };
     
     Thing.asFunction = function (givenValue, defaultValue) {

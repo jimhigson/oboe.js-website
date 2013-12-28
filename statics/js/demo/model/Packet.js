@@ -53,7 +53,6 @@ Packet.prototype.move = function(fromXY, toXY, latency){
 Packet.prototype.isOn = function(holder){
     this.events('isOn').emit(holder);
 };
-Packet.prototype.reset =
-    Packet.prototype.done = function(){
-        this.events('done').emit();
-    };
+Packet.prototype.done = function(){
+    this.events('done').emit();
+};

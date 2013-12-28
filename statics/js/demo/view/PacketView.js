@@ -23,6 +23,8 @@ var PacketView = (function(){
     //---------------------------------------------    
     
     var PacketViewRenderer = extend(ThingView, function (subject, demoView, holder) {
+        var subjectEvents = subject.events;
+        
         ThingView.call(this,subject, demoView);
 
         this.initDomFromTemplate(
@@ -31,9 +33,12 @@ var PacketView = (function(){
             this.className(subject)
         );
 
-        subject.events('move').on(this.animateMove.bind(this));
-
-        subject.events('done').on(this.done.bind(this));        
+        
+        subjectEvents('move').on(this.animateMove.bind(this));
+        
+        // do the same on packet being reset and done: 
+        subjectEvents('reset').on(this.done.bind(this));
+        subjectEvents('done').on(this.done.bind(this));
     });
 
     PacketViewRenderer.prototype.className = function(subject){

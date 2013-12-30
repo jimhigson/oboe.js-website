@@ -50,33 +50,33 @@ DemoView.prototype.createNewViewsForNewModelItems = function(ModelType, ViewType
 
 DemoView.prototype.setupControls = function(){
     var jControls = this.jDom.find('.controls'),
-        jLightbox = jControls.find('.lightbox'),
+        jFadeControls = jControls.find('.fadeControls'),
         jReset = jControls.find('.reset').hide(),
         demo = this.subject,
         demoEvents = demo.events;
 
     demoEvents('paused').on(function(){
-        jLightbox.fadeIn();
+        jFadeControls.fadeIn();
     });
 
     demoEvents('unpaused').on(function(){
-        jLightbox.fadeOut();
+        jFadeControls.fadeOut();
     });    
     
     demoEvents('started').on(function(){
-        jLightbox.fadeOut();
+        jFadeControls.fadeOut();
         jReset.fadeIn();
         listenForClickOnReset();
     });
 
     demoEvents('reset').on(function(){
-        jLightbox.fadeIn();
+        jFadeControls.fadeIn();
         jReset.fadeOut();
         listenForClickOnPlay();
     });
 
     function listenForClickOnPlay(){
-        jLightbox.one('click', function(){
+        jFadeControls.one('click', function(){
             demo.start();
         });
     }

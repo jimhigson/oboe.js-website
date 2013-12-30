@@ -69,7 +69,6 @@ var Scheduler = (function(){
     };
     
     Scheduler.prototype.unschedule = function(unscheduledTask) {
-        console.log('unscheduling', unscheduledTask);
         
         if( unscheduledTask ) {
             window.clearTimeout(unscheduledTask.timeout);

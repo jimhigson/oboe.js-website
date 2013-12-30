@@ -76,6 +76,7 @@ DemoView.prototype.setupControls = function(){
     demoEvents('reset').on(function(){
         jFadeControls.fadeIn();
         jReset.fadeOut();
+        jLightbox.fadeOut();
         listenForClickOnPlay();
     });
 

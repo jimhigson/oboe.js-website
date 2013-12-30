@@ -14,9 +14,15 @@
   background-color: $shadedBackgroundColor;
 }
 
-rect.fade {
+rect.fade,
+.lightbox {
   fill: $shadedBackgroundColor;
   opacity: 0.9;
+}
+
+.lightbox {
+  stroke: $highlight;
+  vector-effect: non-scaling-stroke;
 }
 
 @mixin svg-text-centered {

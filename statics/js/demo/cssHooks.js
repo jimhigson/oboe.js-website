@@ -54,10 +54,10 @@ $.cssHooks.circleRadius = getOrSetAttributeCssHook('r');
 // end of these properties when animating them:
 $.cssNumber.translateX = 
 $.cssNumber.translateY = 
-$.cssNumber.x1 = 
-$.cssNumber.y1 = 
-$.cssNumber.x2 = 
-$.cssNumber.y2 =
+$.cssNumber.lineX1 = 
+$.cssNumber.lineY1 = 
+$.cssNumber.lineX2 = 
+$.cssNumber.lineY2 =
 $.cssNumber.circleX =
 $.cssNumber.circleY =    
 $.cssNumber.circleRadius = 

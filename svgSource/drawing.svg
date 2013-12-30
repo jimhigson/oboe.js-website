@@ -25,14 +25,14 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.8284271"
-     inkscape:cx="71.202677"
-     inkscape:cy="63.960064"
+     inkscape:zoom="0.70710678"
+     inkscape:cx="-151.92778"
+     inkscape:cy="131.49944"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer8"
      showgrid="true"
-     inkscape:window-width="1366"
-     inkscape:window-height="724"
+     inkscape:window-width="1920"
+     inkscape:window-height="1152"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="0"
@@ -40,7 +40,7 @@
      fit-margin-left="0"
      fit-margin-right="0"
      fit-margin-bottom="0"
-     inkscape:snap-grids="false">
+     inkscape:snap-grids="true">
     <inkscape:grid
        type="xygrid"
        id="grid2985"
@@ -69,7 +69,7 @@
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="background"
-     style="display:none">
+     style="display:inline;opacity:0.19130435">
     <image
        y="-175"
        x="-460"
@@ -82,7 +82,7 @@
      inkscape:label="page"
      inkscape:groupmode="layer"
      id="layer1"
-     style="display:inline">
+     style="display:none">
     <rect
        style="color:#000000;fill:#827e7a;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect2987"
@@ -590,9 +590,19 @@
   </g>
   <g
      inkscape:groupmode="layer"
+     id="layer8"
+     inkscape:label="highlight"
+     style="opacity:0.71304348">
+    <path
+       style="color:#000000;fill:#e3dbdb;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;stroke-opacity:1"
+       d="M -520 -335 L -520 335 L 520 335 L 520 -335 L -520 -335 z M 0 -75 C 44.18278 -75 80 -41.421356 80 0 C 80 41.421356 44.18278 75 0 75 C -44.18278 75 -80 41.421356 -80 0 C -80 -41.421356 -44.18278 -75 0 -75 z "
+       id="rect3102" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
      id="layer6"
      inkscape:label="graph"
-     style="display:none">
+     style="display:inline">
     <path
        style="color:#000000;fill:#827e7a;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        d="m 50,-45 -95,0 0,85 95,0 z m -5,10 0,70 -85,0 0,-70 z"

@@ -60,7 +60,7 @@ var ThingView = (function(){
         cssObject[yProperty] = xy.y;
     
         jEle.css(cssObject);
-    }
+    };
     
     ThingView.flash = function( jEle, klass ) {
     

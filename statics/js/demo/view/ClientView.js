@@ -20,7 +20,6 @@ var ClientView = (function(){
         client.events('reset').on(hideSpinner);
 
         jDom.click(function(){
-            console.log('click');
             if( client.demo.paused ) {
                 client.demo.unpause();
             } else {

@@ -3,9 +3,9 @@ var Scheduler = (function(){
 
     var DEFAULT_SCHEDULE_DELAY = 500;
 
-    function Scheduler(thing, pauseEventSource) {
+    function Scheduler(subject, pauseEventSource) {
         this.tasks = [];
-        this.thing = thing;
+        this.subject = subject;
 
         pauseEventSource('paused').on(this._pause.bind(this));
         pauseEventSource('unpaused').on(this._unpause.bind(this));
@@ -69,12 +69,14 @@ var Scheduler = (function(){
     };
 
     Scheduler.prototype._pauseTask = function(task){
+
         window.clearTimeout(task.timeout);
-        task.wait = task.performTime - Date.now();        
+        task.wait = task.performTime - Date.now();
     };
     
     Scheduler.prototype._scheduleTask = function(task){
         task.timeout = window.setTimeout(task.performTask, task.wait);
+        task.performTime = Date.now() + task.wait;
         return task;
     };
     

@@ -49,18 +49,22 @@ DemoView.prototype.createNewViewsForNewModelItems = function(ModelType, ViewType
 };
 
 DemoView.prototype.setupControls = function(){
-    var jControls = this.jDom.find('.controls'),
+    var jDom = this.jDom,
+        jControls = jDom.find('.controls'),
         jFadeControls = jControls.find('.fadeControls'),
+        jLightbox = jDom.find('.lightbox'),
         jReset = jControls.find('.reset').hide(),
         demo = this.subject,
         demoEvents = demo.events;
 
+    jLightbox.hide();
+    
     demoEvents('paused').on(function(){
-        jFadeControls.fadeIn();
+        jLightbox.fadeIn();
     });
 
     demoEvents('unpaused').on(function(){
-        jFadeControls.fadeOut();
+        jLightbox.fadeOut();
     });    
     
     demoEvents('started').on(function(){

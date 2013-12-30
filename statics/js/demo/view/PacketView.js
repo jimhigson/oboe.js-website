@@ -101,6 +101,8 @@ var PacketView = (function(){
         var packet = this.subject,
             transmissionDistance = distance( xyFrom, xyTo),
             jPacketInTransit = this.jDom.find('.packet');
+        
+        this.jPausibleElements = jPacketInTransit;
 
         this.putAtXy( jPacketInTransit, 'circleX', 'circleY', xyFrom);
 
@@ -126,4 +128,4 @@ var PacketView = (function(){
     //---------------------------------------------
 
     return PacketView;
-})();    
+})();

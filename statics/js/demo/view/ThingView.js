@@ -19,11 +19,11 @@ var ThingView = (function(){
     };
 
     ThingView.prototype.pause = function(){
-        this.jDom && this.jDom.pause();
+        this.jPausibleElements && this.jPausibleElements.pause();
     };
     
     ThingView.prototype.unpause = function(){
-        this.jDom && this.jDom.resume();
+        this.jPausibleElements && this.jPausibleElements.resume();
     };
     
     ThingView.prototype.stampContentsFromTemplate = function(containerSelector, templateName, className) {
@@ -41,6 +41,7 @@ var ThingView = (function(){
     
     ThingView.prototype.initDomFromTemplate = function(containerClass, templateName, className) {
         this.jDom = this.stampContentsFromTemplate('.' + containerClass, templateName, className);
+        this.jPausibleElements = this.jDom;
         return this.jDom;
     };
     

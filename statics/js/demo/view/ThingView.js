@@ -11,7 +11,7 @@ var ThingView = (function(){
         var demoEvents = this.subject.demo.events;
         
         demoEvents('paused').on(this.pause.bind(this));
-        demoEvents('unpause').on(this.unpause.bind(this));
+        demoEvents('unpaused').on(this.unpause.bind(this));
     }
     
     ThingView.prototype.find = function(selector) {

@@ -57,14 +57,18 @@ DemoView.prototype.setupControls = function(){
         demo = this.subject,
         demoEvents = demo.events;
 
+    jLightbox.click(function(){
+        demo.unpause();
+    });
+    
     jLightbox.hide();
     
     demoEvents('paused').on(function(){
-        jLightbox.fadeIn();
+        jLightbox.show();
     });
 
     demoEvents('unpaused').on(function(){
-        jLightbox.fadeOut();
+        jLightbox.hide();
     });    
     
     demoEvents('started').on(function(){

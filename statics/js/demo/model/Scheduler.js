@@ -3,19 +3,20 @@ var Scheduler = (function(){
 
     var DEFAULT_SCHEDULE_DELAY = 500;
 
-    function Scheduler(pauseEventSource) {
+    function Scheduler(thing, pauseEventSource) {
         this.tasks = [];
+        this.thing = thing;
 
         pauseEventSource('paused').on(this._pause.bind(this));
         pauseEventSource('unpaused').on(this._unpause.bind(this));
     }
 
     Scheduler.prototype._pause = function(){
-        console.log('pausing this scheduler');
+        this.tasks.forEach(this._pauseTask);
     };
     
     Scheduler.prototype._unpause = function(){
-        console.log('unpausing this scheduler');
+        this.tasks.forEach(this._scheduleTask);
     };
         
     Scheduler.prototype._removeTask = function(taskToRemove){
@@ -56,15 +57,24 @@ var Scheduler = (function(){
                 fn();
             }.bind(this),
 
-            task = {
-                timeout: window.setTimeout(performTask, wait),
+            task = this._scheduleTask({
                 performTask: performTask,
                 performTime: performTime,
                 wait: wait
-            };
+            });
         
         this.tasks.push( task );
     
+        return task;
+    };
+
+    Scheduler.prototype._pauseTask = function(task){
+        window.clearTimeout(task.timeout);
+        task.wait = task.performTime - Date.now();        
+    };
+    
+    Scheduler.prototype._scheduleTask = function(task){
+        task.timeout = window.setTimeout(task.performTask, task.wait);
         return task;
     };
     

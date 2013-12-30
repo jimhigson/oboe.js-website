@@ -7,7 +7,7 @@ var Thing = (function(){
         this.events = pubSub();
         this.locations = locations || {};
 
-        this.scheduler = new Scheduler(this.events);
+        this.scheduler = new Scheduler(this, this.events);
         
         this.events('reset').on(function(){
             this.scheduler.cancelTimeouts();
@@ -26,9 +26,12 @@ var Thing = (function(){
     Thing.prototype.inDemo = function(demo){
         this.demo = demo;
         
-        this.demo.events('reset').on(
-            this.events('reset').emit
-        );
+        var thisEvents = this.events,
+            demoEvents = demo.events;
+
+        demoEvents('reset').on(     thisEvents('reset').emit    );
+        demoEvents('paused').on(    thisEvents('paused').emit   );
+        demoEvents('unpaused').on(  thisEvents('unpaused').emit );
 
         return this; // chaining
     };

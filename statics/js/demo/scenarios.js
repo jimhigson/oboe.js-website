@@ -44,11 +44,14 @@ var scenarios = (function () {
             "narrative":[
                 {
                     "type":"narrativeItem",
-                    "script":{
-                        "client_requestAttempt_0": function(){
-                            this.popUp();
+                    "script":[
+                        {   eventName:"client_requestAttempt_0",
+                            delay:seconds(0.5),
+                            action: function(){
+                                this.popUp();
+                            }
                         }
-                    },
+                    ],
                     "relationships":{
                         "topic":"client"
                     },
@@ -179,16 +182,19 @@ var scenarios = (function () {
                     {
                         "name":"tunnel",
                         "type":"barrier",
-                        "script": {
-                            "client_accepted_response6": function(){
-                                this.activateIfNeverShownBefore();
+                        "script": [
+                            {   eventName:"client_accepted_response6",
+                                action: function(){
+                                    this.activateIfNeverShownBefore();
+                                }
                             },
-                            "client_requestAttempt_1": function(){
-                                this.schedule(function(){
+                            {   eventName: "client_requestAttempt_1",
+                                delay: seconds(0.5),
+                                action: function(){
                                     this.deactivate();
-                                }, seconds(3));
+                                }
                             }
-                        }
+                        ]
                     }
                 ]
             }            
@@ -430,13 +436,14 @@ var scenarios = (function () {
                         "aspect": "landscape"
                     },
                     "locations":{ "where":{x:375, y:185} },
-                    "script": {
-                        "client1_accepted_response1": function(){
-                            this.schedule(function(){
-                                this.makeRequest();
-                            });
+                    "script": [
+                        {   eventName:"client1_accepted_response1",
+                            delay:seconds(0.5),
+                            action: function(){
+                                    this.makeRequest();
+                            }
                         }
-                    },
+                    ],
                     "next": []
                 }
                 
@@ -458,13 +465,13 @@ var scenarios = (function () {
                         "aspect": "landscape"
                     },
                     "locations":{ "where":{x:245, y:205} },
-                    "script": {
-                        "client1_accepted_response9": function(){
-                            this.schedule(function(){
+                    "script": [
+                        {   eventName:"client1_accepted_response9",
+                            action: function(){
                                 this.makeRequest();
-                            });
+                            }
                         }
-                    }
+                    ]
                 }
             ]
         }

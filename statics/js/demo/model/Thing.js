@@ -31,13 +31,24 @@ var Thing = (function(){
         return this; // chaining
     };
     
-    Thing.prototype.followingScript = function(script){
-        
-        for(var eventName in script ){
-            var action = script[eventName];
+    Thing.prototype.followingScript = function(scriptItems){
+
+        var self = this,
+            script = this.demo.script;
+
+        scriptItems.forEach(function(scriptItem){
+
+            var action = scriptItem.action,
+                wrappedAction =
+                    scriptItem.delay
+                    ?   function(){
+                            self.schedule(action, scriptItem.delay);
+                        }
+                    :   action.bind(self);
             
-            this.demo.script(eventName).on(action.bind(this));
-        }
+            script(scriptItem.eventName).on(wrappedAction);
+        });
+        
         return this; // chaining
     };
     

@@ -46,7 +46,7 @@ function loadScenario(scenarioId) {
 
     function createAndWire(scenarioItem){
 
-        var script = scenarioItem.script || {};
+        var script = scenarioItem.script || [];
 
         return makeModel(scenarioItem)
             .inDemo(demo)

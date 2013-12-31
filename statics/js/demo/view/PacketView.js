@@ -99,13 +99,13 @@ var PacketView = (function(){
         
         var packet = this.subject,
             transmissionDistance = distance( xyFrom, xyTo),
-            jPacketInTransit = this.jDom.find('.packet');
+            jAirbornePacketInTransit = this.jDom.find('.packet');
         
-        this.jPausibleElements = jPacketInTransit;
+        this.jPausibleElements = jAirbornePacketInTransit;
 
-        this.putAtXy( jPacketInTransit, 'circleX', 'circleY', xyFrom);
+        this.putAtXy( jAirbornePacketInTransit, 'circleX', 'circleY', xyFrom);
 
-        jPacketInTransit.animate(
+        jAirbornePacketInTransit.animate(
             {   circleRadius: transmissionDistance * MOBILE_WAVE_OVERSHOOT,
                 opacity: 0
             },

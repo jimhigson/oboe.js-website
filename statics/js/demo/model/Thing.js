@@ -59,7 +59,7 @@ var Thing = (function(){
         
         return [firstParty, action, secondParty]
             .map(name)
-            .filter(function(a){return !!a})
+            .filter(function(a){return a !== undefined})
             .join('_');
     }
     

@@ -75,7 +75,7 @@ var Thing = (function(){
     };
     
     Thing.prototype.schedule = function(fn, requestedTiming) {
-        return this.scheduler.schedule(fn.bind(this), requestedTiming);
+        return this.scheduler.schedule(fn.bind(this), requestedTiming, this.demo.paused);
     };
     
     Thing.prototype.unschedule = function(unscheduledTimeout) {

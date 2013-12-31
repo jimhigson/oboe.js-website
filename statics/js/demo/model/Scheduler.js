@@ -36,7 +36,7 @@ var Scheduler = (function(){
         this.tasks = [];
     };
     
-    Scheduler.prototype.schedule = function(fn, requestedTiming) {
+    Scheduler.prototype.schedule = function(fn, requestedTiming, startPaused) {
 
         if( requestedTiming == Number.POSITIVE_INFINITY ) {
             // Waiting forever to do something is interpreted
@@ -48,20 +48,21 @@ var Scheduler = (function(){
         var wait = (requestedTiming === undefined)
                     ? DEFAULT_SCHEDULE_DELAY
                     : requestedTiming,
-
-            performTime = Date.now() + wait,
-            
+           
             performTask = function(){
                 // stop remembering this timeout, it is done now:
                 this._removeTask(task);
                 fn();
             }.bind(this),
 
-            task = this._scheduleTask({
+            task = {
                 performTask: performTask,
-                performTime: performTime,
                 wait: wait
-            });
+            };
+
+        if( !startPaused ) {
+            this._scheduleTask(task);
+        }
         
         this.tasks.push( task );
     

@@ -116,6 +116,7 @@ var PacketView = (function(){
                 }.bind(this)
             }
         );
+        this.pauseAnimationIfDemoPaused(jAirbornePacketInTransit);
     };
 
     PacketOnMobileView.prototype.done = function() {};

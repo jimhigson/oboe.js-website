@@ -88,6 +88,18 @@ var ThingView = (function(){
         toCssObject[yProperty]   = xyTo.y;
     
         this.jDom.animate(toCssObject, {duration:duration, queue:false});
+
+        this.pauseAnimationIfDemoPaused(this.jDom);
+    };
+
+    ThingView.prototype.pauseAnimationIfDemoPaused = function(jDom) {
+        // To be used after a call to .animate() -  
+        // If the demo is paused, start the animation as paused 
+        // to be started later.
+        
+        if( this.subject.demo.paused ) {
+            jDom.pause();
+        }
     };
 
     return ThingView;

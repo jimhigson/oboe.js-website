@@ -67,24 +67,9 @@ DemoView.prototype.setupControls = function(){
     var jDom = this.jDom,
         jControls = jDom.find('.controls'),
         jFadeControls = jControls.find('.fadeControls'),
-        jLightbox = jDom.find('.lightbox'),
         jReset = jControls.find('.reset').hide(),
         demo = this.subject,
         demoEvents = demo.events;
-
-    jLightbox.click(function(){
-        demo.unpause();
-    });
-    
-    jLightbox.hide();
-    
-    demoEvents('paused').on(function(){
-        jLightbox.show();
-    });
-
-    demoEvents('unpaused').on(function(){
-        jLightbox.hide();
-    });    
     
     demoEvents('started').on(function(){
         jFadeControls.fadeOut();
@@ -95,7 +80,6 @@ DemoView.prototype.setupControls = function(){
     demoEvents('reset').on(function(){
         jFadeControls.fadeIn();
         jReset.fadeOut();
-        jLightbox.fadeOut();
         listenForClickOnPlay();
     });
 

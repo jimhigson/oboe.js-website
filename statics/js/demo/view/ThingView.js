@@ -6,7 +6,6 @@ var ThingView = (function(){
     function ThingView(subject, demoView) {
         this.subject = subject;
         this.demoView = demoView;
-        subject.hasView(this);
 
         var demoEvents = this.subject.demo.events;
         

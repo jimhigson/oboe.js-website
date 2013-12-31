@@ -81,7 +81,6 @@ var PacketView = (function(){
 
         if( holder.blockage ) {
 
-            //var clipId = holder.blockage.view.identifyClip( subject.direction );
             var clipId = oppositeDirectionTo( subject.direction ) + '-clip';
 
             this.jDom[0].setAttribute('clip-path', 'url(#' + clipId + ')');

@@ -17,12 +17,7 @@ var Thing = (function(){
     Thing.newEvent = 'Thing';
     
     Thing.prototype.with = {};
-    
-    Thing.prototype.hasView = function(view){
-        this.view = view;
-    };
-    
-   
+       
     Thing.prototype.inDemo = function(demo){
         this.demo = demo;
         

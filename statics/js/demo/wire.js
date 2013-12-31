@@ -98,6 +98,7 @@ function loadScenario(scenarioId) {
         
         var narrativeItem = createAndWire(narrativeJson);
         wireRelationships(narrativeItem, narrativeJson);
+        narrativeItem.announce();
     });
 
     // announce all the new model items

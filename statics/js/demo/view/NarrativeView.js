@@ -4,7 +4,11 @@ var NarrativeView = (function () {
         ThingView.apply(this, arguments);        
     });
 
-    NarrativeView.displayItem = function( narrativeItem ){
+    NarrativeView.prototype.displayItem = function( narrativeItem ){
+        
+        narrativeItem.events('activated').on(function( narrativeItem ){
+            console.log('NarrativeView: time to show', narrativeItem);
+        });
     };
     
     NarrativeView.newEvent = 'NarrativeView';

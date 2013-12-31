@@ -8,7 +8,8 @@ function loadScenario(scenarioId) {
         "aggregatingServer":   AggregatingServer,
         "barrier":             Barrier,
         "relay":               Relay,
-        "cache":               Cache
+        "cache":               Cache,
+        "narrativeItem":       NarrativeItem
     };
     
     var scenario = getScenario(scenarioId);
@@ -27,27 +28,45 @@ function loadScenario(scenarioId) {
 
         return new Type(
             scenarioItem.name,
-            scenarioItem.locations,
+            (scenarioItem.locations || {}),
             (scenarioItem.options || {})
         );
     }
-   
+
+    function wireRelationships(modelItem, json) {
+        var links = json.relationships || {};
+
+        for (var relationship in links) {
+            var otherItemName = links[relationship],
+                otherModelItem = modelItems[ otherItemName ];
+
+            modelItem.with[relationship].call(modelItem, otherModelItem);
+        }
+    }
+
+    function createAndWire(scenarioItem){
+
+        var script = scenarioItem.script || {};
+
+        return makeModel(scenarioItem)
+            .inDemo(demo)
+            .followingScript(script);
+    }
+
+    function createAndWireModelItem(scenarioItem){
+        modelItems[scenarioItem.name] = createAndWire(scenarioItem);
+    }
+
     // init the model items
     var demo
         = modelItems.demo
         = new Demo(scenarioId, (scenario.options || {}));
 
-    new DemoView(demo);
+    var demoView = new DemoView(demo);
     
-    scenario.items.forEach(function (scenarioItem){
-
-        var script = scenarioItem.script || {};
-        
-        modelItems[scenarioItem.name] = makeModel(scenarioItem)
-                                            .inDemo(demo)
-                                            .followingScript(script);
-    });
+    demoView.withNarrativeView(new NarrativeView(demo, demoView));
     
+    scenario.items.forEach(createAndWireModelItem);
 
     // link up- / downstream model items to each other
     scenario.items.forEach(function(scenarioItem){
@@ -69,15 +88,16 @@ function loadScenario(scenarioId) {
     // link up model items which refer to each other by name:
     scenario.items.forEach(function(scenarioItem){
         
-        var modelItem = modelItems[scenarioItem.name],
-            links = scenarioItem.relationships || {};
+        var modelItem = modelItems[scenarioItem.name];
+
+        wireRelationships(modelItem, scenarioItem);
+    });
+
+    // create and wire the narrative:
+    (scenario.narrative || []).forEach(function(narrativeJson){
         
-        for( var relationship in links ){
-            var otherItemName = links[relationship],
-                otherModelItem = modelItems[ otherItemName ];
-            
-            modelItem.with[relationship].call(modelItem ,otherModelItem);
-        }
+        var narrativeItem = createAndWire(narrativeJson);
+        wireRelationships(narrativeItem, narrativeJson);
     });
 
     // announce all the new model items

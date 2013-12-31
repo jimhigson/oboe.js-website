@@ -16,7 +16,13 @@ var DemoView = extend(ThingView, function(demo){
     this.resizeWithWindow();
 
     this.setupControls();
+    
+    this.showNewNarrativeItems();
 });
+
+DemoView.prototype.withNarrativeView = function(narrativeView){
+    this.narrativeView = narrativeView;
+};
 
 DemoView.prototype.resizeWithWindow = function(ModelType, ViewType){
     $( window ).resize(function() {
@@ -24,7 +30,14 @@ DemoView.prototype.resizeWithWindow = function(ModelType, ViewType){
     }.bind(this));
 };
 
-DemoView.prototype.initSubviewCreation = function(ModelType, ViewType){
+DemoView.prototype.showNewNarrativeItems = function(){
+    this.subject.events('NarrativeItem').on(function(narrativeItem){
+        
+        this.narrativeView.displayItem(narrativeItem);
+    }.bind(this));
+};
+
+DemoView.prototype.initSubviewCreation = function(){
     this.createNewViewsForNewModelItems(Packet, PacketView);
     this.createNewViewsForNewModelItems(Message, MessageView);
     this.createNewViewsForNewModelItems(AggregatingServer, ServerView);
@@ -41,7 +54,9 @@ DemoView.prototype.createNewViewsForNewModelItems = function(ModelType, ViewType
         throw new Error('constructors must have .newEvent set to be listened to'); 
     }
     
-    this.subject.events(ModelType.newEvent).on(function(modelItem){
+    var demo = this.subject;
+    
+    demo.events(ModelType.newEvent).on(function(modelItem){
         ViewType.factory
             ?   ViewType.factory(modelItem, this)
             :   new ViewType(modelItem, this);

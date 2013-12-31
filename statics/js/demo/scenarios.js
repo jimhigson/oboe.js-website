@@ -41,6 +41,20 @@ var scenarios = (function () {
         
         "fast-ajax-discrete": {
             "baseOn":"2-node-layout",
+            "narrative":[
+                {
+                    "type":"narrativeItem",
+                    "script":{
+                        "client_requestAttempt_0": function(){
+                            this.popUp();
+                        }
+                    },
+                    "relationships":{
+                        "topic":"client"
+                    },
+                    "text": "hello"
+                }
+            ],
             "extensions":{
                 "items":[
                     ,,{
@@ -495,6 +509,5 @@ var scenarios = (function () {
     function seconds(s){
         return 1000 * s;
     }
-    
     
 })();   

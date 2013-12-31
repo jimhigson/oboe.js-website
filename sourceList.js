@@ -17,6 +17,7 @@ module.exports = [
     ,   '/js/demo/model/throttle.js'
     ,   '/js/demo/model/Scheduler.js'
     ,   '/js/demo/model/Thing.js'
+    ,   '/js/demo/model/NarrativeItem.js'
     ,   '/js/demo/model/Barrier.js'
     ,   '/js/demo/model/PacketHolder.js'
     ,   '/js/demo/model/Demo.js'
@@ -32,6 +33,7 @@ module.exports = [
     ,   '/js/demo/model/Cache.js'
     ,   "/js/demo/view/viewUtils.js"
     ,   "/js/demo/view/ThingView.js"
+    ,   "/js/demo/view/NarrativeView.js"    
     ,   "/js/demo/view/BarrierView.js"
     ,   "/js/demo/view/ClientView.js"
     ,   "/js/demo/view/DemoView.js"

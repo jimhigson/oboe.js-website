@@ -145,9 +145,10 @@ var getScenario = (function () {
     }
     
     function fillInTemplate(template, extensions) {
-        var copy = deepCopy(template);
+        var copy = deepCopy(template),
+            extendedCopy = extend(copy, extensions);
         
-        return extend(copy, extensions);
+        return extendedCopy;
     }
     
     function fillInFromBaseScenario( name ){
@@ -155,7 +156,12 @@ var getScenario = (function () {
             baseName = rawJson.baseOn;
 
         if(baseName) {
-            return fillInTemplate( fillInFromBaseScenario(baseName), rawJson.extensions);
+            var extended = fillInTemplate( fillInFromBaseScenario(baseName), rawJson.extensions);
+            
+            // narratives are never inherited:
+            extended.narrative = rawJson.narrative;
+            
+            return extended;
         } else {
             return rawJson;
         }

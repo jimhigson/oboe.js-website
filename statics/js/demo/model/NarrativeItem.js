@@ -14,12 +14,12 @@ var NarrativeItem = (function(){
 
     NarrativeItem.prototype.popUp = function(){
         this.demo.pause();
-        this.events('activated').emit();
+        this.events('activated').emit(this);
     };
 
     NarrativeItem.prototype.dismiss = function(){
         this.demo.unpause();
-        this.events('deactivated').emit();
+        this.events('deactivated').emit(this);
     };
     
     return NarrativeItem;

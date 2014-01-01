@@ -14,6 +14,11 @@ var NarrativeView = (function () {
         this.positionHighlightAt(narrativeItem.topic.locations.where);
         this.jDom.show();
     };
+
+    NarrativeView.prototype.hideItem = function(){
+        this.jDom.hide();
+    };
+    
     
     NarrativeView.prototype.displayItem = function( narrativeItem ){
 
@@ -21,9 +26,8 @@ var NarrativeView = (function () {
 
         narrativeItem.events('activated').on(this.showItem.bind(this));
 
-        narrativeItem.events('deactivated').on(function(){
-            jLightbox.hide();
-        });
+        narrativeItem.events('reset').on(this.hideItem.bind(this));
+        narrativeItem.events('deactivated').on(this.hideItem.bind(this));
 
         jLightbox.click(function(){
             narrativeItem.dismiss();

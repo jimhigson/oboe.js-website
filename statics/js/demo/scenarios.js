@@ -95,7 +95,7 @@ var scenarios = (function () {
                     "type": "wire",
                     "options": {
                         "medium":"mobile",
-                        "bandwidth": inconsistent_packet_spacing,
+                        "bandwidth": fastAndSlow,
                         "latency": 800
                     }
                 },
@@ -360,7 +360,12 @@ var scenarios = (function () {
                 {
                     "name": "server",
                     "type": "originServer",
-                    "locations":{where:{y:70}}
+                    "locations":{where:{y:70}},
+                    options:{
+                        "payloads":'2012UsElection',
+                        "timeBetweenPackets": inconsistentlyTimed,
+                        "packetMode": 'live'
+                    }
                 },
                 {
                     "name": "server-to-cache-wire",
@@ -456,7 +461,7 @@ var scenarios = (function () {
         }
     };
 
-    function inconsistent_packet_spacing(i) {
+    function fastAndSlow(i) {
 
         switch(i){
             case 0:
@@ -466,6 +471,10 @@ var scenarios = (function () {
                 return 75; // fast    
         }
         return 600; //slow
+    }
+    
+    function inconsistentlyTimed(){
+        return randomBetween(75, 1500);
     }
 
     function randomBetween(min, max) {

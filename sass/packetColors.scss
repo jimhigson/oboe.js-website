@@ -42,6 +42,16 @@ $oddColor:  $categoricalOrange;
   }
 }
 
+.political {
+  [data-wonby=dem] {
+    fill: $categoricalBlue;    
+  }
+
+  [data-wonby=rep] {
+    fill: $categoricalRed;
+  }
+}
+
 rect.origin-slow {
   fill: desaturate($oddColor, 40%);
 }

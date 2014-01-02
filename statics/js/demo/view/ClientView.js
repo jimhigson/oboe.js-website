@@ -120,14 +120,13 @@ var ClientView = (function(){
     PoliticalClient.prototype.updateTotals = function(payload){
         var TOTAL_VOTES = 509,
             winner = payload.wonBy,
-            direction = winner == 'dem'? -1: 1,
             total = this.runningTotals[winner] += payload.votes;
             proportion = total/TOTAL_VOTES,
             selector = '.pie [data-wonby=' + winner + ']';
         
         var jSlice = this.jDom.find(selector);
         
-        jSlice.attr('d', this.pieWedge(proportion, 0.5, direction) );
+        jSlice.attr('d', this.pieWedge(proportion, 0.5) );
     };
 
     /**
@@ -136,16 +135,18 @@ var ClientView = (function(){
      * @param direction Either 1 or -1 - should the wedge go CW or A-CW from
      *  the start angle
      */
-    PoliticalClient.prototype.pieWedge = function(proportion, startPoint, direction){
+    PoliticalClient.prototype.pieWedge = function(proportion, startPoint){
         
-        var startRads = Math.PI * startPoint,
-            endRads = Math.PI * startPoint + proportion * direction;
+        var start = startPoint,
+            end   = startPoint + (2 * proportion);
         
-        var x1 = Math.cos(startRads);
-        var y1 = Math.sin(startRads);
-        var x2 = Math.cos(endRads);
-        var y2 = Math.sin(endRads);
-
+        console.log( proportion, start, '->', end );
+        
+        var x1 = Math.cos(Math.PI * start);
+        var y1 = Math.sin(Math.PI * start);
+        var x2 = Math.cos(Math.PI * end);
+        var y2 = Math.sin(Math.PI * end);
+        
         return "M"+ 0 + " " + 0 + " L" + x1 + " " + y1 + " A" + 1 + " " + 1 + " 0 0 1 " + x2 + " " + y2 + " z";
     };
 

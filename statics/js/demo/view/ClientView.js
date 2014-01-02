@@ -27,8 +27,9 @@ var ClientView = (function(){
                 case "singlePageSite":
                 case "graph":
                 case "map":
+                    return SimpleClient;
                 case "cartogram":
-                    return SimpleClient;                
+                    return PoliticalClient;
                 case "twitter":
                     return TwitterPageClient;
                 default:
@@ -55,7 +56,6 @@ var ClientView = (function(){
         ClientView.apply(this, arguments);
         
         client.events('gotData').on(function( packet ){
-            packet.payload && console.log(packet.payload);
             addClass(this.jDom, 'received-' + packet.ordering.i);
         }.bind(this));
 
@@ -67,6 +67,30 @@ var ClientView = (function(){
             ele.setAttribute('class', newClassAttr);
         }.bind(this));        
     });
+
+    // ---------------------------------
+
+    var PoliticalClient = extend(ClientView, function(client, demoView){
+        ClientView.apply(this, arguments);
+        
+        client.events('gotData').on(function( packet ){
+            var payload = packet.payload;
+
+            payloadAttributes(this.stateElement(payload.state), payload);
+        }.bind(this));
+
+        client.events('reset').on(function(){
+            this.jDom.find('.states [data-state]')
+                        .each(function(){
+                            $(this).attr('data-wonby', '')
+                        });
+        }.bind(this));
+    });
+
+    PoliticalClient.prototype.stateElement = function(stateCode){
+        var selector = '.states [data-state=' + stateCode + ']';
+        return this.jDom.find(selector);
+    };
 
     // ---------------------------------
     

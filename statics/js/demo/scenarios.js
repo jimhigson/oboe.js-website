@@ -407,7 +407,7 @@ var scenarios = (function () {
                     "name": "cache-to-client1",
                     "type": "wire",
                     "options":{
-                        latency: 400,
+                        latency: 600,
                         "bandwidth": 100
                     }
                 },
@@ -429,8 +429,8 @@ var scenarios = (function () {
                     "name": "cache-to-client2",
                     "type": "wire",
                     "options":{
-                        latency: 400,
-                        "bandwidth": 100
+                        latency: 600,
+                        "bandwidth": 60
                     }
                 },
                 {
@@ -443,7 +443,7 @@ var scenarios = (function () {
                     },
                     "locations":{ "where":{x:375, y:185} },
                     "script": [
-                        {   eventName:"client1_accepted_response1",
+                        {   eventName:"client1_accepted_response25",
                             delay:seconds(0.5),
                             action: function(){
                                     this.makeRequest();
@@ -458,8 +458,8 @@ var scenarios = (function () {
                     "name": "cache-to-client3",
                     "type": "wire",
                     "options":{
-                        latency: 600,
-                        "bandwidth": 120
+                        latency: 800,
+                        "bandwidth": 50
                     }
                 },
                 {
@@ -472,7 +472,8 @@ var scenarios = (function () {
                     },
                     "locations":{ "where":{x:245, y:205} },
                     "script": [
-                        {   eventName:"client1_accepted_response9",
+                        {   eventName:"client1_accepted_response50",
+                            delay:seconds(0.5),
                             action: function(){
                                 this.makeRequest();
                             }

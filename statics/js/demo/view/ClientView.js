@@ -81,10 +81,17 @@ var ClientView = (function(){
     var PoliticalClient = extend(ClientView, function(client, demoView){
         ClientView.apply(this, arguments);
         
+        this.runningTotals = {
+            dem:0,
+            rep:0
+        };
+        
         client.events('gotData').on(function( packet ){
             var payload = packet.payload;
-
+            
             payloadAttributes(this.stateElement(payload.state), payload);
+            
+            this.updateTotals(payload);
         }.bind(this));
 
         client.events('reset').on(function(){
@@ -92,12 +99,54 @@ var ClientView = (function(){
                         .each(function(){
                             $(this).attr('data-wonby', '')
                         });
+
+            this.jDom.find('.pie path')
+                .each(function(){
+                    $(this).attr('d', '')
+                });            
+
+            this.runningTotals = {
+                dem:0,
+                rep:0
+            };            
         }.bind(this));
     });
 
     PoliticalClient.prototype.stateElement = function(stateCode){
         var selector = '.states [data-state=' + stateCode + ']';
         return this.jDom.find(selector);
+    };
+
+    PoliticalClient.prototype.updateTotals = function(payload){
+        var TOTAL_VOTES = 509,
+            winner = payload.wonBy,
+            direction = winner == 'dem'? -1: 1,
+            total = this.runningTotals[winner] += payload.votes;
+            proportion = total/TOTAL_VOTES,
+            selector = '.pie [data-wonby=' + winner + ']';
+        
+        var jSlice = this.jDom.find(selector);
+        
+        jSlice.attr('d', this.pieWedge(proportion, 0.5, direction) );
+    };
+
+    /**
+     * @param proportion Number between 0 and 1, the proportion of the whole
+     *  circle that the pie wedge should occupy.
+     * @param direction Either 1 or -1 - should the wedge go CW or A-CW from
+     *  the start angle
+     */
+    PoliticalClient.prototype.pieWedge = function(proportion, startPoint, direction){
+        
+        var startRads = Math.PI * startPoint,
+            endRads = Math.PI * startPoint + proportion * direction;
+        
+        var x1 = Math.cos(startRads);
+        var y1 = Math.sin(startRads);
+        var x2 = Math.cos(endRads);
+        var y2 = Math.sin(endRads);
+
+        return "M"+ 0 + " " + 0 + " L" + x1 + " " + y1 + " A" + 1 + " " + 1 + " 0 0 1 " + x2 + " " + y2 + " z";
     };
 
     // ---------------------------------

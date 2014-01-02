@@ -22,18 +22,22 @@ var PacketView = (function(){
 
     //---------------------------------------------    
     
-    var PacketViewRenderer = extend(ThingView, function (subject, demoView, holder) {
-        ThingView.call(this,subject, demoView);
+    var PacketViewRenderer = extend(ThingView, function (packet, demoView, holder) {
+        ThingView.call(this,packet, demoView);
 
         this.initDomFromTemplate(
             'packets',
-            this.templateName(subject),
-            this.className(subject)
+            this.templateName(packet),
+            this.className(packet)
         );
+        
+        if( packet.payload ) {
+            payloadAttributes(this.jDom, packet.payload);
+        }
 
-        subject.events('move').on(this.animateMove.bind(this));
+        packet.events('move').on(this.animateMove.bind(this));
 
-        subject.events('done').on(this.done.bind(this));        
+        packet.events('done').on(this.done.bind(this));        
     });
 
     PacketViewRenderer.prototype.className = function(subject){

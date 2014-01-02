@@ -430,7 +430,7 @@ var scenarios = (function () {
                     "type": "wire",
                     "options":{
                         latency: 600,
-                        "bandwidth": 60
+                        "bandwidth": 40
                     }
                 },
                 {
@@ -459,7 +459,7 @@ var scenarios = (function () {
                     "type": "wire",
                     "options":{
                         latency: 800,
-                        "bandwidth": 50
+                        "bandwidth": 40
                     }
                 },
                 {

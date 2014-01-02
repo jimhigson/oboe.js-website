@@ -136,21 +136,19 @@ var ClientView = (function(){
      *  the start angle
      */
     PoliticalClient.prototype.pieWedge = function(proportion, startPoint){
-        
-        var start = startPoint,
-            end   = startPoint + (2 * proportion);
-        
+
         function round(n) {
             return Math.round(n*100)/100;
         }
-                
-        var x1 = round(Math.cos(Math.PI * start));
-        var y1 = round(Math.sin(Math.PI * start));
-        var x2 = round(Math.cos(Math.PI * end));
-        var y2 = round(Math.sin(Math.PI * end));        
-        var largeArc = (proportion > 0.5) ? 1 : 0;
+
+        var endPoint = startPoint + (2 * proportion),
+            x1 = round(Math.cos(Math.PI * startPoint)),
+            y1 = round(Math.sin(Math.PI * startPoint)),
+            x2 = round(Math.cos(Math.PI * endPoint)),
+            y2 = round(Math.sin(Math.PI * endPoint)),        
+            largeArc = (proportion > 0.5) ? 1 : 0;
         
-        return "M"+ 0 + " " + 0 + " L" + x1 + " " + y1 + " A" + 1 + " " + 1 + " 0 " + largeArc + " 1 " + x2 + " " + y2 + " z";
+        return "M0 0 L" + x1 + " " + y1 + " A1 1 0 " + largeArc + " 1 " + x2 + " " + y2 + " z";
     };
 
     // ---------------------------------

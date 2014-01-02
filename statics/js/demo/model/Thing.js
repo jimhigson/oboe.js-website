@@ -1,13 +1,17 @@
 var Thing = (function(){
     "use strict";
         
-    function Thing(name, locations){
+    function Thing(name, locations, options){
     
         this.name = name;
         this.events = pubSub();
         this.locations = locations || {};
 
         this.scheduler = new Scheduler(this, this.events);
+        
+        if( options && options.label ) {
+            this.label = options.label;
+        }
         
         this.events('reset').on(function(){
             this.scheduler.cancelTimeouts();

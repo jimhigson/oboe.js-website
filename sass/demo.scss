@@ -106,7 +106,7 @@ line.messageInner {
 }
 
 g.client .frame,
-rect.server {
+.server .box {
     fill: $midTone;
 }
 
@@ -114,10 +114,16 @@ rect.server {
 circle.aerial,
 .browser .frame,
 .tower .area,
-rect.server {
+.server .box {
     stroke:$shadedBackgroundColor;
     stroke-width:3;
     stroke-linejoin: round;
+}
+
+text.label {
+  text-anchor:middle;
+  fill: $shadow;
+  font-family: "Computer Modern italic";
 }
 
 .tower .area {

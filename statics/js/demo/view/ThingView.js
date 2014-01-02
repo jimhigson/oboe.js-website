@@ -12,6 +12,11 @@ var ThingView = (function(){
         demoEvents('paused').on(this.pause.bind(this));
         demoEvents('unpaused').on(this.unpause.bind(this));
     }
+
+    ThingView.prototype.writeLabel = function() {
+        if( this.subject.label )
+            this.jDom.find('.label').text(this.subject.label);
+    }
     
     ThingView.prototype.find = function(selector) {
         return this.demoView.jDom.find(selector);

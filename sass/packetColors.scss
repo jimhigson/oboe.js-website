@@ -52,10 +52,10 @@ $oddColor:  $categoricalOrange;
   }
 }
 
-.origin-slow rect {
+.origin-slow rect.box {
   fill: desaturate($oddColor, 40%);
 }
-.origin-fast rect {
+.origin-fast rect.box {
   fill: desaturate($evenColor, 40%);
 }
 

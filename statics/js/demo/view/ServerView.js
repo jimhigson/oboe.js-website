@@ -4,4 +4,6 @@ var ServerView = extend(ThingView, function(subject, demoView){
     this.initDomFromTemplate( 'places', 'server', subject.name);
 
     this.moveTo( subject.locations.where );
+
+    this.writeLabel();
 });

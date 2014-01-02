@@ -240,7 +240,8 @@ var scenarios = (function () {
                     "options": {
                         "timeBetweenPackets": 2000,
                         "messageSize": 9,
-                        "packetSequence": evenNumberedPackets
+                        "packetSequence": evenNumberedPackets,
+                        label:'Origin 1'
                     }
                 },
                 {
@@ -257,7 +258,8 @@ var scenarios = (function () {
                     "options": {
                         "timeBetweenPackets": 750,
                         "initialDelay": 250,
-                        "packetSequence": oddNumberedPackets
+                        "packetSequence": oddNumberedPackets,
+                        label:'Origin 2'
                     },
                     "locations":{ "where":{x:100, y:200} }
                 },
@@ -273,7 +275,8 @@ var scenarios = (function () {
                     "type": "aggregatingServer",
                     "options": {
                         "timeBetweenPackets": 0,
-                        "messageSize": Number.POSITIVE_INFINITY
+                        "messageSize": Number.POSITIVE_INFINITY,
+                        label:'Aggregator'
                     },
                     "locations":{ "where":{x:240, y:125} }
                 },
@@ -400,14 +403,17 @@ var scenarios = (function () {
                     "name": "cache",
                     "type": "cache",
                     "locations":{where:{x: 180, y:55}},
-                    "next": ["cache-to-client1", "cache-to-client2", "cache-to-client3"]
+                    "next": ["cache-to-client1", "cache-to-client2", "cache-to-client3"],
+                    options:{
+                        label:'cache'
+                    }
                 },
                 
                 {
                     "name": "cache-to-client1",
                     "type": "wire",
                     "options":{
-                        latency: 600,
+                        latency: 800,
                         "bandwidth": 100
                     }
                 },
@@ -430,7 +436,7 @@ var scenarios = (function () {
                     "type": "wire",
                     "options":{
                         latency: 600,
-                        "bandwidth": 40
+                        "bandwidth": 20
                     }
                 },
                 {
@@ -459,7 +465,7 @@ var scenarios = (function () {
                     "type": "wire",
                     "options":{
                         latency: 800,
-                        "bandwidth": 40
+                        "bandwidth": 20
                     }
                 },
                 {

@@ -4,12 +4,14 @@ var ResponseGenerator = (function(){
     var ResponseGenerator = extend(Thing, function ResponseGenerator(options) {
         Thing.call(this, 'responseGenerator');
 
+        var packetPayloads = dataSets[options.payloads];
+        
         this.timeBetweenPackets = Thing.asFunction(options.timeBetweenPackets);
         this.initialDelay = options.initialDelay;
-        this.messageSize = options.messageSize;
+        this.messageSize = packetPayloads? packetPayloads.length : options.messageSize;
         this.packetNumberAfter = options.packetSequence;
         this.packetMode = Thing.asFunction(options.packetMode);
-        this.payloads = dataSets[options.payloads];
+        this.packetPayloads = packetPayloads;
     });
     
     ResponseGenerator.prototype.packetGenerator = function() {
@@ -31,6 +33,8 @@ var ResponseGenerator = (function(){
                 ,   ordering
                 ,   this.packetMode(n)
             ).inDemo(this.demo);
+            
+            packet.payload = this.packetPayloads && this.packetPayloads[n];
     
             firstPacketCreated = true;
     

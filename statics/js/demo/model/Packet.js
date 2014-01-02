@@ -36,7 +36,8 @@ Packet.prototype.copy = function() {
         this.mode
     )   
         .inDemo(this.demo)
-        .startingAt(this.gotAlreadyUpTo);
+        .startingAt(this.gotAlreadyUpTo)
+        .withPayload(this.payload);
 };
 Packet.prototype.replayedCopy = function() {
     var copy = this.copy();
@@ -45,6 +46,10 @@ Packet.prototype.replayedCopy = function() {
 };
 Packet.prototype.startingAt = function( firstPacketNumber ) {
     this.gotAlreadyUpTo = firstPacketNumber;
+    return this; // chaining
+};
+Packet.prototype.withPayload = function( payload ) {
+    this.payload = payload;
     return this; // chaining
 };
 Packet.prototype.move = function(fromXY, toXY, latency){

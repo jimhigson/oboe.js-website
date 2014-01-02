@@ -55,6 +55,7 @@ var ClientView = (function(){
         ClientView.apply(this, arguments);
         
         client.events('gotData').on(function( packet ){
+            packet.payload && console.log(packet.payload);
             addClass(this.jDom, 'received-' + packet.ordering.i);
         }.bind(this));
 

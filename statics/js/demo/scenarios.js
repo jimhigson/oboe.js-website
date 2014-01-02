@@ -354,7 +354,8 @@ var scenarios = (function () {
                 "height":257,
                 "startSimulation":function(modelItems){
                     modelItems.client1.makeRequest();
-                }
+                },
+                "colors":"political"
             },
             "items": [
                 {

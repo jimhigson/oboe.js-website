@@ -10,6 +10,7 @@ module.exports = [
     ,   '/js/demo/scenarios.js'
     ,   '/js/demo/scenarioBuilder.js'
     ,   '/js/demo/oop.js'
+    ,   '/js/demo/model/datasets.js'
     ,   '/js/demo/model/announce.js'
     ,   '/js/demo/model/direction.js'
     ,   '/js/demo/model/multiplex.js'

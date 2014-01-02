@@ -6,5 +6,11 @@
     vector-effect: non-scaling-stroke;
     fill:$shadow;
   }
+  
+  .pie line {
+    vector-effect: non-scaling-stroke;
+    stroke: $backgroundColor;
+    stroke-width:1;
+  }
 
 }

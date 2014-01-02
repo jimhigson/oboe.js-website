@@ -371,8 +371,8 @@ var scenarios = (function () {
                     "name": "server-to-cache-wire",
                     "type": "wire",
                     "options": {
-                        "latency": 1000,
-                        "bandwidth": 500
+                        "latency": 400,
+                        "bandwidth": 100
                     }
                 },
                 {
@@ -386,8 +386,8 @@ var scenarios = (function () {
                     "name": "cache-to-client1",
                     "type": "wire",
                     "options":{
-                        latency: 750,
-                        "bandwidth": 500
+                        latency: 400,
+                        "bandwidth": 100
                     }
                 },
                 {
@@ -408,8 +408,8 @@ var scenarios = (function () {
                     "name": "cache-to-client2",
                     "type": "wire",
                     "options":{
-                        latency: 1500,
-                        "bandwidth": 500
+                        latency: 400,
+                        "bandwidth": 100
                     }
                 },
                 {
@@ -436,8 +436,8 @@ var scenarios = (function () {
                     "name": "cache-to-client3",
                     "type": "wire",
                     "options":{
-                        latency: 1200,
-                        "bandwidth": 500
+                        latency: 600,
+                        "bandwidth": 120
                     }
                 },
                 {

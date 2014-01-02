@@ -69,39 +69,42 @@ var ResponseGenerator = (function(){
         this.packetMode = Thing.asFunction(options.packetMode);
     });
     
-    ResponseGenerator.prototype.generateResponse = function(startingAt) {
+    ResponseGenerator.prototype.packetGenerator = function() {
 
-        var self = this,
-            firstPacketCreated = false;
+        var firstPacketCreated = false;
 
-        function packetNumbered(curPacketNumber) {
+        return function(n) {
             // unannounced packet to use as a template for others
             var ordering = {
-                i:       curPacketNumber,
+                i:       n,
                 isFirst: !firstPacketCreated,
-                isLast:  curPacketNumber >= (self.messageSize -1)
+                isLast:  n >= (this.messageSize -1)
             };
-
+    
             var packet = new Packet(
-                'response' + curPacketNumber
+                'response' + n
                 ,   'JSON'
                 ,   'downstream'
                 ,   ordering
-                ,   self.packetMode(curPacketNumber)
-            ).inDemo(self.demo);
-
+                ,   this.packetMode(n)
+            ).inDemo(this.demo);
+    
             firstPacketCreated = true;
-
+    
             return packet;
-        }
-        
+        }.bind(this)
+    };
+    
+    ResponseGenerator.prototype.generateResponse = function(startingAt) {
+
+        var packets = this.packetGenerator(); 
         
         function sendNext(previousPacketNumber){
     
             var curPacketNumber = this.packetNumberAfter(previousPacketNumber),
                 lastPacket = curPacketNumber >= (this.messageSize - 1);
     
-            this.events('packetGenerated').emit(packetNumbered(curPacketNumber));
+            this.events('packetGenerated').emit(packets(curPacketNumber));
 
             if (!lastPacket) {
                 var nextPacketNumber = this.packetNumberAfter(curPacketNumber);

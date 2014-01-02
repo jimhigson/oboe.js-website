@@ -112,7 +112,7 @@ var scenarios = (function () {
                     "type": "wire",
                     "options": {
                         "medium":"mobile",
-                        "bandwidth": inconsistent_packet_spacing,
+                        "bandwidth": fastAndSlow,
                         "latency": 800
                     }
                 },
@@ -374,20 +374,26 @@ var scenarios = (function () {
                 "height":257,
                 "startSimulation":function(modelItems){
                     modelItems.client1.makeRequest();
-                }
+                },
+                "colors":"political"
             },
             "items": [
                 {
                     "name": "server",
                     "type": "originServer",
-                    "locations":{where:{y:70}}
+                    "locations":{where:{y:70}},
+                    options:{
+                        "payloads":'2012UsElection',
+                        "timeBetweenPackets": inconsistentlyTimed,
+                        "packetMode": 'live'
+                    }
                 },
                 {
                     "name": "server-to-cache-wire",
                     "type": "wire",
                     "options": {
-                        "latency": 1000,
-                        "bandwidth": 500
+                        "latency": 400,
+                        "bandwidth": 100
                     }
                 },
                 {
@@ -401,8 +407,8 @@ var scenarios = (function () {
                     "name": "cache-to-client1",
                     "type": "wire",
                     "options":{
-                        latency: 750,
-                        "bandwidth": 500
+                        latency: 400,
+                        "bandwidth": 100
                     }
                 },
                 {
@@ -423,8 +429,8 @@ var scenarios = (function () {
                     "name": "cache-to-client2",
                     "type": "wire",
                     "options":{
-                        latency: 1500,
-                        "bandwidth": 500
+                        latency: 400,
+                        "bandwidth": 100
                     }
                 },
                 {
@@ -452,8 +458,8 @@ var scenarios = (function () {
                     "name": "cache-to-client3",
                     "type": "wire",
                     "options":{
-                        latency: 1200,
-                        "bandwidth": 500
+                        latency: 600,
+                        "bandwidth": 120
                     }
                 },
                 {
@@ -477,7 +483,7 @@ var scenarios = (function () {
         }
     };
 
-    function inconsistent_packet_spacing(i) {
+    function fastAndSlow(i) {
 
         switch(i){
             case 0:
@@ -487,6 +493,10 @@ var scenarios = (function () {
                 return 75; // fast    
         }
         return 600; //slow
+    }
+    
+    function inconsistentlyTimed(){
+        return randomBetween(75, 1500);
     }
 
     function randomBetween(min, max) {

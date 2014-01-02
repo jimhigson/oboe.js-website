@@ -11,6 +11,7 @@ module.exports = [
     ,   '/js/demo/scenarios.js'
     ,   '/js/demo/scenarioBuilder.js'
     ,   '/js/demo/oop.js'
+    ,   '/js/demo/model/datasets.js'
     ,   '/js/demo/model/announce.js'
     ,   '/js/demo/model/direction.js'
     ,   '/js/demo/model/multiplex.js'
@@ -31,6 +32,7 @@ module.exports = [
     ,   '/js/demo/model/Client.js'
     ,   '/js/demo/model/Relay.js'
     ,   '/js/demo/model/Cache.js'
+    ,   "/js/demo/view/payloadAttributes.js"
     ,   "/js/demo/view/viewUtils.js"
     ,   "/js/demo/view/ThingView.js"
     ,   "/js/demo/view/NarrativeView.js"    

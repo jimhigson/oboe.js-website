@@ -1,49 +1,57 @@
 
 var ResponseGenerator = (function(){
-
+   
     var ResponseGenerator = extend(Thing, function ResponseGenerator(options) {
         Thing.call(this, 'responseGenerator');
 
+        var packetPayloads = dataSets[options.payloads];
+        
         this.timeBetweenPackets = Thing.asFunction(options.timeBetweenPackets);
         this.initialDelay = options.initialDelay;
-        this.messageSize = options.messageSize;
+        this.messageSize = packetPayloads? packetPayloads.length : options.messageSize;
         this.packetNumberAfter = options.packetSequence;
         this.packetMode = Thing.asFunction(options.packetMode);
+        this.packetPayloads = packetPayloads;
     });
     
-    ResponseGenerator.prototype.generateResponse = function(startingAt) {
+    ResponseGenerator.prototype.packetGenerator = function() {
 
-        var self = this,
-            firstPacketCreated = false;
+        var firstPacketCreated = false;
 
-        function packetNumbered(curPacketNumber) {
+        return function(n) {
             // unannounced packet to use as a template for others
             var ordering = {
-                i:       curPacketNumber,
+                i:       n,
                 isFirst: !firstPacketCreated,
-                isLast:  curPacketNumber >= (self.messageSize -1)
+                isLast:  n >= (this.messageSize -1)
             };
-
+    
             var packet = new Packet(
-                'response' + curPacketNumber
+                'response' + n
                 ,   'JSON'
                 ,   'downstream'
                 ,   ordering
-                ,   self.packetMode(curPacketNumber)
-            ).inDemo(self.demo);
-
+                ,   this.packetMode(n)
+            ).inDemo(this.demo);
+            
+            packet.payload = this.packetPayloads && this.packetPayloads[n];
+    
             firstPacketCreated = true;
-
+    
             return packet;
-        }
-        
+        }.bind(this)
+    };
+    
+    ResponseGenerator.prototype.generateResponse = function(startingAt) {
+
+        var packets = this.packetGenerator(); 
         
         function sendNext(previousPacketNumber){
     
             var curPacketNumber = this.packetNumberAfter(previousPacketNumber),
                 lastPacket = curPacketNumber >= (this.messageSize - 1);
     
-            this.events('packetGenerated').emit(packetNumbered(curPacketNumber));
+            this.events('packetGenerated').emit(packets(curPacketNumber));
 
             if (!lastPacket) {
                 var nextPacketNumber = this.packetNumberAfter(curPacketNumber);

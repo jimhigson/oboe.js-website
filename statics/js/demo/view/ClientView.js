@@ -65,8 +65,9 @@ var ClientView = (function(){
        
         function updateBarWidth(){
            if( expectedSize ) {
-              var proportionReceived = receivedSoFar / expectedSize;
-              jBar.attr('width', proportionReceived);
+              var proportionReceived = receivedSoFar / expectedSize,
+                  roundedProportion = Math.round(proportionReceived*100)/100;
+              jBar.attr('width', roundedProportion);
            }
         }
 

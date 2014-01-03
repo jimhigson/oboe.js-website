@@ -26,9 +26,12 @@ rect.fade,
   vector-effect: non-scaling-stroke;
 }
 
-.lightbox p {
+.lightbox div {
   text-align: right;
+}
+.lightbox p {
   line-height: 100%;
+  margin-bottom: 0.15em;
 }
 
 @mixin svg-text-centered {

@@ -76,6 +76,26 @@ var scenarios = (function () {
 
       "fast-ajax-progressive": {
          "baseOn": "2-node-layout",
+         "narrative": [
+            {
+               "type": "narrativeItem",
+               "script": [
+                  {  eventName: "client_accepted_response0",
+                     delay: 0,
+                     action: function () {
+                        this.popUp();
+                     }
+                  }
+               ],
+               "relationships": {
+                  "topic": "client"
+               },
+               "options": {
+                  "text": "This time the webapp can render progressively as the JSON is parsed",
+                  "locationOnTopic": "where"
+               }
+            }
+         ],         
          "extensions": {
             "items": [
                ,

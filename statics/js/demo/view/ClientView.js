@@ -52,14 +52,22 @@ var ClientView = (function(){
     };
 
     ClientView.prototype.manageProgressBar = function(){
+       
+        if( !this.subject.showProgress ) {
+           this.jDom.find('.progressBar').remove();
+           return;
+        }
+       
         var jSpace = this.jDom.find('.progressBar'),
             jBar = jSpace.find('.bar'),
             receivedSoFar = 0,
-            expectedSize = 10;
-
+            expectedSize;
+       
         function updateBarWidth(){
-           var proportionReceived = receivedSoFar / expectedSize;
-           jBar.attr('width', proportionReceived);
+           if( expectedSize ) {
+              var proportionReceived = receivedSoFar / expectedSize;
+              jBar.attr('width', proportionReceived);
+           }
         }
        
         this.subject.events('reset').on(function( packet ){
@@ -71,7 +79,11 @@ var ClientView = (function(){
         this.subject.events('acceptedFromupstream').on(function( packet ){
            receivedSoFar++;
 
-           updateBarWidth();
+           if( packet.ordering.expectedSize ) {
+              expectedSize = packet.ordering.expectedSize; 
+           }
+           
+           updateBarWidth();           
            
            if( packet.ordering.isLast ) {
               addClass(jSpace, 'complete');

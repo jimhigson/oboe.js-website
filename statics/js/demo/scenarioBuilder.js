@@ -44,7 +44,8 @@ var getScenario = (function () {
                 failAfter: Number.POSITIVE_INFINITY,
                 aspect: 'portrait',
                 "page": "singlePageSite",
-                "deviceType":"desktop"
+                "deviceType":"desktop",
+                "showProgress":true
             },
             locations:{
                 where: {x: 430, y: 145}

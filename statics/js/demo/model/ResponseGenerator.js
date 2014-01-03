@@ -25,6 +25,10 @@ var ResponseGenerator = (function(){
                 isFirst: !firstPacketCreated,
                 isLast:  n >= (this.messageSize -1)
             };
+           
+            if( ordering.isFirst && Number.isFinite(this.messageSize) ) {
+               ordering.expectedSize = this.messageSize;
+            }
     
             var packet = new Packet(
                 'response' + n

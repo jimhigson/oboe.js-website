@@ -294,7 +294,8 @@ var scenarios = (function () {
                     "options": {
                         "parseStrategy": "progressive",
                         "page": "graph",
-                        "aspect": "landscape"
+                        "aspect": "landscape",
+                        "showProgress": false
                     },
                     "locations":{ "where":{x:420, y:125} }
                 }
@@ -366,7 +367,8 @@ var scenarios = (function () {
                     "type": "client",
                     "options": {
                         "parseStrategy": "progressive",
-                        "page": "twitter"
+                        "page": "twitter",
+                        "showProgress": false
                     }
                 }
             ]

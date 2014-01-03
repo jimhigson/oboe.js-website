@@ -5,6 +5,7 @@ var Client = extend( PacketHolder, function Client(name, locations, options) {
     this.failAfter = options.failAfter;
     this.retryAfter = options.retryAfter;
     this.aspect = options.aspect;
+    this.showProgress = options.showProgress;
 
     this.parser = Parser(options.parseStrategy);
 

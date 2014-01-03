@@ -25,7 +25,8 @@ Packet.prototype.copy = function() {
     var orderingCopy = {
         i: this.ordering.i,
         isFirst: this.ordering.isFirst,
-        isLast: this.ordering.isLast
+        isLast: this.ordering.isLast,
+        expectedSize: this.ordering.expectedSize
     };
 
     return new Packet(

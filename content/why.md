@@ -18,6 +18,12 @@ like progressive HTML rendering.
 
 <figure data-demo="fast-ajax-progressive"></figure>
 
+Streaming one, with a server writing out using GSON or Node.js. Although this is a stream,
+the contents when it eventually completes are 100% valid JSON and is compatible with
+standard tools.
+
+<figure data-demo="streaming-ajax-progressive"></figure>
+
 ## Mobile data connections
 
 Mobile networks today can be high-bandwidth but they are also high-latency and

@@ -56,7 +56,7 @@ var scenarios = (function () {
                   "topic": "client"
                },
                "options": {
-                  "text": "This client makes a request to JSON service",
+                  "text": "This client makes a request to a JSON service",
                   "locationOnTopic": "upstream"
                }
             }
@@ -73,7 +73,7 @@ var scenarios = (function () {
             ]
          }
       },
-
+      
       "fast-ajax-progressive": {
          "baseOn": "2-node-layout",
          "narrative": [
@@ -103,6 +103,19 @@ var scenarios = (function () {
                {
                   options: {
                      parseStrategy: "progressive"
+                  }
+               }
+            ]
+         }
+      },
+
+      "streaming-ajax-progressive": {
+         baseOn: "fast-ajax-progressive",
+         extensions:{
+            items: [
+               {
+                  "options": {
+                     "timeBetweenPackets": inconsistentlyTimed
                   }
                }
             ]

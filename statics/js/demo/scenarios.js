@@ -468,6 +468,25 @@ var scenarios = (function () {
             },
             "colors": "political"
          },
+         "narrative": [
+            {
+               "type": "narrativeItem",
+               "script": [
+                  {  eventName: "client1_accepted_response25",
+                     delay: 0,
+                     action: function () {
+                        this.popUp();
+                     }
+                  }
+               ],
+               "relationships": {
+                  "topic": "client2"
+               },
+               "options": {
+                  "text": "Some other guy joins in"
+               }
+            }
+         ],
          "items": [
             {
                "name": "server",

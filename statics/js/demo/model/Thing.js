@@ -79,9 +79,13 @@ var Thing = (function(){
     }
     
     Thing.prototype.addToScript = function(verb, secondParty) {
-        
-        this.demo
-            .script(scriptName(this, verb, secondParty))
+
+       var scriptEventName = scriptName(this, verb, secondParty);
+       
+       console.log( 'script:', scriptEventName);
+       
+       this.demo
+            .script(scriptEventName)
             .emit();
     };
     

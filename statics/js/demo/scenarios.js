@@ -46,7 +46,7 @@ var scenarios = (function () {
                     "type":"narrativeItem",
                     "script":[
                         {   eventName:"client_requestAttempt_0",
-                            delay:seconds(0.5),
+                            delay:seconds(0.35),
                             action: function(){
                                 this.popUp();
                             }

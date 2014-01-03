@@ -69,12 +69,19 @@ var ClientView = (function(){
               jBar.attr('width', proportionReceived);
            }
         }
+
+        var reset = function(){
+            receivedSoFar = 0;
+            updateBarWidth();
+            removeClass(jSpace, 'complete');
+        }.bind(this);
        
-        this.subject.events('reset').on(function( packet ){
-           receivedSoFar = 0;
-           updateBarWidth();
-           removeClass(jSpace, 'complete');           
-        }.bind(this));
+        this.subject.events('reset').on(reset);
+       
+        // for discrete parsing, everything goes back to zero when the request fails:
+        if( this.subject.parseStrategy == 'discrete' ) { 
+           this.subject.events('requestFail').on(reset);
+        }
        
         this.subject.events('acceptedFromupstream').on(function( packet ){
            receivedSoFar++;

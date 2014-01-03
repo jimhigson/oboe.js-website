@@ -143,9 +143,11 @@ text.label {
 
 .tower .structure, 
 .barrier .wall,
-.barrier .shadow {
+.barrier .shadow,
+.browser .progressBar{
   fill: $midTone;
 }
+
 .barrier .shadow {
   fill: $shadow;
 }

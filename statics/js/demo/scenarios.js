@@ -407,6 +407,27 @@ var scenarios = (function () {
       },
 
       "historic-and-live": {
+         "narrative": [
+            {
+               "type": "narrativeItem",
+               "script": [
+                  {  eventName: "server_sent_response5",
+                     delay: seconds(0.2),
+                     action: function () {
+                        this.popUp();
+                     }
+                  }
+               ],
+               "relationships": {
+                  "topic": "server"
+               },
+               "options": {
+                  "text": "Once the historic messages have been sent, the server " +
+                     "can keep the same connection open and continue by sending " +
+                     "new ones as they happen"
+               }
+            }
+         ],         
          "items": [
             {
                "name": "server",

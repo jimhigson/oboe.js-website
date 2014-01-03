@@ -71,7 +71,14 @@ var getScenario = (function () {
             locations:{
                 where: {x: 40, y: 55}
             }
-        }
+        },
+
+        narrativeItem: {
+            options:{
+                locationOnTopic:'where'
+            }
+        }       
+       
     };
     
     function setRelativePositions(item) {
@@ -196,6 +203,10 @@ var getScenario = (function () {
             }
             
             setRelativePositions(rawItem);
+        });
+
+        (rawJson.narrative||[]).forEach(function (rawItem) {
+            fillInDefaults(rawItem, DEFAULTS[rawItem.type]);
         });
 
         return rawJson;

@@ -8,9 +8,10 @@ var OriginServer = (function(){
 
         this.responseGenerator = new ResponseGenerator(options);
 
-        this.responseGenerator.events('packetGenerated').on(
-            this.propagate.bind(this)
-        );
+        this.responseGenerator.events('packetGenerated').on(function(packet){
+           this.addToScript('sent', packet);
+           this.propagate(packet);
+        }.bind(this));
     });
 
     OriginServer.newEvent = 'OriginServer';

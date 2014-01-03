@@ -26,6 +26,11 @@ rect.fade,
   vector-effect: non-scaling-stroke;
 }
 
+.lightbox p {
+  text-align: right;
+  line-height: 100%;
+}
+
 @mixin svg-text-centered {
   text-anchor: middle;
   alignment-baseline:middle;

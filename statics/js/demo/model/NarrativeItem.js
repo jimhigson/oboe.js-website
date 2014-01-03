@@ -1,7 +1,10 @@
 var NarrativeItem = (function(){
     
-    var NarrativeItem = extend(Thing, function NarrativeItem(scriptEventName){
+    var NarrativeItem = extend(Thing, function NarrativeItem(scriptEventName, _locations, options){
         Thing.apply(this, arguments);
+        
+        this.text = options.text;
+        this.locationOnTopic = options.locationOnTopic;
     });
     
     NarrativeItem.prototype.with = {

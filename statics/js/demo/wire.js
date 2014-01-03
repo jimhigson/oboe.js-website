@@ -23,13 +23,13 @@ function loadScenario(scenarioId) {
     
     var modelItems = {};
 
-    function makeModel(scenarioItem){
-        var Type = MODEL_TYPES[scenarioItem.type];
+    function makeModel(jsonDescription){
+        var Type = MODEL_TYPES[jsonDescription.type];
 
         return new Type(
-            scenarioItem.name,
-            (scenarioItem.locations || {}),
-            (scenarioItem.options || {})
+            jsonDescription.name,
+            (jsonDescription.locations || {}),
+            (jsonDescription.options || {})
         );
     }
 

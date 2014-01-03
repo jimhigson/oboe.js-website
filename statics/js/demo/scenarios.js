@@ -55,7 +55,10 @@ var scenarios = (function () {
                     "relationships":{
                         "topic":"client"
                     },
-                    "text": "hello"
+                    "options":{
+                        "text": "This client makes a request to JSON service",
+                        "locationOnTopic":"upstream"
+                    }
                 }
             ],
             "extensions":{

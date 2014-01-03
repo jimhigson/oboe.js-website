@@ -9,16 +9,25 @@ var NarrativeView = (function () {
     NarrativeView.prototype.positionHighlightAt = function( location ){
         this.goToXy('translateX', 'translateY', location);
     };
+
+    NarrativeView.prototype.showText = function( text ){
+        this.jDom.find('p').text(text);
+    };   
     
     NarrativeView.prototype.showItem = function( narrativeItem ){
-        this.positionHighlightAt(narrativeItem.topic.locations.where);
+        var text = narrativeItem.text,
+            topic = narrativeItem.topic,
+            locationOnTopic = narrativeItem.locationOnTopic,
+            location = topic.locations[locationOnTopic];
+       
+        this.showText(text);
+        this.positionHighlightAt(location);
         this.jDom.show();
     };
 
     NarrativeView.prototype.hideItem = function(){
         this.jDom.hide();
     };
-    
     
     NarrativeView.prototype.displayItem = function( narrativeItem ){
 

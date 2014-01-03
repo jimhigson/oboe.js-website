@@ -153,6 +153,14 @@ text.label {
   opacity:0.8;
 }
 
+.browser .progressBar{
+  transition: opacity 0.5s;
+  transition-delay: 0.5s;
+}
+.browser .progressBar.complete{
+  opacity:0;
+}
+
 .barrier .shadow {
   fill: $shadow;
 }

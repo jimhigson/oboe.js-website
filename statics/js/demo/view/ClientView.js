@@ -26,6 +26,8 @@ var ClientView = (function(){
                 client.demo.pause();
             }
         });
+
+        this.manageProgressBar();
     });
 
     ClientView.factory = function(client, demoView) {
@@ -49,6 +51,37 @@ var ClientView = (function(){
         return new Type(client, demoView);
     };
 
+    ClientView.prototype.manageProgressBar = function(){
+        var jSpace = this.jDom.find('.progressBar'),
+            jBar = jSpace.find('.bar'),
+            receivedSoFar = 0,
+            expectedSize = 10;
+
+        function updateBarWidth(){
+           var proportionReceived = receivedSoFar / expectedSize;
+           jBar.attr('width', proportionReceived);
+        }
+       
+        this.subject.events('reset').on(function( packet ){
+           receivedSoFar = 0;
+           updateBarWidth();
+           removeClass(jSpace, 'complete');           
+        }.bind(this));
+       
+        this.subject.events('acceptedFromupstream').on(function( packet ){
+           receivedSoFar++;
+
+           updateBarWidth();
+           
+           if( packet.ordering.isLast ) {
+              addClass(jSpace, 'complete');
+           }
+           if( packet.ordering.isFirst ) {
+              removeClass(jSpace, 'complete');
+           }
+        }.bind(this));
+    };
+   
     ClientView.prototype.showSpinner = function(){
         addClass(this.jDom, 'requesting');
     };

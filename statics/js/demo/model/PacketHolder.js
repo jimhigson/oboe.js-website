@@ -60,6 +60,7 @@ var PacketHolder = (function(){
     
                 directionSpecificHandler.call(this, packetCopy, adjacent);
                 this.accept(packetCopy, adjacent);
+                this.events('acceptedFrom' + direction).emit(packetCopy);
             }.bind(this),
             
             throttledInputHandler = this.inputThrottle(inputHandler),

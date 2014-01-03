@@ -295,7 +295,8 @@ var scenarios = (function () {
                   "messageSize": 9,
                   "packetSequence": evenNumberedPackets,
                   label: 'Origin 1'
-               }
+               },
+               "locations": { "where": {x: 60} }               
             },
             {
                "name": "origin-slow-wire",
@@ -314,7 +315,7 @@ var scenarios = (function () {
                   "packetSequence": oddNumberedPackets,
                   label: 'Origin 2'
                },
-               "locations": { "where": {x: 100, y: 200} }
+               "locations": { "where": {x: 120, y: 160} }
             },
             {
                "name": "origin-fast-wire",
@@ -331,7 +332,7 @@ var scenarios = (function () {
                   "messageSize": Number.POSITIVE_INFINITY,
                   label: 'Aggregator'
                },
-               "locations": { "where": {x: 240, y: 125} }
+               "locations": { "where": {x: 260, y: 125} }
             },
             {
                "name": "client-internet",
@@ -413,8 +414,10 @@ var scenarios = (function () {
                "options": {
                   "timeBetweenPackets": fastTimingThenStream,
                   "packetMode": historicPacketsThenLive,
-                  "messageSize": Number.POSITIVE_INFINITY
-               }
+                  "messageSize": Number.POSITIVE_INFINITY,
+                  "label":"Message server"
+               },
+               locations:{where:{x:95,y:70}}
             },
             {
                "name": "internet",
@@ -430,7 +433,8 @@ var scenarios = (function () {
                   "parseStrategy": "progressive",
                   "page": "twitter",
                   "showProgress": false
-               }
+               },
+               locations:{where:{x:400,y:130}}
             }
          ]
       },
@@ -451,7 +455,8 @@ var scenarios = (function () {
                options: {
                   "payloads": '2012UsElection',
                   "timeBetweenPackets": inconsistentlyTimed,
-                  "packetMode": 'live'
+                  "packetMode": 'live',
+                  "label":"origin"
                }
             },
             {

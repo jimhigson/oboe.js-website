@@ -472,8 +472,8 @@ var scenarios = (function () {
             {
                "type": "narrativeItem",
                "script": [
-                  {  eventName: "client1_accepted_response25",
-                     delay: 0,
+                  {  eventName: "client2_requestAttempt_0",
+                     delay: seconds(0.18),
                      action: function () {
                         this.popUp();
                      }
@@ -484,6 +484,41 @@ var scenarios = (function () {
                },
                "options": {
                   "text": "Some other guy joins in"
+               }
+            },
+            {
+               "type": "narrativeItem",
+               "script": [
+                  {  eventName: "cache_requestOff_cache-to-client2",
+                     delay: 0,
+                     action: function () {
+                        this.popUp();
+                     }
+                  }
+               ],
+               "relationships": {
+                  "topic": "cache"
+               },
+               "options": {
+                  "text": "I already got some of it"
+               }
+            },
+            {
+               "type": "narrativeItem",
+               "script": [
+                  {  eventName: "server_sent_response50",
+                     delay: seconds(0.5),
+                     action: function () {
+                        this.popUp();
+                     }
+                  }
+               ],
+               "relationships": {
+                  "topic": "server"
+               },
+               "options": {
+                  "text": "That's it! The server sent all the results and" +
+                     "can close the connection normally"
                }
             }
          ],

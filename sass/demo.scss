@@ -1,3 +1,5 @@
+$demoBackground: $shadedBackgroundColor; 
+
 #demoTemplateHolder {
   display:none;
 }
@@ -11,12 +13,12 @@
   user-select: none;
 
   margin: 0.5em 0 1em 0;
-  background-color: $shadedBackgroundColor;
+  background-color: $demoBackground;
 }
 
 rect.fade,
 .lightbox {
-  fill: $shadedBackgroundColor;
+  fill: $demoBackground;
   opacity: 0.9;
 }
 
@@ -123,7 +125,7 @@ circle.aerial,
 .browser .frame,
 .tower .area,
 .server .box {
-    stroke:$shadedBackgroundColor;
+    stroke:$demoBackground;
     stroke-width:3;
     stroke-linejoin: round;
 }
@@ -135,17 +137,17 @@ text.label {
 }
 
 .tower .area {
-  fill:$shadedBackgroundColor;
-  stroke:$shadedBackgroundColor;
+  fill:$demoBackground;
+  stroke:$demoBackground;
   stroke-width:9;
 }
 .browser .background {
-  stroke:$shadedBackgroundColor;
+  stroke:$demoBackground;
   stroke-width:4;
 }
 
 .browser .frame {
-  stroke:$shadedBackgroundColor;
+  stroke:$demoBackground;
   stroke-width:1;
 }
 
@@ -157,7 +159,7 @@ text.label {
 }
 
 .browser .progressBar .space{
-  fill: $shadedBackgroundColor;
+  fill: $demoBackground;
   opacity:0.8;
 }
 

@@ -289,7 +289,7 @@ var scenarios = (function () {
                   "packetSequence": evenNumberedPackets,
                   label: 'Origin 1'
                },
-               "locations": { "where": {x: 60} }               
+               "locations": { "where": {x: 60, y:50} }
             },
             {
                "name": "origin-slow-wire",
@@ -325,7 +325,7 @@ var scenarios = (function () {
                   "messageSize": Number.POSITIVE_INFINITY,
                   label: 'Aggregator'
                },
-               "locations": { "where": {x: 260, y: 125} }
+               "locations": { "where": {x: 265, y: 115} }
             },
             {
                "name": "client-internet",
@@ -344,7 +344,7 @@ var scenarios = (function () {
                   "aspect": "landscape",
                   "showProgress": false
                },
-               "locations": { "where": {x: 420, y: 125} }
+               "locations": { "where": {x: 420, y: 115} }
             }
          ]
       },

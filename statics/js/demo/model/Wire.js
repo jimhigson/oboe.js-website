@@ -24,7 +24,9 @@ var Wire = (function(){
     
         packet.isOn(this);
         
-        if( packet.ordering.isFirst ) {
+        if( packet.direction == Direction.upstream
+            && packet.ordering.isFirst ) {
+           
             this.message = new Message()
                             .inDemo(this.demo)
                             .transmittedOver(this)
@@ -33,7 +35,9 @@ var Wire = (function(){
         
         this.message.includes(packet);
         
-        if( packet.ordering.isLast ) {
+        if( packet.direction == Direction.downstream           
+            && packet.ordering.isLast ) {
+           
             // end of that message, don't prevent Message
             // from being GC'd anymore:
             this.message = null;

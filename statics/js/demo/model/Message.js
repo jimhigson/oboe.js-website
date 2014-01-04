@@ -9,19 +9,19 @@ Message.prototype.transmittedOver = function(packetHolder){
     return this;
 };
 
-Message.prototype._withFirst = function(firstPacket){
+Message.prototype._withRequestStart = function(firstPacket){
 
     firstPacket.events('move').on(function(){
 
-        this.events('startMove').emit.apply(this, arguments);
+        this.events('requestStartMove').emit.apply(this, arguments);
     }.bind(this));
     return this; // chaining
 };
-Message.prototype._withLast = function(lastPacket){
+Message.prototype._withResponseEnd = function(lastPacket){
 
     lastPacket.events('move').on(function(){
 
-        this.events('endMove').emit.apply(this, arguments);
+        this.events('responseEndMove').emit.apply(this, arguments);
     }.bind(this));
 
     lastPacket.events('done').on(function(){
@@ -34,11 +34,11 @@ Message.prototype._withLast = function(lastPacket){
 Message.prototype.includes = function(packet) {
     var ordering = packet.ordering;
 
-    if( ordering.isFirst ) {
-        this._withFirst(packet);
+    if( packet.direction == Direction.upstream && ordering.isFirst ) {
+        this._withRequestStart(packet);
     }
-    if( ordering.isLast ) {
-        this._withLast(packet);
+    if( packet.direction == Direction.downstream && ordering.isLast ) {
+        this._withResponseEnd(packet);
     }
     return this; // chaining
 };

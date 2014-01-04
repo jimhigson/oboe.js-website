@@ -6,13 +6,13 @@ var MessageView = extend(ThingView, function(message, demoView){
     this.initDomFromTemplate('messages', 'message', message.name);
     this.jDom.hide();
 
-    message.events('startMove').on(function(xyFrom, xyTo, duration){
+    message.events('requestStartMove').on(function(xyFrom, xyTo, duration){
         this.jDom.show();
-        this.goToXy(   'lineX2', 'lineY2', xyFrom);
-        this.animateXy('lineX1', 'lineY1', xyFrom, xyTo, duration);
+        this.goToXy(   'lineX1', 'lineY1', xyFrom);
+        this.animateXy('lineX2', 'lineY2', xyFrom, xyTo, duration);
     }.bind(this));
 
-    message.events('endMove').on(function(xyFrom, xyTo, duration){
+    message.events('responseEndMove').on(function(xyFrom, xyTo, duration){
 
         this.animateXy('lineX2', 'lineY2', xyFrom, xyTo, duration);
     }.bind(this));
@@ -32,5 +32,4 @@ MessageView.factory = function( message, demoView ){
     if( message.holder.medium == 'cable' ) {
         return new MessageView(message, demoView);
     }
-
-}
+};

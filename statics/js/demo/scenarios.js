@@ -15,9 +15,6 @@ var scenarios = (function () {
 
    return {
       "2-node-layout": {
-         options:{
-            endSimulationEvent:'client_accepted_response9'
-         },
          "items": [
             {
                "name": "sever",
@@ -461,7 +458,8 @@ var scenarios = (function () {
             "startSimulation": function (modelItems) {
                modelItems.client1.makeRequest();
             },
-            "colors": "political"
+            "colors": "political",
+            endSimulationEvent:'client3_acceptedAll'
          },
          "narrative": [
             {

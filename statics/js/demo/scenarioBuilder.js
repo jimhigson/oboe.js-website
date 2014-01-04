@@ -8,7 +8,8 @@ var getScenario = (function () {
                 height: 200,
                 startSimulation: function(modelItems){
                     modelItems.client.makeRequest();
-                }
+                },
+                endSimulationEvent:'client_acceptedAll'
             }
         },
         wire: {

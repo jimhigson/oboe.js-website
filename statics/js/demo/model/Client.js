@@ -65,6 +65,7 @@ Client.prototype.acceptFromUpstream = function(packet){
     this.unschedule(this.giveUpTimeout);
 
     if (packet.ordering.isLast) {
+        this.addToScript('acceptedAll');
         this.events('requestComplete').emit();
     } else {
         this.scheduleFail();

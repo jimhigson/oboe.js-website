@@ -16,7 +16,7 @@ var scenarios = (function () {
    return {
       "2-node-layout": {
          options:{
-            endSimulationEvent:'client_accepted_response8'
+            endSimulationEvent:'client_accepted_response9'
          },
          "items": [
             {
@@ -24,7 +24,7 @@ var scenarios = (function () {
                "type": "originServer",
                "options": {
                   "timeBetweenPackets": 0,
-                  "messageSize": 9
+                  "messageSize": 10
                }
             },
             {

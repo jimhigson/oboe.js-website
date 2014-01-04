@@ -9,6 +9,14 @@ var Demo = extend(Thing, function Demo(name, options){
     this.paused = false;
     this.running = false;
     
+    if( options.endSimulationEvent ) {
+       this.script( options.endSimulationEvent ).on(
+          function(){
+              this.schedule(this.reset.bind(this), 2500);
+          }.bind(this)
+       );
+    }
+    
     this.demo = this;  // we are our own demo
 });
 

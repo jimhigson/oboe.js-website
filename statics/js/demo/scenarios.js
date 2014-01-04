@@ -15,6 +15,9 @@ var scenarios = (function () {
 
    return {
       "2-node-layout": {
+         options:{
+            endSimulationEvent:'client_accepted_response8'
+         },
          "items": [
             {
                "name": "sever",
@@ -223,12 +226,14 @@ var scenarios = (function () {
                   "name": "tunnel",
                   "type": "barrier",
                   "script": [
-                     {   eventName: "client_accepted_response6",
+                     {  
+                        eventName: "client_accepted_response6",
                         action: function () {
                            this.activateIfNeverShownBefore();
                         }
                      },
-                     {   eventName: "client_requestAttempt_1",
+                     {  
+                        eventName: "client_requestAttempt_1",
                         delay: seconds(0.5),
                         action: function () {
                            this.deactivate();

@@ -20,7 +20,8 @@ var Cache = (function(){
 
     Cache.prototype.acceptFromDownstream = function( packetFromDownstream, source ){
         // got request from client heading to server
-        
+        this.addToScript('requestOff', source); 
+       
         this.requestors.push(source);
         
         if( this.cacheContents.length ) {

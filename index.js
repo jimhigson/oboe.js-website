@@ -89,9 +89,10 @@ function respondWithMarkdown(req, res, getContentFn, opts){
 }
 
 app
-   .use(gzippo.staticGzip('statics'))
-   .use(gzippo.staticGzip('bower_components'))
-   .use(slashes())    
+   .use(gzippo.staticGzip('statics')) // gzip for static
+   .use(gzippo.staticGzip('bower_components')) // gzip for static
+   .use(slashes())
+   .use(express.compress()) // gzip for dynamic
    .get('/', function(req, res){
         respondWithMarkdown(req, res, readMarkdownFromFile,
             {   home: true,

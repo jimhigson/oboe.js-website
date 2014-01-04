@@ -53,6 +53,12 @@ Packet.prototype.withPayload = function( payload ) {
     this.payload = payload;
     return this; // chaining
 };
+Packet.prototype.startsRequest = function() {
+   return (this.direction == Direction.upstream) && this.ordering.isFirst;
+};
+Packet.prototype.closesResponse = function() {
+   return (this.direction == Direction.downstream) && this.ordering.isLast;
+};
 Packet.prototype.move = function(fromXY, toXY, latency){
     this.events('move').emit(fromXY, toXY, latency);
 };

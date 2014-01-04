@@ -17,11 +17,11 @@ Message.prototype._withRequestStart = function(firstPacket){
     }.bind(this));
     return this; // chaining
 };
-Message.prototype._withResponseEnd = function(lastPacket){
+Message.prototype._withResponseClose = function(lastPacket){
 
     lastPacket.events('move').on(function(){
 
-        this.events('responseEndMove').emit.apply(this, arguments);
+        this.events('responseCloseMove').emit.apply(this, arguments);
     }.bind(this));
 
     lastPacket.events('done').on(function(){
@@ -32,13 +32,12 @@ Message.prototype._withResponseEnd = function(lastPacket){
     return this; // chaining
 };
 Message.prototype.includes = function(packet) {
-    var ordering = packet.ordering;
 
-    if( packet.direction == Direction.upstream && ordering.isFirst ) {
+    if( packet.startsRequest() ) {
         this._withRequestStart(packet);
     }
-    if( packet.direction == Direction.downstream && ordering.isLast ) {
-        this._withResponseEnd(packet);
+    if( packet.closesResponse() ) {
+        this._withResponseClose(packet);
     }
     return this; // chaining
 };

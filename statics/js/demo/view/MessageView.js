@@ -12,7 +12,7 @@ var MessageView = extend(ThingView, function(message, demoView){
         this.animateXy('lineX2', 'lineY2', xyFrom, xyTo, duration);
     }.bind(this));
 
-    message.events('responseEndMove').on(function(xyFrom, xyTo, duration){
+    message.events('responseCloseMove').on(function(xyFrom, xyTo, duration){
 
         this.animateXy('lineX2', 'lineY2', xyFrom, xyTo, duration);
     }.bind(this));

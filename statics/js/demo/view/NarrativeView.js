@@ -22,7 +22,7 @@ var NarrativeView = (function () {
        
         this.showText(text);
         this.positionHighlightAt(location);
-        this.jDom.show();
+        this.jDom.fadeIn();
 
         this.jDom.find('.dismiss').one('click', function(){
             narrativeItem.dismiss();
@@ -31,18 +31,15 @@ var NarrativeView = (function () {
     };
 
     NarrativeView.prototype.hideItem = function(){
-        this.jDom.hide();
+        this.jDom.fadeOut();
     };
     
     NarrativeView.prototype.displayItem = function( narrativeItem ){
-
-        var jLightbox = this.jDom;
 
         narrativeItem.events('activated').on(this.showItem.bind(this));
 
         narrativeItem.events('reset').on(this.hideItem.bind(this));
         narrativeItem.events('deactivated').on(this.hideItem.bind(this));
-
     };
     
     NarrativeView.newEvent = 'NarrativeView';

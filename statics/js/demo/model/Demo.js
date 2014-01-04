@@ -7,6 +7,7 @@ var Demo = extend(Thing, function Demo(name, options){
     this.script = pubSub();
     this.colors = options.colors;
     this.paused = false;
+    this.inProgress = false;
     
     if( options.endSimulationEvent ) {
        this.script( options.endSimulationEvent ).on(
@@ -22,12 +23,18 @@ var Demo = extend(Thing, function Demo(name, options){
 Demo.newEvent = 'Demo';
 
 Demo.prototype.start = function(){
-    this.startSimulation();
-    this.events('started').emit();
+    if( !this.inProgress ) {
+        this.startSimulation();
+        this.inProgress = true;
+        this.events('started').emit();
+    }
 };
 Demo.prototype.reset = function(){
-    this.events('reset').emit();
-    this.paused = false;
+    if( this.inProgress ) {
+        this.events('reset').emit();
+        this.inProgress = false;
+        this.paused = false;
+    }
 };
 
 Demo.prototype.pause = function(){

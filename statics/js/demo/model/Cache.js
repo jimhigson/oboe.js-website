@@ -24,12 +24,9 @@ var Cache = (function(){
        
         this.requestors.push(source);
         
-        if( this.cacheContents.length ) {
-            
-            this.cacheContents.forEach(function( cachedPacket ){
-                this.propagate(cachedPacket, [source]);
-            }.bind(this));
-        }
+        this.cacheContents.forEach(function( cachedPacket ){
+            this.propagate(cachedPacket, [source]);
+        }.bind(this));
         
         if( !this.upstreamRequestOngoing ) {
             

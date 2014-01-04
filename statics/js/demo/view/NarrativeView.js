@@ -25,12 +25,17 @@ var NarrativeView = (function () {
         this.jDom.fadeIn();
 
         this.jDom.find('.dismiss').one('click', function(){
+           
             narrativeItem.dismiss();
             return false;
         });
     };
 
     NarrativeView.prototype.hideItem = function(){
+        // event handler might still be on the element if narrative was 
+        // dismissed in some way other than clicking the 'dismiss' link,
+        // for example by clicking 'reset' 
+        this.jDom.find('.dismiss').off();
         this.jDom.fadeOut();
     };
     

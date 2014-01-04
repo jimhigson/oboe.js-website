@@ -16,6 +16,7 @@ var Scheduler = (function(){
     };
     
     Scheduler.prototype._unpause = function(){
+      
         this.tasks.forEach(this._scheduleTask);
     };
         
@@ -72,10 +73,15 @@ var Scheduler = (function(){
     Scheduler.prototype._pauseTask = function(task){
 
         window.clearTimeout(task.timeout);
+        task.timeout = undefined;
         task.wait = task.performTime - Date.now();
     };
     
     Scheduler.prototype._scheduleTask = function(task){
+        if( task.timeout ) {
+           throw Error('task already scheduled');
+        }
+       
         task.timeout = window.setTimeout(task.performTask, task.wait);
         task.performTime = Date.now() + task.wait;
         return task;
@@ -85,6 +91,7 @@ var Scheduler = (function(){
         
         if( unscheduledTask ) {
             window.clearTimeout(unscheduledTask.timeout);
+            task.timeout = undefined;           
             this._removeTask(unscheduledTask);
         }
     };

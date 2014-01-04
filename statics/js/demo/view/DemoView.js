@@ -78,6 +78,9 @@ DemoView.prototype.setupControls = function(){
     });
 
     demoEvents('reset').on(function(){
+        jFadeControls.off();
+        jReset.off();
+       
         jFadeControls.fadeIn();
         jReset.fadeOut();
         listenForClickOnPlay();

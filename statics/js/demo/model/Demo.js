@@ -42,6 +42,10 @@ Demo.prototype.pause = function(){
     this.events('paused').emit();
 };
 Demo.prototype.unpause = function(){
+    if( !this.paused ){
+        throw new Error('unpausing but not paused');
+    }
+   
     this.paused = false;
     this.events('unpaused').emit();
 };

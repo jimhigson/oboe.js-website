@@ -74,6 +74,13 @@ var getScenario = (function () {
         },
 
         narrativeItem: {
+            script:[
+               {  delay:0,
+                  action:function () {
+                     this.popUp();
+                  }
+               }
+            ],
             options:{
                 locationOnTopic:'where'
             }

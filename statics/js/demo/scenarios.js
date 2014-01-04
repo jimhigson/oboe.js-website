@@ -45,11 +45,8 @@ var scenarios = (function () {
             {
                "type": "narrativeItem",
                "script": [
-                  {   eventName: "client_requestAttempt_0",
-                     delay: seconds(0.35),
-                     action: function () {
-                        this.popUp();
-                     }
+                  {  eventName: "client_requestAttempt_0",
+                     delay: seconds(0.35)
                   }
                ],
                "relationships": {
@@ -80,11 +77,7 @@ var scenarios = (function () {
             {
                "type": "narrativeItem",
                "script": [
-                  {  eventName: "client_accepted_response0",
-                     delay: 0,
-                     action: function () {
-                        this.popUp();
-                     }
+                  {  eventName: "client_accepted_response0"
                   }
                ],
                "relationships": {
@@ -412,10 +405,7 @@ var scenarios = (function () {
                "type": "narrativeItem",
                "script": [
                   {  eventName: "server_sent_response5",
-                     delay: seconds(0.2),
-                     action: function () {
-                        this.popUp();
-                     }
+                     delay: seconds(0.2)
                   }
                ],
                "relationships": {
@@ -473,10 +463,7 @@ var scenarios = (function () {
                "type": "narrativeItem",
                "script": [
                   {  eventName: "client2_requestAttempt_0",
-                     delay: seconds(0.18),
-                     action: function () {
-                        this.popUp();
-                     }
+                     delay: seconds(0.18)
                   }
                ],
                "relationships": {
@@ -489,11 +476,7 @@ var scenarios = (function () {
             {
                "type": "narrativeItem",
                "script": [
-                  {  eventName: "cache_requestOff_cache-to-client2",
-                     delay: 0,
-                     action: function () {
-                        this.popUp();
-                     }
+                  {  eventName: "cache_requestOff_cache-to-client2"
                   }
                ],
                "relationships": {
@@ -507,10 +490,7 @@ var scenarios = (function () {
                "type": "narrativeItem",
                "script": [
                   {  eventName: "server_sent_response50",
-                     delay: seconds(0.5),
-                     action: function () {
-                        this.popUp();
-                     }
+                     delay: seconds(0.5)
                   }
                ],
                "relationships": {

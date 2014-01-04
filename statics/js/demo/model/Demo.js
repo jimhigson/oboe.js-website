@@ -7,7 +7,6 @@ var Demo = extend(Thing, function Demo(name, options){
     this.script = pubSub();
     this.colors = options.colors;
     this.paused = false;
-    this.running = false;
     
     if( options.endSimulationEvent ) {
        this.script( options.endSimulationEvent ).on(
@@ -25,12 +24,10 @@ Demo.newEvent = 'Demo';
 Demo.prototype.start = function(){
     this.startSimulation();
     this.events('started').emit();
-    this.running = true;
 };
 Demo.prototype.reset = function(){
     this.events('reset').emit();
     this.paused = false;
-    this.running = false;
 };
 
 Demo.prototype.pause = function(){

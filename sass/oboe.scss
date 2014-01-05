@@ -84,6 +84,16 @@ em {
    background: $nearBlack;
 }
 
+footer #externalLinks a:hover rect {
+  fill: $highlight;
+}
+footer #externalLinks rect {
+   fill: $midTone;
+}
+footer #externalLinks .logo {
+   fill: $nearBlack;
+}
+
 #siteNav {
    text-align: right;
    padding-top: 0.5em;

@@ -485,7 +485,12 @@ svg.menuButton:active {
       margin-top:0.2em;
    }
 
-  #siteNav .siteLink {
+   #siteNav {
+     position:fixed;
+     top: 0;
+   }
+  
+   #siteNav .siteLink {
      margin-right: $menuMarginRight;     
    }
 
@@ -498,7 +503,10 @@ svg.menuButton:active {
       margin-right: 8px;
       top: 18px;
    }
-   #header, footer {
+   #header {
+      height: 20px;
+   }
+   footer {
       height: 30px;
    }
 

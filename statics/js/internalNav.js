@@ -12,7 +12,9 @@ $(function(){
         };
 
     // make internal nav sticky
-    jSiteNav.sticky(siteNavStickyOptions);
+    if( jWindow.width() > SIZE_REQUIRING_PHONE_LAYOUT ) {
+        jSiteNav.sticky(siteNavStickyOptions);
+    }
 
     $('svg.menuButton').click(function() {
         jSiteNav.toggleClass('open')

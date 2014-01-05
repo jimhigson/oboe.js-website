@@ -98,7 +98,7 @@ em {
 }
 
 .is-sticky #siteNav {
-   border-bottom-color: $highlight;
+   border-bottom-color: $underline;
 }
 
 #siteNav ul {
@@ -211,7 +211,7 @@ li.reducedLogo a {
 
 .internalNav h2,
 .marked h2 {
-   border-bottom: 1px #c1bcb7 solid;
+   border-bottom: 1px $underline solid;
    padding-bottom: 6px;
    margin: 1.2em 0 0.7em;
 }

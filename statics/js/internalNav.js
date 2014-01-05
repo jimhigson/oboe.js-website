@@ -1,5 +1,8 @@
 $(function(){
-    var jWindow = $(window),
+   var MIN_SIZE_FOR_TWO_COL = 950,
+       SIZE_REQUIRING_PHONE_LAYOUT = 600;
+
+   var jWindow = $(window),
         jReducedLogo = $('.reducedLogo'),
         jSiteNav = $('#siteNav'),
         
@@ -24,7 +27,7 @@ $(function(){
         jReducedLogo.toggleClass('show', pos > 240);
     });    
     
-   if( jWindow.width() > 950 ) {
+   if( jWindow.width() > MIN_SIZE_FOR_TWO_COL ) {
 
       // make internal nav sticky
       $('.internalNav').sticky({
@@ -91,9 +94,6 @@ $(function(){
                }
            }
        });
-
-
-
    }
 });
 

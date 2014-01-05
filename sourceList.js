@@ -3,6 +3,7 @@ module.exports = [
         "/js/jquery.sticky.js"
     ,   "/js/jquery.pause.js"
     ,   "/js/internalNav.js"
+    ,   "/js/pollyfill.js"
     ,   "/js/demo/cssHooks.js"
     ,   "/js/demo/functional.js"
     ,   "/js/demo/lists.js"

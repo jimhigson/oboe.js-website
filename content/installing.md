@@ -1,19 +1,33 @@
 # Getting started
 
-## Browser
+Versions
+--------
 
-For the client-side grab either [oboe-browser.js](https://raw.github.com/jimhigson/oboe.js/master/dist/oboe-browser.js)
-or [oboe-browser.min.js](https://raw.github.com/jimhigson/oboe.js/master/dist/oboe-browser.min.js), or use [bower](http://bower.io/) like:
+The latest stable version is {{latestTag}}.
 
+Downloading for the Browser
+---------------------------
+
+Grab one of these files:
+ 
+ * [oboe-browser.js]({{releasedJs}}/oboe-browser.js) (Dev) {{latestTag}} 
+ * [oboe-browser.min.js]({{releasedJs}}/oboe-browser.min.js) (Minified for production) {{latestTag}} 
+ 
+Or if dependency management is your thing you can fetch Oboe using [bower](http://bower.io/).
+
+``` bash
+$ bower install oboe
 ```
-bower install oboe
-```
 
-If AMD is detected Oboe will `define` itself. Otherwise it adds `oboe` to
-the global namespace. Either load the module using require.js, [almond](https://github.com/jrburke/almond)
-etc or just use it directly.
+If there is no AMD present, once loaded you can start using the global `oboe` object.
 
-If using with Require some config is needed so Require knows to load a file
+Using Oboe with AMD
+---------------
+
+If AMD is detected Oboe will `define` itself instead of adding to the 
+global namespace.
+
+When using with Require.js some config is needed so Require knows to load a file
 named `oboe-browser.js` for the `oboe` module. Alternatively, you could rename
 `oboe-browser.js` to `oboe.js`.
 
@@ -25,10 +39,13 @@ require.config({
 });
 ```
 
-## Node.js 
+Node.js
+-------
 
-```
-npm install oboe
+Install using NPM:
+
+``` bash
+$ npm install oboe
 ```
 
 Then load as usual:

@@ -45,7 +45,7 @@
                      {{#if current}}
                          <span class="siteLink">{{title}}</span>
                      {{else}}
-                         <a class="siteLink" href="/{{path}}">{{title}}</a>
+                         <a class="siteLink" href="/{{path}}/">{{title}}</a>
                      {{/if}}
                   </li>
 
@@ -70,7 +70,7 @@
         
               <nav class="col col1">
                  {{#if home}}
-                     <a href="https://raw.github.com/jimhigson/oboe.js/{{latestTag}}/dist/oboe-browser.js"
+                     <a href="{{releasedJs}}/dist/oboe-browser.js"
                         id="download" title="Get the code">
                         Download <span id="version">{{latestTag}}</span>
                      </a>

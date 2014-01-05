@@ -17,7 +17,8 @@ var express = require('express'),
 
     CSS_STYLESHEETS = environment == 'prod'? ["all-min.css"] : ["all.css"],
         
-    LATEST_TAG = 'v1.11.1';
+    LATEST_TAG = 'v1.11.1',
+    RAW_REPO_LOCATION = 'https://raw.github.com/jimhigson/oboe.js';
 
 require('colors');
 
@@ -42,14 +43,10 @@ function defaultOpts(opts) {
     opts.scripts     = SCRIPTS;
     opts.stylesheets = CSS_STYLESHEETS;
     opts.latestTag   = LATEST_TAG;
+    opts.repo = RAW_REPO_LOCATION;
+    opts.releasedJs = RAW_REPO_LOCATION + '/' + LATEST_TAG + '/dist/';
     
     return opts;
-}
-
-function readMarkdownFromFile(req, callback) {
-    var mdFile = req.params.page || 'index';
-    
-    readContent(mdFile, callback);
 }
 
 function respondWithMarkdown(req, res, getContentFn, opts){
@@ -74,7 +71,7 @@ function respondWithMarkdown(req, res, getContentFn, opts){
         opts.pages = pages;
     }));
 
-    getContentFn(req, bar.add(function( outline ){
+    getContentFn(req, opts, bar.add(function( outline ){
 
         opts.content = outline.content;
         opts.heading = outline.heading;
@@ -85,7 +82,13 @@ function respondWithMarkdown(req, res, getContentFn, opts){
     renderClientSideDemoTemplates(res, bar.add(function(templateHtml) {
         
         opts.templates = templateHtml;
-    }));    
+    }));
+}
+
+function readMarkdownFromFile(req, opts, callback) {
+   var mdFile = req.params.page || 'index';
+
+   readContent(mdFile, opts, callback);
 }
 
 app
@@ -100,14 +103,14 @@ app
             });
    })
    .get('/:page', function(req, res){
-       respondWithMarkdown( req, res, readMarkdownFromFile);
+       respondWithMarkdown(req, res, readMarkdownFromFile);
    });
 
 // allow single demos to be viewed but only if we are in dev:
 if( environment == 'dev' ) {
    app.get('/demo/:demo', function(req, res){
         
-       function readMarkdownFromFile(req, callback){
+       function generateMarkdownForSingleDemo(req, opts, callback){
            var demoName = req.params.demo;
            
            callback({
@@ -118,7 +121,7 @@ if( environment == 'dev' ) {
            });
        }
         
-       respondWithMarkdown( req, res, readMarkdownFromFile);
+       respondWithMarkdown( req, res, generateMarkdownForSingleDemo);
    })
 }
 

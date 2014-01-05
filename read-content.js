@@ -2,7 +2,8 @@
 
 var supermarked = require('supermarked'), 
     fs = require('fs'),
-    cheerio = require('cheerio');
+    cheerio = require('cheerio'),
+    Handlebars = require('handlebars');
 
 function outline(html){
 
@@ -31,7 +32,7 @@ function outline(html){
    }
 }
 
-function readMarkdown(requestedMarkdown, callback) {
+function readContent(requestedMarkdown, opts, callback) {
 
    function markdownPath(markdownFileName) {
       return 'content/' + markdownFileName + '.md';
@@ -48,7 +49,8 @@ function readMarkdown(requestedMarkdown, callback) {
       fs.readFile(fileToRead, function(err, markdownBuffer){
        
           var markdownStr = markdownBuffer.toString(),
-              html = supermarked(markdownStr, {ignoreMath:true}),
+              filledInMarkdown = Handlebars.compile(markdownStr)(opts),
+              html = supermarked(filledInMarkdown, {ignoreMath:true}),
               response = outline(html);
               
           response.status = status;    
@@ -58,7 +60,7 @@ function readMarkdown(requestedMarkdown, callback) {
    });
 }
 
-module.exports = readMarkdown;
+module.exports = readContent;
 
 
 

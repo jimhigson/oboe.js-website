@@ -91,7 +91,7 @@ var Scheduler = (function(){
         
         if( unscheduledTask ) {
             window.clearTimeout(unscheduledTask.timeout);
-            task.timeout = undefined;           
+            unscheduledTask.timeout = undefined;           
             this._removeTask(unscheduledTask);
         }
     };

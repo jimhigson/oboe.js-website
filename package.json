@@ -1,6 +1,6 @@
 {
   "name": "oboe.js-demo",
-  "version": "0.0.0-154",
+  "version": "0.0.0-155",
   "description": "A website for Oboe.js",
   "main": "index.js",
   "dependencies": {

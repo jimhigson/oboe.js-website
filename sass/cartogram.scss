@@ -14,3 +14,9 @@
   }
 
 }
+
+@media only screen and (max-width: $sizeRequiringPhoneLayout) {
+  .cartogram path, circle {     
+      stroke-width:0.5;
+  }  
+}

@@ -231,7 +231,7 @@ var scenarios = (function () {
                      },
                      {  
                         eventName: "client_requestAttempt_1",
-                        delay: seconds(0.5),
+                        delay: seconds(2),
                         action: function () {
                            this.deactivate();
                         }

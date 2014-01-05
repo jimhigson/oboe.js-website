@@ -38,9 +38,6 @@ var PacketView = (function(){
         }
 
         packetEvents('move').on(this.animateMove.bind(this));
-
-        // do the same on packet being reset and done: 
-        packetEvents('reset').on(this.done.bind(this));
         packetEvents('done').on(this.done.bind(this));        
     });
 

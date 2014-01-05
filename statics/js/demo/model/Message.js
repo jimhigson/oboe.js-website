@@ -1,5 +1,7 @@
 var Message = extend(Thing, function Message() {
     Thing.apply(this, arguments);
+
+    this.events('reset').on(this.done.bind(this));
 });
 
 Message.newEvent = 'Message';
@@ -25,8 +27,7 @@ Message.prototype._withResponseClose = function(lastPacket){
     }.bind(this));
 
     lastPacket.events('done').on(function(){
-
-        this.events('done').emit.apply(this, arguments);
+        this.done();
     }.bind(this));    
     
     return this; // chaining

@@ -33,13 +33,21 @@ var Cache = (function(){
             this.propagate(packetFromDownstream);
 
             this.upstreamRequestOngoing = true;
+        } else {
+            // already have a request ongoing, ignore and kill this packet
+            packetFromDownstream.done();
         }
     };
 
     Cache.prototype.acceptFromUpstream = function( packetFromUpstream ){
         // got response from server heading to client
-
-        this.cacheContents.push(packetFromUpstream.replayedCopy());
+       
+        // make a copy for the cache:
+        var copyForCache = packetFromUpstream
+                              .replayedCopy()
+                              .done();
+       
+        this.cacheContents.push(copyForCache);
         
         this.propagate(packetFromUpstream, this.requestors);
     };

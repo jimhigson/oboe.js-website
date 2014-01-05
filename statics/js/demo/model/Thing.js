@@ -23,6 +23,7 @@ var Thing = (function(){
     Thing.prototype.with = {};
        
     Thing.prototype.inDemo = function(demo){
+       
         this.demo = demo;
         
         var thisEvents = this.events,
@@ -33,6 +34,22 @@ var Thing = (function(){
         demoEvents('unpaused').on(  thisEvents('unpaused').emit );
 
         return this; // chaining
+    };
+
+    /** for short-lived Things. Unregister listeners */
+    Thing.prototype.done = function(){
+       
+       this.events('done').emit();
+       
+       var thisEvents = this.events,
+           demoEvents = this.demo.events;
+       
+       // unsubscribe from events on the demo
+       demoEvents('reset').un(     thisEvents('reset').emit    );
+       demoEvents('paused').un(    thisEvents('paused').emit   );
+       demoEvents('unpaused').un(  thisEvents('unpaused').emit );
+
+       return this; // chaining       
     };
     
     Thing.prototype.followingScript = function(scriptItems){

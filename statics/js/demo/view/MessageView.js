@@ -21,7 +21,6 @@ var MessageView = extend(ThingView, function(message, demoView){
         this.jDom.remove();
     }.bind(this);
     
-    message.events('reset').on(remove);
     message.events('done').on(remove);
 });
 

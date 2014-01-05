@@ -17,7 +17,7 @@ var express = require('express'),
 
     CSS_STYLESHEETS = environment == 'prod'? ["all-min.css"] : ["all.css"],
         
-    LATEST_TAG = 'v1.11.0';
+    LATEST_TAG = 'v1.11.1';
 
 require('colors');
 

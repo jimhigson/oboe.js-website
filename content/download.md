@@ -3,15 +3,15 @@
 Versions
 --------
 
-The latest stable version is {{latestTag}}.
+The latest stable version is *{{latestTag}}*
 
 Downloading for the Browser
 ---------------------------
 
 Grab one of these files:
  
- * [oboe-browser.js]({{releasedJs}}/oboe-browser.js) (Dev) {{latestTag}} 
- * [oboe-browser.min.js]({{releasedJs}}/oboe-browser.min.js) (Minified for production) {{latestTag}} 
+ * [oboe-browser.js]({{releasedJs}}/oboe-browser.js) (Dev)
+ * [oboe-browser.min.js]({{releasedJs}}/oboe-browser.min.js) (Minified for production) 
  
 Or if dependency management is your thing you can fetch Oboe using [bower](http://bower.io/).
 

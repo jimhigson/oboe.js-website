@@ -5,7 +5,7 @@
 Your app AJAXes in some JSON. You wait for the response to finish and you update the
 page.
 
-<figure data-demo="fast-ajax-discrete"></figure>
+{{{demo "fast-ajax-discrete"}}}
 
 ## Streaming downloading from standard REST
 
@@ -16,13 +16,13 @@ On a fast, low latency, predictable network there isn't a great deal of time to 
 That doesn't stop us rendering things progressively though. Progressive AJAX is a lot
 like progressive HTML rendering.
 
-<figure data-demo="fast-ajax-progressive"></figure>
+{{{demo "fast-ajax-progressive"}}}
 
 Streaming one, with a server writing out using GSON or Node.js. Although this is a stream,
 the contents when it eventually completes are 100% valid JSON and is compatible with
 standard tools.
 
-<figure data-demo="streaming-ajax-progressive"></figure>
+{{{demo "streaming-ajax-progressive"}}}
 
 ## Mobile data connections
 
@@ -31,11 +31,11 @@ give poor guarantees of packet delivery time. This is why mobile networks, with 
 on the device, streaming HD video fluidly while web surfing feels laggy. If we wait until
 we have everything we're wasting the chance to show data earlier.
 
-<figure data-demo="mobile-discrete"></figure>
+{{{demo "mobile-discrete"}}}
 
 With some stream-loading we show everything at the earliest opportunity:
 
-<figure data-demo="mobile-progressive"></figure>
+{{{demo "mobile-progressive"}}}
 
 ## Dropped connections
 
@@ -43,23 +43,23 @@ Mobile networks go down while requests are being made. Today's AJAX frameworks t
 responses as wholly successful or wholly unsuccessful. Even if a request is 90% done
 when the connection goes down, nothing is shown.
 
-<figure data-demo="mobile-fail-discrete"></figure>
+{{{demo "mobile-fail-discrete"}}}
 
 If we use the data that we have, we can show it *now* and only request the missing
 part when the network comes back.
 
-<figure data-demo="mobile-fail-progressive"></figure>
+{{{demo "mobile-fail-progressive"}}}
 
 ## Aggregating resources
 
 - waiting for the last one
 
-<figure data-demo="aggregated-discrete"></figure>
+{{{demo "aggregated-discrete"}}}
 
 - don't let one slow resource slow everything down.
 - don't slow everything's display down to the speed of the slowest component
 
-<figure data-demo="aggregated-progressive"></figure>
+{{{demo "aggregated-progressive"}}}
 
 ## Historic and live data on the same transport
 
@@ -73,7 +73,7 @@ to date with 'live' events.
 We normally use two transports for this, but wouldn't it be
 nicer if we didn't have to handle distinct cases?
 
-<figure data-demo="historic-and-live"></figure>
+{{{demo "historic-and-live"}}}
 
 If we treat the historic part as a stream and the streaming
 becomes trivial. Handle both with the same code, with no
@@ -87,4 +87,4 @@ I'll write it later
 
 Copied from [Wikipedia](http://en.wikipedia.org/wiki/File:Cartogram%E2%80%942012_Electoral_Vote.svg)
 
-<figure data-demo="caching"></figure>
+{{{demo "caching"}}}

@@ -5,6 +5,11 @@ var supermarked = require('supermarked'),
     cheerio = require('cheerio'),
     Handlebars = require('handlebars');
 
+Handlebars.registerHelper("demo", function(name) {
+   console.log(arguments);
+   return '<figure data-demo="' + name + '"></figure>';
+});
+
 function outline(html){
 
    var $ = cheerio.load(html),

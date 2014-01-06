@@ -32,17 +32,24 @@ $categoricalLightBlue: #17becf;
   
 $categoricalColors: $categoricalBlue $categoricalOrange $categoricalGreen $categoricalPurple $categoricalRed $categoricalBrown $categoricalPink $categoricalGrey $categoricalYellow $categoricalLightBlue;
 
+@mixin linkTiming {
+  transition: all 0.5s;
+}
+@mixin linkTimingHover {
+  transition: all 0.2s;
+}
+
 @mixin link {
   color: $highlight;
   fill: $highlight;
   text-decoration: none;
-  transition: all 0.5s;
+  @include linkTiming;
 }
 @mixin hovered-link {
   color: $highlightHover;
   fill: $highlightHover;
   text-decoration: underline;
-  transition: all 0.2s;
+  @include linkTimingHover;
   cursor: pointer;
 }
 @mixin active-link {

@@ -363,28 +363,85 @@ nav ul.sections li {
    margin: 0.3em 0;
 }
 
-#sw {
-   background: url(http://samwakeling.com/img/sw-icon-100.png) no-repeat;
-   height: 50px;
-   width: 50px;
-   display: inline-block;
-   background-size: 100%;
-   text-indent: -1000px;
-   overflow: hidden;
-   opacity: 0.8;
-   transition: all 0.6s;
+
+
+footer {
+   padding:17px 20px;
+   height:30px;
 }
 
-#sw:hover {
-   transition: all 0.2s;
-   opacity: 1;
+#footer-contents {
+   text-align:center;
+   position:relative;
+  
+   a {
+      display:inline-block;
+   }
+
+   .contact {
+      position:absolute;
+      left:0;
+      padding:20px 0;
+      color: $midTone;
+   }
+   .contact:hover {
+      color: $highlight;
+   }
+   .contact:active {
+      color: $nearBlack;
+   }
+  
+   #externalLinks {
+      display: inline-block;
+    
+      .logo {
+         fill: $midTone;
+         @include linkTiming;
+      }
+     
+      a {
+         margin: 0 15px;
+         padding: 0 15px;
+      }
+    
+      a:hover {
+         text-decoration: none;
+        
+         .logo {
+            fill: $highlight;
+            @include linkTimingHover;
+         }
+      }
+
+      a:active {
+         .logo {
+            fill:$nearBlack;
+         }
+      }
+   }
+
+   #sw {
+      position:absolute;
+      right:0;
+      background: url(http://samwakeling.com/img/sw-icon-100.png) no-repeat;
+      height: 64px;
+      width: 50px;
+      background-size: 100%;
+      text-indent: -1000px;
+      overflow: hidden;
+      opacity: 0.8;
+      transition: all 0.6s;
+      background-position: 50%;
+   }
+
+   #sw:hover {
+      transition: all 0.2s;
+      opacity: 1;
+   }  
 }
 
-footer #sw {
-   float: right;
-   position: relative;
-   top: -10px;
-}
+
+ 
 
 svg.menuButton {
    display: none;
@@ -424,7 +481,7 @@ svg.menuButton:active {
 /* Small screens - 1 column */
 @media only screen and (max-width: $minSizeForTwoCol) {
 
-   #header, footer {
+   #header {
       height: 60px;
    }
 
@@ -509,6 +566,16 @@ svg.menuButton:active {
    footer {
       height: 30px;
    }
+   #footer-contents {
+      height: 135px;
+      #sw, .contact {
+         bottom:0;
+      }
+   }
+   #footer-contents #externalLinks a {
+      margin: 0 5px;
+      padding: 0 5px;
+   }  
 
    #download {
       display: none;
@@ -544,8 +611,3 @@ svg.menuButton:active {
    }
 
 }
-
-
-
-
-

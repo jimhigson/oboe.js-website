@@ -44,6 +44,7 @@ function defaultOpts(opts) {
     opts.stylesheets = CSS_STYLESHEETS;
     opts.latestTag   = LATEST_TAG;
     opts.repo = RAW_REPO_LOCATION;
+    opts.logoSize = 64;
     opts.releasedJs = RAW_REPO_LOCATION + '/' + LATEST_TAG + '/dist/';
     
     return opts;

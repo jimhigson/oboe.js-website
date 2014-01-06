@@ -6,8 +6,9 @@ var supermarked = require('supermarked'),
     Handlebars = require('handlebars');
 
 Handlebars.registerHelper("demo", function(name) {
-   console.log(arguments);
-   return '<figure data-demo="' + name + '"></figure>';
+
+   var html = '<figure data-demo="' + name + '"></figure>';
+   return new Handlebars.SafeString( html );
 });
 
 function outline(html){

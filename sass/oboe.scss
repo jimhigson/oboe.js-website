@@ -381,7 +381,7 @@ footer {
    .contact {
       position:absolute;
       left:0;
-      padding-top:20px;
+      padding:20px 0;
       color: $midTone;
    }
    .contact:hover {
@@ -481,7 +481,7 @@ svg.menuButton:active {
 /* Small screens - 1 column */
 @media only screen and (max-width: $minSizeForTwoCol) {
 
-   #header, footer {
+   #header {
       height: 60px;
    }
 
@@ -566,6 +566,16 @@ svg.menuButton:active {
    footer {
       height: 30px;
    }
+   #footer-contents {
+      height: 135px;
+      #sw, .contact {
+         bottom:0;
+      }
+   }
+   #footer-contents #externalLinks a {
+      margin: 0 5px;
+      padding: 0 5px;
+   }  
 
    #download {
       display: none;
@@ -601,8 +611,3 @@ svg.menuButton:active {
    }
 
 }
-
-
-
-
-

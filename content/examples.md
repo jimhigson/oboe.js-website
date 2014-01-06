@@ -275,6 +275,31 @@ oboe('/myapp/things.json')
    });
 ```
 
+## Streaming out HTML from express
+
+``` js
+
+Generating a streamed HTML response from a streamed JSON data service.
+
+require('express')()
+   .get('/foo', function(req, res){
+      function writeHtml(err, html){
+         res.write(html);
+      }
+
+      res.render('pageheader', writeHtml);
+
+      oboe( my_stream )
+         .node('items.*', function( item ){
+             res.render('item', item, writeHtml);
+         })
+         .done( function() {
+             res.render('pagefooter', writeHtml);
+         })
+   });
+   
+```
+
 ## Using Oboe with d3.js
 
  

@@ -115,4 +115,6 @@ $(function(){
     $('[data-demo]').each(function( _i, element ){
         loadScenario( element.getAttribute('data-demo') );
     })
+    recordHeadingsPosition();
+    updateActiveHeading();
 });

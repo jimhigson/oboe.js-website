@@ -390,11 +390,45 @@ nav ul.sections li {
    opacity: 1;
 }
 
-footer #sw {
-   float: right;
-   position: relative;
-   top: -10px;
+footer {
+   padding:17px 20px;
+   height:30px;
 }
+
+#footer-contents {
+   text-align:center;
+   position:relative;
+  
+   a {
+      display:inline-block;
+   }
+
+   .contact {
+      position:absolute;
+      left:0;
+      padding-top:12px;
+   }
+  
+   #externalLinks {
+      display: inline-block;
+     
+      a {
+         margin: 0 30px;
+      }
+    
+      a:hover {
+         text-decoration: none;
+      }
+   }
+
+   #sw {
+      position:absolute;
+      right:0;
+   }
+}
+
+
+ 
 
 svg.menuButton {
    display: none;

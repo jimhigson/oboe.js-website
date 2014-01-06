@@ -511,6 +511,13 @@ svg.menuButton:active {
       padding: 30px 0 0.2em 0;
    }
 
+   #footer-contents {
+      height: 135px;
+      #sw, .contact {
+         bottom:0;
+      }
+   }
+  
    .strapline {
       padding: 0;
    }
@@ -569,12 +576,7 @@ svg.menuButton:active {
    footer {
       height: 30px;
    }
-   #footer-contents {
-      height: 135px;
-      #sw, .contact {
-         bottom:0;
-      }
-   }
+
    #footer-contents #externalLinks a {
       margin: 0 5px;
       padding: 0 5px;

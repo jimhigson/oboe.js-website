@@ -373,6 +373,9 @@ footer {
 #footer-contents {
    text-align:center;
    position:relative;
+   max-width: $maxPageWidth;
+   margin-left: auto;
+   margin-right: auto;
   
    a {
       display:inline-block;
@@ -380,7 +383,7 @@ footer {
 
    .contact {
       position:absolute;
-      left:0;
+      left:0.8em;
       padding:20px 0;
       color: $midTone;
    }
@@ -422,7 +425,7 @@ footer {
 
    #sw {
       position:absolute;
-      right:0;
+      right:0.8em;
       background: url(http://samwakeling.com/img/sw-icon-100.png) no-repeat;
       height: 64px;
       width: 50px;

@@ -84,16 +84,6 @@ em {
    background: $nearBlack;
 }
 
-footer #externalLinks a:hover rect {
-  fill: $highlight;
-}
-footer #externalLinks rect {
-   fill: $midTone;
-}
-footer #externalLinks .logo {
-   fill: $nearBlack;
-}
-
 #siteNav {
    text-align: right;
    padding-top: 0.5em;
@@ -407,10 +397,15 @@ footer {
       position:absolute;
       left:0;
       padding-top:12px;
+      color: $midTone;
    }
   
    #externalLinks {
       display: inline-block;
+    
+      .logo {
+         fill: $midTone;
+      }
      
       a {
          margin: 0 30px;
@@ -418,6 +413,10 @@ footer {
     
       a:hover {
          text-decoration: none;
+        
+         .logo {
+            fill: $highlight;
+         }
       }
    }
 

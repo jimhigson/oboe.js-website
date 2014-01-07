@@ -3,12 +3,14 @@
 var supermarked = require('supermarked'), 
     fs = require('fs'),
     cheerio = require('cheerio'),
-    Handlebars = require('handlebars');
+    Handlebars = require('handlebars'),
+    figureTemplate = Handlebars.compile(
+       '<figure id="demo-{{name}}" data-demo="{{name}}"></figure>'
+    );
 
 Handlebars.registerHelper("demo", function(name) {
 
-   var html = '<figure data-demo="' + name + '"></figure>';
-   return new Handlebars.SafeString( html );
+   return new Handlebars.SafeString( figureTemplate({name:name}) );
 });
 
 function outline(html){

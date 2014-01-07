@@ -275,38 +275,36 @@ oboe('/myapp/things.json')
    });
 ```
 
-## Streaming out HTML from express
-
-``` js
+Streaming out HTML from express
+-------------------------------
 
 Generating a streamed HTML response from a streamed JSON data service.
 
-require('express')()
-   .get('/foo', function(req, res){
-      function writeHtml(err, html){
-         res.write(html);
-      }
+``` js
+app.get('/foo', function(req, res){
+   function writeHtml(err, html){
+      res.write(html);
+   }
 
-      res.render('pageheader', writeHtml);
+   res.render('pageheader', writeHtml);
 
-      oboe( my_stream )
-         .node('items.*', function( item ){
-             res.render('item', item, writeHtml);
-         })
-         .done( function() {
-             res.render('pagefooter', writeHtml);
-         })
-   });
-   
+   oboe( my_stream )
+      .node('items.*', function( item ){
+          res.render('item', item, writeHtml);
+      })
+      .done( function() {
+          res.render('pagefooter', writeHtml);
+      })
+});
 ```
 
-## Using Oboe with d3.js
+Using Oboe with d3.js
+---------------------
 
+Oboe works very nicely with [d3.js](http://d3js.org/) to add content to 
+a visualisation while the JSON downloads.
  
 ``` js
-
-// Oboe works very nicely with d3. http://d3js.org/
-
 // get a (probably empty) d3 selection:
 var things = d3.selectAll('rect.thing');
 

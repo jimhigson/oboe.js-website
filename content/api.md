@@ -151,6 +151,16 @@ The headers will be available from inside `node`, `path`, `start` or `done` call
 or after any of those callbacks have been called. If have not recieved the headers
 yet `.header()` returns `undefined`.
 
+The code below logs the [ETag](http://en.wikipedia.org/wiki/HTTP_ETag) from the
+response before any other content is received. 
+
+```js
+oboe('/content')
+   .on('start', function(item){
+      console.log( 'content has tag', this.header('ETag') );
+   })
+```
+
 ## .root()
 
 ```js
@@ -170,6 +180,21 @@ If nothing has been received yet this will return undefined, otherwise it will g
 
 Calling .forget() on the Oboe instance from inside a node or path callback
 de-registers the currently executing callback.
+
+The code below reads from an array at the root of the response but stops
+using the objects found after the tenth item:
+ 
+ ```js
+oboe('/content')
+   .on('node:!.*', function(item, path){
+      
+      if( path[0] == 9 ) {
+         this.forget();
+      }
+      
+      useItem(item);
+   })
+```
 
 ## .removeListener()
 
@@ -214,7 +239,17 @@ An object is given to the callback with fields:
  * `thrown`: The error, if one was thrown
  * `statusCode`: The status code, if the request got that far
  * `body`: The response body for the error, if any
- * `jsonBody`: If the server's error response was json, the parsed body. 
+ * `jsonBody`: If the server's error response was json, the parsed body.
+  
+```js
+oboe('/content')
+   .fail(function(errorReport){
+   
+      if( errorReport.statusCode == 404 ){
+         console.error("no such content"); 
+      }
+   });
+```
 
 ## Pattern matching
 
@@ -232,5 +267,5 @@ Oboe's pattern matching is a variation on [JSONPath](https://code.google.com/p/j
 `$` explicitly specify an intermediate clause in the jsonpath spec the callback should be applied to
 
 The pattern engine supports 
-[CSS-4 style node selection](http://www.w3.org/TR/2011/WD-selectors4-20110929/#subject)
-using the dollar (`$`) symbol. See also *[some example patterns](#more-patterns)*. 
+[CSS-4 style node selection](/examples/#css4-style-patterns)
+using the dollar (`$`) symbol. See also *[example patterns](#more-patterns)*. 

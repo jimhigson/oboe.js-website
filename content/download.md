@@ -3,7 +3,7 @@
 Versions
 --------
 
-The latest stable version is *{{latestTag}}*
+The latest stable version is *{{latestTag}}*.
 
 Downloading for the Browser
 ---------------------------

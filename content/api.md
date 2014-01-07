@@ -268,4 +268,4 @@ Oboe's pattern matching is a variation on [JSONPath](https://code.google.com/p/j
 
 The pattern engine supports 
 [CSS-4 style node selection](/examples/#css4-style-patterns)
-using the dollar (`$`) symbol. See also *[example patterns](#more-patterns)*. 
+using the dollar (`$`) symbol. See also [list of example patterns](/examples/#list-of-example-patterns). 

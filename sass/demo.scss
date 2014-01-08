@@ -16,6 +16,9 @@ $demoBackground: $backgroundColor;
   background-color: $demoBackground;
   position:relative;
   overflow:hidden;
+
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: 1000;
 }
 
 div.demoCaption {

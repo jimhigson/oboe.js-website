@@ -53,7 +53,7 @@ var scenarios = (function () {
                   "topic": "client"
                },
                "options": {
-                  "text": "This client makes a request to a JSON service",
+                  "text": "Here we have a single-page webapp running in a browser that makes a request for the next page's JSON",
                   "locationOnTopic": "upstream"
                }
             }

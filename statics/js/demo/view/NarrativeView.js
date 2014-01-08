@@ -9,13 +9,26 @@ var NarrativeView = (function () {
                .hide();
     });
 
+    NarrativeView.prototype.scaleAt = function( jEle ){
+       // bit of a hack here:
+       return jEle.parents('[data-scale]').attr('data-scale');
+    }
+   
     NarrativeView.prototype.positionLightboxHighlightAt = function( location ){
        
        var jLightbox = this.jDom.filter('.lightbox');
        this.putAtXy(jLightbox, 'translateX', 'translateY', location);
 
-       var jDemoCaption = this.jDom.filter('div.narrative');
-       this.putAtXy(jDemoCaption, 'left', 'top', location);       
+       var jDemoCaption = this.jDom.filter('div.narrative'),
+
+           // adjust the caption position according to the scale of the highlight:
+           scale = this.scaleAt(jLightbox),
+           scaledLocation = { 
+              x: location.x * scale,
+              y: location.y * scale
+           };
+       
+       this.putAtXy(jDemoCaption, 'left', 'top', scaledLocation);
     };
 
     NarrativeView.prototype.showText = function( text ){

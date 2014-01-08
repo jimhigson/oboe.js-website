@@ -112,6 +112,7 @@ DemoView.prototype.setDimensions = function(height, scalingFactor){
     var jSvg = this.jDom.filter('svg');
 
     jSvg.attr('height', height * scalingFactor);
+    jSvg.attr('data-scale', scalingFactor);
 
     jSvg.find('.scaling').attr('transform', 'scale(' + scalingFactor + ')');   
     jSvg.find('.fade').attr('height', height);

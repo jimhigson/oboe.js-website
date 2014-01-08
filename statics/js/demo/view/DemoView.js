@@ -3,12 +3,10 @@ var DemoView = extend(ThingView, function(demo){
 
     var containerFigure = $("[data-demo=" + demo.name + "]");
    
-    this.jDom = stampFromTemplate($('#demo'), demo.colors);
+    this.jDom = stampFromTemplate($('#demo'), demo.colors)
+                  .add( stampFromTemplate($('#demoCaption')) );
    
-    this.captionArea = stampFromTemplate($('#demoCaption'));
-
     containerFigure.append( this.jDom );
-    containerFigure.append( this.captionArea );
 
     this.baseWidth  = demo.width;
     this.baseHeight = demo.height;

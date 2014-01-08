@@ -19,10 +19,18 @@ function removeClass(jEle, klass) {
 }
 
 function stampFromTemplate(jTemplate, klass) {
+    var jCopy;
+   
     if( !jTemplate.length )
-        throw new Error('no template');
+        throw new Error('nothing in the template');
     
-    var jCopy = jTemplate.children().clone();
+    if( jTemplate[0].content ) {
+
+       jCopy = $( document.importNode(jTemplate[0].content, true) );
+    } else {
+   
+       jCopy = jTemplate.children().clone();
+    }
     // jQuery doesn't like addClass on SVG...
     if( klass )
         addClass(jCopy, klass);

@@ -13,22 +13,31 @@ var NarrativeView = (function () {
        // bit of a hack here:
        return jEle.parents('[data-scale]').attr('data-scale');
     }
+
+    NarrativeView.prototype.captionPosition = function( highlightPosition ){
+       return {
+          x:40,
+          y:0
+       };
+    };
    
     NarrativeView.prototype.positionLightboxHighlightAt = function( location ){
        
        var jLightbox = this.jDom.filter('.lightbox');
        this.putAtXy(jLightbox, 'translateX', 'translateY', location);
-
+      
+       var captionLocation = this.captionPosition(location);
+       
        var jDemoCaption = this.jDom.filter('div.narrative'),
 
            // adjust the caption position according to the scale of the highlight:
            scale = this.scaleAt(jLightbox),
-           scaledLocation = { 
-              x: location.x * scale,
-              y: location.y * scale
+           scaledCaptionLocation = { 
+              x: captionLocation.x * scale,
+              y: captionLocation.y * scale
            };
        
-       this.putAtXy(jDemoCaption, 'left', 'top', scaledLocation);
+       this.putAtXy(jDemoCaption, 'left', 'top', scaledCaptionLocation);
     };
 
     NarrativeView.prototype.showText = function( text ){

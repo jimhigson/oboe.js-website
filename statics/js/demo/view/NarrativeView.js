@@ -37,7 +37,7 @@ var NarrativeView = (function () {
               y: captionLocation.y * scale
            };
        
-       this.putAtXy(jDemoCaption, 'left', 'top', scaledCaptionLocation);
+       jDemoCaption.css('left', scaledCaptionLocation.x);
     };
 
     NarrativeView.prototype.showText = function( text ){
@@ -54,7 +54,7 @@ var NarrativeView = (function () {
         this.positionLightboxHighlightAt(location);
         this.jDom.fadeIn();
 
-        this.jDom.find('.dismiss').one('click', function(){
+        this.jDom.filter('.demoCaption').one('click', function(){
            
             narrativeItem.dismiss();
             return false;
@@ -65,7 +65,7 @@ var NarrativeView = (function () {
         // event handler might still be on the element if narrative was 
         // dismissed in some way other than clicking the 'dismiss' link,
         // for example by clicking 'reset' 
-        this.jDom.find('.dismiss').off();
+        this.jDom.filter('.demoCaption').off();
         this.jDom.fadeOut();
     };
     

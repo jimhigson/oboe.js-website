@@ -25,10 +25,19 @@ div.demoCaption {
   position: absolute; 
   width:14em;
   text-align: right;
+  bottom: 2em;
+  cursor: pointer;
   
   p {
     margin-bottom: 0.3em; 
   }
+}
+
+div.demoCaption:hover a {
+  @include hovered-link;
+}
+div.demoCaption:active a {
+  @include active-link;
 }
 
 rect.fade,

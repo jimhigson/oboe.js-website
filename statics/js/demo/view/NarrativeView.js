@@ -3,15 +3,17 @@ var NarrativeView = (function () {
     var NarrativeView = extend(ThingView, function NarrativeView(demo, demoView) {
         ThingView.apply(this, arguments);
         
-        this.jDom = demoView.jDom.find('.lightbox').hide();
+        this.jDom = demoView.jDom.find('.narrative').hide();
     });
 
-    NarrativeView.prototype.positionHighlightAt = function( location ){
-        this.goToXy('translateX', 'translateY', location);
+    NarrativeView.prototype.positionLightboxHighlightAt = function( location ){
+       
+       var jLightbox = this.jDom.filter('.lightbox');
+       this.putAtXy(jLightbox, 'translateX', 'translateY', location);
     };
 
     NarrativeView.prototype.showText = function( text ){
-        this.jDom.find('.narrative').text(text);
+       this.jDom.find('.label').text(text);
     };   
     
     NarrativeView.prototype.showItem = function( narrativeItem ){
@@ -21,7 +23,7 @@ var NarrativeView = (function () {
             location = topic.locations[locationOnTopic];
        
         this.showText(text);
-        this.positionHighlightAt(location);
+        this.positionLightboxHighlightAt(location);
         this.jDom.fadeIn();
 
         this.jDom.find('.dismiss').one('click', function(){

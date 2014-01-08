@@ -26,7 +26,7 @@ function stampFromTemplate(jTemplate, klass) {
     
     if( jTemplate[0].content ) {
 
-       jCopy = $( document.importNode(jTemplate[0].content, true) );
+       jCopy = $( document.importNode(jTemplate[0].content.querySelector('*'), true) );
     } else {
    
        jCopy = jTemplate.children().clone();

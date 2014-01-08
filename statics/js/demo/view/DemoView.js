@@ -109,13 +109,15 @@ DemoView.prototype.scalingFactor = function(){
 
 DemoView.prototype.setDimensions = function(height, scalingFactor){
 
-    this.jDom.attr('height', height * scalingFactor);
+    var jSvg = this.jDom.filter('svg');
 
-    this.jDom.find('.scaling').attr('transform', 'scale(' + scalingFactor + ')');   
-    this.jDom.find('.fade').attr('height', height);
+    jSvg.attr('height', height * scalingFactor);
+
+    jSvg.find('.scaling').attr('transform', 'scale(' + scalingFactor + ')');   
+    jSvg.find('.fade').attr('height', height);
 
     // The container div should have the height set on
     // the server-side to avoid the page reflowing.
-    this.jDom.find('.reset').css('translateY', height);
-    this.jDom.find('.play').attr('y', height / 2);
+    jSvg.find('.reset').css('translateY', height);
+    jSvg.find('.play').attr('y', height / 2);
 };

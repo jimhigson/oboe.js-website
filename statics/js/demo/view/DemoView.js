@@ -1,11 +1,11 @@
 var DemoView = extend(ThingView, function(demo){
     ThingView.apply(this,arguments);
 
+    var containerFigure = $("[data-demo=" + demo.name + "]");
+   
     this.jDom = stampFromTemplate($('#demo'), demo.colors);
    
     this.captionArea = stampFromTemplate($('#demoCaption'));
-
-    var containerFigure = $("[data-demo=" + demo.name + "]");
 
     containerFigure.append( this.jDom );
     containerFigure.append( this.captionArea );

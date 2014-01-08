@@ -15,12 +15,18 @@ $demoBackground: $backgroundColor;
   margin: 0.5em 0 1em 0;
   background-color: $demoBackground;
   position:relative;
+  overflow:hidden;
 }
 
 div.demoCaption {
   position: absolute; 
   top: 0px;
   left: 0px;
+  width:14em;
+  
+  p {
+    margin:0;
+  }
 }
 
 rect.fade,

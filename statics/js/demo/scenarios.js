@@ -542,7 +542,8 @@ var scenarios = (function () {
                   "topic": "client2"
                },
                "options": {
-                  "text": "As the results are coming in"
+                  "text": "A new client is behind the same proxy and comes" +
+                     " online now that some of the results are known"
                }
             },
             {
@@ -555,9 +556,42 @@ var scenarios = (function () {
                   "topic": "cache"
                },
                "options": {
-                  "text": "I already got some of it"
+                  "text": "The http cache already has an open connection " +
+                     "to the server for this URL and is already partially " +
+                     "populated. It doesn't need to open a new connection " +
+                     "and can send what it has already"
                }
             },
+            {
+               "type": "narrativeItem",
+               "script": [
+                  {  eventName: "cache_requestOff_cache-to-client2"
+                  }
+               ],
+               "relationships": {
+                  "topic": "cache"
+               },
+               "options": {
+                  "text": "The http cache already has an open connection " +
+                     "to the server for this URL and is already partially " +
+                     "populated. It doesn't need to open a new connection " +
+                     "and can send what it has already"
+               }
+            },
+            {
+               "type": "narrativeItem",
+               "script": [
+                  {  eventName: "cache_accepted_response19"
+                  }
+               ],
+               "relationships": {
+                  "topic": "cache"
+               },
+               "options": {
+                  "text": "As streaming data arrives the cache treats it " +
+                     "like normal traffic and propagate to all requesters"
+               }
+            },            
             {
                "type": "narrativeItem",
                "script": [
@@ -569,8 +603,38 @@ var scenarios = (function () {
                   "topic": "server"
                },
                "options": {
-                  "text": "The server sent all the results and" +
-                     " can close the JSON normally"
+                  "text": "The server sends the last results and" +
+                     " closes the JSON normally. Although the response was" +
+                     " written slowly as a stream, the content ultimately " +
+                     " forms a valid JSON document."
+               }
+            },
+            {
+               "type": "narrativeItem",
+               "script": [
+                  {  eventName: "client3_requestAttempt_0",
+                     delay: seconds(0.18)
+                  }
+               ],
+               "relationships": {
+                  "topic": "client3"
+               },
+               "options": {
+                  "text": "A third client comes online after all the results are announced."
+               }
+            },
+            {
+               "type": "narrativeItem",
+               "script": [
+                  {  eventName: "cache_requestOff_cache-to-client3"
+                  }
+               ],
+               "relationships": {
+                  "topic": "cache"
+               },
+               "options": {
+                  "text": "This request can be served straight from cache. At this" +
+                     " time it is essentially a static resource."
                }
             }
          ],
@@ -583,7 +647,7 @@ var scenarios = (function () {
                   "payloads": '2012UsElection',
                   "timeBetweenPackets": inconsistentlyTimed,
                   "packetMode": 'live',
-                  "label":"origin"
+                  "label":"Results Server"
                }
             },
             {
@@ -600,7 +664,7 @@ var scenarios = (function () {
                "locations": {where: {x: 180, y: 55}},
                "next": ["cache-to-client1", "cache-to-client2", "cache-to-client3"],
                options: {
-                  label: 'cache'
+                  label: 'HTTP cache'
                }
             },
 
@@ -644,7 +708,7 @@ var scenarios = (function () {
                },
                "locations": { "where": {x: 375, y: 185} },
                "script": [
-                  {   eventName: "client1_accepted_response25",
+                  {   eventName: "client1_accepted_response12",
                      delay: seconds(0.5),
                      action: function () {
                         this.makeRequest();

@@ -7,6 +7,7 @@ var Relay = (function(){
     Relay.newEvent = 'Relay';
         
     Relay.prototype.accept = function(receivedPacket){
+        this.addToScript('accepted', receivedPacket);
         this.propagate(receivedPacket);
     };
     

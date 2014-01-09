@@ -40,6 +40,8 @@ var Cache = (function(){
     };
 
     Cache.prototype.acceptFromUpstream = function( packetFromUpstream ){
+        this.addToScript('accepted', packetFromUpstream);
+       
         // got response from server heading to client
        
         // make a copy for the cache:

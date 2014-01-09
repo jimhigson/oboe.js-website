@@ -154,7 +154,11 @@ var scenarios = (function () {
                "type": "client",
                "options": {
                   "page": "map",
-                  "deviceType": "mobile"
+                  "deviceType": "mobile",
+                  "zoom":1.25
+               },
+               locations:{
+                  where: {x:415, y:135}
                },
                "next": []
             }

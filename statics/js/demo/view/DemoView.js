@@ -115,7 +115,7 @@ DemoView.prototype.setDimensions = function(height, scalingFactor){
     jSvg.attr('data-scale', scalingFactor);
 
     jSvg.find('.scaling').attr('transform', 'scale(' + scalingFactor + ')');   
-    jSvg.find('.fade').attr('height', height);
+    jSvg.find('.fade').attr('height', height+1);
 
     // The container div should have the height set on
     // the server-side to avoid the page reflowing.

@@ -27,6 +27,8 @@ var ClientView = (function(){
             }
         });
 
+        jDom.find('.zoom').attr('transform', 'scale(' + client.zoom + ')');
+       
         this.manageProgressBar();
     });
 

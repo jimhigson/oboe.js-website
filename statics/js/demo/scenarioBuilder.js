@@ -46,7 +46,8 @@ var getScenario = (function () {
                 aspect: 'portrait',
                 "page": "singlePageSite",
                 "deviceType":"desktop",
-                "showProgress":true
+                "showProgress":true,
+                zoom: 1
             },
             locations:{
                 where: {x: 430, y: 145}
@@ -92,6 +93,7 @@ var getScenario = (function () {
     function setRelativePositions(item) {
         var locations = item.locations;
         var baseXy = locations.where;
+        var zoom = (item.options && item.options.zoom) || 1;
         
         switch (item.type) {
             case 'relay':
@@ -100,7 +102,7 @@ var getScenario = (function () {
             case 'client':
                 switch( item.options.deviceType ){
                     case 'mobile':
-                        locations.upstream   = translate(baseXy, {x:30, y:-53});
+                        locations.upstream   = translate(baseXy, {x:zoom*30, y:zoom*-53});
                         break;
                     case 'desktop':
                     default:

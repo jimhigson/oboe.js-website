@@ -16,29 +16,39 @@ var NarrativeView = (function () {
 
     NarrativeView.prototype.captionPosition = function( highlightPosition ){
        
-       var DEMO_WIDTH = 500,// TODO: DRY!
-           HIGHLIGHT_SIZE = 100;
+       var demoWidth = this.subject.demo.width,
+           demoHeight = this.subject.demo.height,
+           HIGHLIGHT_SIZE = 100,
            highlightFromLeft = highlightPosition.x,
-           highlightFromRight = DEMO_WIDTH - highlightFromLeft; 
+           highlightFromRight = demoWidth - highlightPosition.x,
+           highlightCloserToRight = (highlightPosition.x > (demoWidth / 2)),
+           highlightCloserToBottom = (highlightPosition.y > (demoHeight / 2)),
+           result = {};
        
-       if( highlightFromLeft > (DEMO_WIDTH/2) ) {
-          //highlight to the right;
-          return {
-             x:highlightFromRight + HIGHLIGHT_SIZE,
-             edge:'right'
-          };
+       if( highlightCloserToRight ) {
+
+          result.x = highlightFromRight + HIGHLIGHT_SIZE;
+          result.horizontalSide = 'right';
        } else {
-          //highlight to the left;
-          return {
-             x:highlightFromLeft + HIGHLIGHT_SIZE,
-             edge:'left'
-          };
+
+          result.x = highlightFromLeft + HIGHLIGHT_SIZE;
+          result.horizontalSide = 'left';
        }
+
+       if( highlightCloserToBottom ) {
+          result.y = '15';
+          result.verticalSide = 'bottom';
+       } else {
+          result.y = '15';
+          result.verticalSide = 'top';
+       }
+       
+       return result;
     };
    
     NarrativeView.prototype.positionLightboxHighlightAt = function( location ){
               
-       function oppositeDirection(d){
+       function oppositeHorizontalDirection(d){
           return d=='left'? 'right' : 'left';
        }
        
@@ -51,10 +61,11 @@ var NarrativeView = (function () {
 
            // adjust the caption position according to the scale of the highlight:
            scale = this.scaleAt(jLightbox);
-       
-       jDemoCaption.css( captionLocation.edge, captionLocation.x * scale);
-       jDemoCaption.css( oppositeDirection( captionLocation.edge), '' );
-       jDemoCaption.css( 'text-align', captionLocation.edge );
+
+       jDemoCaption.css( {left:'', right:'', top:'', bottom:''} )
+                   .css( 'text-align', captionLocation.horizontalSide )
+                   .css( captionLocation.horizontalSide, captionLocation.x * scale)
+                   .css( captionLocation.verticalSide, captionLocation.y * scale);
     };
 
     NarrativeView.prototype.showText = function( text ){

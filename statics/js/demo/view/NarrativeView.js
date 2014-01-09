@@ -15,13 +15,32 @@ var NarrativeView = (function () {
     }
 
     NarrativeView.prototype.captionPosition = function( highlightPosition ){
-       return {
-          x:40,
-          y:0
-       };
+       
+       var DEMO_WIDTH = 500,// TODO: DRY!
+           HIGHLIGHT_SIZE = 100;
+           highlightFromLeft = highlightPosition.x,
+           highlightFromRight = DEMO_WIDTH - highlightFromLeft; 
+       
+       if( highlightFromLeft > (DEMO_WIDTH/2) ) {
+          //highlight to the right;
+          return {
+             x:highlightFromRight + HIGHLIGHT_SIZE,
+             edge:'right'
+          };
+       } else {
+          //highlight to the left;
+          return {
+             x:highlightFromLeft + HIGHLIGHT_SIZE,
+             edge:'left'
+          };
+       }
     };
    
     NarrativeView.prototype.positionLightboxHighlightAt = function( location ){
+              
+       function oppositeDirection(d){
+          return d=='left'? 'right' : 'left';
+       }
        
        var jLightbox = this.jDom.filter('.lightbox');
        this.putAtXy(jLightbox, 'translateX', 'translateY', location);
@@ -31,13 +50,11 @@ var NarrativeView = (function () {
        var jDemoCaption = this.jDom.filter('div.narrative'),
 
            // adjust the caption position according to the scale of the highlight:
-           scale = this.scaleAt(jLightbox),
-           scaledCaptionLocation = { 
-              x: captionLocation.x * scale,
-              y: captionLocation.y * scale
-           };
+           scale = this.scaleAt(jLightbox);
        
-       jDemoCaption.css('left', scaledCaptionLocation.x);
+       jDemoCaption.css( captionLocation.edge, captionLocation.x * scale);
+       jDemoCaption.css( oppositeDirection( captionLocation.edge), '' );
+       jDemoCaption.css( 'text-align', captionLocation.edge );
     };
 
     NarrativeView.prototype.showText = function( text ){

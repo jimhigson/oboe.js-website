@@ -83,8 +83,14 @@ divergent code to write.
 
 ## Cacheable streaming
 
-I'll write it later
+In the [example above](#) we have a JSON which intentionally never 
+completes. Below we have a different example - data which streams
+but is finite. That is, there is a defined point at which it will end.
+This kind of streaming plays nice with the REST paradigm and HTTP caches.
 
-Copied from [Wikipedia](http://en.wikipedia.org/wiki/File:Cartogram%E2%80%942012_Electoral_Vote.svg)
+The visualisation below includes a cartogram inspired by 
+[this file on Wikipedia](http://en.wikipedia.org/wiki/File:Cartogram%E2%80%942012_Electoral_Vote.svg)
+and likewise simulates the results for the [United States presidential election, 2012](http://en.wikipedia.org/wiki/United_States_presidential_election,_2012)
+being streamed out as they are announced.
 
 {{demo "caching"}}

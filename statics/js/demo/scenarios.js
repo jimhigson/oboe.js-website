@@ -166,7 +166,53 @@ var scenarios = (function () {
                   }
                }
             ]
-         }
+         },
+         "narrative": [
+            {
+               "type": "narrativeItem",
+               "script": [
+                  {  eventName: "tower_accepted_response9",
+                     delay: seconds(0.2)
+                  }
+               ],
+               "relationships": {
+                  "topic": "tower"
+               },
+               "options": {
+                  "text": "Mobile networks can be fast, but http traffic often arrives" +
+                     "in bursts."
+               }
+            },
+            {
+               "type": "narrativeItem",
+               "script": [
+                  {  eventName: "client_accepted_response6",
+                     delay: seconds(0.2)
+                  }
+               ],
+               "relationships": {
+                  "topic": "client"
+               },
+               "options": {
+                  "text": "The server is fast, The webapp has received most of the data but " +
+                     "The user won't be shown anything until the last bit arrives..."
+               }
+            },
+            {
+               "type": "narrativeItem",
+               "script": [
+                  {  eventName: "client_accepted_response9",
+                     delay: seconds(0.5)
+                  }
+               ],
+               "relationships": {
+                  "topic": "client"
+               },
+               "options": {
+                  "text": "... and at last the user can see where they have to go"
+               }
+            }            
+         ]
       },
 
       "mobile-progressive": {
@@ -183,7 +229,24 @@ var scenarios = (function () {
                   }
                }
             ]
-         }
+         },
+         "narrative": [
+            {
+               "type": "narrativeItem",
+               "script": [
+                  {  eventName: "client_accepted_response2",
+                     delay: seconds(0.2)
+                  }
+               ],
+               "relationships": {
+                  "topic": "client"
+               },
+               "options": {
+                  "text": "Now we're showing results early. This might be early enough for the " +
+                     "user to start walking towards the rough area of the hits."
+               }
+            }
+         ]
       },
 
       "mobile-fail": {
@@ -398,7 +461,7 @@ var scenarios = (function () {
                "type": "narrativeItem",
                "script": [
                   {  eventName: "server_sent_response5",
-                     delay: seconds(0.2)
+                     delay: seconds(1)
                   }
                ],
                "relationships": {
@@ -406,8 +469,23 @@ var scenarios = (function () {
                },
                "options": {
                   "text": "Once the historic messages have been sent, the server " +
-                     "can keep the same connection open and continue by sending " +
-                     "new ones as they happen"
+                     "can keep the same connection open and write out " +
+                     "messages as they happen"
+               }
+            },
+            {
+               "type": "narrativeItem",
+               "script": [
+                  {  eventName: "client_accepted_response6",
+                     delay: seconds(0.2)
+                  }
+               ],
+               "relationships": {
+                  "topic": "client"
+               },
+               "options": {
+                  "text": "After streaming in the historic data the client doesn't need " +
+                     "any extra code to keep it updated with live messages."
                }
             }
          ],         
@@ -464,7 +542,7 @@ var scenarios = (function () {
                   "topic": "client2"
                },
                "options": {
-                  "text": "Some other guy joins in"
+                  "text": "As the results are coming in"
                }
             },
             {
@@ -491,8 +569,8 @@ var scenarios = (function () {
                   "topic": "server"
                },
                "options": {
-                  "text": "That's it! The server sent all the results and" +
-                     "can close the connection normally"
+                  "text": "The server sent all the results and" +
+                     " can close the JSON normally"
                }
             }
          ],

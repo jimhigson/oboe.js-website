@@ -83,14 +83,45 @@ divergent code to write.
 
 ## Cacheable streaming
 
-In the [example above](#) we have a JSON which intentionally never 
-completes. Below we have a different example - data which streams
-but is finite. That is, there is a defined point at which it will end.
-This kind of streaming plays nice with the REST paradigm and HTTP caches.
+[Above](#historic-and-live-data-on-the-same-transport) we had a JSON server which intentionally never 
+completes its response. Here we have a different example: a datastream
+which will complete. Although streaming is used this case can be treated according
+to the standard REST paradigm and plays nice with well designed intermediaries 
+such as caches.
 
 The visualisation below includes a cartogram inspired by 
 [this file on Wikipedia](http://en.wikipedia.org/wiki/File:Cartogram%E2%80%942012_Electoral_Vote.svg)
-and likewise simulates the results for the [United States presidential election, 2012](http://en.wikipedia.org/wiki/United_States_presidential_election,_2012)
-being streamed out as they are announced.
+and simulates each state's results being announced in the [2012 United States presidential election](http://en.wikipedia.org/wiki/United_States_presidential_election,_2012).
 
 {{demo "caching"}}
+
+*Incorporate and break up*:
+
+The REST service
+gives results per-state for the for the [United States presidential election, 2012](http://en.wikipedia.org/wiki/United_States_presidential_election,_2012).
+While the results are being announced, requesting them
+returns an incomplete JSON with the states known so far
+be immediately sent, followed by the remainder dispatched
+individually as the results are called. When all results are known the
+JSON would finally close leaving a complete resource.
+
+After the event,
+somebody wishing to fetch the results would use the *same URL for the
+historic data as was used on the night for the live data*. This is
+possible because the URL refers only to the data that is required, not
+to whether it is current or historic. Because it eventually forms a
+complete HTTP response, the data that was streamed is not incompatible
+with HTTP caching and a cache which saw the data while it was live could
+later serve it from cache as historic. More sophisticated caches located
+between client and service would recognise when a new request has the
+same URL as an already ongoing request, serve the response received so
+far, and then continue by giving both inbound requests the content as it
+arrives from the already established outbound request. Hence, the
+resource would be cacheable even while the election results are
+streaming and a service would only have to provide one stream to serve
+the same live data to multiple users fronted by the same cache. An
+application developer programming with Oboe would not have to handle
+live and historic data as separate cases because the node and path
+events they receive are the same. Without branching, the code which
+displays results as they are announced would automatically be able to
+show historic data.

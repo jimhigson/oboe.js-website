@@ -1,18 +1,5 @@
 var scenarios = (function () {
 
-   /* some more:
-    * jQ fast
-    * Oboe fast
-    * jQ mobile
-    * Oboe mobile
-    * jQ mobile, failing
-    * Oboe mobile, failing
-    * streaming + historic together
-    * a chat session
-    * creating an aggregation (Insight) jQ
-    * creating an aggregation (Insight) Oboe
-    */
-
    return {
       "2-node-layout": {
          "items": [

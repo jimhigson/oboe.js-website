@@ -40,7 +40,8 @@ var scenarios = (function () {
                   "topic": "client"
                },
                "options": {
-                  "text": "Here we have a single-page webapp running in a browser that makes a request for the next page's JSON",
+                  "text": "Here we have a single-page webapp running in a browser." +
+                     "It makes a request for the next page worth of JSON",
                   "locationOnTopic": "upstream"
                }
             }
@@ -179,8 +180,8 @@ var scenarios = (function () {
                   "topic": "tower"
                },
                "options": {
-                  "text": "Mobile networks can be fast, but http traffic often arrives" +
-                     "in bursts."
+                  "text": "On mobile networks the traffic often arrives in bursts.",
+                  "locationOnTopic": "upstream"
                }
             },
             {
@@ -194,8 +195,8 @@ var scenarios = (function () {
                   "topic": "client"
                },
                "options": {
-                  "text": "The server is fast, The webapp has received most of the data but " +
-                     "The user won't be shown anything until the last bit arrives..."
+                  "text": "Although webapp has received most of the data" +
+                     "the user won't be shown anything until the last bit arrives..."
                }
             },
             {
@@ -209,7 +210,7 @@ var scenarios = (function () {
                   "topic": "client"
                },
                "options": {
-                  "text": "... and at last the user can see where they have to go"
+                  "text": "...and at last the user can see where they have to go"
                }
             }            
          ]
@@ -242,10 +243,25 @@ var scenarios = (function () {
                   "topic": "client"
                },
                "options": {
-                  "text": "Now we're showing results early. This might be early enough for the " +
-                     "user to start walking towards the rough area of the hits."
+                  "text": "Now we're showing results early. This might be enough already for the " +
+                     "user to start to understand the data."
                }
-            }
+            },
+            {
+               "type": "narrativeItem",
+               "script": [
+                  {  eventName: "client_accepted_response9",
+                     delay: seconds(0.5)
+                  }
+               ],
+               "relationships": {
+                  "topic": "client"
+               },
+               "options": {
+                  "text": "In this example it took the same time to view all of" +
+                     " the data but less time to show the first parts of it"
+               }
+            }            
          ]
       },
 
@@ -534,6 +550,22 @@ var scenarios = (function () {
             {
                "type": "narrativeItem",
                "script": [
+                  {  eventName: "cache_requestOff_cache-to-client1"
+                  }
+               ],
+               "relationships": {
+                  "topic": "cache"
+               },
+               "options": {
+                  "text": "This is the first client to request the results" +
+                     " so it is a cache hit. REST streaming doesn't rely" +
+                     " on bypassing caching so the cache can propagate and store" +
+                     " as per usual."
+               }
+            },            
+            {
+               "type": "narrativeItem",
+               "script": [
                   {  eventName: "client2_requestAttempt_0",
                      delay: seconds(0.18)
                   }
@@ -542,7 +574,7 @@ var scenarios = (function () {
                   "topic": "client2"
                },
                "options": {
-                  "text": "A new client is behind the same proxy and comes" +
+                  "text":"A new client is behind the same proxy and comes" +
                      " online now that some of the results are known"
                }
             },
@@ -620,7 +652,8 @@ var scenarios = (function () {
                   "topic": "client3"
                },
                "options": {
-                  "text": "A third client comes online after all the results are announced."
+                  "text": "A third client comes online after all the " +
+                     "results have been announced."
                }
             },
             {

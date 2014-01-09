@@ -148,7 +148,7 @@ var getScenario = (function () {
                 
                 // objects, arrays - recursive case
                 if( !to[k] ) {
-                    to[k] = new from[k].constructor;
+                    to[k] = new (from[k].constructor);
                 }
                 
                 superimpose(to[k], from[k], overwrite);

@@ -1,20 +1,36 @@
 # Why Stream-loading?
 
+This page makes the case for load JSON using streaming.
+
+* For writing JSON streams from a Java server try [GSON](https://code.google.com/p/google-gson/)
+* If you need an even more lightweight JSON stream library and don't mind
+  writing more code, try [Clarinet](https://github.com/dscape/clarinet) (In fact, Oboe
+  is built on Clarinet)
+
+## [Tl;dr](http://en.wiktionary.org/wiki/TLDR)
+
+Streaming is usually faster. Or in the worst case it is about the same. For messages
+that load *very* quickly and never fail streaming might be slower due to extra 
+processing but this is very likely to be negligible.
+
+Using Oboe in the browser, the biggest advantages are found on mobile networks 
+where requests can stall or fail, or if the server is writing out the JSON as a stream.
+For some use cases writing out
+REST streams can be used as an alternative to Websockets and similar.
+
+On a server, stream-loading aggregated JSON resources is usually faster because   
+
 ## Downloading from standard REST
 
-Your app AJAXes in some JSON. You wait for the response to finish and you update the
-page.
+In this use case we have a web application running on a browser and a server which
+provides it with JSON. The page won't be updated until the response is complete.
+This is the standard pattern used on almost all AJAX-powered sites. 
 
 {{demo "fast-ajax-discrete"}}
 
 ## Streaming downloading from standard REST
 
-But if you are developing for a browser you already have progressive HTML, JPEG,
-..., ... rendering. Why not render the JSON progressively as well?
-
-On a fast, low latency, predictable network there isn't a great deal of time to save.
-That doesn't stop us rendering things progressively though. Progressive AJAX is a lot
-like progressive HTML rendering.
+With a non-streamed response there is only a little time that can be saved.
 
 {{demo "fast-ajax-progressive"}}
 

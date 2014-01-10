@@ -67,15 +67,19 @@ With some stream-loading we show everything at the earliest opportunity:
 Dropped connections
 -------------------
 
-Mobile networks go down while requests are being made. Today's AJAX
-frameworks treat responses as wholly successful or wholly unsuccessful.
-Even if a request is 90% done when the connection goes down, nothing is
-shown.
+Most AJAX frameworks consider requests to be either wholly successful or
+wholly unsuccessful.
 
 {{demo "mobile-fail-discrete"}}
 
-If we use the data that we have, we can show it *now* and only request
-the missing part when the network comes back.
+Oboe takes a less dimorphic approach by viewing the HTTP response as a
+collection of many small parts. If the connection is lost it is simply
+the case that some parts where successful and can be used immediately,
+while others failed.
+
+If we use the data that we have, as soon as we get it, we can show it
+*now*. When the network returns we need only request the parts that we
+missed.
 
 {{demo "mobile-fail-progressive"}}
 

@@ -47,11 +47,7 @@ var NarrativeView = (function () {
     };
    
     NarrativeView.prototype.positionLightboxHighlightAt = function( location ){
-              
-       function oppositeHorizontalDirection(d){
-          return d=='left'? 'right' : 'left';
-       }
-       
+
        var jLightbox = this.jDom.filter('.lightbox');
        this.putAtXy(jLightbox, 'translateX', 'translateY', location);
       

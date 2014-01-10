@@ -63,6 +63,7 @@ var NarrativeView = (function () {
                    .css( captionLocation.horizontalSide, captionLocation.x * scale * topic.zoom)
                    .css( captionLocation.verticalSide,   captionLocation.y * scale * topic.zoom);
     };
+   
     NarrativeView.prototype.zoomLightboxToMatch = function( topic ){
        this.jDom.find('.zoom').attr('transform', 'scale(' + topic.zoom + ')');
     };

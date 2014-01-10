@@ -31,7 +31,7 @@ function stampFromTemplate(jTemplate, klass) {
    
        jCopy = jTemplate.children().clone();
     }
-    // jQuery doesn't like addClass on SVG...
+
     if( klass )
         addClass(jCopy, klass);
     

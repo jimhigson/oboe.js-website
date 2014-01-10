@@ -36,7 +36,7 @@ var ThingView = (function(){
             jContainer = this.find(containerSelector);
     
         if( jContainer.length != 1 ) {
-            throw new Error('no one place to put the thing');
+           throw new Error('no one place to put the thing');
         }
         
         jContainer.append(jDom);
@@ -46,8 +46,12 @@ var ThingView = (function(){
     ThingView.prototype.initHiding = function() {
        if( this.subject.startHidden ){
           this.hide();
+          
+          this.subject.events('reset').on(this.hide.bind(this));          
        }
-       this.subject.events('reset').on(this.hide.bind(this));       
+     
+       this.subject.events('activated').on(this.fadeIn.bind(this));
+       this.subject.events('deactivated').on(this.fadeOut.bind(this));
     };
    
     ThingView.prototype.initDomFromTemplate = function(containerClass, templateName, className) {

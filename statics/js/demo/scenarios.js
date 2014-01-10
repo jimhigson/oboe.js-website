@@ -578,7 +578,7 @@ var scenarios = (function () {
                },
                "options": {
                   "text":"A new client is behind the same proxy and comes" +
-                     " online now that some of the results are known"
+                     " online. Some of the results are already known."
                }
             },
             {
@@ -740,16 +740,23 @@ var scenarios = (function () {
                "options": {
                   "parseStrategy": "progressive",
                   "page": "cartogram",
-                  "aspect": "landscape"
+                  "aspect": "landscape",
+                  startHidden:true
                },
                "locations": { "where": {x: 375, y: 185} },
                "script": [
-                  {   eventName: "client1_accepted_response12",
+                  {  eventName: "client1_accepted_response12",
                      delay: seconds(0.5),
+                     action: function () {
+                        this.activate();
+                     }
+                  },
+                  {  eventName: "client1_accepted_response12",
+                     delay: seconds(1.5),
                      action: function () {
                         this.makeRequest();
                      }
-                  }
+                  }                  
                ],
                "next": []
             }
@@ -769,16 +776,23 @@ var scenarios = (function () {
                "options": {
                   "parseStrategy": "progressive",
                   "page": "cartogram",
-                  "aspect": "landscape"
+                  "aspect": "landscape",
+                  startHidden:true
                },
                "locations": { "where": {x: 245, y: 205} },
                "script": [
-                  {   eventName: "client1_accepted_response50",
+                  {  eventName: "client1_accepted_response50",
                      delay: seconds(0.5),
+                     action: function () {
+                        this.activate();
+                     }
+                  },
+                  {  eventName: "client1_accepted_response50",
+                     delay: seconds(1.5),
                      action: function () {
                         this.makeRequest();
                      }
-                  }
+                  }                  
                ]
             }
          ]

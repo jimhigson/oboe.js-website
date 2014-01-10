@@ -10,9 +10,6 @@ var Barrier = (function(){
 
     Barrier.newEvent = 'Barrier';
     
-    Barrier.prototype.activate = function(){
-        this.events('activated').emit();
-    };
     
     Barrier.prototype.activateIfNeverShownBefore = function(){
         
@@ -22,9 +19,5 @@ var Barrier = (function(){
         this.hasBeenShown = true;
     };
 
-    Barrier.prototype.deactivate = function(){
-        this.events('deactivated').emit();
-    };    
-    
     return Barrier;
 }());

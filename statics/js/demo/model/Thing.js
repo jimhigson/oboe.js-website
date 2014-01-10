@@ -128,5 +128,13 @@ var Thing = (function(){
         return function(){return constantValue};
     };
 
+    Thing.prototype.activate = function(){
+       this.events('activated').emit();
+    };
+
+    Thing.prototype.deactivate = function(){
+       this.events('deactivated').emit();
+    };
+
     return Thing;
 }());

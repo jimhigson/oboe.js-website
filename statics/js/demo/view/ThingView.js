@@ -106,6 +106,10 @@ var ThingView = (function(){
             jDom.pause();
         }
     };
+   
+    ThingView.prototype.hide = function(){
+       this.jDom.hide();
+    };
 
     return ThingView;
 }());

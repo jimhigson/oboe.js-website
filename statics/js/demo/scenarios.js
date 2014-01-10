@@ -577,8 +577,8 @@ var scenarios = (function () {
                   "topic": "client2"
                },
                "options": {
-                  "text":"A new client is behind the same proxy and comes" +
-                     " online. Some of the results are already known."
+                  "text":"A second client behind the same proxy comes" +
+                     " online and requests the results."
                }
             },
             {
@@ -591,9 +591,9 @@ var scenarios = (function () {
                   "topic": "cache"
                },
                "options": {
-                  "text": "The http cache already has an open connection " +
-                     "to the server for this URL and is already partially " +
-                     "populated. It doesn't need to open a new connection " +
+                  "text": "The http cache already has a connection " +
+                     "to the server for this URL and is partially " +
+                     "populated. It doesn't need to hit the server again " +
                      "and can send what it has already"
                }
             },
@@ -601,6 +601,7 @@ var scenarios = (function () {
                "type": "narrativeItem",
                "script": [
                   {  eventName: "cache_accepted_response19"
+                  ,  delay: 0.2
                   }
                ],
                "relationships": {
@@ -622,7 +623,7 @@ var scenarios = (function () {
                   "topic": "server"
                },
                "options": {
-                  "text": "The server sends the last results and" +
+                  "text": "The server sends the last result and" +
                      " closes the JSON normally. Although the response was" +
                      " written slowly as a stream, the content ultimately " +
                      " forms a valid JSON document."

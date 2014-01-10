@@ -1,7 +1,14 @@
 Why Stream-loading?
 ===================
 
-This page makes the case for load JSON using streaming by examining several use cases.
+This page makes the case for load JSON using streaming.
+
+-   For writing JSON streams from a Java server try
+    [GSON](https://code.google.com/p/google-gson/)
+-   If you need an even more lightweight JSON stream library and don't
+    mind writing more code, try
+    [Clarinet](https://github.com/dscape/clarinet) (In fact, Oboe is
+    built on Clarinet)
 
 [Tl;dr](http://en.wiktionary.org/wiki/TLDR)
 -------------------------------------------
@@ -65,14 +72,13 @@ wholly unsuccessful.
 
 {{demo "mobile-fail-discrete"}}
 
-Oboe takes a less dimorphic approach by viewing the HTTP response as a
-collection of many small parts. If the connection is lost it is simply
-the case that some parts where successful and can be used immediately,
-while others failed.
+Oboe takes a less dimorphic approach by viewing
+the HTTP response as a collection of many small parts. If the connection
+is lost it is simply the case that some parts where successful and can be
+used immediately, while others failed.
 
-If we use the data that we have, as soon as we get it, we can show it
-*now*. When the network returns we need only request the parts that we
-missed.
+If we use the data that we have, as soon as we get it, we can show it *now*.
+When the network returns we need only request the parts that we missed.
 
 {{demo "mobile-fail-progressive"}}
 

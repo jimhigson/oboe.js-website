@@ -14,13 +14,3 @@ while it is ongoing.
 
 -   If a request fails halfway use the part that transferred without
     writing special cases.
-
-Other tools
------------
-
--   For writing JSON streams from a Java server try
-    [GSON](https://code.google.com/p/google-gson/)
--   If you need an even more lightweight JSON stream library and don't
-    mind writing more code, try
-    [Clarinet](https://github.com/dscape/clarinet) (In fact, Oboe is
-    built on Clarinet)

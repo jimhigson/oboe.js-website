@@ -6,7 +6,8 @@ var supermarked = require('supermarked'),
     Handlebars = require('handlebars'),
     figureTemplate = Handlebars.compile(
        '<figure id="demo-{{name}}" data-demo="{{name}}"></figure>'
-    );
+    ),
+    MD_POSTFIX = fs.readFileSync('content/postfix.md');
 
 Handlebars.registerHelper("demo", function(name) {
 
@@ -45,7 +46,9 @@ function readContent(requestedMarkdown, opts, callback) {
    function markdownPath(markdownFileName) {
       return 'content/' + markdownFileName + '.md';
    }
-  
+
+   opts.page = requestedMarkdown;
+
    fs.exists(markdownPath(requestedMarkdown), function(requestedMarkdownExists){
       
       var fileToRead = requestedMarkdownExists? 
@@ -53,11 +56,13 @@ function readContent(requestedMarkdown, opts, callback) {
                            :  'content/404.md';
                            
       var status = requestedMarkdownExists? 200 : 404;                           
-   
+
+      // fileToRead should point to legit page by now (possibly 404)
       fs.readFile(fileToRead, function(err, markdownBuffer){
        
           var markdownStr = markdownBuffer.toString(),
-              filledInMarkdown = Handlebars.compile(markdownStr)(opts),
+              markDownWithGithubLink = markdownStr + MD_POSTFIX,
+              filledInMarkdown = Handlebars.compile(markDownWithGithubLink)(opts),
               html = supermarked(filledInMarkdown, {ignoreMath:true}),
               response = outline(html);
               

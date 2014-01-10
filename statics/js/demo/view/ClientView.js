@@ -31,7 +31,8 @@ var ClientView = (function(){
        
         this.manageProgressBar();
 
-        this.initHiding();     
+        this.initHiding();
+        this.writeLabel();
     });
 
     ClientView.factory = function(client, demoView) {

@@ -46,7 +46,7 @@ var NarrativeView = (function () {
        return result;
     };
    
-    NarrativeView.prototype.positionLightboxHighlightAt = function( location ){
+    NarrativeView.prototype.positionLightboxHighlightAt = function( topic, location ){
 
        var jLightbox = this.jDom.filter('.lightbox');
        this.putAtXy(jLightbox, 'translateX', 'translateY', location);
@@ -60,8 +60,11 @@ var NarrativeView = (function () {
 
        jDemoCaption.css( {left:'', right:'', top:'', bottom:''} )
                    .css( 'text-align', captionLocation.horizontalSide )
-                   .css( captionLocation.horizontalSide, captionLocation.x * scale)
-                   .css( captionLocation.verticalSide, captionLocation.y * scale);
+                   .css( captionLocation.horizontalSide, captionLocation.x * scale * topic.zoom)
+                   .css( captionLocation.verticalSide,   captionLocation.y * scale * topic.zoom);
+    };
+    NarrativeView.prototype.zoomLightboxToMatch = function( topic ){
+       this.jDom.find('.zoom').attr('transform', 'scale(' + topic.zoom + ')');
     };
 
     NarrativeView.prototype.showText = function( text ){
@@ -75,7 +78,8 @@ var NarrativeView = (function () {
             location = topic.locations[locationOnTopic];
        
         this.showText(text);
-        this.positionLightboxHighlightAt(location);
+        this.positionLightboxHighlightAt(topic, location);
+        this.zoomLightboxToMatch(topic);
         this.jDom.fadeIn();
 
         this.jDom.filter('.demoCaption').one('click', function(){

@@ -8,8 +8,10 @@ var scenarios = (function () {
                "type": "originServer",
                "options": {
                   "timeBetweenPackets": 0,
-                  "messageSize": 10
-               }
+                  "messageSize": 10,
+                  "label":"Server"
+               },
+               locations:{where:{x:65,y:70}}
             },
             {
                "name": "internet",
@@ -21,7 +23,11 @@ var scenarios = (function () {
             },
             {
                "name": "client",
-               "type": "client"
+               "type": "client",
+               "options":{
+                  label:"Client"
+               },
+               locations:{where:{x:415,y:130}}
             }
          ]
       },

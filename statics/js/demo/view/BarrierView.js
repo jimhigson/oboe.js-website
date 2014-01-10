@@ -9,10 +9,7 @@ var BarrierView = extend(ThingView, function(subject, demoView){
     
     this.hide();
        
-    subject.events('activated').on(function(){
-        this.jDom.show();
-    }.bind(this));
-
-    subject.events('deactivated').on(this.hide.bind(this));
+    subject.events('activated').on(this.fadeIn.bind(this));
+    subject.events('deactivated').on(this.fadeOut.bind(this));
     subject.events('reset').on(this.hide.bind(this));
 });

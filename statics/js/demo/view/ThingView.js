@@ -111,5 +111,13 @@ var ThingView = (function(){
        this.jDom.hide();
     };
 
+    ThingView.prototype.fadeIn = function(){
+       this.jDom.fadeIn();
+    };
+
+    ThingView.prototype.fadeOut = function(){
+       this.jDom.fadeOut();
+    };   
+
     return ThingView;
 }());

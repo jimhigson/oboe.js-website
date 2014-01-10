@@ -33,6 +33,8 @@ var WireView = extend(ThingView, function(subject, demoView){
     if( subject.medium == 'mobile' ){
         this.flashOnMessageStartAndEnd();
     }
+   
+    this.initHiding();
 });
 
 WireView.prototype.flashOnMessageStartAndEnd = function(){

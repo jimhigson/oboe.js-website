@@ -731,7 +731,8 @@ var scenarios = (function () {
                "type": "wire",
                "options": {
                   latency: 600,
-                  "bandwidth": 20
+                  "bandwidth": 20,
+                  startHidden:true
                }
             },
             {
@@ -749,6 +750,9 @@ var scenarios = (function () {
                      delay: seconds(0.5),
                      action: function () {
                         this.activate();
+                        this.adjacents.upstream.forEach(function(adj){
+                           adj.activate();
+                        });
                      }
                   },
                   {  eventName: "client1_accepted_response12",
@@ -767,7 +771,8 @@ var scenarios = (function () {
                "type": "wire",
                "options": {
                   latency: 800,
-                  "bandwidth": 20
+                  "bandwidth": 20,
+                  startHidden:true
                }
             },
             {
@@ -785,6 +790,9 @@ var scenarios = (function () {
                      delay: seconds(0.5),
                      action: function () {
                         this.activate();
+                        this.adjacents.upstream.forEach(function(adj){
+                           adj.activate();
+                        });
                      }
                   },
                   {  eventName: "client1_accepted_response50",

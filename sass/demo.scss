@@ -126,6 +126,7 @@ $i: 1;
 line.wire.cable {
    stroke:$highlight;
    stroke-width:4;
+   stroke-linecap: round;  
 }
 line.messageOuter {
   stroke:$highlight;
@@ -141,6 +142,10 @@ line.messageInner {
 g.client .frame,
 .server .box {
     fill: $midTone;
+}
+
+.box {
+   opacity: 0.75;
 }
 
 .aerial circle,

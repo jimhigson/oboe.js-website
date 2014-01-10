@@ -218,13 +218,13 @@ g.client .part {
 .spinnerLink {
   fill:$shadow;
 }
-.browser use.spinnerLink {
+.client use.spinnerLink {
   opacity:1;
   transition:opacity 1s;
   transition-delay:opacity 0.5s;
 }
 
-.browser:not(.requesting) use.spinnerLink {
+.client:not(.requesting) use.spinnerLink {
   opacity:0;
 }
 

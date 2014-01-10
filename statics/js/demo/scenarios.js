@@ -648,7 +648,7 @@ var scenarios = (function () {
                "type": "narrativeItem",
                "script": [
                   {  eventName: "client3_requestAttempt_0",
-                     delay: seconds(0.18)
+                     delay: seconds(0.3)
                   }
                ],
                "relationships": {
@@ -656,7 +656,8 @@ var scenarios = (function () {
                },
                "options": {
                   "text": "A third client comes online after all the " +
-                     "results have been announced."
+                     "results have been announced.",
+                  "locationOnTopic": "upstream"
                }
             },
             {
@@ -756,7 +757,7 @@ var scenarios = (function () {
                      }
                   },
                   {  eventName: "client1_accepted_response12",
-                     delay: seconds(1.5),
+                     delay: seconds(1),
                      action: function () {
                         this.makeRequest();
                      }
@@ -796,7 +797,7 @@ var scenarios = (function () {
                      }
                   },
                   {  eventName: "client1_accepted_response50",
-                     delay: seconds(1.5),
+                     delay: seconds(2),
                      action: function () {
                         this.makeRequest();
                      }

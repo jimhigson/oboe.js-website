@@ -600,22 +600,6 @@ var scenarios = (function () {
             {
                "type": "narrativeItem",
                "script": [
-                  {  eventName: "cache_requestOff_cache-to-client2"
-                  }
-               ],
-               "relationships": {
-                  "topic": "cache"
-               },
-               "options": {
-                  "text": "The http cache already has an open connection " +
-                     "to the server for this URL and is already partially " +
-                     "populated. It doesn't need to open a new connection " +
-                     "and can send what it has already"
-               }
-            },
-            {
-               "type": "narrativeItem",
-               "script": [
                   {  eventName: "cache_accepted_response19"
                   }
                ],

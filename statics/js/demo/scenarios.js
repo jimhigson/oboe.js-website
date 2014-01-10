@@ -720,7 +720,7 @@ var scenarios = (function () {
                   "page": "cartogram",
                   "aspect": "landscape"
                },
-               "locations": { "where": {x: 430, y: 67} },
+               "locations": { "where": {x: 375, y: 185} },
                "next": []
             }
             ,
@@ -744,7 +744,7 @@ var scenarios = (function () {
                   "aspect": "landscape",
                   startHidden:true
                },
-               "locations": { "where": {x: 375, y: 185} },
+               "locations": { "where": {x: 430, y: 67} },               
                "script": [
                   {  eventName: "client1_accepted_response12",
                      delay: seconds(0.5),

@@ -1,7 +1,8 @@
 Why Stream-loading?
 ===================
 
-This page makes the case for load JSON using streaming by examining several use cases.
+This page makes the case for load JSON using streaming by examining
+several use cases.
 
 [Tl;dr](http://en.wiktionary.org/wiki/TLDR)
 -------------------------------------------
@@ -15,8 +16,8 @@ networks where requests can stall or fail, or if the server is writing
 out the JSON as a stream. For some use cases writing out REST streams
 can be used as an alternative to Websockets and similar.
 
-On a server, stream-loading aggregated JSON resources is usually faster
-because
+When aggregating, streaming will usually be faster because everything
+else doesn't have to wait for the slowest resource.
 
 Downloading from standard REST
 ------------------------------

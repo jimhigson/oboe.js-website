@@ -3,7 +3,15 @@ var MessageView = extend(ThingView, function(message, demoView){
     
     ThingView.apply(this,arguments);
     
-    this.initDomFromTemplate('messages', 'message', message.name);
+    var jContainer = this.find('.messages');
+   
+    // jDom is two-element selection of inner and outer part
+    this.jDom = stampFromTemplate($('#message'), message.name);
+    this.jPausibleElements = this.jDom;
+
+    jContainer.find('.inners').append(this.jDom.filter('.messageInner'));
+    jContainer.find('.outers').append(this.jDom.filter('.messageOuter'));
+   
     this.jDom.hide();
 
     message.events('requestStartMove').on(function(xyFrom, xyTo, duration){

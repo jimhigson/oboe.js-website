@@ -91,7 +91,8 @@ such as caches.
 
 The visualisation below includes a cartogram inspired by 
 [this file on Wikipedia](http://en.wikipedia.org/wiki/File:Cartogram%E2%80%942012_Electoral_Vote.svg)
-and simulates each state's results being announced in the [2012 United States presidential election](http://en.wikipedia.org/wiki/United_States_presidential_election,_2012).
+and simulates each state's results being announced in the [2012 United States presidential election](http://en.wikipedia.org/wiki/United_States_presidential_election,_2012)
+by condensing several hours into a minute to so.
 
 {{demo "caching"}}
 

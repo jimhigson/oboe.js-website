@@ -8,10 +8,11 @@ var Thing = (function(){
         this.locations = locations || {};
 
         this.scheduler = new Scheduler(this, this.events);
-        
-        if( options && options.label ) {
-            this.label = options.label;
-        }
+
+       if (options) {
+          this.label = options.label;
+          this.startHidden = options.startHidden;
+       }
         
         this.events('reset').on(function(){
             this.scheduler.cancelTimeouts();

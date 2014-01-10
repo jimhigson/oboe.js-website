@@ -43,9 +43,17 @@ var ThingView = (function(){
         return jDom;
     };
     
+    ThingView.prototype.initHiding = function() {
+       if( this.subject.startHidden ){
+          this.hide();
+       }
+       this.subject.events('reset').on(this.hide.bind(this));       
+    };
+   
     ThingView.prototype.initDomFromTemplate = function(containerClass, templateName, className) {
         this.jDom = this.stampContentsFromTemplate('.' + containerClass, templateName, className);
         this.jPausibleElements = this.jDom;
+       
         return this.jDom;
     };
     

@@ -292,6 +292,9 @@ var scenarios = (function () {
                {
                   "name": "tunnel",
                   "type": "barrier",
+                  options:{
+                     startHidden: true
+                  },
                   "script": [
                      {  
                         eventName: "client_accepted_response6",

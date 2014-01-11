@@ -352,7 +352,24 @@ var scenarios = (function () {
                   }
                }
             ]
-         }
+         },
+         "narrative": [
+            {
+               "type": "narrativeItem",
+               "script": [
+                  {  eventName: "client_requestAttempt_2",
+                     delay: seconds(0.2)
+                  }
+               ],
+               "relationships": {
+                  "topic": "client"
+               },
+               "options": {
+                  "text": "Because the client already has most of the data it need only request" +
+                     "the parts that it is missing"
+               }
+            }
+         ]
       },
 
       "aggregated-layout": {

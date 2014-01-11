@@ -76,14 +76,12 @@ Inside the callback `this` will be the Oboe instance
 
 The parameters to callback are:
 
- * `node` - the node that was found in the JSON stream. This can be any valid
-      JSON type - `Array`, `Object`, `String`, `true`, `false` or `null`. 
- * `path` - an array of strings describing the path from the root of the JSON to
-   the location where the node was found
- * `ancestors` - an array of node's ancestors. `ancestors[ancestors.length-1]`
-   is the parent object, `ancestors[ancestors.length-2]` is the grandparent 
-   and so on.
-   
+|             |              |     
+|-------------|--------------|
+| `node`      | The node that was found in the JSON stream. This can be any valid JSON type - `Array`, `Object`, `String`, `true`, `false` or `null`. 
+| `path`      | An array of strings describing the path from the root of the JSON to the location where the node was found
+| `ancestors` | An array of node's ancestors. `ancestors[ancestors.length-1]` is the parent object, `ancestors[ancestors.length-2]` is the grandparent and so on.
+ 
 ```js
 .path( String pattern, 
        Function callback( thingFound, String[] path, Object[] ancestors)
@@ -249,11 +247,13 @@ Fetching a resource could fail for several reasons:
 
 An object is given to the callback with fields:
 
- * `thrown`: The error, if one was thrown
- * `statusCode`: The status code, if the request got that far
- * `body`: The response body for the error, if any
- * `jsonBody`: If the server's error response was json, the parsed body.
-  
+|              |              |     
+|--------------|--------------|
+| `thrown`     | The error, if one was thrown 
+| `statusCode` | The status code, if the request got that far
+| `body`       | The response body for the error, if any
+| `jsonBody`   | If the server's error response was json, the parsed body.
+ 
 ```js
 oboe('/content')
    .fail(function(errorReport){
@@ -269,17 +269,19 @@ Pattern matching
 
 Oboe's pattern matching is a variation on [JSONPath](https://code.google.com/p/json-path/). It supports these clauses:
 
-`!` root object   
-`.`  path separator   
-`person` an element under the key 'person'  
-`{name email}` an element with attributes name and email  
-`*`  any element at any name  
-`[2]`  the second element (of an array)  
-`['foo']`  equivalent to .foo  
-`[*]`  equivalent to .*  
-`..` any number of intermediate nodes (non-greedy)
-`$` explicitly specify an intermediate clause in the jsonpath spec the callback should be applied to
+| Clause         | Meaning             |     
+|----------------|---------------------|
+| `!`            | Root object                                                                                      
+| `.`            | Path separator                                                                                  
+| `person`       | An element under the key 'person'                                                               
+| `{name email}` | An element with attributes name and email                                                       
+| `*`            | Any element at any name                                                                         
+| `[2]`          | The second element (of an array)                                                                
+| `['foo']`      | Equivalent to .foo                                                                              
+| `[*]`          | Equivalent to .*                                                                                
+| `..`           | Any number of intermediate nodes (non-greedy)                                                   
+| `$`            | Explicitly specify an intermediate clause in the jsonpath spec the callback should be applied to
 
 The pattern engine supports 
 [CSS-4 style node selection](/examples/#css4-style-patterns)
-using the dollar, `$`, symbol. See also [list of example patterns](/examples/#list-of-example-patterns). 
+using the dollar, `$`, symbol. See also [the example patterns](/examples/#example-patterns). 

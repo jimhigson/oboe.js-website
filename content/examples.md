@@ -405,20 +405,21 @@ oboe('everyone')
    })
 ```
 
-List of example patterns
-------------------------
+Example patterns
+----------------
   
-* `!.foods.colour` the colours of the foods  
-* `person.emails[1]` the first element in the email array for each person
-* `{name email}` any object with a name and an email property, regardless of where it is in the document  
-* `person.emails[*]` any element in the email array for each person  
-* `person.$emails[*]` any element in the email array for each person, but the callback will be
-   passed the array so far rather than the array elements as they are found.  
-* `person` all people in the json, nested at any depth  
-* `person.friends.*.name` detecting friend names in a social network  
-* `person.friends..{name}` detecting friends with names in a social network  
-* `person..email` email addresses anywhere as descendent of a person object  
-* `person..{email}` any object with an email address relating to a person in the stream  
-* `$person..email` any person in the json stream with an email address  
-* `*` every object, string, number etc found in the json stream  
-* `!` the root object (fired when the whole response is available, like JSON.parse())
+| Pattern                  | Meaning |
+|------------------------- |--------------|
+| `*`                      | Every object, string, number etc found in the json stream  
+| `!`                      | The root object (fired when the whole response is available, like JSON.parse())
+| `!.foods.colour`         | The colours of the foods  
+| `person.emails[1]`       | The first element in the email array for each person
+| `{name email}`           | Any object with a name and an email property, regardless of where it is in the document  
+| `person.emails[*]`       | Any element in the email array for each person  
+| `person.$emails[*]`      | Any element in the email array for each person, but the callback will be passed the array so far rather than the array elements as they are found.  
+| `person`                 | All people in the json, nested at any depth  
+| `person.friends.*.name`  | Detecting friend names in a social network  
+| `person.friends..{name}` | Detecting friends with names in a social network  
+| `person..email`          | Email addresses anywhere as descendent of a person object  
+| `person..{email}`        | Any object with an email address relating to a person in the stream  
+| `$person..email`         | Any person in the json stream with an email address  

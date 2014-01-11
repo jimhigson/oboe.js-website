@@ -7,6 +7,7 @@ var supermarked = require('supermarked'),
     figureTemplate = Handlebars.compile(
        '<figure id="demo-{{name}}" data-demo="{{name}}"></figure>'
     ),
+    MARKDOWN_OPTS = {ignoreMath:true, smartypants:true, gfm:true, tables:true},
     MD_POSTFIX = fs.readFileSync('content/postfix.md');
 
 Handlebars.registerHelper("demo", function(name) {
@@ -79,7 +80,7 @@ function readContent(requestedMarkdown, opts, callback) {
           var markdownStr = markdownBuffer.toString(),
               markDownWithGithubLink = markdownStr + MD_POSTFIX,
               filledInMarkdown = Handlebars.compile(markDownWithGithubLink)(opts),
-              html = supermarked(filledInMarkdown, {ignoreMath:true, smartypants:true}),
+              html = supermarked(filledInMarkdown, MARKDOWN_OPTS),
               $ = postProcessMarkup(cheerio.load(html)),
               response = outline($);
               

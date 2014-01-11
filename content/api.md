@@ -63,7 +63,7 @@ When you make a request the returned Oboe instance exposes a few chainable metho
      Function callback(node, String[] path, Object[] ancestors)
 )
 
-// 2-argument style .on() which is compatible with Node.js EventEmitter#on
+// 2-argument style .on() ala Node.js EventEmitter#on
 .on( 'node:{pattern}',  
      Function callback(node, String[] path, Object[] ancestors)
 )
@@ -94,7 +94,7 @@ The parameters to callback are:
      Function callback(thingFound, String[] path, Object[] ancestors)
 )
 
-// 2-argument style .on() which is compatible with Node.js EventEmitter#on
+// 2-argument style .on() ala Node.js EventEmitter#on
 .on( 'path:{pattern}',  
      Function callback(thingFound, String[] path, Object[] ancestors)
 )
@@ -282,4 +282,4 @@ Oboe's pattern matching is a variation on [JSONPath](https://code.google.com/p/j
 
 The pattern engine supports 
 [CSS-4 style node selection](/examples/#css4-style-patterns)
-using the dollar (`$`) symbol. See also [list of example patterns](/examples/#list-of-example-patterns). 
+using the dollar, `$`, symbol. See also [list of example patterns](/examples/#list-of-example-patterns). 

@@ -119,20 +119,23 @@ page as soon as possible.
 var currentPersonElement;
 oboe('//people.json')
    .path('people.*', function(){
-      // we don't have the person's details yet but we know we found someone 
-      // in the json stream. We can eagerly put their div to the page and 
-      // then fill it with whatever other data we find:
+      // we don't have the person's details yet but we know we
+      // found someone in the json stream. We can eagerly put
+      // their div to the page and then fill it with whatever
+      // other data we find:
       currentPersonElement = jQuery('<div class="person">');
       jQuery('#people').append(personDiv);
    })
    .node({
       'people.*.name': function( name ){
-         // we just found out that person's name, lets add it to their div:
-         currentPersonElement.append('<span class="name"> + name + </span>');
+         // we just found out that person's name, lets add it
+         // to their div:
+         currentPersonElement.append('<span class="name">' + name + '</span>');
       },
       'people.*.email': function( email ){
-         // we just found out this person has email, lets add it to their div:
-         currentPersonElement.append('<span class="email"> + email + </span>');
+         // we just found out this person has email, lets add
+         // it to their div:
+         currentPersonElement.append('<span class="email">' + email + '</span>');
       }
    });
 ```
@@ -260,14 +263,14 @@ If a term is prefixed with a dollar sign, instead of the element that matched, a
 given instead to the callback. 
 
 ``` js
-
-// the json from the server side looks like this:
+// the JSON from the server side looks like this:
 {"people": [
    {"name":"Baz", "age":34, "email": "baz@example.com"}
    {"name":"Boz", "age":24}
    {"name":"Bax", "age":98, "email": "bax@example.com"}}
 ]}
-
+```
+``` js
 // we are using Angular and have a controller:
 function PeopleListCtrl($scope) {
 

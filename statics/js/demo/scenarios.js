@@ -335,7 +335,49 @@ var scenarios = (function () {
                   }
                }
             ]
-         }
+         },
+         "narrative": [
+            {
+               "type": "narrativeItem",
+               "script": [
+                  {  eventName: "tunnel_activated"
+                  }
+               ],
+               "relationships": {
+                  "topic": "client"
+               },
+               "options": {
+                  "text": "At this point the mobile client is blocked from reaching the tower and loses connection," +
+                     "no more of the request can be loaded"
+               }
+            },
+            {
+               "type": "narrativeItem",
+               "script": [
+                  {  eventName: "client_requestFail_1"
+                  }
+               ],
+               "relationships": {
+                  "topic": "client"
+               },
+               "options": {
+                  "text": "Eventually the request times out. All the data loaded so far is discarded."
+               }
+            },            
+            {
+               "type": "narrativeItem",
+               "script": [
+                  {  eventName: "tunnel_deactivated"
+                  }
+               ],
+               "relationships": {
+                  "topic": "client"
+               },
+               "options": {
+                  "text": "Signal comes back"
+               }
+            }
+         ]
       },
 
       "mobile-fail-progressive": {

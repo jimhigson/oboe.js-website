@@ -48,7 +48,9 @@ Client.prototype.makeRequest = function(){
 Client.prototype.scheduleFail = function() {
     
     this.giveUpTimeout = this.schedule(function(){
-        
+
+        this.addToScript('requestFail', this.attemptNumber);
+       
         this.events('requestFail').emit();
         
         this.schedule(this.makeRequest.bind(this), this.retryAfter);

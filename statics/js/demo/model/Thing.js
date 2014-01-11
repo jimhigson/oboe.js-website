@@ -99,7 +99,7 @@ var Thing = (function(){
     Thing.prototype.addToScript = function(verb, secondParty) {
 
        var scriptEventName = scriptName(this, verb, secondParty);
-             
+           
        this.demo
             .script(scriptEventName)
             .emit();
@@ -129,10 +129,12 @@ var Thing = (function(){
     };
 
     Thing.prototype.activate = function(){
+       this.addToScript('activated');
        this.events('activated').emit();
     };
 
     Thing.prototype.deactivate = function(){
+       this.addToScript('deactivated');
        this.events('deactivated').emit();
     };
 

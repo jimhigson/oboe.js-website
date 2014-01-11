@@ -117,7 +117,7 @@ page as soon as possible.
 
 ``` js
 var currentPersonElement;
-oboe('//people.json')
+oboe('people.json')
    .path('people.*', function(){
       // we don't have the person's details yet but we know we
       // found someone in the json stream. We can eagerly put
@@ -152,7 +152,7 @@ I'll assume you already implemented a spinner
 ``` js
 MyApp.showSpinner('#foods');
 
-oboe('/myapp/things.json')
+oboe('/myapp/things')
    .node({
       '!.foods.*': function( foodThing ){
       
@@ -205,7 +205,7 @@ register a wide-matching pattern and use the path parameter to decide what to do
 }
 ```
 ``` js
-oboe('http://mysocialsite.example.com/homepage.json')
+oboe('http://mysocialsite.example.com/homepage')
    .node('!.*', function( moduleJson, path ){
    
       // This callback will be called with every direct child
@@ -274,7 +274,7 @@ given instead to the callback.
 // we are using Angular and have a controller:
 function PeopleListCtrl($scope) {
 
-   oboe('/myapp/things.json')
+   oboe('/myapp/things')
       .node('$people[*]', function( peopleLoadedSoFar ){
          
          // This callback will be called with a 1-length array,
@@ -293,7 +293,7 @@ function PeopleListCtrl($scope) {
 Like css4 stylesheets, this can also be used to express a 'containing' operator.
 
 ``` js
-oboe('/myapp/things.json')
+oboe('/myapp/things')
    .node('people.$*.email', function(personWithAnEmailAddress){
       
       // here we'll be called back with baz 
@@ -339,7 +339,7 @@ var things = d3.selectAll('rect.thing');
 // Every time we see a new thing in the data stream, use
 // d3 to add an element to our visualisation. This basic
 // pattern should work for most visualistions built in d3.
-oboe('/data/things.json')
+oboe('/data/things')
    .node('$things.*', function( thingsArray ){
             
       things.data(thingsArray)
@@ -356,7 +356,7 @@ oboe('/data/things.json')
 
 ```
 
-## Reading from any stream (Node.js only)
+## Reading from Node.js streams
 
 Instead of giving a url you can pass any [ReadableStream](http://nodejs.org/api/stream.html#stream_class_stream_readable).
 To load from a local file you'd do this:

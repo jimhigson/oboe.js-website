@@ -12,7 +12,8 @@ oboe({
    method: String,  // defaults to GET
    url: String,
    headers:{ key: value, ... },
-   body: Object|String   
+   body: Object|String,
+   cached: Boolean
 })
 ```
 

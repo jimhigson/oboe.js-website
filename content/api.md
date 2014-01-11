@@ -252,7 +252,7 @@ An object is given to the callback with fields:
 | `thrown`     | The error, if one was thrown 
 | `statusCode` | The status code, if the request got that far
 | `body`       | The response body for the error, if any
-| `jsonBody`   | If the server's error response was json, the parsed body.
+| `jsonBody`   | If the server's error response was JSON, the parsed body.
  
 ```js
 oboe('/content')

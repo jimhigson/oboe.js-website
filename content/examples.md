@@ -411,7 +411,7 @@ Example patterns
 | Pattern                  | Meaning |
 |------------------------- |--------------|
 | `*`                      | Every object, string, number etc found in the json stream  
-| `!`                      | The root object (fired when the whole response is available, like JSON.parse())
+| `!`                      | The root object. Fired when the whole response is available, like JSON.parse()
 | `!.foods.colour`         | The colours of the foods  
 | `person.emails[1]`       | The first element in the email array for each person
 | `{name email}`           | Any object with a name and an email property, regardless of where it is in the document  

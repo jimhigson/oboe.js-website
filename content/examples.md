@@ -8,7 +8,7 @@ later to make it progressive.
 
 ``` js
 oboe('/myapp/things.json')
-   .done( function(things) {
+   .done(function(things) {
    
       // we got it
    })
@@ -52,7 +52,7 @@ oboe('/myapp/things.json')
           
       console.log( 'Danger! stay away from', badThings.name);
    })   
-   .done( function(things){
+   .done(function(things){
    
       console.log(
          'there are', things.foods.length, 'things to eat',
@@ -319,7 +319,7 @@ app.get('/foo', function(req, res){
       .node('items.*', function( item ){
           res.render('item', item, writeHtml);
       })
-      .done( function() {
+      .done(function() {
           res.render('pagefooter', writeHtml);
       })
 });

@@ -13,7 +13,8 @@ oboe({
    headers:{ key: value, ... },
    body: Object|String   
 })
-
+```
+```js
 // DEPRECATED: The oboe.doFoo() methods will be removed for oboe v2.0.0:
 oboe.doGet(    String url )
 oboe.doDelete( String url )
@@ -32,9 +33,9 @@ If the body is given as an object it will be serialised using JSON.stringify.
 Method, body and headers arguments are all optional.
 
 If the cached option is set to false caching will be avoided by
-appending "_={timestamp}" to the URL's query string.
+appending `_={timestamp}` to the URL's query string.
 
-The above are supported under Browsers or Node.js. Under Node you can also
+Under Node you can also
 give Oboe a [ReadableStream](http://nodejs.org/api/stream.html#stream_class_stream_readable):
 
 ```js
@@ -44,7 +45,7 @@ oboe( ReadableStream source ) // Node.js only
 When reading from a stream http headers and status code will not be available
 via the `start` event or the `.header()` method.
  
-## .node() and .path()
+## Detecting nodes and paths
 
 When you make a request the returned Oboe instance exposes a few chainable methods:
 
@@ -246,7 +247,7 @@ oboe('/content')
    .fail(function(errorReport){
    
       if( errorReport.statusCode == 404 ){
-         console.error("no such content"); 
+         console.error('no such content'); 
       }
    });
 ```

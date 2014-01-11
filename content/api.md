@@ -1,6 +1,7 @@
 # API
 
-## The oboe object
+The oboe object
+---------------
 
 Start a new AJAX request by calling one of these methods:
 
@@ -45,7 +46,8 @@ oboe( ReadableStream source ) // Node.js only
 When reading from a stream http headers and status code will not be available
 via the `start` event or the `.header()` method.
  
-## Detecting nodes and paths
+Detecting nodes and paths
+-------------------------
 
 When you make a request the returned Oboe instance exposes a few chainable methods:
 
@@ -113,7 +115,8 @@ Alternatively, several patterns may be registered at once using either `.path` o
 });
 ``` 
 
-## .done()
+.done()
+------
 
 ```js
 .done(Function callback(Object wholeJson))
@@ -125,7 +128,8 @@ Register a callback for when the response is complete. Gets passed the entire
 JSON. Usually it is better to read the json in small parts than waiting for it
 to completely download but this is there when you need the whole picture.
 
-## .start()
+.start()
+--------
 
 ```js
 .start(Function callback(Object json))
@@ -137,7 +141,8 @@ Registers a listener for when the http response starts. When the
 callback is called we have the status code and the headers but no 
 content yet.
 
-## .header([name])
+.header([name])
+---------------
 
 ```js
 .header()
@@ -162,7 +167,8 @@ oboe('/content')
    })
 ```
 
-## .root()
+.root()
+-------
 
 ```js
 .root()
@@ -171,7 +177,8 @@ oboe('/content')
 At any time, call .root() on the oboe instance to get the JSON received so far. 
 If nothing has been received yet this will return undefined, otherwise it will give the root Object.
 
-## .forget()
+.forget()
+---------
 
 ```js
 .node('*', function(){
@@ -197,7 +204,8 @@ oboe('/content')
    })
 ```
 
-## .removeListener()
+.removeListener()
+-----------------
 
 ```js
 .removeListener('node', String pattern, callback)
@@ -212,7 +220,8 @@ Remove a `node`, `path`, `start`, `done`, or `fail` listener. From inside
 the listener itself `.forget()` is usually more convenient but this
 works from anywhere.
 
-## .abort()
+.abort()
+--------
 
 `.abort()` Stops the http call at any time. This is useful if you want to read a json response only as
 far as is necessary. You are guaranteed not to get any further .path() or .node() 
@@ -220,7 +229,8 @@ callbacks, even if the underlying xhr already has additional content buffered an
 the .done() callback will not fire.
 See [example above](#taking-ajax-only-as-far-as-is-needed).
 
-## .fail()
+.fail()
+-------
 
 Fetching a resource could fail for several reasons:
 
@@ -252,7 +262,8 @@ oboe('/content')
    });
 ```
 
-## Pattern matching
+Pattern matching
+----------------
 
 Oboe's pattern matching is a variation on [JSONPath](https://code.google.com/p/json-path/). It supports these clauses:
 

@@ -178,15 +178,16 @@ footer p a:hover {
    margin-right: 40px;
 }
 
-a {
+
+a, summary {
    @include link;
 }
 
-a:hover {
+a:hover, summary:hover {
    @include hovered-link;
 }
 
-a:active {
+a:active, summary:active {
    @include active-link;
 }
 

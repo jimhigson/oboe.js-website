@@ -14,10 +14,26 @@ Handlebars.registerHelper("demo", function(name) {
    return new Handlebars.SafeString( figureTemplate({name:name}) );
 });
 
-function outline(html){
+function postProcessMarkup($) {
+   $('pre').each(function(i, ele){
+      var code = $(ele);
+      
+      if( /deprecated/i.exec( code.text()) ) {
+         
+         var details = $('<details>');
+         code.replaceWith(details);
+         details
+            .append('<summary>Deprecated</summary>')
+            .append(code);
+      }
+   });
+   
+   return $;
+}
 
-   var $ = cheerio.load(html),
-       mainHeadingEle = $('h1').first(),
+function outline($){
+
+   var mainHeadingEle = $('h1').first(),
    
        mainHeading = {
          text: mainHeadingEle.text(),
@@ -64,7 +80,8 @@ function readContent(requestedMarkdown, opts, callback) {
               markDownWithGithubLink = markdownStr + MD_POSTFIX,
               filledInMarkdown = Handlebars.compile(markDownWithGithubLink)(opts),
               html = supermarked(filledInMarkdown, {ignoreMath:true}),
-              response = outline(html);
+              $ = postProcessMarkup(cheerio.load(html)),
+              response = outline($);
               
           response.status = status;    
           

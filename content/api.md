@@ -15,8 +15,10 @@ oboe({
    body: Object|String   
 })
 ```
+
 ```js
-// DEPRECATED: The oboe.doFoo() methods will be removed for oboe v2.0.0:
+// The oboe.doFoo() methods are deprecated 
+// and will be removed for oboe v2.0.0:
 oboe.doGet(    String url )
 oboe.doDelete( String url )
 oboe.doPost(   String url, Object|String body )

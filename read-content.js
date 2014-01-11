@@ -79,7 +79,7 @@ function readContent(requestedMarkdown, opts, callback) {
           var markdownStr = markdownBuffer.toString(),
               markDownWithGithubLink = markdownStr + MD_POSTFIX,
               filledInMarkdown = Handlebars.compile(markDownWithGithubLink)(opts),
-              html = supermarked(filledInMarkdown, {ignoreMath:true}),
+              html = supermarked(filledInMarkdown, {ignoreMath:true, smartypants:true}),
               $ = postProcessMarkup(cheerio.load(html)),
               response = outline($);
               

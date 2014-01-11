@@ -354,22 +354,23 @@ Because explicit loops are replaced with declarations the code is usually
 about the same length as if you'd done JSON.parse:
 
 ``` js
-fs.readFile('/home/me/secretPlans.json', function( err, plansJson ){     
-   if( err ) {
-      console.log("Drat! Foiled again!");
-      return;
-   }
-   var plans = JSON.parse(err, plansJson);
-   
-   plans.schemes.forEach(function( scheme ){
-      console.log('Aha! ' + scheme);   
-   });   
-   plans.plottings.forEach(function(deviousPlot){
-      console.log('Hmmm! ' + deviousPlot);
-   });
+fs.readFile('/home/me/secretPlans.json',
+   function(err, plansJson){     
+      if(err) {
+         console.log("Drat! Foiled again!");
+         return;
+      }
+      var plans = JSON.parse(err, plansJson);
       
-   console.log("*twiddles mustache*");   
-});
+      plans.schemes.forEach(function(scheme){
+         console.log('Aha! ' + scheme);   
+      });   
+      plans.plottings.forEach(function(deviousPlot){
+         console.log('Hmmm! ' + deviousPlot);
+      });
+         
+      console.log("*twiddles mustache*");   
+   });
 ```
 
 ## Rolling back on error

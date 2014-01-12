@@ -5,7 +5,7 @@ Stop waiting for requests to complete by using JSON content as soon as
 it arrives. Select any object, array, or value from the http response
 while it is ongoing.
 
-<figure data-demo="aggregated-progressive"></figure>
+{{demo "aggregated-progressive"}}
 
 For more animations see *“[why Stream-loading?](/why/)”*.
 

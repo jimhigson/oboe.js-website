@@ -62,8 +62,8 @@ oboe('/myapp/things.json')
 
 ## Hanging up when we have what we need
 
-We can improve on the example above. Since we only care about the foods object and 
-not the non-foods we can hang up as soon as we have the foods, reducing our precious 
+We can improve on the example above. Since we only care about the foods object and
+not the non-foods we can hang up as soon as we have the foods, reducing our precious
 download footprint.
 
 ``` js
@@ -81,9 +81,9 @@ oboe('/myapp/things.json')
 
 ## Duck typing
 
-Sometimes it is more useful to say *what you are trying to find* than *where you'd like to find it*. In these cases,
-[duck typing](http://en.wikipedia.org/wiki/Duck_typing) is more useful than a specifier based on paths.
- 
+Sometimes it is more useful to say *what you are trying to find* than *where you'd like to find it*.
+In these cases, [duck typing](http://en.wikipedia.org/wiki/Duck_typing) is more useful than a
+specifier based on paths.
 
 ``` js
 oboe('/myapp/things.json')

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+pandoc -o pdf/examples.pdf content/examples.md
+pandoc -o pdf/api.pdf      content/api.md
+pandoc -o pdf/why.pdf      content/why.md

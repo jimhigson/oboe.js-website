@@ -5,21 +5,23 @@ Versions
 
 The latest stable version is *{{latestTag}}*.
 
+Older versions are [available on Github]({{RAW_REPO_LOCATION}}/releases).
+
 Downloading for the Browser
 ---------------------------
 
 Grab one of these files:
  
- * [oboe-browser.js]({{releasedJs}}/oboe-browser.js) (Dev)
+ * [oboe-browser.js]({{releasedJs}}/oboe-browser.js) (For development)
  * [oboe-browser.min.js]({{releasedJs}}/oboe-browser.min.js) (Minified for production) 
  
-Or if dependency management is your thing you can fetch Oboe using [bower](http://bower.io/).
+If you prefer to use [bower](http://bower.io/) for JS dependency management you can fetch Oboe like this:
 
 ``` bash
 $ bower install oboe
 ```
 
-If there is no AMD present, once loaded you can start using the global `oboe` object.
+If there is no AMD present, once the Oboe Javascript is loaded you can start using the global `oboe` object.
 
 Using Oboe with AMD
 ---------------

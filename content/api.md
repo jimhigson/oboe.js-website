@@ -82,7 +82,7 @@ The parameters to callback are:
 | `node`      | The node that was found in the JSON stream. This can be any valid JSON type - `Array`, `Object`, `String`, `true`, `false` or `null`. 
 | `path`      | An array of strings describing the path from the root of the JSON to the location where the node was found
 | `ancestors` | An array of node's ancestors. `ancestors[ancestors.length-1]` is the parent object, `ancestors[ancestors.length-2]` is the grandparent and so on.
- 
+
 ```js
 .path( String pattern, 
        Function callback( thingFound, String[] path, Object[] ancestors)
@@ -192,8 +192,8 @@ de-registers the currently executing callback.
 
 The code below reads from an array at the root of the response but stops
 using the objects found after the tenth item:
- 
- ```js
+
+```js
 oboe('/content')
    .on('node:!.*', function(item, path){
       
@@ -247,13 +247,13 @@ Fetching a resource could fail for several reasons:
 
 An object is given to the callback with fields:
 
-|              |              |     
-|--------------|--------------|
-| `thrown`     | The error, if one was thrown 
-| `statusCode` | The status code, if the request got that far
-| `body`       | The response body for the error, if any
-| `jsonBody`   | If the server's error response was JSON, the parsed body.
- 
+| Field        | Meaning                                                 
+|--------------|---------------------------------------------------------
+| `thrown`     | The error, if one was thrown                            
+| `statusCode` | The status code, if the request got that far            
+| `body`       | The response body for the error, if any                 
+| `jsonBody`   | If the server's error response was JSON, the parsed body
+
 ```js
 oboe('/content')
    .fail(function(errorReport){

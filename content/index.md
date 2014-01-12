@@ -1,7 +1,7 @@
 Streaming JSON loading for Node and browsers
 ============================================
 
-Stop waiting for requests to complete by using json content as soon as
+Stop waiting for requests to complete by using JSON content as soon as
 it arrives. Select any object, array, or value from the http response
 while it is ongoing.
 

@@ -126,6 +126,12 @@ if( environment == 'dev' ) {
    })
 }
 
+// As a catch-all generate a 404.
+app.use(function(req,res){
+   req.params = {page:'404'};
+   respondWithMarkdown(req, res, readMarkdownFromFile);
+});
+
 app.listen(PORT);
 
 console.log('started on port', PORT.cyan);

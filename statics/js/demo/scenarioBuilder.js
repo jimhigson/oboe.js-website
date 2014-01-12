@@ -23,7 +23,8 @@ var getScenario = (function () {
     
         relay: {
             options:{
-                "timeBetweenPackets": 500
+                "timeBetweenPackets": 500,
+                zoom: 1
             },
             locations:{
                 where: {x: 235, y: 90}
@@ -68,7 +69,8 @@ var getScenario = (function () {
                 "timeBetweenPackets": 500,
                 "initialDelay": 500,
                 "messageSize": 10,
-                packetMode:'live'
+                packetMode:'live',
+                zoom: 1
             },
             locations:{
                 where: {x: 40, y: 55}

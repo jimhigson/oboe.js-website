@@ -544,8 +544,8 @@ var scenarios = (function () {
             {
                "type": "narrativeItem",
                "script": [
-                  {  eventName: "server_sent_response5",
-                     delay: seconds(1)
+                  {  eventName: "server_sent_response6",
+                     delay: seconds(0.15)
                   }
                ],
                "relationships": {

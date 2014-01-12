@@ -1,6 +1,8 @@
-# Examples
+Examples
+========
 
-## A simple download
+A simple download
+-----------------
 
 It isn't really what Oboe is for but you can use it as a simple AJAX library.
 This might be good to drop it into an existing application so you can refactor
@@ -18,7 +20,8 @@ oboe('/myapp/things.json')
    });
 ```
 
-## Using objects from the JSON stream
+Using objects from the JSON stream
+----------------------------------
 
 Say we have a resource called things.json that we need to fetch over AJAX:
 ``` js
@@ -60,7 +63,8 @@ oboe('/myapp/things.json')
    });
 ```
 
-## Hanging up when we have what we need
+Hanging up when we have what we need
+------------------------------------
 
 We can improve on the example above. Since we only care about the foods object and
 not the non-foods we can hang up as soon as we have the foods, reducing our precious
@@ -79,7 +83,8 @@ oboe('/myapp/things.json')
    });
 ```
 
-## Duck typing
+Duck typing
+-----------
 
 Sometimes it is more useful to say *what you are trying to find* than *where you'd like to find it*.
 In these cases, [duck typing](http://en.wikipedia.org/wiki/Duck_typing) is more useful than a
@@ -93,7 +98,8 @@ oboe('/myapp/things.json')
    };
 ```
 
-## Detecting strings, numbers
+Detecting strings, numbers
+--------------------------
 
 Want to detect strings or numbers instead of objects? Oboe doesn't care about the 
 types in the json so the syntax is the same:
@@ -109,7 +115,8 @@ oboe('/myapp/socialgraph.json')
       });
 ```  
 
-## Reacting before we get the whole object
+Reacting before we get the whole object
+---------------------------------------
 
 As well as `.node`, you can use `.path` to be notified when the path is first found, even though we don't yet 
 know what will be found there. We might want to eagerly create elements before we have all the content to get them on the 
@@ -140,7 +147,8 @@ oboe('people.json')
    });
 ```
 
-## Giving some visual feedback as a page is updating
+Giving some visual feedback as a page is updating
+-------------------------------------------------
 
 If we're doing progressive rendering to go to a new page in a single-page web app, we probably want to put some kind of
 indication on the page as the parts load.
@@ -171,7 +179,8 @@ oboe('/myapp/things')
    });   
 ```
 
-## The path parameter
+The path parameter
+------------------
 
 The callback is also given the path to the node that it found in the json. It is sometimes preferable to
 register a wide-matching pattern and use the path parameter to decide what to do instead of
@@ -222,7 +231,8 @@ oboe('http://mysocialsite.example.com/homepage')
 
 ```
 
-## Deregistering a callback
+Deregistering a callback
+------------------------
 
 Calling `this.forget()` from inside a callback deregisters that listener.
 
@@ -250,7 +260,8 @@ oboe('/listOfPlaces')
    });
 ```
 
-## Css4 style patterns
+Css4 style patterns
+-------------------
 
 Sometimes when downloading an array of items it isn't very useful to be given each element individually. 
 It is easier to integrate with libraries like [Angular](http://angularjs.org/) if you're given an array 
@@ -356,7 +367,8 @@ oboe('/data/things')
 
 ```
 
-## Reading from Node.js streams
+Reading from Node.js streams
+----------------------------
 
 Instead of giving a url you can pass any [ReadableStream](http://nodejs.org/api/stream.html#stream_class_stream_readable).
 To load from a local file you'd do this:
@@ -402,7 +414,8 @@ fs.readFile('/home/me/secretPlans.json',
    });
 ```
 
-## Rolling back on error
+Rolling back on error
+---------------------
 
 [The fail function](#fail) gives a callback for when something goes wrong.
 If you started putting elements on the page and the connection

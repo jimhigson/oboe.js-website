@@ -60,22 +60,20 @@ function outline($){
 
 function readContent(requestedMarkdown, opts, callback) {
 
-   function markdownPath(markdownFileName) {
-      return 'content/' + markdownFileName + '.md';
+   function markdownPath(pageName) {
+      return 'content/' + pageName + '.md';
    }
-
-   opts.page = requestedMarkdown;
 
    fs.exists(markdownPath(requestedMarkdown), function(requestedMarkdownExists){
       
-      var fileToRead = requestedMarkdownExists? 
-                              markdownPath(requestedMarkdown) 
-                           :  'content/404.md';
+      var pageNameToRead = requestedMarkdownExists? requestedMarkdown : '404',
+          markdownToRead = markdownPath(pageNameToRead),
+          status = requestedMarkdownExists? 200 : 404;
+      
+      opts.page = pageNameToRead;
                            
-      var status = requestedMarkdownExists? 200 : 404;                           
-
       // fileToRead should point to legit page by now (possibly 404)
-      fs.readFile(fileToRead, function(err, markdownBuffer){
+      fs.readFile(markdownToRead, function(err, markdownBuffer){
        
           var markdownStr = markdownBuffer.toString(),
               markDownWithGithubLink = markdownStr + MD_POSTFIX,

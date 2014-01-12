@@ -33,7 +33,8 @@ var getScenario = (function () {
 
         cache: {
             options:{
-                "timeBetweenPackets": 500
+                "timeBetweenPackets": 500,
+                zoom:1
             },
             locations:{
                 where: {x: 235, y: 90}

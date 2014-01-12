@@ -9,10 +9,11 @@ var Thing = (function(){
 
         this.scheduler = new Scheduler(this, this.events);
 
-       if (options) {
-          this.label = options.label;
-          this.startHidden = options.startHidden;
-       }
+        if (options) {
+           this.label = options.label;
+           this.startHidden = options.startHidden;
+           this.zoom = options.zoom;
+        }
         
         this.events('reset').on(function(){
             this.scheduler.cancelTimeouts();

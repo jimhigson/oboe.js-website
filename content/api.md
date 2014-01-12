@@ -228,7 +228,6 @@ works from anywhere.
 far as is necessary. You are guaranteed not to get any further .path() or .node() 
 callbacks, even if the underlying xhr already has additional content buffered and
 the .done() callback will not fire.
-See [example above](#taking-ajax-only-as-far-as-is-needed).
 
 .fail()
 -------

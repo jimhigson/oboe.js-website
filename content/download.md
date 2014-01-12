@@ -5,7 +5,7 @@ Versions
 
 The latest stable version is *{{latestTag}}*.
 
-Older versions are [available on Github]({{RAW_REPO_LOCATION}}/releases).
+Older versions are [available via Github]({{repo}}/releases).
 
 Downloading for the Browser
 ---------------------------

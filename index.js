@@ -18,7 +18,8 @@ var express = require('express'),
     CSS_STYLESHEETS = environment == 'prod'? ["all-min.css"] : ["all.css"],
         
     LATEST_TAG = 'v1.12.0',
-    RAW_REPO_LOCATION = 'https://raw.github.com/jimhigson/oboe.js';
+    RAW_REPO_LOCATION = 'https://raw.github.com/jimhigson/oboe.js',
+    REPO_LOCATION = 'https://github.com/jimhigson/oboe.js';
 
 require('colors');
 
@@ -43,7 +44,8 @@ function defaultOpts(opts) {
     opts.scripts     = SCRIPTS;
     opts.stylesheets = CSS_STYLESHEETS;
     opts.latestTag   = LATEST_TAG;
-    opts.repo = RAW_REPO_LOCATION;
+    opts.repo = REPO_LOCATION;
+    opts.rawRepo = RAW_REPO_LOCATION;
     opts.logoSize = 64;
     opts.releasedJs = RAW_REPO_LOCATION + '/' + LATEST_TAG + '/dist/';
     

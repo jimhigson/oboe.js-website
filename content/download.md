@@ -23,8 +23,8 @@ $ bower install oboe
 
 If there is no AMD present, once the Oboe Javascript is loaded you can start using the global `oboe` object.
 
-Using Oboe with AMD
----------------
+Loading Oboe via AMD
+--------------------
 
 If AMD is detected Oboe will `define` itself instead of adding to the 
 global namespace.

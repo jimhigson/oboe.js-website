@@ -47,7 +47,7 @@ function defaultOpts(opts) {
     opts.repo = REPO_LOCATION;
     opts.rawRepo = RAW_REPO_LOCATION;
     opts.logoSize = 64;
-    opts.releasedJs = RAW_REPO_LOCATION + '/' + LATEST_TAG + '/dist/';
+    opts.releasedJs = RAW_REPO_LOCATION + '/' + LATEST_TAG + '/dist';
     
     return opts;
 }

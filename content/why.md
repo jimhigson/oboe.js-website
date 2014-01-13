@@ -40,6 +40,7 @@ saved.
 Streaming one, with a server writing out using GSON or Node.js. Although
 this is a stream, the contents when it eventually completes are 100%
 valid JSON and is compatible with standard tools.
+Compatible with legacy or non-interactive tools.
 
 {{demo "streaming-ajax-progressive"}}
 

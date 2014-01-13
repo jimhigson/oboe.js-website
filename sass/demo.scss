@@ -193,8 +193,11 @@ text.label {
 }
 
 .browser .progressBar .space{
-  fill: $demoBackground;
+  fill: $shadow;
   opacity:0.8;
+}
+.map .progressBar .space{
+  fill: $demoBackground;
 }
 
 .browser .progressBar{

@@ -9,7 +9,7 @@ var Client = extend( PacketHolder, function Client(name, locations, options) {
 
     this.parser = Parser(options.parseStrategy);
     this.parseStrategy = options.parseStrategy;
-
+   
     this.parser.events('packetParsed').on( function(packet) {
         this.events('gotData').emit(packet);
         this.receivedUpTo = packet.ordering.i;

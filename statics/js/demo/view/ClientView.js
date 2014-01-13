@@ -8,7 +8,8 @@ var ClientView = (function(){
             browserTemplateName = 'client-' + client.page;
         
         this.stampContentsFromTemplate( browserContentsPaneSelector, browserTemplateName);
-    
+        addClass(jDom, client.page);
+       
         this.moveTo(client.locations.where);
 
         var showSpinner = this.showSpinner.bind(this),

@@ -25,7 +25,7 @@ DemoView.prototype.withNarrativeView = function(narrativeView){
     this.narrativeView = narrativeView;
 };
 
-DemoView.prototype.resizeWithWindow = function(ModelType, ViewType){
+DemoView.prototype.resizeWithWindow = function(){
     $( window ).resize(function() {
         this.setDimensions(this.baseHeight, this.scalingFactor());
     }.bind(this));

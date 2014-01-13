@@ -1,4 +1,5 @@
-$demoBackground: $backgroundColor; 
+$demoBackground: $backgroundColor;
+$labelColor: $shadow;
 
 #demoTemplateHolder {
   display:none;
@@ -159,7 +160,7 @@ circle.aerial,
 }
 
 .playing text.label {
-  fill: $shadow;
+  fill: $labelColour;
 }
 
 text.label {

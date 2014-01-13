@@ -58,8 +58,13 @@ $categoricalColors: $categoricalBlue $categoricalOrange $categoricalGreen $categ
   transition: all 0s;
 }
 
+$themeFont: "Computer Modern";
+$themeMonoFont: "Computer Modern mono";
+$themeItalicFont: "Computer Modern italic";
+
+
 @font-face {
-  font-family: "Computer Modern mono";
+  font-family: $themeMonoFont;
   src: url("/type/cmuntt.eot");
   src: url("/type/cmuntt.ttf");
   src: url("/type/cmuntt.svg");
@@ -67,7 +72,7 @@ $categoricalColors: $categoricalBlue $categoricalOrange $categoricalGreen $categ
 }
 
 @font-face {
-  font-family: "Computer Modern";
+  font-family: $themeFont;
   src: url("/type/cmunrm.eot");
   src: url("/type/cmunrm.ttf");
   src: url("/type/cmunrm.svg");
@@ -75,7 +80,7 @@ $categoricalColors: $categoricalBlue $categoricalOrange $categoricalGreen $categ
 }
 
 @font-face {
-  font-family: "Computer Modern italic";
+  font-family: $themeItalicFont;
   src: url("/type/cmunti.eot");
   src: url("/type/cmunti.ttf");
   src: url("/type/cmunti.svg");

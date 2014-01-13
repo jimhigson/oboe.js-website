@@ -166,7 +166,7 @@ circle.aerial,
 text.label {
   text-anchor:middle;
   fill: $demoBackground;
-  font-family: "Computer Modern italic";
+  font-family: $themeItalicFont;
   transition: fill 1s;
 }
 

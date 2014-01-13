@@ -66,12 +66,12 @@ input[type="submit"].button {
 body {
    background: $backgroundColor;
    color: $nearBlack;
-   font-family: Computer Modern, georgia, serif;
+   font-family: $themeFont, georgia, serif;
    font-size: 120%;
 }
 
 em {
-   font-family: Computer Modern italic;
+   font-family: $themeItalicFont;
    font-style: normal;
 }
 

@@ -9,7 +9,7 @@ var supermarked = require('supermarked'),
        '<figure id="demo-{{name}}" data-demo="{{name}}"></figure>'
     ),
     MARKDOWN_OPTS = {ignoreMath:true, smartypants:true, gfm:true, tables:true},
-    MD_PREFIX = '{{#if pdfLink}}This page is also [available as a PDF]({{pdfLink}}).{{/if}}\n',
+    MD_PREFIX = '{{#if pdfLink}}This page is [available as a PDF]({{pdfLink}}).{{/if}}\n',
     MD_POSTFIX = fs.readFileSync('content/postfix.md');
 
 Handlebars.registerHelper("demo", function(name) {

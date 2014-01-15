@@ -294,8 +294,8 @@ has the advantage that it can be called from anywhere.
 
 Calling `.abort()` stops an ongoing HTTP call at any time. 
 You are guaranteed not to get any further `path` or `node` 
-callbacks, even if the underlying transport has unparsed buffered content. After calling `.abort()`
-the `done` event will not fire.
+callbacks, even if the underlying transport has unparsed buffered content.
+After calling `.abort()` the `done` event will not fire.
 
 Under Node.js, if the Oboe instance is reading from a stream that it did not create
 this method deregisters all listeners but it is the caller's responsibility to

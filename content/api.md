@@ -27,17 +27,19 @@ oboe.doPost(   url, body )
 oboe.doPut(    url, body )
 oboe.doPatch(  url, body )
 
-oboe.doGet(    {url:url, headers:headers, cached:Boolean} )
-oboe.doDelete( {url:url, headers:headers, cached:Boolean} )
-oboe.doPost(   {url:url, headers:headers, cached:Boolean, body:body} )
-oboe.doPut(    {url:url, headers:headers, cached:Boolean, body:body} )
-oboe.doPatch(  {url:url, headers:headers, cached:Boolean, body:body} )
+oboe.doGet(    {url:String, headers:Object, cached:Boolean} )
+oboe.doDelete( {url:String, headers:Object, cached:Boolean} )
+oboe.doPost(   {url:String, headers:Object, cached:Boolean, body:String|Object} )
+oboe.doPut(    {url:String, headers:Object, cached:Boolean, body:String|Object} )
+oboe.doPatch(  {url:String, headers:Object, cached:Boolean, body:String|Object} )
 ```
 
 The `method`, `headers`, `body`, and `cached` arguments are optional.
 
 * If no method is given Oboe will default to `GET`.
-* If `body` is given as an object it will be stringified using `JSON.stringify` prior to sending.
+* If `body` is given as an object it will be stringified using `JSON.stringify` 
+prior to sending. The Content-Type request header will automatically be set to `text/json`
+unless a different value for this header is also given.
 * If the cached option is given as `false` cachebusting will be applied by
 appending `_={timestamp}` to the URL's query string. Any other value will be
 ignored.
@@ -58,11 +60,10 @@ oboe( stream )
 node event
 ----------
 
-An Oboe instance emits `node` and `path` events as items of interest are detected in the stream.
-The methods `.node()`, `.path()`, and `.on` may be used to register callbacks which will later be notified 
-if suitable nodes and paths are found.
-A specifier for which items are interesting to the caller is given using JSONPath as the listeners
-are registered.
+Oboe instances emit `node` events when items of interest are parsed from their stream.
+The methods `.node()` and `.on` are used to register interest in particular nodes by giving callbacks
+which will be notified when matching nodes are found.
+A specifier for which items are interesting to the caller is given as a pattern using a variant of JSONPath.
 
 ```js
 .on('node', pattern, callback)
@@ -79,14 +80,14 @@ are registered.
 });
 ```
 
-When the callback is notified, the context - `this` - will be the Oboe instance,
+When the callback is notified, the context, `this`, is the Oboe instance,
 unless it is bound otherwise. The callback receives three parameters: 
 
 |             |              |     
 |-------------|--------------|
-| `node`      | The node that was found in the JSON stream. This can be any valid JSON type - `Array`, `Object`, `String`, `true`, `false` or `null` 
+| `node`      | The node that was found in the JSON stream. This can be any valid JSON type - `Array`, `Object`, `String`, `Boolean` or `null`
 | `path`      | An array of strings describing the path from the root of the JSON to the matching item. For example, if the match is at `(root).foo.bar` this array will equal `['foo', 'bar']`
-| `ancestors` | An array of the found item's ancestors such that `ancestors[0]` is the JSON root, `ancestors[ancestors.length-1]` is the parent object, and `ancestors[ancestors.length-2]` is the grandparent. These ancestors will be *as complete as possible* given the data which has so far been read from the stream but because Oboe.js is a streaming parser may not yet have all properties.
+| `ancestors` | An array of the found item's ancestors such that `ancestors[0]` is the JSON root, `ancestors[ancestors.length-1]` is the parent object, and `ancestors[ancestors.length-2]` is the grandparent. These ancestors will be as complete as possible given the data which has so far been read from the stream but because Oboe.js is a streaming parser may not yet have all properties
 
 ```js
 oboe('friends.json')
@@ -98,7 +99,7 @@ oboe('friends.json')
 path event
 ----------
 
-Oboe `path` events are similar to `node` events except that they are emitted as soon as matching paths are found,
+Path events are similar to [node events](#node-event) except that they are emitted as soon as matching paths are found,
 without waiting for the thing at the path to be revealed.
 
 
@@ -155,8 +156,8 @@ start event
 .on('start', callback)
 ```
 
-The `start` event is fired once Oboe
-has parsed the status code and the response headers but not yet any content 
+Start events are fired when Oboe
+has parsed the status code and the response headers but has not yet received any content 
 from the response body.
 
 |             |          |                             
@@ -164,14 +165,14 @@ from the response body.
 | `status`    | `Number` | HTTP status code 
 | `headers`   | `Object` | Object of response headers
 
-This event is never fired for non-HTTP streams.
-
 ```js
 oboe('resource.json')
    .on('start', function(status, headers){
       console.log('Resource cached for', headers.Age, 'secs');
    });
 ```
+
+Under Node.js this event is never fired for [BYO streaming](#byo-stream).
 
 fail event
 -------
@@ -289,7 +290,7 @@ oboe('/content')
 .removeListener('fail', callback)
 ```
 
-Remove a `node`, `path`, `start`, `done`, or `fail` listener.
+Removes a listener.
 
 From inside the node and path listeners calling [.forget()](#-forget-)
 is usually more convenient since it is not required to store a reference

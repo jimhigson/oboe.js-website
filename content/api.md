@@ -7,13 +7,13 @@ Oboe.js exposes only one function, `oboe`, which is used to instantiate a new Ob
 and normally starts a new HTTP request.
 
 ```js
-oboe( String url ) // makes a GET request
+oboe( String url )
       
 oboe({
-   method: String,  // defaults to GET
+   method: String,
    url: String,
-   headers:{ key: value, ... },
-   body: Object|String,
+   headers: Object,
+   body: String|Object,
    cached: Boolean
 })
 ```
@@ -34,18 +34,25 @@ oboe.doPut(    {url:url, headers:headers, cached:Boolean, body:body} )
 oboe.doPatch(  {url:url, headers:headers, cached:Boolean, body:body} )
 ```
 
-The `method`, `body`, and `headers` arguments are optional.
-If `body` is given as an object it will be stringified prior to sending. 
-If the cached option is set to false cachebusting will be applied by
-appending `_={timestamp}` to the URL's query string.
+The `method`, `headers`, `body`, and `cached` arguments are optional.
 
-Under Node.js you may also pass oboe an arbitrary
+* If no method is given Oboe will default to `GET`.
+* If `body` is given as an object it will be stringified using `JSON.stringify` prior to sending.
+* If the cached option is given as `false` cachebusting will be applied by
+appending `_={timestamp}` to the URL's query string. Any other value will be
+ignored.
+
+BYO stream
+----------
+
+Under Node.js you may also pass `oboe` an arbitrary
 [ReadableStream](http://nodejs.org/api/stream.html#stream_class_stream_readable)
-as the sole argument. In this case it is your responsibility to set up the stream and Oboe will not initiate 
+as the sole argument. In this case Oboe will read JSON from the given stream.
+It is your responsibility to set up the stream and Oboe will not initiate 
 a new HTTP request on your behalf.
 
 ```js
-oboe( ReadableStream source ) // Node.js only
+oboe( stream )
 ```
  
 node event

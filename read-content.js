@@ -4,6 +4,7 @@ var supermarked = require('supermarked'),
     fs = require('fs'),
     cheerio = require('cheerio'),
     Handlebars = require('handlebars'),
+    barrier = require('./barrier.js'),
     figureTemplate = Handlebars.compile(
        '<figure id="demo-{{name}}" data-demo="{{name}}"></figure>'
     ),
@@ -24,7 +25,7 @@ function postProcessMarkup($) {
          var details = $('<details>');
          code.replaceWith(details);
          details
-            .append('<summary>Deprecated</summary>')
+            .append('<summary>Deprecated API</summary>')
             .append(code);
       }
    });
@@ -60,6 +61,10 @@ function outline($){
 
 function readContent(requestedMarkdown, opts, callback) {
 
+   function pdfPath(pageName) {
+      return 'pdf/' + pageName + '.pdf';
+   }
+   
    function markdownPath(pageName) {
       return 'content/' + pageName + '.md';
    }
@@ -68,24 +73,24 @@ function readContent(requestedMarkdown, opts, callback) {
       
       var pageNameToRead = requestedMarkdownExists? requestedMarkdown : '404',
           markdownToRead = markdownPath(pageNameToRead),
-          status = requestedMarkdownExists? 200 : 404;
-      
-      opts.page = pageNameToRead;
+          markdownStr,
+          bar = barrier(function(){
+            var markDownWithGithubLink = markdownStr + MD_POSTFIX,
+                filledInMarkdown = Handlebars.compile(markDownWithGithubLink)(opts),
+                html = supermarked(filledInMarkdown, MARKDOWN_OPTS),
+                $ = postProcessMarkup(cheerio.load(html)),
+                response = outline($);
+
+            response.status = requestedMarkdownExists? 200 : 404; 
+             
+            callback( response );
+         });
                            
       // fileToRead should point to legit page by now (possibly 404)
-      fs.readFile(markdownToRead, function(err, markdownBuffer){
+      fs.readFile(markdownToRead, bar.add(function(err, markdownBuffer){
        
-          var markdownStr = markdownBuffer.toString(),
-              markDownWithGithubLink = markdownStr + MD_POSTFIX,
-              filledInMarkdown = Handlebars.compile(markDownWithGithubLink)(opts),
-              html = supermarked(filledInMarkdown, MARKDOWN_OPTS),
-              $ = postProcessMarkup(cheerio.load(html)),
-              response = outline($);
-              
-          response.status = status;    
-          
-          callback( response );
-       });   
+         markdownStr = markdownBuffer.toString();
+      }));
    });
 }
 

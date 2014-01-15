@@ -9,6 +9,7 @@ var supermarked = require('supermarked'),
        '<figure id="demo-{{name}}" data-demo="{{name}}"></figure>'
     ),
     MARKDOWN_OPTS = {ignoreMath:true, smartypants:true, gfm:true, tables:true},
+    MD_PREFIX = '{{#if pdfLink}}This page is also [available as a PDF]({{pdfLink}}).{{/if}}\n',
     MD_POSTFIX = fs.readFileSync('content/postfix.md');
 
 Handlebars.registerHelper("demo", function(name) {
@@ -61,31 +62,43 @@ function outline($){
 
 function readContent(requestedMarkdown, opts, callback) {
 
-   function pdfPath(pageName) {
+   function pdfFile(pageName) {
       return 'pdf/' + pageName + '.pdf';
    }
+
+   function pdfUrl(pageName) {
+      return '/' + pageName + '.pdf';
+   }   
    
-   function markdownPath(pageName) {
+   function markdownFile(pageName) {
       return 'content/' + pageName + '.md';
    }
 
-   fs.exists(markdownPath(requestedMarkdown), function(requestedMarkdownExists){
+   fs.exists(markdownFile(requestedMarkdown), function(requestedMarkdownExists){
       
       var pageNameToRead = requestedMarkdownExists? requestedMarkdown : '404',
-          markdownToRead = markdownPath(pageNameToRead),
+          markdownToRead = markdownFile(pageNameToRead),
           markdownStr,
           bar = barrier(function(){
-            var markDownWithGithubLink = markdownStr + MD_POSTFIX,
-                filledInMarkdown = Handlebars.compile(markDownWithGithubLink)(opts),
+             
+            var surroundedMarkdown = MD_PREFIX + markdownStr + MD_POSTFIX,
+                filledInMarkdown = Handlebars.compile(surroundedMarkdown)(opts),
                 html = supermarked(filledInMarkdown, MARKDOWN_OPTS),
                 $ = postProcessMarkup(cheerio.load(html)),
                 response = outline($);
 
+            console.log(filledInMarkdown);
             response.status = requestedMarkdownExists? 200 : 404; 
              
             callback( response );
          });
-                           
+
+      fs.exists(pdfFile(requestedMarkdown), bar.add(function(exists){
+         if( exists ) {
+            opts.pdfLink = pdfUrl(requestedMarkdown);
+         }
+      }));
+      
       // fileToRead should point to legit page by now (possibly 404)
       fs.readFile(markdownToRead, bar.add(function(err, markdownBuffer){
        

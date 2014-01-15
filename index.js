@@ -96,8 +96,8 @@ function readMarkdownFromFile(req, opts, callback) {
 
 app
    .use(gzippo.staticGzip('statics')) // gzip for static
+   .use(gzippo.staticGzip('pdf'))
    .use(gzippo.staticGzip('bower_components')) // gzip for static
-   .use(slashes())
    .use(express.compress()) // gzip for dynamic
    .get('/', function(req, res){
         respondWithMarkdown(req, res, readMarkdownFromFile,

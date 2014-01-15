@@ -7,8 +7,6 @@ while it is ongoing.
 
 {{demo "aggregated-progressive"}}
 
-For more animations see *“[why Stream-loading?](/why/)”*.
-
 -   React quickly, even downloading large content on slow networks.
 
 -   Connect to any standard JSON REST service or streaming REST service

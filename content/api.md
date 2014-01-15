@@ -48,7 +48,7 @@ BYO stream
 Under Node.js you may also pass `oboe` an arbitrary
 [ReadableStream](http://nodejs.org/api/stream.html#stream_class_stream_readable)
 as the sole argument. In this case Oboe will read JSON from the given stream.
-It is your responsibility to set up the stream and Oboe will not initiate 
+It is your responsibility to initiate the stream and Oboe will not initiate 
 a new HTTP request on your behalf.
 
 ```js

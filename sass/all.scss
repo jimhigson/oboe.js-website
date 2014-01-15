@@ -13,6 +13,9 @@ $highlight:             #74b58c;
 $highlightHover:        #4a765a;
 $highlightPressed:      #569a6e;
 
+$linkColor:             $highlight;
+$linkHoverColor:        $highlightHover;
+
 $minSizeForTwoCol:         950px;
 $sizeRequiringPhoneLayout: 600px;
 
@@ -40,8 +43,8 @@ $categoricalColors: $categoricalBlue $categoricalOrange $categoricalGreen $categ
 }
 
 @mixin link {
-  color: $highlight;
-  fill: $highlight;
+  color: $linkColor;
+  fill: $linkColor;
   text-decoration: none;
   @include linkTiming;
 }

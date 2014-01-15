@@ -19,19 +19,19 @@ oboe({
 ```
 
 ```js
-// The oboe.doFoo() methods are deprecated 
+// Method specific methods are deprecated 
 // and will be removed in v2.0.0:
-oboe.doGet(    String url )
-oboe.doDelete( String url )
-oboe.doPost(   String url, Object|String body )
-oboe.doPut(    String url, Object|String body )
-oboe.doPatch(  String url, Object|String body )              
+oboe.doGet(    url )
+oboe.doDelete( url )
+oboe.doPost(   url, body )
+oboe.doPut(    url, body )
+oboe.doPatch(  url, body )
 
-oboe.doGet(    {url:String, headers:{ key: value, ... }}, cached:Boolean )       
-oboe.doDelete( {url:String, headers:{ key: value, ... }} )   
-oboe.doPost(   {url:String, headers:{ key: value, ... }, body:Object|String} )
-oboe.doPut(    {url:String, headers:{ key: value, ... }, body:Object|String} )       
-oboe.doPatch(  {url:String, headers:{ key: value, ... }, body:Object|String} )
+oboe.doGet(    {url:url, headers:headers, cached:Boolean} )
+oboe.doDelete( {url:url, headers:headers, cached:Boolean} )
+oboe.doPost(   {url:url, headers:headers, cached:Boolean, body:body} )
+oboe.doPut(    {url:url, headers:headers, cached:Boolean, body:body} )
+oboe.doPatch(  {url:url, headers:headers, cached:Boolean, body:body} )
 ```
 
 The `method`, `body`, and `headers` arguments are optional.

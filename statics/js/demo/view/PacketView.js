@@ -45,6 +45,10 @@ var PacketView = (function(){
         return subject.name + ' ' + unitClass(subject);
     };
 
+    PacketViewRenderer.prototype.done = function(){
+        this.jDom.remove()
+    };   
+
     //---------------------------------------------
     
     var PacketOnWireView = extend(PacketViewRenderer, function(subject, demoView){
@@ -54,11 +58,7 @@ var PacketView = (function(){
     PacketOnWireView.prototype.animateMove = function( xyFrom, xyTo, duration ){
         this.animateXy('translateX', 'translateY', xyFrom, xyTo, duration)
     };
-
-    PacketOnWireView.prototype.done = function(){
-        this.jDom.remove()
-    };
-    
+   
     PacketOnWireView.prototype.templateName = function(packet){
         switch(packet.type) {
             case 'GET':
@@ -118,8 +118,6 @@ var PacketView = (function(){
         );
         this.pauseAnimationIfDemoPaused(jAirbornePacketInTransit);
     };
-
-    PacketOnMobileView.prototype.done = function() {};
     
     PacketOnMobileView.prototype.templateName = function(_packet) {
         return 'airwavePacket';

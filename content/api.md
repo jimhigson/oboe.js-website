@@ -3,8 +3,9 @@
 The oboe function
 ---------------
 
-Oboe.js exposes only one function, `oboe`, which is used to instantiate a new Oboe instance
-and normally starts a new HTTP request.
+Oboe.js exposes only one function, `oboe`, which is used to instantiate a new Oboe instance.
+The Oboe instance starts a new HTTP request unless the caller is 
+[managing the stream themselves](#byo-stream).
 
 ```js
 oboe( String url )
@@ -19,7 +20,7 @@ oboe({
 ```
 
 ```js
-// Method specific methods are deprecated 
+// the doMethod style of calling is deprecated 
 // and will be removed in v2.0.0:
 oboe.doGet(    url )
 oboe.doDelete( url )
@@ -36,10 +37,10 @@ oboe.doPatch(  {url:String, headers:Object, cached:Boolean, body:String|Object} 
 
 The `method`, `headers`, `body`, and `cached` arguments are optional.
 
-* If no method is given Oboe will default to `GET`.
+* If `method` is not given Oboe defaults to `GET`.
 * If `body` is given as an object it will be stringified using `JSON.stringify` 
 prior to sending. The Content-Type request header will automatically be set to `text/json`
-unless a different value for this header is also given.
+unless a different value is explicitly given.
 * If the cached option is given as `false` cachebusting will be applied by
 appending `_={timestamp}` to the URL's query string. Any other value will be
 ignored.
@@ -50,7 +51,7 @@ BYO stream
 Under Node.js you may also pass `oboe` an arbitrary
 [ReadableStream](http://nodejs.org/api/stream.html#stream_class_stream_readable)
 as the sole argument. In this case Oboe will read JSON from the given stream.
-It is your responsibility to initiate the stream and Oboe will not initiate 
+It is your responsibility to initiate the stream and Oboe will not start 
 a new HTTP request on your behalf.
 
 ```js
@@ -60,11 +61,10 @@ oboe( stream )
 node event
 ----------
 
-Oboe instances emit `node` events when items of interest are parsed from their stream.
-The methods `.node()` and `.on` are used to register interest in particular nodes by giving callbacks
-which will be notified when matching nodes are found.
-A specifier for which items are interesting to the caller is given as a pattern using a variant of JSONPath.
-
+The methods `.node()` and `.on` are used to register interest in particular nodes by providing 
+JSONPath patterns. As the JSON stream is parsed the Oboe instance checks for matches 
+against these patterns and when a matching node is found it emits a `node` event.
+ 
 ```js
 .on('node', pattern, callback)
 
@@ -87,7 +87,7 @@ unless it is bound otherwise. The callback receives three parameters:
 |-------------|--------------|
 | `node`      | The node that was found in the JSON stream. This can be any valid JSON type - `Array`, `Object`, `String`, `Boolean` or `null`
 | `path`      | An array of strings describing the path from the root of the JSON to the matching item. For example, if the match is at `(root).foo.bar` this array will equal `['foo', 'bar']`
-| `ancestors` | An array of the found item's ancestors such that `ancestors[0]` is the JSON root, `ancestors[ancestors.length-1]` is the parent object, and `ancestors[ancestors.length-2]` is the grandparent. These ancestors will be as complete as possible given the data which has so far been read from the stream but because Oboe.js is a streaming parser may not yet have all properties
+| `ancestors` | An array of the found item's ancestors such that `ancestors[0]` is the JSON root, `ancestors[ancestors.length-1]` is the parent object, and `ancestors[ancestors.length-2]` is the grandparent. These ancestors will be as complete as possible given the data which has so far been read from the stream but because Oboe.js is a streaming parser they may not yet have all properties
 
 ```js
 oboe('friends.json')
@@ -99,7 +99,7 @@ oboe('friends.json')
 path event
 ----------
 
-Path events are similar to [node events](#node-event) except that they are emitted as soon as matching paths are found,
+Path events are identical to [node events](#node-event) except that they are emitted as soon as matching paths are found,
 without waiting for the thing at the path to be revealed.
 
 
@@ -125,6 +125,8 @@ oboe('friends.json')
    });
 ```
 
+One use of path events is to [start adding elements to an interface before they are complete](examples#reacting-before-we-get-the-whole-object).
+
 done event
 ----------
 
@@ -134,11 +136,11 @@ done event
 .on('done', callback)
 ```
 
-Done events are fired when the response is complete. The handler is passed the entire
+Done events are fired when the response is complete. The callback is passed the entire
 parsed JSON.
 
-In most cases it is better to read the json in small parts by listening to `node` events
-(see [above](#node-and-path-events)) than waiting for it to be completely download.
+In most cases it is faster to read the JSON in small parts by listening to `node` events
+(see [above](#node-event)) than waiting for it to be completely download.
 
 ```js
 oboe('resource.json')
@@ -160,7 +162,9 @@ Start events are fired when Oboe
 has parsed the status code and the response headers but has not yet received any content 
 from the response body.
 
-|             |          |                             
+The callback receives two parameters: 
+
+| name        | type     |                              
 |-------------|----------|------------------------
 | `status`    | `Number` | HTTP status code 
 | `headers`   | `Object` | Object of response headers
@@ -190,7 +194,7 @@ Fetching a resource could fail for several reasons:
  * Invalid JSON from the server
  * Error thrown by an event listener
 
-An object is given to the listener with four fields:
+The fail callback receives an object with four fields:
 
 | Field        | Meaning                                                 
 |--------------|---------------------------------------------------------
@@ -201,7 +205,7 @@ An object is given to the listener with four fields:
 
 ```js
 oboe('/content')
-   .fail(function( errorReport ){
+   .fail( function( errorReport ){
       if( 404 == errorReport.statusCode ){
          console.error('no such content'); 
       }
@@ -238,12 +242,23 @@ oboe('data.json')
 .root()
 -------
 
-```js
-.root()
-```
-
 At any time, call `.root()` on the oboe instance to get the JSON parsed so far. 
-If nothing has been received yet this will return `undefined`.
+If nothing has yet been received this will return `undefined`.
+
+```js
+var interval;
+
+oboe('resourceUrl')
+   .start(function(){
+      interval = window.setInterval(function(){
+         console.log('downloaded so far:', this.root());
+      }.bind(this), 10);
+   })
+   .done(function(completeJson){
+      console.log('download finished:', completeJson);
+      window.clearInterval(interval);
+   });
+```
 
 .forget()
 ---------
@@ -255,12 +270,12 @@ If nothing has been received yet this will return `undefined`.
 ```
 
 `.forget()` is a shortcut for [.removeListener()](#-removelistener-) in
-the case where the listner to be removed is currently executing. 
+the case where the listener to be removed is currently executing. 
 Calling `.forget()` on the Oboe instance from inside a `node` or `path` event 
 listener de-registers that callback.
 
 ```js
-// Display the first ten items from an array
+// Display only the first ten downloaded items
 // but place all in the model 
 
 oboe('/content')
@@ -290,12 +305,12 @@ oboe('/content')
 .removeListener('fail', callback)
 ```
 
-Removes a listener.
+Remove any listener on the Oboe instance.
 
-From inside the node and path listeners calling [.forget()](#-forget-)
+From inside node and path callbacks [.forget()](#-forget-)
 is usually more convenient since it is not required to store a reference
-to the callback but `.removeListener()`
-has the advantage that it can be called from anywhere.
+to the callback function. However, `.removeListener()`
+has the advantage that it may be called from anywhere.
 
 .abort()
 --------
@@ -308,6 +323,17 @@ After calling `.abort()` the `done` event will not fire.
 Under Node.js, if the Oboe instance is reading from a stream that it did not create
 this method deregisters all listeners but it is the caller's responsibility to
 actually terminate the streaming.
+
+```js
+// Display the first nine nodes, then hang up 
+oboe('/content')
+   .node('!.*', function(item){   
+      display(item);
+   })
+   .node('![9]', function(){
+      this.abort();
+   });
+```
 
 Pattern matching
 ----------------
@@ -324,7 +350,7 @@ Oboe's pattern matching is a variation on [JSONPath](https://code.google.com/p/j
 | `[2]`          | The second element (of an array)                                                                
 | `['foo']`      | Equivalent to .foo                                                                              
 | `[*]`          | Equivalent to .*                                                                                
-| `..`           | Any number of intermediate nodes (non-greedy)                                                   
+| `..`           | Any number of intermediate nodes (non-greedy)
 | `$`            | Explicitly specify an intermediate clause in the jsonpath spec the callback should be applied to
 
 The pattern engine supports 

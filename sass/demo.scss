@@ -135,7 +135,7 @@ line.messageOuter {
   stroke-linecap: round;
 }
 line.messageInner {
-  stroke:$backgroundColor;
+  stroke:white;
   stroke-width:35;
   stroke-linecap: round;
 }
@@ -226,7 +226,7 @@ g.client .part {
 
 
 .browser .background {
-  fill:$backgroundColor;
+  fill:white;
 }
 
 .spinnerLink {

@@ -23,26 +23,31 @@ var NarrativeView = (function () {
            highlightFromLeft = highlightPosition.x,
            highlightCloserToRight = (highlightPosition.x > halfWidth),
            highlightCloserToBottom = (highlightPosition.y > (demoHeight / 2)),
-           result = {};
+           flipVert = false,
+           result = {},
+           x;
        
        if( highlightCloserToRight ) {
 
           var highlightFromRight = demoWidth - highlightPosition.x;
-          result.x = Math.min(halfWidth, highlightFromRight + HIGHLIGHT_SIZE);
+          x = highlightFromRight + HIGHLIGHT_SIZE;
           result.horizontalSide = 'right';
        } else {
 
-          result.x = Math.min(halfWidth, highlightFromLeft + HIGHLIGHT_SIZE);
+          x = highlightFromLeft + HIGHLIGHT_SIZE;
           result.horizontalSide = 'left';
        }
-
-       if( highlightCloserToBottom ) {
-          result.y = '15';
-          result.verticalSide = 'bottom';
-       } else {
-          result.y = '15';
-          result.verticalSide = 'top';
+       
+       if( x > halfWidth ) {
+          x = halfWidth;
+          flipVert = true;
        }
+
+       result.x = x;
+       result.y = '15';
+
+       var relateToTop = (flipVert ? highlightCloserToBottom : !highlightCloserToBottom);
+       result.verticalSide = relateToTop ? 'top' : 'bottom';
        
        return result;
     };

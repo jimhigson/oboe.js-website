@@ -46,7 +46,7 @@ var PacketView = (function(){
     };
 
     PacketViewRenderer.prototype.done = function(){
-        this.jDom.remove()
+        this.jDom.remove();
     };   
 
     //---------------------------------------------

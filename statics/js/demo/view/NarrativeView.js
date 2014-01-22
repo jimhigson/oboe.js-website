@@ -18,7 +18,7 @@ var NarrativeView = (function () {
 
        var demoWidth = this.subject.demo.width,
            demoHeight = this.subject.demo.height,
-           halfWidth = (demoWidth / 2),
+           halfWidth = (demoWidth * 0.5),
            HIGHLIGHT_SIZE = 100,
            highlightFromLeft = highlightPosition.x,
            highlightCloserToRight = (highlightPosition.x > halfWidth),

@@ -4,20 +4,24 @@ Why Stream-loading?
 This page makes the case for load JSON using streaming by examining
 several use cases.
 
-[Tl;dr](http://en.wiktionary.org/wiki/TLDR)
--------------------------------------------
+The big picture
+---------------
 
-Streaming is usually faster. Or in the worst case it is about the same.
+Streaming is usually faster, or in the worst case it is about the same.
 For messages that load *very* quickly and never fail streaming might be
 slower due to extra processing but this is very likely to be negligible.
+In almost all real-world use cases, reacting to i/o sooner beats
+using fewer CPU cycles. 
 
-Using Oboe in the browser, the biggest advantages are found on mobile
-networks where requests can stall or fail, or if the server is writing
-out the JSON as a stream. For some use cases writing out REST streams
-can be used as an alternative to Websockets and similar.
+In the browser the biggest advantages for Oboe are found with large
+responses, mobile networks, or if the service writes
+JSON as a stream. For some use cases Oboe can be used to combine REST
+and streaming rather than using a non-REST technique such as Websockets.
+It will usually make applications simpler if REST can be used for all
+cases.
 
-When aggregating, streaming will usually be faster because everything
-else doesn't have to wait for the slowest resource.
+When aggregating resources, streaming will usually be faster because everything
+else isn't forced to wait for the slowest item.
 
 Downloading from standard REST
 ------------------------------

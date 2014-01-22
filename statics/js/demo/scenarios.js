@@ -770,7 +770,7 @@ var scenarios = (function () {
                   "parseStrategy": "progressive",
                   "page": "cartogram",
                   "aspect": "landscape",
-                  zoom:1.15
+                  zoom:1.5
                },
                "locations": { "where": {x: 375, y: 185} },
                "next": []

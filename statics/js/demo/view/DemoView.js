@@ -26,7 +26,15 @@ var DemoView = extend(ThingView, function(demo){
    
     demo.events('reset').on(function(){
        removeClass(this.jDom, 'playing');
-    }.bind(this));   
+    }.bind(this));
+
+   demo.events('paused').on(function(){
+      addClass(this.jDom, 'paused');
+   }.bind(this));
+
+   demo.events('unpaused').on(function(){
+      removeClass(this.jDom, 'paused');
+   }.bind(this));   
 });
 
 DemoView.prototype.withNarrativeView = function(narrativeView){

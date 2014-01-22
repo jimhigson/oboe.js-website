@@ -94,6 +94,10 @@ rect.fade,
    opacity:0;
 }
 
+.paused .controls .reset:not(:hover) text {
+   fill:$shadow;
+}
+
 
 .pie-divide {
     fill:none;

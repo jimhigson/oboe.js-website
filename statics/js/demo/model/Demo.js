@@ -1,6 +1,7 @@
 var Demo = (function(){
 
-   var DELAY_AFTER_FINISH = 4500;
+   var DELAY_AFTER_FINISH = 4500,
+       START_DELAY = 750;
    
    var Demo = extend(Thing, function Demo(name, options){
        Thing.apply(this, arguments);
@@ -27,9 +28,13 @@ var Demo = (function(){
    
    Demo.prototype.start = function(){
        if( !this.inProgress ) {
-           this.startSimulation();
+
            this.inProgress = true;
            this.events('started').emit();
+
+           this.schedule(function(){
+               this.startSimulation();
+           }.bind(this), START_DELAY)
        }
    };
    Demo.prototype.reset = function(){

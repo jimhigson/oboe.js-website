@@ -1,6 +1,7 @@
 module.exports = [
 
         "/js/jquery.sticky.js"
+    ,   "/js/jquery.easing.js"
     ,   "/js/jquery.pause.js"
     ,   "/js/internalNav.js"
     ,   "/js/pollyfill.js"

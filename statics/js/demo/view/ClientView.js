@@ -42,8 +42,9 @@ var ClientView = (function(){
             switch(pageName){
                 case "singlePageSite":
                 case "graph":
-                case "map":
                     return SimpleClient;
+                case "map":
+                    return PinDropClient;
                 case "cartogram":
                     return PoliticalClient;
                 case "twitter":
@@ -122,9 +123,7 @@ var ClientView = (function(){
     var SimpleClient = extend(ClientView, function(client, demoView){
         ClientView.apply(this, arguments);
         
-        client.events('gotData').on(function( packet ){
-            addClass(this.jDom, 'received-' + packet.ordering.i);
-        }.bind(this));
+        client.events('gotData').on(this.newData.bind(this));
 
         client.events('reset').on(function(){
             var ele = this.jDom[0],
@@ -135,7 +134,31 @@ var ClientView = (function(){
         }.bind(this));        
     });
 
+    SimpleClient.prototype.newData = function( packet ){
+       addClass(this.jDom, 'received-' + packet.ordering.i);
+    }; 
+
     // ---------------------------------
+
+   /* like simple but animates new pins appearing */
+   var PinDropClient = extend(SimpleClient, function(client, demoView){
+      SimpleClient.apply(this, arguments);
+   });
+
+   PinDropClient.prototype.newData = function( packet ){
+      
+      // random delay before dropping because for non-progressive parsing
+      // it looks odd if all drop perfectly together
+      var randomDelay = Math.random() * 400;
+      
+      SimpleClient.prototype.newData.apply(this, arguments);
+      
+      var jPin = this.jDom.find('.unit-' + packet.ordering.i + ' .pointer');
+      jPin.css('translateY', -20);
+      jPin.delay(randomDelay).animate({'translateY': 0}, {easing:'easeOutBounce'});
+   };   
+
+   // ---------------------------------   
 
     var PoliticalClient = extend(ClientView, function(client, demoView){
         ClientView.apply(this, arguments);

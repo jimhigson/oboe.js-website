@@ -153,9 +153,17 @@ var ClientView = (function(){
       
       SimpleClient.prototype.newData.apply(this, arguments);
       
-      var jPin = this.jDom.find('.unit-' + packet.ordering.i + ' .pointer');
-      jPin.css('translateY', -20);
-      jPin.delay(randomDelay).animate({'translateY': 0}, {easing:'easeOutBounce'});
+      var jPin = this.jDom.find('.unit-' + packet.ordering.i);
+      
+      jPin.find('.pointer')
+         .css('translateY', -20)
+         .delay(randomDelay)
+         .animate({'translateY': 0}, {easing:'easeOutBounce'});
+
+      jPin.find('.shadow')
+         .hide()
+         .delay(randomDelay)
+         .fadeIn();
    };   
 
    // ---------------------------------   

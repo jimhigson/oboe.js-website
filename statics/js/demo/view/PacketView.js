@@ -118,6 +118,16 @@ var PacketView = (function(){
         );
         this.pauseAnimationIfDemoPaused(jAirbornePacketInTransit);
     };
+
+    PacketViewRenderer.prototype.done = function(){
+       // when we get a done event, remove the packet after a short time.
+       // this will do nothing in most cases because the animation will
+       // already have removed it when it completes but here we allow
+       // a little movement to continue after the wave hits the target
+       window.setTimeout(function(){
+          this.jDom.remove();
+       }.bind(this), 500);
+    };   
     
     PacketOnMobileView.prototype.templateName = function(_packet) {
         return 'airwavePacket';

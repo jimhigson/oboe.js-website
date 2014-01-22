@@ -2,7 +2,10 @@
 
 /* allow svg properties to be set like css by jQuery. Apply a simple
  * idea of SVG transforms that ignores order and other transforms */
-$.cssHooks.translateX = {
+var cssHooks = $.cssHooks;
+var cssNumber = $.cssNumber;
+   
+cssHooks.translateX = {
     get: function( elem, computed, extra ) {
         var baseVal = elem.transform.baseVal;
         if( !baseVal.numberOfItems ) {
@@ -18,7 +21,7 @@ $.cssHooks.translateX = {
         baseVal.getItem(0).matrix.e = value;
     }
 };
-$.cssHooks.translateY = {
+cssHooks.translateY = {
     get: function( elem, computed, extra ) {
         var baseVal = elem.transform.baseVal;
         if( !baseVal.numberOfItems ) {
@@ -44,25 +47,25 @@ function getOrSetAttributeCssHook(attributeName) {
         }
     };
 }
-$.cssHooks.lineX1 = getOrSetAttributeCssHook('x1');
-$.cssHooks.lineY1 = getOrSetAttributeCssHook('y1');
-$.cssHooks.lineX2 = getOrSetAttributeCssHook('x2');
-$.cssHooks.lineY2 = getOrSetAttributeCssHook('y2');
-$.cssHooks.circleX = getOrSetAttributeCssHook('cx');
-$.cssHooks.circleY = getOrSetAttributeCssHook('cy');
-$.cssHooks.circleRadius = getOrSetAttributeCssHook('r');
+cssHooks.lineX1 = getOrSetAttributeCssHook('x1');
+cssHooks.lineY1 = getOrSetAttributeCssHook('y1');
+cssHooks.lineX2 = getOrSetAttributeCssHook('x2');
+cssHooks.lineY2 = getOrSetAttributeCssHook('y2');
+cssHooks.circleX = getOrSetAttributeCssHook('cx');
+cssHooks.circleY = getOrSetAttributeCssHook('cy');
+cssHooks.circleRadius = getOrSetAttributeCssHook('r');
 
 // Setting cssNumber.foo to true tells jquery not to put 'px' on the
 // end of these properties when animating them:
-$.cssNumber.translateX = 
-$.cssNumber.translateY = 
-$.cssNumber.lineX1 = 
-$.cssNumber.lineY1 = 
-$.cssNumber.lineX2 = 
-$.cssNumber.lineY2 =
-$.cssNumber.circleX =
-$.cssNumber.circleY =    
-$.cssNumber.circleRadius = 
+cssNumber.translateX = 
+cssNumber.translateY = 
+cssNumber.lineX1 = 
+cssNumber.lineY1 = 
+cssNumber.lineX2 = 
+cssNumber.lineY2 =
+cssNumber.circleX =
+cssNumber.circleY =    
+cssNumber.circleRadius = 
         true;
 
 }());

@@ -29,7 +29,11 @@ var ThingView = (function(){
     ThingView.prototype.unpause = function(){
         this.jPausibleElements && this.jPausibleElements.resume();
     };
-    
+
+    ThingView.prototype.setZoom = function(zoom){
+       this.jDom.find('.zoom').attr('transform', 'scale(' + zoom + ')');
+    };
+   
     ThingView.prototype.stampContentsFromTemplate = function(containerSelector, templateName, className) {
         
         var jDom = stampFromTemplate($('#' + templateName), className),

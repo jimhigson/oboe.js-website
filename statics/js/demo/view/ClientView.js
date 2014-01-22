@@ -28,7 +28,7 @@ var ClientView = (function(){
             }
         });
 
-        jDom.find('.zoom').attr('transform', 'scale(' + client.zoom + ')');
+        this.setZoom(client.zoom);
        
         this.manageProgressBar();
 

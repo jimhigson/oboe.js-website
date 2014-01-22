@@ -70,10 +70,6 @@ var NarrativeView = (function () {
                    .css( captionLocation.verticalSide,   captionLocation.y * scale * topic.zoom);
     };
    
-    NarrativeView.prototype.zoomLightboxToMatch = function( topic ){
-       this.jDom.find('.zoom').attr('transform', 'scale(' + topic.zoom + ')');
-    };
-
     NarrativeView.prototype.showText = function( text ){
        this.jDom.find('.label').text(text);
     };   
@@ -86,7 +82,7 @@ var NarrativeView = (function () {
        
         this.showText(text);
         this.positionLightboxHighlightAt(topic, location);
-        this.zoomLightboxToMatch(topic);
+        this.setZoom(topic.zoom);
         this.jDom.fadeIn();
 
         this.jDom.filter('.demoCaption').one('click', function(){

@@ -769,7 +769,8 @@ var scenarios = (function () {
                "options": {
                   "parseStrategy": "progressive",
                   "page": "cartogram",
-                  "aspect": "landscape"
+                  "aspect": "landscape",
+                  zoom:1.15
                },
                "locations": { "where": {x: 375, y: 185} },
                "next": []
@@ -793,7 +794,8 @@ var scenarios = (function () {
                   "parseStrategy": "progressive",
                   "page": "cartogram",
                   "aspect": "landscape",
-                  startHidden:true
+                  startHidden:true,
+                  zoom:1.15
                },
                "locations": { "where": {x: 430, y: 67} },               
                "script": [
@@ -833,7 +835,8 @@ var scenarios = (function () {
                   "parseStrategy": "progressive",
                   "page": "cartogram",
                   "aspect": "landscape",
-                  startHidden:true
+                  startHidden:true,
+                  zoom:1.15
                },
                "locations": { "where": {x: 245, y: 205} },
                "script": [

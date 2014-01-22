@@ -1,5 +1,9 @@
 .cartogram {
   
+  path {
+    transition:fill 0.5s;
+  }
+  
   path, circle {
     stroke: $backgroundColor;
     stroke-width:0.9;

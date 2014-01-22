@@ -15,23 +15,24 @@ var NarrativeView = (function () {
     }
 
     NarrativeView.prototype.captionPosition = function( highlightPosition ){
-       
+
        var demoWidth = this.subject.demo.width,
            demoHeight = this.subject.demo.height,
+           halfWidth = (demoWidth / 2),
            HIGHLIGHT_SIZE = 100,
            highlightFromLeft = highlightPosition.x,
-           highlightFromRight = demoWidth - highlightPosition.x,
-           highlightCloserToRight = (highlightPosition.x > (demoWidth / 2)),
+           highlightCloserToRight = (highlightPosition.x > halfWidth),
            highlightCloserToBottom = (highlightPosition.y > (demoHeight / 2)),
            result = {};
        
        if( highlightCloserToRight ) {
 
-          result.x = highlightFromRight + HIGHLIGHT_SIZE;
+          var highlightFromRight = demoWidth - highlightPosition.x;
+          result.x = Math.min(halfWidth, highlightFromRight + HIGHLIGHT_SIZE);
           result.horizontalSide = 'right';
        } else {
 
-          result.x = highlightFromLeft + HIGHLIGHT_SIZE;
+          result.x = Math.min(halfWidth, highlightFromLeft + HIGHLIGHT_SIZE);
           result.horizontalSide = 'left';
        }
 

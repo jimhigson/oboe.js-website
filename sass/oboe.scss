@@ -563,6 +563,14 @@ svg.menuButton:active {
 /* Even Smaller screens */
 @media only screen and (max-width: $sizeRequiringPhoneLayout) {
 
+   figure div.demoCaption {
+      width: 100%;
+   }
+
+   figure .lightbox {
+      opacity:1;
+   }
+  
    svg.menuButton {
       display: inline;
    }

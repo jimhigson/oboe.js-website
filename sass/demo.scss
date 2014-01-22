@@ -23,7 +23,7 @@ $labelColor: $shadow;
   -ms-user-select: none;
   user-select: none;
 
-  margin: 0.5em 0 1em 0;
+  margin: 1em 0 2em 0;
   background-color: $demoBackground;
   position:relative;
 
@@ -40,6 +40,7 @@ div.demoCaption {
   
   p {
     margin-bottom: 0.3em; 
+    margin-top: 0; 
   }
   
   p, a {

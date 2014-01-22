@@ -12,8 +12,20 @@ var NarrativeView = (function () {
     NarrativeView.prototype.scaleAt = function( jEle ){
        // bit of a hack here:
        return jEle.parents('[data-scale]').attr('data-scale');
-    }
+    };
 
+    NarrativeView.prototype.captionPositionOnSmall = function( highlightPosition ){
+       var demoWidth = this.subject.demo.width,
+           halfWidth = (demoWidth * 0.5),
+           highlightCloserToRight = (highlightPosition.x > halfWidth);
+       
+       return {
+          x: 0, y: 0,
+          verticalSide: "top",
+          horizontalSide: (highlightCloserToRight? 'left' : 'right')
+       }
+    };
+   
     NarrativeView.prototype.captionPosition = function( highlightPosition ){
 
        var demoWidth = this.subject.demo.width,
@@ -57,14 +69,13 @@ var NarrativeView = (function () {
        var jLightbox = this.jDom.filter('.lightbox');
        this.putAtXy(jLightbox, 'translateX', 'translateY', location);
       
-       var captionLocation = this.captionPosition(location);
-       
-       var jDemoCaption = this.jDom.filter('div.narrative'),
+       var scale = this.scaleAt(jLightbox),
+           isSmall = scale < 1,
+           captionLocation = (isSmall ? this.captionPositionOnSmall(location) 
+                                      : this.captionPosition(location));
 
-           // adjust the caption position according to the scale of the highlight:
-           scale = this.scaleAt(jLightbox);
-
-       jDemoCaption.css( {left:'', right:'', top:'', bottom:''} )
+       this.jDom.filter('div.narrative')
+                   .css( {left:'', right:'', top:'', bottom:''} )
                    .css( 'text-align', captionLocation.horizontalSide )
                    .css( captionLocation.horizontalSide, captionLocation.x * scale * topic.zoom)
                    .css( captionLocation.verticalSide,   captionLocation.y * scale * topic.zoom);

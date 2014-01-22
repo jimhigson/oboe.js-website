@@ -152,18 +152,18 @@ var ClientView = (function(){
       var randomDelay = Math.random() * 400;
       
       SimpleClient.prototype.newData.apply(this, arguments);
-      
+
       var jPin = this.jDom.find('.unit-' + packet.ordering.i);
+
+      jPin
+         .css({opacity:0})
+         .delay(randomDelay)         
+         .animate({opacity:1});
       
       jPin.find('.pointer')
-         .css('translateY', -20)
+         .css({'translateY': -20})
          .delay(randomDelay)
          .animate({'translateY': 0}, {easing:'easeOutBounce'});
-
-      jPin.find('.shadow')
-         .hide()
-         .delay(randomDelay)
-         .fadeIn();
    };   
 
    // ---------------------------------   

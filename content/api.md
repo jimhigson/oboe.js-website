@@ -86,7 +86,7 @@ unless it is bound otherwise. The callback receives three parameters:
 |             |              |     
 |-------------|--------------|
 | `node`      | The node that was found in the JSON stream. This can be any valid JSON type - `Array`, `Object`, `String`, `Boolean` or `null`
-| `path`      | An array of strings describing the path from the root of the JSON to the matching item. For example, if the match is at `(root).foo.bar` this array will equal `['foo', 'bar']`
+| `path`      | An array of strings describing the path from the root of the JSON to the matching item. For example, if the match is at `(root).foo.bar` this array will equal `['foo', 'bar']`. [Example usage](examples#implying-meaning-through-node-location).
 | `ancestors` | An array of the found item's ancestors such that `ancestors[0]` is the JSON root, `ancestors[ancestors.length-1]` is the parent object, and `ancestors[ancestors.length-2]` is the grandparent. These ancestors will be as complete as possible given the data which has so far been read from the stream but because Oboe.js is a streaming parser they may not yet have all properties
 
 ```js
@@ -182,7 +182,7 @@ fail event
 -------
 
 ```js
-   .fail(Function callback)
+   .fail(callback)
    
    .on('fail', callback)
 ```

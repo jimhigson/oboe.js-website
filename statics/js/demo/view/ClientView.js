@@ -149,7 +149,8 @@ var ClientView = (function(){
       
       // random delay before dropping because for non-progressive parsing
       // it looks odd if all drop perfectly together
-      var randomDelay = Math.random() * 400;
+      var shortDelay = this.subject.parseStrategy == 'discrete'?
+                           packet.ordering.i * 20 : 0;
       
       SimpleClient.prototype.newData.apply(this, arguments);
 
@@ -157,12 +158,12 @@ var ClientView = (function(){
 
       jPin
          .css({opacity:0})
-         .delay(randomDelay)         
+         .delay(shortDelay)         
          .animate({opacity:1});
       
       jPin.find('.pointer')
          .css({'translateY': -20})
-         .delay(randomDelay)
+         .delay(shortDelay)
          .animate({'translateY': 0}, {easing:'easeOutBounce'});
    };   
 

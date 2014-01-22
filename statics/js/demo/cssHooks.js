@@ -47,13 +47,18 @@ function getOrSetAttributeCssHook(attributeName) {
         }
     };
 }
-cssHooks.lineX1 = getOrSetAttributeCssHook('x1');
-cssHooks.lineY1 = getOrSetAttributeCssHook('y1');
-cssHooks.lineX2 = getOrSetAttributeCssHook('x2');
-cssHooks.lineY2 = getOrSetAttributeCssHook('y2');
-cssHooks.circleX = getOrSetAttributeCssHook('cx');
-cssHooks.circleY = getOrSetAttributeCssHook('cy');
-cssHooks.circleRadius = getOrSetAttributeCssHook('r');
+   
+jQuery.extend(
+   cssHooks,
+   {  lineX1       : getOrSetAttributeCssHook('x1'),
+      lineY1       : getOrSetAttributeCssHook('y1'),
+      lineX2       : getOrSetAttributeCssHook('x2'),
+      lineY2       : getOrSetAttributeCssHook('y2'),
+      circleX      : getOrSetAttributeCssHook('cx'),
+      circleY      : getOrSetAttributeCssHook('cy'),
+      circleRadius : getOrSetAttributeCssHook('r')
+   }
+);
 
 // Setting cssNumber.foo to true tells jquery not to put 'px' on the
 // end of these properties when animating them:

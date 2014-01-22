@@ -1,3 +1,5 @@
+(function(){
+
 /* allow svg properties to be set like css by jQuery. Apply a simple
  * idea of SVG transforms that ignores order and other transforms */
 $.cssHooks.translateX = {
@@ -62,3 +64,5 @@ $.cssNumber.circleX =
 $.cssNumber.circleY =    
 $.cssNumber.circleRadius = 
         true;
+
+}());

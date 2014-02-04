@@ -1,19 +1,6 @@
 Why use Oboe.js?
 ================
 
-In Summary
-----------
-
-Using streaming to load data is usually faster. The biggest advantages come with large
-responses, mobile networks, or reading from streaming
-JSON services.
-
-Oboe.js might be marginally
-slower for messages that load *very* quickly 
-but in almost all real-world cases reacting to i/o sooner beats
-fussing about CPU usage.
-
-
 Downloading REST resources
 --------------------------
 
@@ -140,7 +127,7 @@ Time is sped up so that hours are condensed into seconds.
 
 {{demo "caching"}}
 
-This won't work for every use case. Websockets remain a better choice where
+This won't work for every use case. Websockets remains the better choice where
 live data after-the-fact is no longer interesting. Cacheable streaming
 works best for cases where the live data remains interesting as it ages.
 
@@ -148,3 +135,19 @@ REST talks in the language of resources, not services. URLs should
 identify things, not endpoints. It shouldn't matter if the server has
 the thing now or if it will send it later when it does have it, or some
 combination of both.
+
+In Summary
+----------
+
+Using streaming to load data is usually faster. The biggest advantages come with large
+responses, mobile networks, or reading from streaming
+JSON services.
+
+Downsides?
+----------
+
+Oboe.js might be marginally
+slower for messages that load *very* quickly 
+but for most real-world cases reacting to i/o sooner beats
+fussing about CPU usage. If in doubt, benchmark, but don't forget to
+use the real internet and think about perceptual performance.

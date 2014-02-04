@@ -1,5 +1,5 @@
-Why Stream-loading?
-===================
+Why use Oboe.js?
+================
 
 In Summary
 ----------
@@ -14,62 +14,72 @@ but in almost all real-world cases reacting to i/o sooner beats
 fussing about CPU usage.
 
 
-Downloading from standard REST
-------------------------------
+Downloading REST resources
+--------------------------
 
-In this use case we have a web application running on a browser and a
-server which provides it with JSON. The page won't be updated until the
-response is complete. This is the standard pattern used on almost all
-AJAX-powered sites.
+Let's start with the standard pattern found on most AJAX-powered sites.
+We have a client-side web application and a server which provides it with JSON.
+The page won't be updated until the response is complete.
 
 {{demo "fast-ajax-discrete"}}
 
-Streaming downloading from standard REST
-----------------------------------------
-
-With a non-streamed response there is only a little time that can be
-saved.
+On a good connection there isn't much time to save but we can give a more responsive
+feel by using streaming.
 
 {{demo "fast-ajax-progressive"}}
 
-Streaming one, with a server writing out using GSON or Node.js. Although
-this is a stream, the contents when it eventually completes are 100%
-valid JSON and is compatible with standard tools.
-Compatible with legacy or non-interactive tools.
+Let's say that our server gets the data for some modules faster than others. Using
+the usual AJAX pattern displaying any data would have to wait until the slowest component
+is done. With Oboe we can start displaying data as soon as we have it.
 
 {{demo "streaming-ajax-progressive"}}
+
+This requires a server that can write out the JSON as a stream. The 
+response when it completes is 100% valid JSON so it remains compatible 
+with standard AJAX tools.
 
 Mobile data connections
 -----------------------
 
-Mobile networks today can be high-bandwidth but they are also
-high-latency and give poor guarantees of packet delivery time. This is
-why mobile networks, with buffering on the device, streaming HD video
-fluidly while web surfing feels laggy. If we wait until we have
-everything we're wasting the chance to show data earlier.
+Mobile networks today are high-bandwidth but can also be
+high-latency and come with inconsistent packet delivery times.
+This is why buffered content like streaming HD video plays
+fluidly but web surfing still feels laggy.
 
 {{demo "mobile-discrete"}}
 
-With some stream-loading we show everything at the earliest opportunity:
+If the client uses Oboe.js we can show everything as soon as it arrives:
 
 {{demo "mobile-progressive"}}
+
+This is about showing the user useful data sooner. In itself, progressive
+display also improves the user perception of performance.
 
 Dropped connections
 -------------------
 
-Most AJAX frameworks consider requests to be either wholly successful or
-wholly unsuccessful.
+Oboe.js can provides improved tolerance when connections are dropped.
+Most AJAX frameworks equate a dropped connection with total failure and discard
+the partially transferred data.
+
+Although not ideal, in the situation where we have partially transferred data
+using it is usually preferable to throwing it away.
+It probably contains information that your user is interested in reading.
+
+In the next example we have a mobile connection which fails when the
+user enters a building:
 
 {{demo "mobile-fail-discrete"}}
 
-Oboe takes a less dimorphic approach by viewing the HTTP response as a
-collection of many small parts. If the connection is lost it is simply
-the case that some parts where successful and can be used immediately,
-while others failed.
+Oboe takes a more nuanced approach by viewing the HTTP response as a
+series of small, useful parts. If the connection is lost it is simply
+the case that some parts were successful and were used immediately,
+while others did not arrive.
+Using the data from partial responses requires no special
+cases or extra programming.
 
-If we use the data that we have, as soon as we get it, we can show it
-*now*. When the network returns we need only request the parts that we
-missed.
+In the example below the client is smart enough so that when the network
+comes back it only requests the data that it missed the first time.
 
 {{demo "mobile-fail-progressive"}}
 

@@ -86,35 +86,37 @@ comes back it only requests the data that it missed the first time.
 Aggregating resources
 ---------------------
 
--   waiting for the last one
+In an N-tier architecture it is a common pattern for web clients to
+connect to an aggregation layer. The aggregation layer connects to
+several back-end services and returns a single response with all
+their data combined.
+
+Below we can see an example without streaming. Origin 1 is slower
+than Origin 2 but the whole system is forced to run at the speed of
+its slowest component.
 
 {{demo "aggregated-discrete"}}
 
--   don't let one slow resource slow everything down.
--   don't slow everything's display down to the speed of the slowest
-    component
+We can speed the system up if we use Oboe.js in the aggregator and the
+client. The aggregator dispatches the data as soon as it has it and 
+the client displays the data as soon as it is arrives.
+
 
 {{demo "aggregated-progressive"}}
 
 Historic and live data on the same transport
 --------------------------------------------
 
-REST talks in the language of resources, not services. URLs should
-identify things, not endpoints. It shouldn't matter if the server has
-the thing now or if it will send it later when it does have it, or some
-combination of both.
+Consider the common pattern - an application fetches existing data
+and then keeps the page updated with 'live' events as they happen.
+We normally use two transports for this but
+wouldn't our day be easier if we didn't have to program for distinct cases?
 
-You got to a page, you get the 'old' data and then are kept up to date
-with 'live' events. We normally use two transports for this, but
-wouldn't it be nicer if we didn't have to handle distinct cases?
+In the example below the message server intentionally writes a JSON response
+that never completes. The only difference between 'old' and 'new' data
+is timing.
 
 {{demo "historic-and-live"}}
-
-If we treat the historic part as a stream and the streaming becomes
-trivial. Handle both with the same code, with no divergent code to
-write.
-
-*write: Why this is more like REST. Why REST is good.*
 
 Combining REST and streaming for cacheability
 ---------------------------------------------
@@ -136,6 +138,11 @@ election](http://en.wikipedia.org/wiki/United_States_presidential_election,_2012
 by condensing several hours into a minute to so.
 
 {{demo "caching"}}
+
+REST talks in the language of resources, not services. URLs should
+identify things, not endpoints. It shouldn't matter if the server has
+the thing now or if it will send it later when it does have it, or some
+combination of both.
 
 *Incorporate and break up*:
 

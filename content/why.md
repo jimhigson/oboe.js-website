@@ -121,21 +121,20 @@ is timing.
 Combining REST and streaming for cacheability
 ---------------------------------------------
 
-In some use cases Oboe can be used to bring REST
-and streaming together rather than choosing non-REST technique such as Websockets.
-
 [Above](#historic-and-live-data-on-the-same-transport) we had a JSON
-server which intentionally never completes its response. Here we have a
-different example: a datastream which will complete. Although streaming
-is used this case can be treated according to the standard REST paradigm
-and plays nice with well designed intermediaries such as caches.
+server which intentionally never completes the response. Below there is a
+slightly different case: data which streams but will eventually complete.
 
-The visualisation below includes a cartogram inspired by [this file on
+Streaming techniques such as Websockets work around caching and proxies.
+Oboe.js is different; by taking a REST-based approach to streaming it remains
+compatible with HTTP intermediaries such as caches.
+
+The visualisation below is based on [a cartogram taken from
 Wikipedia](http://en.wikipedia.org/wiki/File:Cartogram%E2%80%942012_Electoral_Vote.svg)
 and simulates each state's results being announced in the [2012 United
 States presidential
-election](http://en.wikipedia.org/wiki/United_States_presidential_election,_2012)
-by condensing several hours into a minute to so.
+election](http://en.wikipedia.org/wiki/United_States_presidential_election,_2012).
+Time is sped up so that hours are condensed into seconds.
 
 {{demo "caching"}}
 

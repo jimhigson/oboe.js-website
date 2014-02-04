@@ -264,7 +264,7 @@ var scenarios = (function () {
                },
                "options": {
                   "text": "The time taken to display the" +
-                     " data completely is the same but the client could show pieces of it" +
+                     " data completely is the same but the display started" +
                      " much earlier"
                }
             }            
@@ -373,7 +373,7 @@ var scenarios = (function () {
                   "topic": "client"
                },
                "options": {
-                  "text": "Some time later the obstruction is gone and signal returns"
+                  "text": "Some time later the signal returns"
                }
             }
          ]

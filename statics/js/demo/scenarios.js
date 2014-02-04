@@ -551,8 +551,8 @@ var scenarios = (function () {
                   "topic": "server"
                },
                "options": {
-                  "text": "Once the historic messages have been sent the server " +
-                     "keeps the same connection open, writing out " +
+                  "text": "Now the historic messages have been sent the server " +
+                     "keeps the connection open, writing out " +
                      "new messages as they happen."
                }
             },

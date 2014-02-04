@@ -50,8 +50,10 @@ var NarrativeView = (function () {
           result.horizontalSide = 'left';
        }
        
-       if( x > halfWidth ) {
-          x = halfWidth;
+       var maxX = demoWidth * 0.45;
+       
+       if( x > maxX ) {
+          x = maxX;
           flipVert = true;
        }
 

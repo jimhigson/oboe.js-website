@@ -46,8 +46,7 @@ var scenarios = (function () {
                   "topic": "client"
                },
                "options": {
-                  "text": "Here we have a single-page webapp running in a browser." +
-                     "It makes a request for the next page worth of JSON",
+                  "text": "Our client makes a GET request for a page-worth of data",
                   "locationOnTopic": "upstream"
                }
             }
@@ -78,7 +77,7 @@ var scenarios = (function () {
                   "topic": "client"
                },
                "options": {
-                  "text": "This time the webapp can render progressively as the JSON is parsed",
+                  "text": "Because it parses the stream the webapp can render progressively",
                   "locationOnTopic": "where"
                }
             }
@@ -201,7 +200,7 @@ var scenarios = (function () {
                   "topic": "client"
                },
                "options": {
-                  "text": "Although webapp has received most of the data" +
+                  "text": "By now the webapp has already received most of the data but " +
                      "the user won't be shown anything until the last bit arrives..."
                }
             },
@@ -216,7 +215,7 @@ var scenarios = (function () {
                   "topic": "client"
                },
                "options": {
-                  "text": "...and at last the user can see where they have to go"
+                  "text": "The user didn't see anything until all the data was downloaded"
                }
             }            
          ]
@@ -249,8 +248,8 @@ var scenarios = (function () {
                   "topic": "client"
                },
                "options": {
-                  "text": "Now we're showing results early. This might be enough already for the " +
-                     "user to start to understand the data."
+                  "text": "The client has only the first pieces of data but already we're displaying " +
+                     "useful content."
                }
             },
             {
@@ -264,8 +263,9 @@ var scenarios = (function () {
                   "topic": "client"
                },
                "options": {
-                  "text": "In this example it took the same time to view all of" +
-                     " the data but less time to show the first parts of it"
+                  "text": "The time taken to display the" +
+                     " data completely is the same but the client could show pieces of it" +
+                     " much earlier"
                }
             }            
          ]
@@ -347,8 +347,7 @@ var scenarios = (function () {
                   "topic": "client"
                },
                "options": {
-                  "text": "At this point the mobile client is blocked from reaching the tower and loses connection," +
-                     "no more of the request can be loaded"
+                  "text": "At this point the mobile client is blocked from reaching the tower and loses connection."
                }
             },
             {
@@ -361,7 +360,7 @@ var scenarios = (function () {
                   "topic": "client"
                },
                "options": {
-                  "text": "Eventually the request times out. All the data loaded so far is discarded."
+                  "text": "When the request times out the data received so far is discarded."
                }
             },            
             {
@@ -374,7 +373,7 @@ var scenarios = (function () {
                   "topic": "client"
                },
                "options": {
-                  "text": "Signal comes back"
+                  "text": "Some time later the obstruction is gone and signal returns"
                }
             }
          ]
@@ -407,8 +406,8 @@ var scenarios = (function () {
                   "topic": "client"
                },
                "options": {
-                  "text": "Because the client already has most of the data it need only request" +
-                     " the parts that it is missing"
+                  "text": "Now that signal has returned the client is smart enough to only re-request" +
+                     " the data that it missed the first time"
                }
             }
          ]
@@ -552,9 +551,9 @@ var scenarios = (function () {
                   "topic": "server"
                },
                "options": {
-                  "text": "Once the historic messages have been sent, the server " +
-                     "can keep the same connection open and write out " +
-                     "messages as they happen"
+                  "text": "Once the historic messages have been sent the server " +
+                     "keeps the same connection open, writing out " +
+                     "new messages as they happen."
                }
             },
             {
@@ -568,8 +567,7 @@ var scenarios = (function () {
                   "topic": "client"
                },
                "options": {
-                  "text": "After streaming in the historic data the client doesn't need " +
-                     "any extra code to keep it updated with live messages."
+                  "text": "The client handles live messages the same as historic, displaying them as HTML."
                }
             }
          ],         

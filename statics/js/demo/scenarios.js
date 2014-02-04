@@ -77,7 +77,7 @@ var scenarios = (function () {
                   "topic": "client"
                },
                "options": {
-                  "text": "Because it parses the stream the webapp can render progressively",
+                  "text": "Because it uses a streaming parser the webapp can render progressively",
                   "locationOnTopic": "where"
                }
             }
@@ -215,7 +215,7 @@ var scenarios = (function () {
                   "topic": "client"
                },
                "options": {
-                  "text": "The user didn't see anything until all the data was downloaded"
+                  "text": "The user didn't see anything until all the data was downloaded."
                }
             }            
          ]
@@ -265,7 +265,7 @@ var scenarios = (function () {
                "options": {
                   "text": "The time taken to display the" +
                      " data completely is the same but the display started" +
-                     " much earlier"
+                     " much earlier."
                }
             }            
          ]
@@ -347,7 +347,7 @@ var scenarios = (function () {
                   "topic": "client"
                },
                "options": {
-                  "text": "At this point the mobile client is blocked from reaching the tower and loses connection."
+                  "text": "At this point the phone loses sight of the tower and the connection goes down."
                }
             },
             {
@@ -373,7 +373,7 @@ var scenarios = (function () {
                   "topic": "client"
                },
                "options": {
-                  "text": "Some time later the signal returns"
+                  "text": "Some time later the signal returns."
                }
             }
          ]
@@ -398,6 +398,19 @@ var scenarios = (function () {
             {
                "type": "narrativeItem",
                "script": [
+                  {  eventName: "tunnel_activated"
+                  }
+               ],
+               "relationships": {
+                  "topic": "client"
+               },
+               "options": {
+                  "text": "When the connection goes down the user can already see most of the data."
+               }
+            },            
+            {
+               "type": "narrativeItem",
+               "script": [
                   {  eventName: "client_requestAttempt_2",
                      delay: seconds(0.2)
                   }
@@ -407,7 +420,7 @@ var scenarios = (function () {
                },
                "options": {
                   "text": "Now that signal has returned the client is smart enough to only re-request" +
-                     " the data that it missed the first time"
+                     " the data that it missed the first time."
                }
             }
          ]

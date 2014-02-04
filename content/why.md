@@ -5,25 +5,18 @@ Downloading REST resources
 --------------------------
 
 Let's start with the standard pattern found on most AJAX-powered sites.
-We have a client-side web application and a server which provides it with JSON.
-The page won't be updated until the response is complete.
+We have a client-side web application and a service that it goes to for data.
+The page isn't updated until the response completes.
 
 {{demo "fast-ajax-discrete"}}
 
-On a good connection there isn't much time to save but we can give a more responsive
-feel by using streaming.
+On a good connection there isn't a huge amount of time to save but we can
+show data sooner and give a more responsive feel by using streaming.
 
 {{demo "fast-ajax-progressive"}}
 
-Let's say that our server gets the data for some modules faster than others. Using
-the usual AJAX pattern displaying any data would have to wait until the slowest component
-is done. With Oboe we can start displaying data as soon as we have it.
-
-{{demo "streaming-ajax-progressive"}}
-
-This requires a server that can write out the JSON as a stream. The 
-response when it completes is 100% valid JSON so it remains compatible 
-with standard AJAX tools.
+As the connection gets slower or the response gets larger the improvement
+is more significant.
 
 Mobile data connections
 -----------------------
@@ -35,38 +28,39 @@ fluidly but web surfing still feels laggy.
 
 {{demo "mobile-discrete"}}
 
-If the client uses Oboe.js we can show everything as soon as it arrives:
+Oboe.js helps webapps to feel faster when running over mobile networks by
+making it easy for the programmer to use chunks from the response as soon 
+as they arrive:
 
 {{demo "mobile-progressive"}}
 
-This is about showing the user useful data sooner. In itself, progressive
-display also improves the user perception of performance.
+The visualisation above shows how the data is displayed sooner.
+In itself, progressive display also improves the *perception* of performance.
 
 Dropped connections
 -------------------
 
-Oboe.js can provides improved tolerance when connections are dropped.
+Oboe.js can provide improved tolerance if the connection is dropped before
+a response completes.
 Most AJAX frameworks equate a dropped connection with total failure and discard
-the partially transferred data.
+the partially transferred data, even if 90% transferred correctly.
 
-Although not ideal, in the situation where we have partially transferred data
-using it is usually preferable to throwing it away.
-It probably contains information that your user is interested in reading.
+We can handle this situation better by using the partially transferred data
+instead of throwing it away. From a streaming approach using this data
+follows naturally without requiring any extra programming. 
 
-In the next example we have a mobile connection which fails when the
+In the next visualisation we have a mobile connection which fails when the
 user enters a building:
 
 {{demo "mobile-fail-discrete"}}
 
-Oboe takes a more nuanced approach by viewing the HTTP response as a
-series of small, useful parts. If the connection is lost it is simply
-the case that some parts were successful and were used immediately,
-while others did not arrive.
-Using the data from partial responses requires no special
-cases or extra programming.
+Because Oboe.js views the HTTP response as a
+series of small, useful parts, when a connection is lost it is simply
+the case that some parts were successful and were used already,
+while others did not arrive. No special cases are required.
 
 In the example below the client is smart enough so that when the network
-comes back it only requests the data that it missed the first time.
+comes back it only requests the data that it missed on the first request.
 
 {{demo "mobile-fail-progressive"}}
 
@@ -88,8 +82,11 @@ We can speed the system up if we use Oboe.js in the aggregator and the
 client. The aggregator dispatches the data as soon as it has it and 
 the client displays the data as soon as it is arrives.
 
-
 {{demo "aggregated-progressive"}}
+
+The from the aggregator is 100% valid JSON so it remains compatible 
+with standard AJAX tools. A streaming parser like Oboe.js reads the resource
+as a stream while a standard parser reads it like a static resource.
 
 Historic and live data on the same transport
 --------------------------------------------

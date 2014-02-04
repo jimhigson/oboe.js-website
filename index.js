@@ -54,21 +54,21 @@ function defaultOpts(opts) {
 
 function respondWithMarkdown(req, res, getContentFn, opts){
     
-    var view = req.query.mode == 'raw'? 'raw' : 'page';
+    var view = req.query.mode == 'raw'? 'raw' : 'page',
+        pageName = req.params.page || 'index';
 
     opts = defaultOpts(opts);
         
     var bar = barrier(function(){
         res.render(view, opts);
+        console.log('html page', pageName.cyan, 'created in', String(bar.duration).cyan, 'ms');
     });
     
     
     readPagesList(bar.add(function(pages){
-        var mdFile = req.params.page || 'index';
-        
         // mark one as current:
         pages.forEach(function(page){
-            page.current = ( page.path == mdFile ); 
+            page.current = ( page.path == pageName ); 
         });
         
         opts.pages = pages;

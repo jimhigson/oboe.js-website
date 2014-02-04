@@ -1,9 +1,10 @@
 module.exports = function barrier(whenDone) {
 
     var requiredCallbacks = 0,
-        doneCallbacks = 0;
-
-    return {
+        doneCallbacks = 0,
+        startTime = Date.now();
+   
+    var instance = {
         add:function(fn){
             requiredCallbacks++;
 
@@ -12,9 +13,12 @@ module.exports = function barrier(whenDone) {
                 doneCallbacks++;
 
                 if( requiredCallbacks === doneCallbacks ) {
+                    instance.duration = Date.now() - startTime;
                     whenDone();
                 }
             }
         }
-    }
+    };
+   
+    return instance;
 };

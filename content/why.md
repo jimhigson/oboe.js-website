@@ -132,7 +132,8 @@ Time is sped up so that hours are condensed into seconds.
 
 This won't work for every use case. Websockets remains the better choice where
 live data after-the-fact is no longer interesting. REST-based Cacheable streaming
-works best for cases where the live data remains interesting as it ages.
+works best for cases where the live data is not specific to a single user and remains
+interesting as it ages.
 
 In Summary
 ----------

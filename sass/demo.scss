@@ -82,8 +82,9 @@ rect.fade,
 
 
 .packet text {
-    fill:$nearBlack;
-    @include svg-text-centered
+  fill:$demoBackground;
+  @include svg-text-centered;
+  font-size: 60%;
 }
 
 .controls text {

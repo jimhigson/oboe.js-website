@@ -67,33 +67,38 @@ comes back it only requests the data that it missed on the first request.
 Aggregating resources
 ---------------------
 
-In an N-tier architecture it is a common pattern for web clients to
-connect to an aggregation layer. The aggregation layer connects to
-several back-end services and returns a single response with all
-their data combined.
+It is a common architectural pattern for web clients to
+collect their data through a middle tier.
+This aggregating layer connects to several back-end services and
+returns a single response with their data combined.
 
-Below we can see an example without streaming. Origin 1 is slower
-than Origin 2 but the whole system is forced to run at the speed of
+The visualisation below shows an example without streaming. *Origin 1* is slower
+than *Origin 2* but the system as a whole is forced to run at the speed of
 its slowest component.
 
 {{demo "aggregated-discrete"}}
 
-We can speed the system up if we use Oboe.js in the aggregator and the
-client. The aggregator dispatches the data as soon as it has it and 
+Using Oboe.js in the aggregator and the client
+speeds the system up. The aggregator dispatches the data as soon as it has it and 
 the client displays the data as soon as it is arrives.
+In a Java stack this could also be implemented by using 
+[GSON](http://code.google.com/p/google-gson/) in the middle
+tier.
 
 {{demo "aggregated-progressive"}}
 
-The from the aggregator is 100% valid JSON so it remains compatible 
+Despite being a stream, the aggregator's output is 100% valid 
+JSON so it remains compatible 
 with standard AJAX tools. A streaming parser like Oboe.js reads the resource
-as a stream while a standard parser reads it like a static resource.
+as a stream but a tool which does not understand streaming has no problem reading it like 
+a static resource.
 
 Historic and live data on the same transport
 --------------------------------------------
 
-Consider the common pattern - an application fetches existing data
-and then keeps the page updated with 'live' events as they happen.
-We normally use two transports for this but
+It is a common pattern for an application to fetch existing data
+and then keep the page updated with 'live' events as they happen.
+We traditionally use two transports here but
 wouldn't our day be easier if we didn't have to program for distinct cases?
 
 In the example below the message server intentionally writes a JSON response
@@ -105,11 +110,12 @@ is timing.
 Cacheable streaming
 -------------------
 
-[Above](#historic-and-live-data-on-the-same-transport) we had a JSON
-server which intentionally never completes the response. Below there is a
-slightly different case: data which streams but will eventually complete.
+[Above](#historic-and-live-data-on-the-same-transport) we had a
+service where the response intentionally never completes. Here we will
+consider a slightly different case: JSON that streams to reflect
+live events but which eventually ends.
 
-Streaming techniques such as Websockets employ workarounds to avoid caches
+Most streaming HTTP techniques like Websockets intentionally avoid caches
 and proxies.
 Oboe.js is different; by taking a REST-based approach to streaming it remains
 compatible with HTTP intermediaries and can take advantage of caches to better
@@ -125,13 +131,8 @@ Time is sped up so that hours are condensed into seconds.
 {{demo "caching"}}
 
 This won't work for every use case. Websockets remains the better choice where
-live data after-the-fact is no longer interesting. Cacheable streaming
+live data after-the-fact is no longer interesting. REST-based Cacheable streaming
 works best for cases where the live data remains interesting as it ages.
-
-REST talks in the language of resources, not services. URLs should
-identify things, not endpoints. It shouldn't matter if the server has
-the thing now or if it will send it later when it does have it, or some
-combination of both.
 
 In Summary
 ----------

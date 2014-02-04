@@ -810,7 +810,7 @@ var scenarios = (function () {
                   startHidden:true,
                   zoom:1.15
                },
-               "locations": { "where": {x: 430, y: 67} },               
+               "locations": { "where": {x: 430, y: 60} },               
                "script": [
                   {  eventName: "client1_accepted_response12",
                      delay: seconds(0.5),
@@ -851,7 +851,7 @@ var scenarios = (function () {
                   startHidden:true,
                   zoom:1.15
                },
-               "locations": { "where": {x: 245, y: 205} },
+               "locations": { "where": {x: 235, y: 205} },
                "script": [
                   {  eventName: "client1_accepted_response50",
                      delay: seconds(0.5),

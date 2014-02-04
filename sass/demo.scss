@@ -11,6 +11,11 @@ $labelColor: $shadow;
       1px 1px 0 $demoBackground;
 }
 
+template {
+  /* browsers that don't understand template elements fail to hide them */
+  display:none;
+}
+
 #demoTemplateHolder {
   display:none;
 }

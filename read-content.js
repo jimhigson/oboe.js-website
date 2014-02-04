@@ -60,7 +60,7 @@ function outline($){
    }
 }
 
-function readContent(requestedMarkdown, opts, callback) {
+function readContent(requestedPage, opts, callback) {
 
    function pdfFile(pageName) {
       return 'pdf/' + pageName + '.pdf';
@@ -74,14 +74,14 @@ function readContent(requestedMarkdown, opts, callback) {
       return 'content/' + pageName + '.md';
    }
 
-   fs.exists(markdownFile(requestedMarkdown), function(requestedMarkdownExists){
+   fs.exists(markdownFile(requestedPage), function(requestedMarkdownExists){
       
-      var pageNameToRead = requestedMarkdownExists? requestedMarkdown : '404',
-          markdownToRead = markdownFile(pageNameToRead),
-          markdownStr,
+      var actualPage = requestedMarkdownExists? requestedPage : '404',
+          markdownToRead = markdownFile(actualPage),
+          markdownContent,
           bar = barrier(function(){
-             
-            var surroundedMarkdown = MD_PREFIX + markdownStr + MD_POSTFIX,
+
+            var surroundedMarkdown = MD_PREFIX + markdownContent + MD_POSTFIX,
                 filledInMarkdown = Handlebars.compile(surroundedMarkdown)(opts),
                 html = supermarked(filledInMarkdown, MARKDOWN_OPTS),
                 $ = postProcessMarkup(cheerio.load(html)),
@@ -91,17 +91,19 @@ function readContent(requestedMarkdown, opts, callback) {
              
             callback( response );
          });
+      
+      opts.page = actualPage;
 
-      fs.exists(pdfFile(requestedMarkdown), bar.add(function(exists){
+      fs.exists(pdfFile(requestedPage), bar.add(function(exists){
          if( exists ) {
-            opts.pdfLink = pdfUrl(requestedMarkdown);
+            opts.pdfLink = pdfUrl(requestedPage);
          }
       }));
       
       // fileToRead should point to legit page by now (possibly 404)
       fs.readFile(markdownToRead, bar.add(function(err, markdownBuffer){
        
-         markdownStr = markdownBuffer.toString();
+         markdownContent = markdownBuffer.toString();
       }));
    });
 }

@@ -87,7 +87,6 @@ function readContent(requestedMarkdown, opts, callback) {
                 $ = postProcessMarkup(cheerio.load(html)),
                 response = outline($);
 
-            console.log(filledInMarkdown);
             response.status = requestedMarkdownExists? 200 : 404; 
              
             callback( response );

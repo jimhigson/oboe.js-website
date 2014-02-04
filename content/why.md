@@ -125,9 +125,11 @@ Combining REST and streaming for cacheability
 server which intentionally never completes the response. Below there is a
 slightly different case: data which streams but will eventually complete.
 
-Streaming techniques such as Websockets work around caching and proxies.
+Streaming techniques such as Websockets employ workarounds to avoid caches
+and proxies.
 Oboe.js is different; by taking a REST-based approach to streaming it remains
-compatible with HTTP intermediaries such as caches.
+compatible with HTTP intermediaries and can take advantage of caches to better
+distribute the content.
 
 The visualisation below is based on [a cartogram taken from
 Wikipedia](http://en.wikipedia.org/wiki/File:Cartogram%E2%80%942012_Electoral_Vote.svg)
@@ -138,38 +140,11 @@ Time is sped up so that hours are condensed into seconds.
 
 {{demo "caching"}}
 
+This won't work for every use case. Websockets remain a better choice where
+live data after-the-fact is no longer interesting. Cacheable streaming
+works best for cases where the live data remains interesting as it ages.
+
 REST talks in the language of resources, not services. URLs should
 identify things, not endpoints. It shouldn't matter if the server has
 the thing now or if it will send it later when it does have it, or some
 combination of both.
-
-*Incorporate and break up*:
-
-The REST service gives results per-state for the for the [United States
-presidential election,
-2012](http://en.wikipedia.org/wiki/United_States_presidential_election,_2012).
-While the results are being announced, requesting them returns an
-incomplete JSON with the states known so far be immediately sent,
-followed by the remainder dispatched individually as the results are
-called. When all results are known the JSON would finally close leaving
-a complete resource.
-
-After the event, somebody wishing to fetch the results would use the
-*same URL for the historic data as was used on the night for the live
-data*. This is possible because the URL refers only to the data that is
-required, not to whether it is current or historic. Because it
-eventually forms a complete HTTP response, the data that was streamed is
-not incompatible with HTTP caching and a cache which saw the data while
-it was live could later serve it from cache as historic. More
-sophisticated caches located between client and service would recognise
-when a new request has the same URL as an already ongoing request, serve
-the response received so far, and then continue by giving both inbound
-requests the content as it arrives from the already established outbound
-request. Hence, the resource would be cacheable even while the election
-results are streaming and a service would only have to provide one
-stream to serve the same live data to multiple users fronted by the same
-cache. An application developer programming with Oboe would not have to
-handle live and historic data as separate cases because the node and
-path events they receive are the same. Without branching, the code which
-displays results as they are announced would automatically be able to
-show historic data.

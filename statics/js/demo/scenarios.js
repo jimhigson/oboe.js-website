@@ -700,7 +700,7 @@ var scenarios = (function () {
                },
                "options": {
                   "text": "As streaming data arrives the cache treats it " +
-                     "like normal traffic and propagate to all requesters"
+                     "like normal traffic by propagating to all requesters."
                }
             },            
             {

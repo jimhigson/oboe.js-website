@@ -248,7 +248,7 @@ var scenarios = (function () {
                   "topic": "client"
                },
                "options": {
-                  "text": "The client has only the first pieces of data but already we're displaying " +
+                  "text": "The client has only downloaded some of the JSON but we're displaying " +
                      "useful content."
                }
             },
@@ -623,7 +623,7 @@ var scenarios = (function () {
                   "topic": "cache"
                },
                "options": {
-                  "text": "This is the first client to request the results" +
+                  "text": "This is the first client to request election results" +
                      " so it is a cache miss. The cache propagates the request" +
                      " as per usual."
                }
@@ -672,7 +672,7 @@ var scenarios = (function () {
                   "text": "The http cache already has a connection " +
                      "to the server for this URL and is partially " +
                      "populated. It doesn't need to hit the server again " +
-                     "and can send what it has already"
+                     "and can send what it has already."
                }
             },
             {
@@ -702,8 +702,7 @@ var scenarios = (function () {
                },
                "options": {
                   "text": "The server sends the last result and" +
-                     " closes the JSON normally. Although the response was" +
-                     " written slowly as a stream, the content ultimately " +
+                     " closes the JSON normally. The content ultimately " +
                      " forms a valid JSON document."
                }
             },
@@ -718,7 +717,7 @@ var scenarios = (function () {
                   "topic": "client3"
                },
                "options": {
-                  "text": "A third client comes online after all the " +
+                  "text": "Now a third client comes online after all the " +
                      "results have been announced.",
                   "locationOnTopic": "upstream"
                }

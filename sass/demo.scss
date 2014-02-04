@@ -161,8 +161,11 @@ line.messageInner {
 }
 
 g.client .frame,
-.server .box {
+.server .box,
+.graph .bars,
+.graph .axes {
     fill: $midTone;
+    shape-rendering: crispEdges;
 }
 
 .aerial circle,
@@ -195,6 +198,8 @@ text.label {
 .browser .background {
   stroke:$demoBackground;
   stroke-width:4;
+  fill:white;
+  shape-rendering: crispEdges;
 }
 
 .browser .frame {
@@ -202,11 +207,18 @@ text.label {
   stroke-width:1;
 }
 
+
+
 .tower .structure, 
 .barrier .wall,
 .barrier .shadow,
 .browser .progressBar .bar{
   fill: $midTone;
+}
+
+.progressBar,
+.tweet .shading {
+  shape-rendering: crispEdges;
 }
 
 .browser .progressBar .space{
@@ -242,9 +254,7 @@ g.client .part {
 }
 
 
-.browser .background {
-  fill:white;
-}
+
 
 .spinnerLink {
   fill:$shadow;

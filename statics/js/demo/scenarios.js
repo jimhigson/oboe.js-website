@@ -408,7 +408,7 @@ var scenarios = (function () {
                },
                "options": {
                   "text": "Because the client already has most of the data it need only request" +
-                     "the parts that it is missing"
+                     " the parts that it is missing"
                }
             }
          ]

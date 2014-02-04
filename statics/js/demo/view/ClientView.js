@@ -209,7 +209,7 @@ var ClientView = (function(){
     };
 
     PoliticalClient.prototype.updateTotals = function(payload){
-        var TOTAL_VOTES = 509,
+        var TOTAL_VOTES = 538,
             winner = payload.wonBy,
             total = this.runningTotals[winner] += payload.votes;
             proportion = total/TOTAL_VOTES,

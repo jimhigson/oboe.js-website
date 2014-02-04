@@ -624,9 +624,24 @@ var scenarios = (function () {
                },
                "options": {
                   "text": "This is the first client to request the results" +
-                     " so it is a cache hit. REST streaming doesn't rely" +
-                     " on bypassing caching so the cache can propagate and store" +
+                     " so it is a cache miss. The cache propagates the request" +
                      " as per usual."
+               }
+            },
+            {
+               "type": "narrativeItem",
+               "script": [
+                  {  eventName: "server_gotRequest",
+                     delay: seconds(0.1)
+                  }
+               ],
+               "relationships": {
+                  "topic": "server"
+               },
+               "options": {
+                  "text": "As usual, the results server doesn't care that it is " +
+                     "talking to a cache. It proceeds to serve the results as they " +
+                     "are announced."
                }
             },            
             {
@@ -640,7 +655,7 @@ var scenarios = (function () {
                   "topic": "client2"
                },
                "options": {
-                  "text":"A second client behind the same proxy comes" +
+                  "text":"A second client comes" +
                      " online and requests the results."
                }
             },
@@ -718,7 +733,7 @@ var scenarios = (function () {
                   "topic": "cache"
                },
                "options": {
-                  "text": "This request can be served straight from cache. At this" +
+                  "text": "This request can be served from cache. At this" +
                      " time it is essentially a static resource."
                }
             }
@@ -727,7 +742,7 @@ var scenarios = (function () {
             {
                "name": "server",
                "type": "originServer",
-               "locations": {where: {y: 70}},
+               "locations": {where: {x:60, y: 100}},
                options: {
                   "payloads": '2012UsElection',
                   "timeBetweenPackets": inconsistentlyTimed,

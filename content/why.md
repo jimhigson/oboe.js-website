@@ -118,8 +118,8 @@ is timing.
 
 {{demo "historic-and-live"}}
 
-Combining REST and streaming for cacheability
----------------------------------------------
+Cacheable streaming
+-------------------
 
 [Above](#historic-and-live-data-on-the-same-transport) we had a JSON
 server which intentionally never completes the response. Below there is a

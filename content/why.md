@@ -138,15 +138,16 @@ interesting as it ages.
 In Summary
 ----------
 
-Using streaming to load data is usually faster. The biggest advantages come with large
-responses, mobile networks, or reading from streaming
+Using streaming to load data is usually faster and more fault tolerant.
+The biggest advantages come with large responses, mobile networks, or reading from streaming
 JSON services.
 
 Downsides?
 ----------
 
-Oboe.js might be marginally
-slower for messages that load *very* quickly 
+Because it is a pure Javascript parser, Oboe.js requires more CPU time
+than JSON.parse. Oboe.js is marginally
+slower for messages that load very quickly 
 but for most real-world cases reacting to i/o sooner beats
 fussing about CPU usage. If in doubt, benchmark, but don't forget to
 use the real internet and think about perceptual performance.

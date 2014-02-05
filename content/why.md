@@ -1,13 +1,14 @@
 Why use Oboe.js?
 ================
 
-Oboe.js is a Javascript tool for loading JSON using streaming that runs under Node.js
-and web browsers. This page looks at why streaming is a good thing.  
+**Oboe.js** is a Javascript library that runs under Node.js
+and web browsers for loading JSON using streaming.
+This page looks at why streaming is a good thing.  
 
 Downloading REST resources
 --------------------------
 
-Let's start by looking at the standard pattern found on most AJAX-powered sites.
+Let's start by examining the standard pattern found on most AJAX-powered sites.
 We have a client-side web application and a service that it goes to for data.
 The page isn't updated until the response completes.
 
@@ -27,13 +28,14 @@ Mobile data connections
 Mobile networks today are high-bandwidth but can also be
 high-latency and come with inconsistent packet delivery times.
 This is why buffered content like streaming HD video plays
-fluidly but web surfing still feels laggy.
+fluidly but web surfing still feels laggy. The visualisation
+below approximates a medium-sized download on a mobile network.
 
 {{demo "mobile-discrete"}}
 
-Oboe.js helps webapps to feel faster when running over mobile networks by
-making it easy for the programmer to use chunks from the response as soon 
-as they arrive:
+Oboe.js makes it easy for the programmer to use chunks from the response as soon 
+as they arrive. This helps webapps to feel faster when running over mobile networks.
+
 
 {{demo "mobile-progressive"}}
 
@@ -43,8 +45,8 @@ In itself, progressive display also improves the *perception* of performance.
 Dropped connections
 -------------------
 
-Oboe.js can provide improved tolerance if the connection is dropped before
-a response completes.
+Oboe.js provides improved tolerance if a connection is lost before
+the response completes.
 Most AJAX frameworks equate a dropped connection with total failure and discard
 the partially transferred data, even if 90% transferred correctly.
 
@@ -60,10 +62,11 @@ user enters a building:
 Because Oboe.js views the HTTP response as a
 series of small, useful parts, when a connection is lost it is simply
 the case that some parts were successful and were used already,
-while others did not arrive. No special cases are required.
+while others did not arrive. Fault tolerance follows naturally from this
+model and no special cases are required.
 
 In the example below the client is smart enough so that when the network
-comes back it only requests the data that it missed on the first request.
+comes back it only requests the data that it missed on the first request:
 
 {{demo "mobile-fail-progressive"}}
 
@@ -71,18 +74,18 @@ Aggregating resources
 ---------------------
 
 It is a common architectural pattern for web clients to
-collect their data through a middle tier.
-This aggregating layer connects to several back-end services and
-returns a single response with their data combined.
+retrieve their data through an aggreating middle tier.
+The aggregator connects to several back-end services and
+combines their data into a single response.
 
 The visualisation below shows an example without streaming. *Origin 1* is slower
-than *Origin 2* but the system as a whole is forced to run at the speed of
-its slowest component.
+than *Origin 2* but the system is forced to run at the speed of
+the slowest service:
 
 {{demo "aggregated-discrete"}}
 
-Using Oboe.js in the aggregator and the client
-speeds the system up. The aggregator dispatches the data as soon as it has it and 
+We can speed this scenario up by using Oboe.js to load data in the
+aggregator and the client. The aggregator dispatches the data as soon as it has it and 
 the client displays the data as soon as it is arrives.
 In a Java stack this could also be implemented by using 
 [GSON](http://code.google.com/p/google-gson/) in the middle
@@ -93,7 +96,7 @@ tier.
 Despite being a stream, the aggregator's output is 100% valid 
 JSON so it remains compatible 
 with standard AJAX tools. A streaming parser like Oboe.js reads the resource
-as a stream but a tool which does not understand streaming has no problem reading it like 
+as a stream but a tool which does not understand streaming will have no problem reading it like 
 a static resource.
 
 Historic and live data on the same transport
@@ -105,8 +108,9 @@ We traditionally use two transports here but
 wouldn't our day be easier if we didn't have to program for distinct cases?
 
 In the example below the message server intentionally writes a JSON response
-that never completes. The only difference between 'old' and 'new' data
-is timing.
+that never completes. It starts by writing out the existing messages
+as a chunk and then continues to write out new ones as they happen.
+The only difference between 'old' and 'new' data is timing.
 
 {{demo "historic-and-live"}}
 

@@ -4,7 +4,7 @@ The oboe function
 ---------------
 
 Oboe.js exposes only one function, `oboe`, which is used to instantiate a new Oboe instance.
-The Oboe instance starts a new HTTP request unless the caller is 
+Calling this function starts a new HTTP request unless the caller is 
 [managing the stream themselves](#byo-stream).
 
 ```js
@@ -50,7 +50,7 @@ BYO stream
 
 Under Node.js you may also pass `oboe` an arbitrary
 [ReadableStream](http://nodejs.org/api/stream.html#stream_class_stream_readable)
-as the sole argument. In this case Oboe will read JSON from the given stream.
+for it to read JSON from.
 It is your responsibility to initiate the stream and Oboe will not start 
 a new HTTP request on your behalf.
 
@@ -61,7 +61,7 @@ oboe( stream )
 node event
 ----------
 
-The methods `.node()` and `.on` are used to register interest in particular nodes by providing 
+The methods `.node()` and `.on()` are used to register interest in particular nodes by providing 
 JSONPath patterns. As the JSON stream is parsed the Oboe instance checks for matches 
 against these patterns and when a matching node is found it emits a `node` event.
  
@@ -225,9 +225,9 @@ oboe('/content')
 If the name parameter is given that named header will be returned as a String,
 otherwise all headers are returned as an Object.
 
-`.header()` returns `undefined` if the headers have not yet been received. The headers 
-are available anytime after the `start` event has been emitted. In practice this means
-from inside any `node`, `path`, `start` or `done` callbacks.
+`undefined` wil be returned if the headers have not yet been received. The headers 
+are available anytime after the `start` event has been emitted. They will always be
+available from inside a `node`, `path`, `start` or `done` callback.
 
 `.header()` always returns undefined for non-HTTP streams.
 
@@ -271,8 +271,8 @@ oboe('resourceUrl')
 
 `.forget()` is a shortcut for [.removeListener()](#-removelistener-) in
 the case where the listener to be removed is currently executing. 
-Calling `.forget()` on the Oboe instance from inside a `node` or `path` event 
-listener de-registers that callback.
+Calling `.forget()` on the Oboe instance from inside a `node` or `path` 
+callback de-registers that callback.
 
 ```js
 // Display only the first ten downloaded items
@@ -308,7 +308,7 @@ oboe('/content')
 Remove any listener on the Oboe instance.
 
 From inside node and path callbacks [.forget()](#-forget-)
-is usually more convenient since it is not required to store a reference
+is usually more convenient because it does not require that the programmer stores a reference
 to the callback function. However, `.removeListener()`
 has the advantage that it may be called from anywhere.
 
@@ -356,3 +356,24 @@ Oboe's pattern matching is a variation on [JSONPath](https://code.google.com/p/j
 The pattern engine supports 
 [CSS-4 style node selection](/examples/#css4-style-patterns)
 using the dollar, `$`, symbol. See also [the example patterns](/examples/#example-patterns). 
+
+Browser support
+---------------
+
+These browsers have full support:
+
+* Recent Chrome
+* Recent Firefox
+* Internet Explorer 10
+* Recent Safaris
+
+These browsers will run Oboe but not stream:
+
+* Internet explorer 8 and 9, given [appropriate shims for ECMAScript 5](https://github.com/kriskowal/es5-shim/blob/master/es5-sham.js)
+ 
+Unfortunately, IE before version 10 
+[doesn't provide any convenient way to read an http request while it is in progress](http://blogs.msdn.com/b/ieinternals/archive/2010/04/06/comet-streaming-in-internet-explorer-with-xmlhttprequest-and-xdomainrequest.aspx).
+
+The good news is that in older versions of IE Oboe gracefully degrades,
+it'll just fall back to waiting for the whole response to return, then fire all the events together.
+You don't get streaming but it isn't any worse than if you'd have designed your code to non-streaming AJAX.

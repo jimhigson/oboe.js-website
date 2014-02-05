@@ -4,9 +4,9 @@ Examples
 A simple download
 -----------------
 
-It isn't really what Oboe is for but you can use it as a simple AJAX library.
-This might be good to drop it into an existing application before iteratively refactor
-towards progressive loading. The API should be familiar to jQuery users.
+It isn't what Oboe was built for but it works fine as a simple AJAX library.
+This might be a good tactic to drop it into an existing application before iteratively refactoring
+towards progressive loading. The call style should be familiar to jQuery users.
 
 ``` js
 oboe('/myapp/things.json')
@@ -66,14 +66,13 @@ oboe('/myapp/things.json')
 Duck typing
 -----------
 
-Sometimes it is more useful to say *what you are trying to find* than *where you'd like to find it*.
-In these cases, [duck typing](http://en.wikipedia.org/wiki/Duck_typing) is more useful than
-patterns that use location:
+Sometimes it is easier to say *what you are trying to find* than *where you'd like to find it*.
+[Duck typing](http://en.wikipedia.org/wiki/Duck_typing) is provided for these cases.
 
 ``` js
 oboe('/myapp/things.json')
    .node('{name colour}', function( thing ) {   
-      // I'll get called for every object found that 
+      // I'll be called for every object found that 
       // has both a name and a colour   
       console.log(thing.name, ' is ', thing.colour);
    };
@@ -82,10 +81,10 @@ oboe('/myapp/things.json')
 Hanging up when we have what we need
 ------------------------------------
 
-If you don't control the data source it might give more information than the
-client actually needs.
+If you don't control the data source the service sometimes returns more information than you
+application actually needs.
 
-In the example above if we only care about the foods and not the non-foods we
+If we only care about the foods and not the non-foods we
 can hang up as soon as we have the foods, reducing our precious
 download footprint.
 
@@ -97,6 +96,7 @@ oboe('/myapp/things.json')
          alert('go ahead and eat some ' + foodObject.name);
       },
       'foods': function(){
+         // We have everything that we need. That's enough.
          this.abort();
       }
    });

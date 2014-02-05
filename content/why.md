@@ -1,10 +1,13 @@
 Why use Oboe.js?
 ================
 
+Oboe.js is a Javascript tool for loading JSON using streaming that runs under Node.js
+and web browsers. This page looks at why streaming is a good thing.  
+
 Downloading REST resources
 --------------------------
 
-Let's start with the standard pattern found on most AJAX-powered sites.
+Let's start by looking at the standard pattern found on most AJAX-powered sites.
 We have a client-side web application and a service that it goes to for data.
 The page isn't updated until the response completes.
 

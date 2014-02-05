@@ -1,8 +1,7 @@
 Discuss
 =======
 
-To discuss the project there is a [Google
-Group](https://groups.google.com/forum/#!forum/oboejs).
+There is a [Google Group](https://groups.google.com/forum/#!forum/oboejs) for general project discussion.
 
 Please report any bugs on the [Github issues
 page](https://github.com/jimhigson/oboe.js/issues?state=open).

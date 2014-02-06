@@ -1,5 +1,5 @@
 
-function loadScenario(scenarioId) {
+function loadScenario(scenarioId, autoplay) {
 
     var MODEL_TYPES = {
         "originServer":        OriginServer,
@@ -109,11 +109,15 @@ function loadScenario(scenarioId) {
     demo.startSimulation = function() {
         scenario.options.startSimulation(modelItems);
     }
+   
+    if( autoplay ) {
+       demo.start();
+    }
 }
 
 $(function(){
     $('[data-demo]').each(function( _i, element ){
-        loadScenario( element.getAttribute('data-demo') );
+        loadScenario( element.getAttribute('data-demo'), element.hasAttribute('data-autoplay') );
     })
     recordHeadingsPosition();
     updateActiveHeading();

@@ -118,10 +118,10 @@ oboe('/myapp/things.json')
 Reacting before we get the whole object
 ---------------------------------------
 
-As well as `node` events, you can listen on `path` events to receive notification when
-paths are found, even if we don't yet know what will be found there.
-In the example below we eagerly create elements before we have their content 
-so that the page updates as soon as possible.
+As well as `node` events, you can listen on `path` events which fire when
+locations in the JSON are found, before we know what will be found there.
+Here we eagerly create elements before we have their content 
+so that the page updates as soon as possible:
 
 ``` js
 var currentPersonElement;
@@ -154,9 +154,10 @@ Giving some visual feedback as a page is updating
 -------------------------------------------------
 
 Suppose we're using progressive rendering to go to the next 'page' in a dashboard-style single page webapp
-and want to put some kind of indication on the page as the individual components parts load.
+and want to put some kind of indication on the page as individual modules load.
 
-Let's give visual feedback that when an area of the page is loading and remove it when we have data.
+We use a spinner to give visual feedback when an area of the page is loading and remove it 
+when we have the data for that area.
 
 ``` js
 // JSON from the server side:
@@ -198,11 +199,11 @@ oboe('/agileReport/sprint42')
    });   
 ```
 
-Implying meaning through node location
+Taking meaning from a node's location
 --------------------------------------
 
-Node and path callbacks receive the location of found items
-as an array of strings describing the descent from the root.
+Node and path callbacks receive a description of where items are found
+as an array of strings describing the path from the JSON root.
 It is sometimes preferable to
 register a wide-matching pattern and use the item's location to 
 decide programmatically what to do with it.
@@ -241,9 +242,9 @@ oboe('http://mysocialsite.example.com/homepage')
    
       // This callback will be called with every direct child
       // of the root object but not the sub-objects therein.
-      // Because we're coming off the root, the path argument
-      // is a single-element array with the module name
-      // resembling ['messages'] or ['photos'].
+      // Because we're maching direct children of the root the
+      // path argument is a single-element array with the module
+      // name; it resembles ['messages'] or ['photos'].
       var moduleName = path[0];
       
       My.App
@@ -368,8 +369,8 @@ var things = d3.selectAll('rect.thing');
 
 // Start downloading some data.
 // Every time we see a new thing in the data stream, use
-// d3 to add an element to our visualisation. This basic
-// pattern should work for most visualistions built in d3.
+// d3 to add an element to our visualisation. This pattern
+// should work for most d3 based visualistions.
 oboe('/data/things')
    .node('$things.*', function( thingsArray ){
             

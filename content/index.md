@@ -5,7 +5,7 @@ Stop waiting for requests to complete by using JSON content as soon as
 it arrives. Select any object, array, or value from the http response
 while it is ongoing.
 
-{{demo "aggregated-progressive"}}
+{{demo "aggregated-progressive" "autoplay"}}
 
 -   React quickly, even downloading large content on slow networks.
 

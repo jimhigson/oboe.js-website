@@ -6,15 +6,16 @@ var supermarked = require('supermarked'),
     Handlebars = require('handlebars'),
     barrier = require('./barrier.js'),
     figureTemplate = Handlebars.compile(
-       '<figure id="demo-{{name}}" data-demo="{{name}}"></figure>'
+       '<figure id="demo-{{name}}" data-demo="{{name}}" {{#if autoplay}}data-autoplay{{/if}}></figure>'
     ),
     MARKDOWN_OPTS = {ignoreMath:true, smartypants:true, gfm:true, tables:true},
     MD_PREFIX = '{{#if pdfLink}}This page is also [available as a PDF]({{pdfLink}}).{{/if}}\n',
     MD_POSTFIX = fs.readFileSync('content/postfix.md');
 
-Handlebars.registerHelper("demo", function(name) {
-
-   return new Handlebars.SafeString( figureTemplate({name:name}) );
+Handlebars.registerHelper("demo", function(name, mode) {
+   var autoplay = (mode == "autoplay");
+   
+   return new Handlebars.SafeString( figureTemplate({name:name, autoplay:autoplay}) );
 });
 
 function postProcessMarkup($) {

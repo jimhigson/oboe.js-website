@@ -72,7 +72,7 @@
     methods = {
       init: function(options) {
         var o = $.extend(defaults, options);
-        return this.each(function() {
+        var rtn = this.each(function() {
           var stickyElement = $(this),
              
               isStuckAlready = sticked.some(function( stickedItem ){
@@ -109,6 +109,8 @@
             getWidthFrom: o.getWidthFrom
           });
         });
+        scroller(); // might already need sticking
+        return rtn;
       },
       unstick: function(){
         return this.each(function() {

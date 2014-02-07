@@ -1,6 +1,9 @@
 /* this file is stuff that css doesn't do yet, or that I'm too lazy to do in css
  * It is not OO at all unlike the other JS. Pretty bad perhaps. */
 
+var MIN_SIZE_FOR_TWO_COL = 950,
+   SIZE_REQUIRING_PHONE_LAYOUT = 600;
+
 var jWindow = $(window);
 
 var headings = [];
@@ -49,26 +52,45 @@ function updateActiveHeading() {
 jWindow.resize(function() {
    recordHeadingsPosition();
    updateActiveHeading();
+   initSticky();
 });
 
+function initSticky(){
+   console.log('handling stickying');
+   
+   var jSiteNav = $('#siteNav');
+
+   var siteNavStickyOptions = {
+      getWidthFrom: '#pageArea',
+      topSpacing: 0
+   };
+   
+   // make internal nav sticky
+   if( jWindow.width() > SIZE_REQUIRING_PHONE_LAYOUT ) {
+      jSiteNav.sticky(siteNavStickyOptions);
+   } else {
+      jSiteNav.sticky('unstick');
+   }
+
+   if( jWindow.width() > MIN_SIZE_FOR_TWO_COL ) {
+
+      // make internal nav sticky
+      $('.internalNav').sticky({
+         topSpacing:28
+         ,  getWidthFrom:'.col1'
+      });
+   } else {
+      $('.internalNav').sticky('unstick');
+   }
+}
+
+
 $(function(){
-   var MIN_SIZE_FOR_TWO_COL = 950,
-       SIZE_REQUIRING_PHONE_LAYOUT = 600;
 
    var jWindow = $(window),
         jReducedLogo = $('.reducedLogo'),
-        jSiteNav = $('#siteNav'),
-        
-        siteNavStickyOptions = {
-            getWidthFrom: '#pageArea',
-            topSpacing: 0
-        };
-
-    // make internal nav sticky
-    if( jWindow.width() > SIZE_REQUIRING_PHONE_LAYOUT ) {
-        jSiteNav.sticky(siteNavStickyOptions);
-    }
-
+        jSiteNav = $('#siteNav');
+ 
     $('svg.menuButton').click(function() {
         jSiteNav.toggleClass('open')
 
@@ -81,15 +103,10 @@ $(function(){
 
         jReducedLogo.toggleClass('show', pos > 240);
     });    
-    
+
+   initSticky();
+   
    if( jWindow.width() > MIN_SIZE_FOR_TWO_COL ) {
-
-      // make internal nav sticky
-      $('.internalNav').sticky({
-         topSpacing:28
-      ,  getWidthFrom:'.col1'
-      });
-
 
         // highlight active item on internal nav
         recordHeadingsPosition();

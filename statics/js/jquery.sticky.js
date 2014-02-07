@@ -73,7 +73,15 @@
       init: function(options) {
         var o = $.extend(defaults, options);
         return this.each(function() {
-          var stickyElement = $(this);
+          var stickyElement = $(this),
+             
+              isStuckAlready = sticked.some(function( stickedItem ){
+                 return stickedItem.stickyElement[0] == stickyElement[0];
+              });
+           
+          if( isStuckAlready ) {
+             return;
+          }
 
           var stickyId = stickyElement.attr('id');
           var wrapper = $('<div></div>')
@@ -105,9 +113,13 @@
       unstick: function(){
         return this.each(function() {
 
-          var stickyElement = $(this);
+          var stickyElement = $(this),
+              wrapped = stickyElement.parent().hasClass('sticky-wrapper');
 
-          stickyElement.unwrap();
+          if( wrapped ) {
+             stickyElement.unwrap();
+          }
+           
           stickyElement.attr('style', '');
             
           sticked = sticked.filter(function( stickedItem ){

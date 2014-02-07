@@ -88,7 +88,7 @@ rect.fade,
 
 .packet text {
   fill:$demoBackground;
-  @include svg-text-centered;
+  text-anchor: middle;
   font-size: 60%;
 }
 

@@ -53,15 +53,6 @@ table {
    border-spacing: 0;
 }
 
-input[type="submit"] {
-   -webkit-appearance: none;
-   -webkit-border-radius: 0;
-}
-
-input[type="submit"].button {
-   -webkit-appearance: none;
-   -webkit-border-radius: 3px;
-}
 
 body {
    background: $backgroundColor;
@@ -223,71 +214,6 @@ details {
      margin-left: 1em;
      margin-bottom:0.5em;
    }
-}
-
-.button {
-   width: 100px;
-   height: 100px;
-   position: absolute;
-   top: 100px;
-}
-
-.button2 {
-   width: 50px;
-   height: 50px;
-   background: #ccc;
-   position: relative;
-   float: left;
-   top: 25px;
-   margin: 0 10px;
-   border-radius: 100px;
-   border: 2px solid #fff;
-   box-shadow: inset 0 -3px 0px rgba(0, 0, 0, 0.2), inset 0 8px 0 rgba(255, 255, 255, 0.3), 0 4px 10px rgba(0, 0, 0, 0.1);
-   -webkit-animation-duration: 2s;
-   -webkit-animation-name: slidein;
-   animation-duration: 2s;
-   animation-name: slidein;
-}
-
-@keyframes slidein {
-   0% {
-      left: -50%;
-      margin-left: 50px;
-      animation-timing-function: ease-in;
-   }
-   80% {
-      left: 9%;
-      margin-left: 0;
-      animation-timing-function: ease-out;
-   }
-   100% {
-      left: 0%;
-      margin-left: 10px;
-   }
-}
-
-@-webkit-keyframes slidein {
-   0% {
-      left: -50%;
-      margin-left: 50px;
-      -webkit-animation-timing-function: ease-in;
-   }
-   80% {
-      left: 9%;
-      margin-left: 0;
-      -webkit-animation-timing-function: ease-out;
-   }
-   100% {
-      left: 0%;
-      margin-left: 10px;
-   }
-
-}
-
-.button2.wee {
-   width: 30px;
-   height: 30px;
-   top: 45px;
 }
 
 /* main four elements making up grid */
@@ -546,18 +472,6 @@ svg.menuButton:active {
       padding: 0;
    }
 
-   .button2 {
-      width: 25px;
-      height: 25px;
-      top: 55px;
-   }
-
-   .button2.wee {
-      width: 15px;
-      height: 15px;
-      top: 60px;
-   }
-
 }
 
 /* Even Smaller screens */
@@ -593,11 +507,6 @@ svg.menuButton:active {
       display:none;
    }
 
-   .button2, .button2.wee {
-      margin-left: 0px;
-      margin-right: 8px;
-      top: 18px;
-   }
    #header {
       height: 20px;
    }

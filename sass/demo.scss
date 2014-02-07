@@ -261,16 +261,16 @@ g.client .part {
 
 
 
-.spinnerLink {
+.spinner {
   fill:$shadow;
 }
-.client use.spinnerLink {
+.client g.spinnerContainer {
   opacity:1;
   transition:opacity 1s;
   transition-delay:opacity 0.5s;
 }
 
-.client:not(.requesting) use.spinnerLink {
+.client:not(.requesting) g.spinnerContainer {
   opacity:0;
 }
 

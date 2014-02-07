@@ -101,7 +101,8 @@ function readContent(requestedPage, opts, callback) {
          });
       
       opts.page = actualPage;
-
+      opts.isDownloadPage = (actualPage == 'download');
+      
       fs.exists(pdfFile(requestedPage), bar.add(function(exists){
          if( exists ) {
             opts.pdfLink = pdfUrl(requestedPage);

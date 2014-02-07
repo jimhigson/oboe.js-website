@@ -8,6 +8,11 @@ var jWindow = $(window);
 
 var headings = [];
 
+var siteNavStickyOptions = {
+   getWidthFrom: '#pageArea',
+   topSpacing: 0
+};
+
 function recordHeadingsPosition(){
    headings = $('main h2').map(function(i, el) {
       return {
@@ -59,11 +64,6 @@ function initSticky(){
    console.log('handling stickying');
    
    var jSiteNav = $('#siteNav');
-
-   var siteNavStickyOptions = {
-      getWidthFrom: '#pageArea',
-      topSpacing: 0
-   };
    
    // make internal nav sticky
    if( jWindow.width() > SIZE_REQUIRING_PHONE_LAYOUT ) {

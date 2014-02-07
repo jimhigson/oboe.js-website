@@ -86,6 +86,7 @@ em {
    right: 0;
    overflow: hidden;
    transition: padding 0.5s;
+   height: 1.1em; // stop Firefox getting confused what height this should be
 }
 
 .is-sticky #siteNav {
@@ -565,6 +566,7 @@ svg.menuButton:active {
       text-align: right;
       padding-top: 0.2em;
       padding-bottom: 0.2em;
+      height: auto; // remove hack to stop Firefox getting confused what height this should be
    }
 
 }

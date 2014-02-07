@@ -261,8 +261,9 @@ g.client .part {
 
 
 
-.spinner {
+.browser .spinner {
   fill:$shadow;
+  stroke:none;
 }
 .client g.spinnerContainer {
   opacity:1;

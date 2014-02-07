@@ -111,9 +111,13 @@ var ClientView = (function(){
    
     ClientView.prototype.showSpinner = function(){
         addClass(this.jDom, 'requesting');
+        var spin = stampFromTemplate($('#rotateAnimation'));
+       
+        this.jDom.find('.spinner')[0].appendChild( spin[0] );
     };
     ClientView.prototype.hideSpinner = function(){
         removeClass(this.jDom, 'requesting');
+        this.jDom.find('.spinner .rotate').remove();
     };
 
     // ---------------------------------

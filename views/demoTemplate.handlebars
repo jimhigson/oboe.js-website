@@ -66,6 +66,14 @@
     </g>
 </template>
 
+<template id="rotateAnimation">
+    <animateTransform class="rotate"
+                      attributeType="xml" attributeName="transform"
+                      type="rotate"
+                      from="0" to="360" dur="2s"
+                      repeatCount="indefinite"/>
+</template>
+
 <template id="client-portrait">
     <g class="client position">
        <g class="zoom">
@@ -81,13 +89,7 @@
                  <rect class="bar" width="0" height="4"/>
               </g>
               <g class="spinnerContainer" transform="translate(-30,-45)">
-                  <path class="spinner"
-                        d="M -0.1,-3 A 1,1 0 1 0 0,-1 C 0.6,-1 1,-0.6 1,0 1,0.3 0.9,0.5 0.7,0.7 A 1,1 0 1 0 2.1,2.1 C 2.7,1.6 3,0.8 3,0 3,-1.6 1.6,-3 0,-3 a 1,1 0 0 0 -0.1,0 z" >
-                      <animateTransform attributeType="xml" attributeName="transform"
-                                        type="rotate"
-                                        from="0" to="360" dur="2s"
-                                        repeatCount="indefinite"/>
-                  </path>
+                  <path class="spinner" d="M -0.1,-3 A 1,1 0 1 0 0,-1 C 0.6,-1 1,-0.6 1,0 1,0.3 0.9,0.5 0.7,0.7 A 1,1 0 1 0 2.1,2.1 C 2.7,1.6 3,0.8 3,0 3,-1.6 1.6,-3 0,-3 a 1,1 0 0 0 -0.1,0 z" />
               </g>
           </g>
           <text class="label" y="66"></text>
@@ -108,12 +110,7 @@
            </g>
            <g class="spinnerContainer" transform="translate(-35,-40)">
                <path class="spinner"
-                     d="M -0.1,-3 A 1,1 0 1 0 0,-1 C 0.6,-1 1,-0.6 1,0 1,0.3 0.9,0.5 0.7,0.7 A 1,1 0 1 0 2.1,2.1 C 2.7,1.6 3,0.8 3,0 3,-1.6 1.6,-3 0,-3 a 1,1 0 0 0 -0.1,0 z" >
-                   <animateTransform attributeType="xml" attributeName="transform"
-                                      type="rotate"
-                                      from="0" to="360" dur="2s"
-                                      repeatCount="indefinite"/>
-               </path>
+                     d="M -0.1,-3 A 1,1 0 1 0 0,-1 C 0.6,-1 1,-0.6 1,0 1,0.3 0.9,0.5 0.7,0.7 A 1,1 0 1 0 2.1,2.1 C 2.7,1.6 3,0.8 3,0 3,-1.6 1.6,-3 0,-3 a 1,1 0 0 0 -0.1,0 z" />
            </g>            
         </g>
     </g>

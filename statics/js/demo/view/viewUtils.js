@@ -18,6 +18,12 @@ function removeClass(jEle, klass) {
     );
 }
 
+/**
+ * 
+ * @param jTemplate
+ * @param klass
+ * @returns {jQuery}
+ */
 function stampFromTemplate(jTemplate, klass) {
     var jCopy;
    

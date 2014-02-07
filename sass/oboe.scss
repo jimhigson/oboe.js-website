@@ -86,7 +86,7 @@ em {
    right: 0;
    overflow: hidden;
    transition: padding 0.5s;
-   height: 1.1em; // stop Firefox getting confused what height this should be
+   height: 1em; // stop Firefox getting confused what height this should be
 }
 
 .is-sticky #siteNav {

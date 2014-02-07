@@ -2,8 +2,11 @@ Why use Oboe.js?
 ================
 
 **Oboe.js** is a Javascript library that runs under Node.js
-and web browsers for loading JSON using streaming.
-This page looks at why streaming is a good thing.  
+and web browsers for loading JSON using streaming. It combines
+the convenience of DOM parsing with the speed and fluidity of SAX
+parsing.
+
+This page looks at why that is a good thing. See also [Oboe.js vs SAX vs DOM](saxdom).
 
 Downloading REST resources
 --------------------------
@@ -158,3 +161,4 @@ slower for messages that load very quickly
 but for most real-world cases reacting to i/o sooner beats
 fussing about CPU usage. If in doubt, benchmark, but don't forget to
 use the real internet and think about perceptual performance.
+

@@ -49,7 +49,21 @@ var scenarios = (function () {
                   "text": "Our client makes a GET request for a page-worth of data",
                   "locationOnTopic": "upstream"
                }
-            }
+            },
+            {
+               "type": "narrativeItem",
+               "script": [
+                  {  eventName: "client_accepted_response5"
+                  }
+               ],
+               "relationships": {
+                  "topic": "client"
+               },
+               "options": {
+                  "text": "Without streaming nothing is shown until everything is downloaded",
+                  "locationOnTopic": "where"
+               }
+            }            
          ],
          "extensions": {
             "items": [

@@ -1,4 +1,4 @@
-# Downloading Oboe.js
+# Get Started
 
 Versions
 --------
@@ -7,8 +7,8 @@ The latest stable version is *{{latestTag}}*.
 
 Older versions are [available via Github]({{repo}}/releases).
 
-Downloading for the Browser
----------------------------
+Downloading Oboe.js for the Browser
+-----------------------------------
 
 Grab one of these files:
  
@@ -23,8 +23,8 @@ $ bower install oboe
 
 If there is no AMD present, once the Oboe Javascript is loaded you can start using the global `oboe` object.
 
-Loading Oboe via AMD
---------------------
+Loading Oboe.js via AMD
+-----------------------
 
 If AMD is detected Oboe will `define` itself instead of adding to the 
 global namespace.

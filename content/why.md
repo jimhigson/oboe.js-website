@@ -1,5 +1,5 @@
-Why use Oboe.js?
-================
+Why Oboe.js?
+============
 
 **Oboe.js** is a Javascript library that runs under Node.js
 and web browsers for loading JSON using streaming. It combines

@@ -44,13 +44,20 @@ function outline($){
          id:   mainHeadingEle.attr('id')
        },
        
-       sectionHeadings = 
-            $('h2').map(function(i, element){
-               return {
-                  text: $(element).text(),
-                  id:   $(element).attr('id')
+       sectionHeadings = [];
+   
+            $('h2').each(function(i, element){
+               var jEle = $(element),
+                   text = jEle.text(); 
+               
+               // Hack here to avoid putting 'Typos' heading in side links
+               if( text != 'Typos' ){
+                  sectionHeadings.push({
+                     text: text,
+                     id:   jEle.attr('id')
+                  });
                }
-            });   
+            });
    
    mainHeadingEle.remove();
    

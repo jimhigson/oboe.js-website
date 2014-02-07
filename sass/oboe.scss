@@ -457,10 +457,22 @@ svg.menuButton:active {
    }
 
    h1 {
-      margin-bottom: 0.2em;
+      margin-bottom: 0.1em;
       padding: 30px 0 0.2em 0;
    }
+  
+   h1, .strapline {
+     margin-left:auto; margin-right:auto;
+     text-align:center;
+   }
 
+   body:not(.home) #download {
+     display:none;
+   }
+   #download {
+     margin-left:auto; margin-right:auto;
+   }
+  
    #footer-contents {
       height: 135px;
       #sw, .contact {
@@ -468,10 +480,18 @@ svg.menuButton:active {
       }
    }
   
+   .col.col1 {
+     margin-right:0;
+   }
+  
    .strapline {
       padding: 0;
+      margin-top:0;
    }
 
+   #siteNav .siteLink {
+     margin-right:0.7em;
+   }
 }
 
 /* Even Smaller screens */
@@ -519,14 +539,9 @@ svg.menuButton:active {
       padding: 0 5px;
    }  
 
-   #download {
-      display: none;
-   }
-
    h1,
    .strapline {
-      margin: 20px auto;
-      text-align: center;
+      margin-top: 20px;
    }
 
    h1, .col1 {

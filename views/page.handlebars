@@ -16,7 +16,7 @@
        <meta name="Description" content="Progressive loading of json"/>
            
     </head>
-    <body>
+    <body {{#if home}}class="home"{{/if}}>
         <div id="header">
                {{#if experimental}}
                     <div class="button2 wee"></div>
@@ -72,12 +72,12 @@
            <div class="row">
         
               <nav class="col col1">
-                 {{#if home}}
+                 
                      <a href="/download"
                         id="download" title="Get the code">
-                        Download <em id="version">{{latestTag}}</em>
+                        Get started <em id="version">{{latestTag}}</em>
                      </a>
-                 {{else}}                 
+                 {{#unless home}}                
                     <div class="internalNav">
                        <h2>{{heading.text}}</h2>
                        {{#if sections}}         
@@ -88,7 +88,7 @@
                           </ul>
                        {{/if}}
                     </div>
-                 {{/if}}
+                 {{/unless}}
 
                  {{#if experimental}}
                     <div class="siteNav">

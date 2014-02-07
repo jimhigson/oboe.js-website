@@ -14,6 +14,15 @@ while it is ongoing.
 
 -   If a request fails halfway use the part that transferred without
     writing special cases.
+    
+What next?
+----------
+
+- Browse [code examples](examples) 
+- Learn the Oboe.js [API](api)
+- [Download](download) the library
+- [Discuss](discuss) Oboe.js
+- Visit the [project on Github](http://github.com/jimhigson/oboe.js)
 
 Other tools
 -----------
@@ -22,5 +31,5 @@ Other tools
     [GSON](https://code.google.com/p/google-gson/)
 -   If you need an even more lightweight JSON stream library and don't
     mind writing more code, try
-    [Clarinet](https://github.com/dscape/clarinet) (In fact, Oboe is
+    [Clarinet](http://github.com/dscape/clarinet) (In fact, Oboe is
     built on Clarinet)

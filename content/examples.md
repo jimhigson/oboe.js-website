@@ -81,7 +81,7 @@ oboe('/myapp/things.json')
 Hanging up when we have what we need
 ------------------------------------
 
-If you don't control the data source the service sometimes returns more information than you
+If you don't control the data source the service sometimes returns more information than your
 application actually needs.
 
 If we only care about the foods and not the non-foods we
@@ -132,7 +132,7 @@ oboe('people.json')
       // their div to the page and then fill it with whatever
       // other data we find:
       currentPersonElement = $('<div class="person">');
-      $('#people').append(personDiv);
+      $('#people').append(currentPersonElement);
    })
    .node({
       'people.*.name': function( name ){

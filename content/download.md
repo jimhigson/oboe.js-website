@@ -17,6 +17,11 @@ Grab one of these files:
  
 If you prefer to use [bower](http://bower.io/) for JS dependency management you can fetch Oboe like this:
 
+Using Bower
+-----------
+
+You can fetch using [Bower](http://bower.io/) like this:
+
 ``` bash
 $ bower install oboe
 ```

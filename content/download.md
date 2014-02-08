@@ -26,6 +26,15 @@ $ bower install oboe
 
 If there is no AMD present, once the Oboe Javascript is loaded you can start using the global `oboe` object.
 
+Using Jam
+---------
+
+Oboe.js is also available through the [Jam package manager](http://jamjs.org/):
+
+``` bash
+$ jam install oboe
+```
+
 Loading Oboe.js via AMD
 -----------------------
 

@@ -455,8 +455,8 @@ oboe('everyone')
       // we don't have the person's details yet but we know we
       // found someone in the json stream, we can use this to
       // eagerly add them to the page:
-      personDiv = $('<div class="person">');
-      $('#people').append(personDiv);
+      currentPersonElement = $('<div class="person">');
+      $('#people').append(currentPersonElement);
    })
    .node('people.*.name', function( name ){
       // we just found out that person's name, lets add it to 

@@ -6,7 +6,7 @@ and web browsers for loading JSON using streaming. It combines
 the convenience of DOM parsing with the speed and fluidity of SAX
 parsing.
 
-This page visualises how streaming speeds up applications. See
+This page visualises using streaming to speed up web applications. See
 also [Oboe.js vs. SAX vs. DOM](parsers).
 
 Downloading REST resources

@@ -3,7 +3,7 @@ Promote:
 
 * Put on HN
 * Put on GSON forums
-* Join 
+* Join json.org mailing list 
 * Put actual URL in package.json for oboe.js repo
 
 Programming:

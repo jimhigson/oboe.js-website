@@ -364,16 +364,24 @@ These browsers have full support:
 
 * Recent Chrome
 * Recent Firefox
+* Recent Safari
 * Internet Explorer 10
-* Recent Safaris
 
 These browsers will run Oboe but not stream:
 
 * Internet explorer 8 and 9, given [appropriate shims for ECMAScript 5](https://github.com/kriskowal/es5-shim/blob/master/es5-sham.js)
  
-Unfortunately, IE before version 10 
+Unfortunately, <abbr title="Internet Explorer">IE</abbr> before version 10 
 [doesn't provide any convenient way to read an http request while it is in progress](http://blogs.msdn.com/b/ieinternals/archive/2010/04/06/comet-streaming-in-internet-explorer-with-xmlhttprequest-and-xdomainrequest.aspx).
+It may be possible to add support for limited streaming in Internet Explorer 8 and 9 using the proprietary
+[XDomainRequest](http://msdn.microsoft.com/en-us/library/cc288060%28VS.85%29.aspx)
+but this object is has a reduced API and is buggy -
+[only GET and POST are supported and it does not allow HTTP headers to be set](http://blogs.msdn.com/b/ieinternals/archive/2010/05/13/xdomainrequest-restrictions-limitations-and-workarounds.aspx).
+It also requires that responses set the `Access-Control-Allow-Origin` 
+header and fails in IE8 for users browsing using InPrivate mode.
 
-The good news is that in older versions of IE Oboe gracefully degrades,
-it'll just fall back to waiting for the whole response to return, then fire all the events together.
-You don't get streaming but it isn't any worse than if you'd have designed your code to non-streaming AJAX.
+The good news is that in older versions of IE Oboe gracefully degrades.
+It falls back to waiting for the whole response to return, then fires
+all the events instantaneously.
+You don't get streaming but the responsiveness is no worse than if you
+had used a non-streaming AJAX download.

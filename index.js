@@ -30,7 +30,8 @@ app.engine('handlebars', consolidate.handlebars);
 app.set('view engine', 'handlebars');
 app.set('views', __dirname + '/views');
 
-/* create <template> elements to send to the client side */
+/* create <template> elements to send to the client side so it can
+ * make visualisations by cloning them */
 function renderClientSideDemoTemplates(res, callback){
     var DEMO_TEMPLATE_OPTIONS = {packetRadius: 15};
 

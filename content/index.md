@@ -18,6 +18,7 @@ while it is ongoing.
 What next?
 ----------
 
+- Visualise [faster web applications through streaming](why) 
 - Browse [code examples](examples) 
 - Learn the Oboe.js [API](api)
 - [Download](download) the library

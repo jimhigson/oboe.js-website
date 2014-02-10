@@ -19,15 +19,6 @@
     </head>
     <body {{#if home}}class="home"{{/if}}>
         <div id="header">
-               {{#if experimental}}
-                    <div class="button2 wee"></div>
-                    <div class="button2 wee"></div>
-                    <div class="button2 wee"></div>
-                    <div class="button2"></div>
-                    <div class="button2"></div>
-                    <div class="button2"></div>
-                    <div class="button2"></div>
-               {{/if}}
         </div>
         <nav id="siteNav">
             <svg width="24" height="24" class="menuButton" >
@@ -93,18 +84,6 @@
                        {{/if}}
                     </div>
                  {{/unless}}
-
-                 {{#if experimental}}
-                    <div class="siteNav">
-                     <ul class="sections site">
-                        <li><a href="api">API</a></li>
-                        <li><a href="examples">Examples</a></li>
-                        <li><a href="installing">Installing</a></li>
-                        <li><a href="useCases">Use cases</a></li>
-                        <li><a href="why">Why Oboe.js?</a></li>
-                     </ul>
-                    </div>
-                 {{/if}}
         
                  {{#home}}               
                      <ul class="links">

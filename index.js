@@ -1,7 +1,6 @@
 
 var express = require('express'),
     gzippo = require('gzippo'),
-    slashes = require('connect-slashes'),
     app = express(),
     consolidate = require('consolidate'),
     readContent = require('./read-content.js'),

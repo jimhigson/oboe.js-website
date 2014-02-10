@@ -17,7 +17,6 @@
     "grunt-develop": "~0.2.2",
     "grunt-cli": "~0.1.11",
     "mustache": "~0.7.3",
-    "connect-slashes": "~1.0.2",
     "line-reader": "~0.2.3",
     "grunt-contrib-uglify": "~0.2.7",
     "optimist": "~0.6.0",

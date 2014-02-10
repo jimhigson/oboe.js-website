@@ -12,8 +12,8 @@ Downloading Oboe.js for the Browser
 
 Grab one of these files:
  
- * [oboe-browser.js]({{releasedJs}}/oboe-browser.js) (For development) 
- * [oboe-browser.min.js]({{releasedJs}}/oboe-browser.min.js) (Minified for production) The size after gzip is 4.9k.
+ * [oboe-browser.js]({{releasedJs}}/oboe-browser.js) (for development) 
+ * [oboe-browser.min.js]({{releasedJs}}/oboe-browser.min.js) (minified for production) The size after gzip is 4.9k.
  
 Using Bower
 -----------

@@ -23,7 +23,7 @@ var express = require('express'),
 
 require('colors');
 
-console.log('starting up for environment', environment.cyan );
+console.log('starting up for environment', environment.blue );
 
 app.engine('handlebars', consolidate.handlebars);
 app.set('view engine', 'handlebars');
@@ -61,7 +61,7 @@ function respondWithMarkdown(req, res, getContentFn, opts){
         
     var bar = barrier(function(){
         res.render(view, opts);
-        console.log('html page', pageName.cyan, 'created in', String(bar.duration).cyan, 'ms');
+        console.log('html page', pageName.blue, 'created in', String(bar.duration).blue, 'ms');
     });
     
     
@@ -136,4 +136,4 @@ app.use(function(req,res){
 
 app.listen(PORT);
 
-console.log('started on port', PORT.cyan);
+console.log('started on port', PORT.blue);

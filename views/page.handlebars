@@ -151,7 +151,12 @@
            }(document, "script", "twitter-wjs");</script>
         {{/if}}
 
-        <script src="/jquery/jquery.js"></script>
+        {{#if production}}
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        {{else}}
+           <script src="/jquery/jquery.js"></script>
+        {{/if}}
+        
         {{#each scripts}}
             <script type="text/javascript" src="{{this}}"></script>
         {{/each}}    

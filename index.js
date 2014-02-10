@@ -12,9 +12,10 @@ var express = require('express'),
     
     PORT = '8888',
 
-    SCRIPTS = environment == 'prod'? ['/js-concat/all.js'] : require('./sourceList.js'),
+    isProd = (environment == 'prod'),  
+    SCRIPTS = isProd? ['/js-concat/all.js'] : require('./sourceList.js'),
 
-    CSS_STYLESHEETS = environment == 'prod'? ["all-min.css"] : ["all.css"],
+    CSS_STYLESHEETS = isProd? ["all-min.css"] : ["all.css"],
         
     LATEST_TAG = 'v1.12.3',
     ANALYTICS_ID = 'UA-47871814-1',
@@ -50,6 +51,7 @@ function defaultOpts(opts) {
     opts.rawRepo = RAW_REPO_LOCATION;
     opts.logoSize = 64;
     opts.releasedJs = RAW_REPO_LOCATION + '/' + LATEST_TAG + '/dist';
+    opts.production = isProd;
     
     return opts;
 }

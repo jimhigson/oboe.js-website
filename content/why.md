@@ -4,8 +4,8 @@ Why Oboe.js?
 This page visualises using streaming to speed up web applications. See
 also [Oboe.js vs. SAX vs. DOM](parsers).
 
-Stream any REST resource
-------------------------
+Stream any JSON REST resource
+-----------------------------
 
 Let's start by examining the standard pattern found on most AJAX-powered sites.
 We have a client-side web application and a service that it goes to for data.

@@ -151,7 +151,7 @@ var ClientView = (function(){
 
    PinDropClient.prototype.newData = function( packet ){
       
-      // random delay before dropping because for non-progressive parsing
+      // delay before dropping because for non-progressive parsing
       // it looks odd if all drop perfectly together
       var shortDelay = this.subject.parseStrategy == 'discrete'?
                            packet.ordering.i * 20 : 0;

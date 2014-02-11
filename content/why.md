@@ -130,10 +130,10 @@ connect to <span class="place">the same server</span>. The
 Send historic and live data using the same transport
 -------------------------------------------------
 
-It is a common pattern for an application to fetch existing data
+It is a common pattern for an interface to fetch existing data
 and then keep the page updated with 'live' events as they happen.
 We traditionally use two transports here but
-wouldn't our day be easier if we didn't have to program for distinct cases?
+wouldn't our day be easier if we didn't have to program distinct cases?
 
 In the example below the message server intentionally writes a JSON response
 that never completes. It starts by writing out the existing messages

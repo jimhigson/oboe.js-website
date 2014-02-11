@@ -1,6 +1,18 @@
 var scenarios = (function () {
 
    return {
+
+      "blank": {
+         options:{
+            "startSimulation": function (modelItems) {
+               // this is optional and can removed if there is an item called 'client'
+            }
+         },
+         items:[
+
+         ]
+      },
+      
       "2-node-layout": {
          "items": [
             {
@@ -566,7 +578,13 @@ var scenarios = (function () {
       },
 
       "big-small": {
-         items:[]
+         options:{
+            "startSimulation": function (modelItems) {
+            }
+         },
+         items:[
+            
+         ]
       },
       
       "historic-and-live": {

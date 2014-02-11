@@ -98,6 +98,20 @@ with standard AJAX tools. A streaming parser like Oboe.js reads the resource
 as a stream but a tool which does not understand streaming will have no problem reading it like 
 a static resource.
 
+Not having to choose between big and small JSON
+-----------------------------------------------
+
+There is oftentimes a tradeoff designing AJAX architectures using traditional tools:
+
+* Request too much data at once and the page feels unresponsive because each request
+  takes a long time to be shown.
+* Request too little data at once and you have to fetch more often, increasing http
+  overhead and showing spinners more often.
+
+Oboe.js breaks out of this tradeoff because loading large resources is just as
+responsive as loading small ones. In the visualisation below the top client
+requests a little data, the middle a lot, and the bottom a lot using Oboe.js.
+
 Historic and live data on the same transport
 --------------------------------------------
 

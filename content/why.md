@@ -108,15 +108,18 @@ In a Java stack this could also be implemented by using
 Step outside the trade-off between big and small JSON
 ---------------------------------------------
 
-There is oftentimes a tradeoff designing AJAX architectures using traditional tools:
+Oftentimes there is a tradeoff using traditional REST clients:
 
-* Request too much data at once and the page feels unresponsive because each request
-  takes a long time to be shown.
-* Request too little data at once and you have to fetch more often, increasing http
-  overhead and showing spinners more often.
+* Request too much data at once and the application is unresponsive because each request
+  takes some time to download.
+* Request less and, while the first data is handled earlier, more requests are needed,
+  meaning a greater http overhead and more time overall.
 
-Oboe.js breaks out of this tradeoff because loading large resources is just as
-responsive as loading small ones. In the visualisation below three rival clients
+Oboe.js breaks out of this tradeoff by beating both.
+Large resources load just as
+responsively as smaller ones.
+
+In the visualisation below three rival clients
 connect to <span class="place">the same server</span>. The
 <span class="client1">top client requests a little data twice</span>,
 <span class="client2">the middle a lot</span>, and

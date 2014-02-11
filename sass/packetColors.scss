@@ -22,6 +22,9 @@ $oddColor:  $categoricalOrange;
 $evenPlace: desaturate($evenColor, 40%);
 $oddPlace:  desaturate($oddColor, 40%);
 
+$thirdColor: $categoricalPurple;
+$thirdPlace: desaturate($thirdColor, 15%);
+
 .twoSeries {
 
   $i: 1; 
@@ -71,6 +74,8 @@ $requestColor: lighten($categoricalBlue, 20%);
   stroke:$requestColor;
 }
 
+
+
 figure[data-demo=big-small] {
   .client1 .frame {
     fill: $oddPlace;
@@ -78,5 +83,18 @@ figure[data-demo=big-small] {
 
   .client2 .frame {
     fill: $evenPlace;
+  }
+
+  .client3 .frame {
+    fill: $thirdPlace;
   }  
+}
+span.client1 {
+  background-color: transparentize($oddColor, 0.8); 
+}
+span.client2 {
+  background-color: transparentize($evenColor, 0.8);
+}
+span.client3 {
+  background-color: transparentize($thirdColor, 0.8);
 }

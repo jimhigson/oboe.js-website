@@ -109,8 +109,10 @@ There is oftentimes a tradeoff designing AJAX architectures using traditional to
   overhead and showing spinners more often.
 
 Oboe.js breaks out of this tradeoff because loading large resources is just as
-responsive as loading small ones. In the visualisation below the top client
-requests a little data, the middle a lot, and the bottom a lot using Oboe.js.
+responsive as loading small ones. In the visualisation below the
+<span class="client1">top client requests a little data</span>,
+<span class="client2">the middle a lot</span>, and
+<span class="client3">the bottom a lot using Oboe.js</span>.
 
 {{demo "big-small"}}
 

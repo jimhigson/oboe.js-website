@@ -580,53 +580,57 @@ var scenarios = (function () {
       "big-small": {
          options:{
             "startSimulation": function (modelItems) {
+               modelItems.client1.makeRequest();
+               modelItems.client2.makeRequest();
+               modelItems.client3.makeRequest();
             },
             height:257
          },
          items:[
             
-            {  name: 'client1',
-               type: 'client',
-               options:{
-                  zoom:'0.85'
-               },
-               locations:{where:{y:40}}
-            },
-            {
-               "name": "wire1",
-               "type": "wire",
-               "next": ["server"]
-            },                        
-            {  name: 'client2',
-               type: 'client',
-               options:{
-                  zoom:'0.85'
-               },               
-               locations:{where:{y:130}}               
-            },
-            {
-               "name": "wire2",
-               "type": "wire",
-               "next": ["server"]
-            },                        
-            {  name: 'client3',
-               type: 'client',
-               options:{
-                  zoom:'0.85'
-               },               
-               locations:{where:{y:220}}
-            },
-            {
-               "name": "wire3",
-               "type": "wire",
-               "next": ["server"]
-            },            
             {  name: 'server',
                type: 'originServer',
                options:{
                   zoom:'0.85'
                },
+               next:['wire1', 'wire2', 'wire3'],
                locations:{where:{y:150}}
+            },
+            {
+               "name": "wire1",
+               "type": "wire"
+            },            
+            {  name: 'client1',
+               type: 'client',
+               options:{
+                  zoom:'0.85'
+               },
+               locations:{where:{y:40}},
+               "next": []
+            },
+            {
+               "name": "wire2",
+               "type": "wire"
+            },            
+            {  name: 'client2',
+               type: 'client',
+               options:{
+                  zoom:'0.85'
+               },               
+               locations:{where:{y:130}},
+               "next": []
+            },
+            {
+               "name": "wire3",
+               "type": "wire"
+            },
+            {  name: 'client3',
+               type: 'client',
+               options:{
+                  zoom:'0.85'
+               },               
+               locations:{where:{y:220}},
+               "next": []
             }
          ]
       },

@@ -1,20 +1,15 @@
 Streaming JSON loading for Node and browsers
 ============================================
 
-Stop waiting for requests to complete by using JSON content as soon as
-it arrives. Select any object, array, or value from the http response
-while it is ongoing.
+Oboe.js is an [open source](LICENCE) Javascript library
+for loading JSON using streaming, combining the convenience of DOM with
+the speed and fluidity of SAX.
+
+It can stream-parse any JSON resource, is small enough to be a [micro-library](http://microjs.com/#),
+doesn't have any external dependencies, and doesn't care which other libraries you need it to speak to.
 
 {{demo "aggregated-progressive" "autoplay"}}
-
--   React quickly, even downloading large content on slow networks.
-
--   Connect to any standard JSON REST service or streaming REST service
-    from the same client library.
-
--   If a request fails halfway use the part that transferred without
-    writing special cases.
-    
+   
 What next?
 ----------
 
@@ -28,9 +23,9 @@ What next?
 Other tools
 -----------
 
--   For writing JSON streams from a Java server try
+-   For writing JSON streams from a Java server to an Oboe.js front-end try
     [GSON](https://code.google.com/p/google-gson/)
 -   If you need an even more lightweight JSON stream library and don't
-    mind writing more code, try
+    mind writing [rather more code](parsers#code-comparison-sax), try
     [Clarinet](http://github.com/dscape/clarinet) (In fact, Oboe is
     built on Clarinet)

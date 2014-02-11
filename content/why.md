@@ -1,11 +1,6 @@
 Why Oboe.js?
 ============
 
-**Oboe.js** is a Javascript library that runs under Node.js
-and web browsers for loading JSON using streaming. It combines
-the convenience of DOM parsing with the speed and fluidity of SAX
-parsing.
-
 This page visualises using streaming to speed up web applications. See
 also [Oboe.js vs. SAX vs. DOM](parsers).
 

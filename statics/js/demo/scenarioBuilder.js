@@ -49,6 +49,7 @@ var getScenario = (function () {
                 "page": "singlePageSite",
                 "deviceType":"desktop",
                 "showProgress":true,
+                parseStrategy: 'discrete',
                 zoom: 1
             },
             locations:{

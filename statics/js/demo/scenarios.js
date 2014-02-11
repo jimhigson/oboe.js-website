@@ -580,9 +580,38 @@ var scenarios = (function () {
       "big-small": {
          options:{
             "startSimulation": function (modelItems) {
-            }
+            },
+            height:257
          },
          items:[
+            {  name: 'server',
+               type: 'originServer',
+               options:{
+                  zoom:'0.85'
+               },
+               locations:{where:{y:150}}               
+            },            
+            {  name: 'client1',
+               type: 'client',
+               options:{
+                  zoom:'0.85'
+               },
+               locations:{where:{y:40}}
+            },
+            {  name: 'client2',
+               type: 'client',
+               options:{
+                  zoom:'0.85'
+               },               
+               locations:{where:{y:130}}               
+            },
+            {  name: 'client3',
+               type: 'client',
+               options:{
+                  zoom:'0.85'
+               },               
+               locations:{where:{y:220}}
+            }
             
          ]
       },

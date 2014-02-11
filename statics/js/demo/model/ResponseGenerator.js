@@ -46,7 +46,7 @@ var ResponseGenerator = (function(){
         }.bind(this)
     };
     
-    ResponseGenerator.prototype.generateResponse = function(startingAt) {
+    ResponseGenerator.prototype.generateResponse = function(startingAt, intendedRecipient) {
 
         var packets = this.packetGenerator(); 
         
@@ -55,12 +55,12 @@ var ResponseGenerator = (function(){
             var curPacketNumber = this.packetNumberAfter(previousPacketNumber),
                 lastPacket = curPacketNumber >= (this.messageSize - 1);
     
-            this.events('packetGenerated').emit(packets(curPacketNumber));
+            this.events('packetGenerated').emit(packets(curPacketNumber), intendedRecipient);
 
             if (!lastPacket) {
                 var nextPacketNumber = this.packetNumberAfter(curPacketNumber);
                 this.schedule(
-                    sendNext.bind(this, curPacketNumber)
+                    sendNext.bind(this, curPacketNumber, intendedRecipient)
                     , this.timeBetweenPackets(nextPacketNumber)
                 );
             }

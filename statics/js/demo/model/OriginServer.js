@@ -8,19 +8,20 @@ var OriginServer = (function(){
 
         this.responseGenerator = new ResponseGenerator(options);
 
-        this.responseGenerator.events('packetGenerated').on(function(packet){
+        this.responseGenerator.events('packetGenerated').on(function(packet, recipient){
+           
            this.addToScript('sent', packet);
-           this.propagate(packet);
+           this.propagate(packet, [recipient]);
         }.bind(this));
     });
 
     OriginServer.newEvent = 'OriginServer';
 
-    OriginServer.prototype.acceptFromDownstream = function(packet){
-
+    OriginServer.prototype.acceptFromDownstream = function(packet, source){
+       
         this.addToScript('gotRequest');
         var startingAt = packet.gotAlreadyUpTo;
-        this.responseGenerator.generateResponse(startingAt);
+        this.responseGenerator.generateResponse(startingAt, source);
         packet.done();
     };
 

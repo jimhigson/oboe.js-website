@@ -18,12 +18,17 @@
 }
 
 $evenColor: $categoricalBlue;
-$oddColor:  $categoricalOrange;
 $evenPlace: desaturate($evenColor, 40%);
+$evenKey: transparentize($evenColor, 0.8);
+
+$oddColor:  $categoricalOrange;
 $oddPlace:  desaturate($oddColor, 40%);
+$oddKey: transparentize($oddColor, 0.8);
 
 $thirdColor: $categoricalPurple;
-$thirdPlace: desaturate($thirdColor, 15%);
+$thirdPlace: desaturate($thirdColor, 25%);
+$thirdKey: transparentize($thirdColor, 0.8);
+
 
 .twoSeries {
 
@@ -63,6 +68,9 @@ $thirdPlace: desaturate($thirdColor, 15%);
 .origin-fast rect.box {
   fill: $evenPlace;
 }
+.aggregator rect.box {
+  fill: $thirdPlace;
+}
 
 $requestColor: lighten($categoricalBlue, 20%);
 
@@ -74,6 +82,15 @@ $requestColor: lighten($categoricalBlue, 20%);
   stroke:$requestColor;
 }
 
+span.server1 {
+  background-color: $evenKey;
+}
+span.server2 {
+  background-color: $oddKey;
+}
+span.aggregator {
+  background-color: $thirdKey;
+}
 
 
 figure[data-demo=big-small] {
@@ -90,11 +107,15 @@ figure[data-demo=big-small] {
   }  
 }
 span.client1 {
-  background-color: transparentize($oddColor, 0.8); 
+  background-color: $evenKey; 
 }
 span.client2 {
-  background-color: transparentize($evenColor, 0.8);
+  background-color: $oddKey;
 }
 span.client3 {
-  background-color: transparentize($thirdColor, 0.8);
+  background-color: $thirdKey;
+}
+
+span.place {
+  background-color: transparentize($shadow, 0.5);
 }

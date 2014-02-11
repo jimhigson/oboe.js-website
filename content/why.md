@@ -77,26 +77,33 @@ retrieve their data through an aggreating middle tier.
 The aggregator connects to several back-end services and
 combines their data into a single response.
 
-The visualisation below shows an example without streaming. *Origin 1* is slower
-than *Origin 2* but the system is forced to run at the speed of
+The visualisation below shows an example without streaming.
+<span class="server2">Origin 1</span> is slower
+than
+<span class="server1">Origin 2</span>
+but the 
+<span class="aggregator">aggregator</span> is forced to respond at the speed of
 the slowest service:
 
 {{demo "aggregated-discrete"}}
 
-We can speed this scenario up by using Oboe.js to load data in the
-aggregator and the client. The aggregator dispatches the data as soon as it has it and 
+We can speed this scenario up by using Oboe.js to load data in
+<span class="aggregator">the aggregator</span> and 
+<span class="place">the client</span>.
+The aggregator dispatches the data as soon as it has it and 
 the client displays the data as soon as it is arrives.
-In a Java stack this could also be implemented by using 
-[GSON](http://code.google.com/p/google-gson/) in the middle
-tier.
 
 {{demo "aggregated-progressive"}}
 
-Despite being a stream, the aggregator's output is 100% valid 
-JSON so it remains compatible 
-with standard AJAX tools. A streaming parser like Oboe.js reads the resource
-as a stream but a tool which does not understand streaming will have no problem reading it like 
-a static resource.
+Despite being a stream, 
+<span class="aggregator">the aggregator's</span>
+output is 100% valid JSON so it remains compatible 
+with standard AJAX tools. A client using a streaming parser like Oboe.js
+consumes the resource as a stream but a more traditional client has no 
+problem reading it as a static resource.
+
+In a Java stack this could also be implemented by using 
+[GSON](http://code.google.com/p/google-gson/) in the middle tier.
 
 Not having to choose between big and small JSON
 -----------------------------------------------

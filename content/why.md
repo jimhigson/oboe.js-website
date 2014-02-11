@@ -110,7 +110,7 @@ Step outside the trade-off between big and small JSON
 
 There is often a tradeoff using traditional REST clients:
 
-* Request too much data at once and the application is unresponsive because each request
+* Request too much data and the application feels unresponsive because each request
   takes some time to download.
 * Request less and, while the first data is handled earlier, more requests are needed,
   meaning a greater http overhead and more time overall.

@@ -105,8 +105,8 @@ problem reading it as a static resource.
 In a Java stack this could also be implemented by using 
 [GSON](http://code.google.com/p/google-gson/) in the middle tier.
 
-Avoid the tradeoff between big and small JSON
----------------------------------------------
+Avoid the compromise between big and small JSON
+-----------------------------------------------
 
 There is oftentimes a tradeoff designing AJAX architectures using traditional tools:
 

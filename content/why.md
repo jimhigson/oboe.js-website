@@ -112,6 +112,8 @@ Oboe.js breaks out of this tradeoff because loading large resources is just as
 responsive as loading small ones. In the visualisation below the top client
 requests a little data, the middle a lot, and the bottom a lot using Oboe.js.
 
+{{demo "big-small"}}
+
 Historic and live data on the same transport
 --------------------------------------------
 

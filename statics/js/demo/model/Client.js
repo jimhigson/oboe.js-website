@@ -44,8 +44,6 @@ Client.prototype.makeRequest = function(){
 
     this.scheduleFail();
     
-    console.log('client', '"' + this.name + '"', 'requested', packet.gotAlreadyUpTo, '->', packet.requestingUpto);
-   
     this.propagate(packet);
     
     this.attemptNumber++; // increment for next time

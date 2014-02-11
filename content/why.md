@@ -145,7 +145,7 @@ The only difference between 'old' and 'new' data is timing.
 Publish cacheable, streamed content
 -----------------------------------
 
-[Above](#historic-and-live-data-on-the-same-transport) we had a
+[Above](#send-historic-and-live-data-using-the-same-transport) we had a
 service where the response intentionally never completes. Here we will
 consider a slightly different case: JSON that streams to reflect
 live events but which eventually ends.

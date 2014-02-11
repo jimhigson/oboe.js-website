@@ -577,6 +577,8 @@ var scenarios = (function () {
          }
       },
 
+      
+      
       "big-small": {
          options:{
             "startSimulation": function (modelItems) {
@@ -625,7 +627,15 @@ var scenarios = (function () {
                   maxRequestSize: 5
                },               
                locations:{where:{x: 310, y:130}},
-               "next": []
+               "next": [],
+               "script": [
+                  {  eventName: "client2_accepted_response4",
+                     delay: seconds(0.5),
+                     action: function () {
+                        this.makeRequest();
+                     }
+                  }
+               ]
             },
             {
                "name": "wire3",
@@ -644,6 +654,8 @@ var scenarios = (function () {
             }
          ]
       },
+      
+      
       
       "historic-and-live": {
          "narrative": [

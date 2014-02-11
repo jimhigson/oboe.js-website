@@ -18,9 +18,7 @@ function loadScenario(scenarioId, autoplay) {
         console.warn('no scenario for ' + scenarioId);
         return;
     }
-    
-    console.log('setting up demo', scenario);
-    
+       
     var modelItems = {};
 
     function makeModel(jsonDescription){

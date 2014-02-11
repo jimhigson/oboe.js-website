@@ -9,14 +9,8 @@ var Client = extend( PacketHolder, function Client(name, locations, options) {
     this.showProgress = options.showProgress;
     this.maxRequestSize = options.maxRequestSize || Number.POSITIVE_INFINITY;
 
-    this.parser = Parser(options.parseStrategy);
     this.parseStrategy = options.parseStrategy;
    
-    this.parser.events('packetParsed').on( function(packet) {
-        this.events('gotData').emit(packet);
-        this.receivedUpTo = packet.ordering.i;
-    }.bind(this));
-
     this.attemptNumber = 0;
     this.receivedUpTo = -1;
     
@@ -29,6 +23,12 @@ var Client = extend( PacketHolder, function Client(name, locations, options) {
 Client.newEvent = 'Client';
 
 Client.prototype.makeRequest = function(){
+
+    this.parser = Parser(this.parseStrategy);
+    this.parser.events('packetParsed').on( function(packet) {
+      this.events('gotData').emit(packet);
+      this.receivedUpTo = packet.ordering.i;
+    }.bind(this));
    
     this.events('request').emit();
     this.addToScript('requestAttempt', this.attemptNumber);

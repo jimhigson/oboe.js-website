@@ -586,6 +586,7 @@ var scenarios = (function () {
                modelItems.client2.makeRequest();
                modelItems.client3.makeRequest();
             },
+            endSimulationEvent: 'client2_accepted_response9',
             height:257
          },
          items:[
@@ -597,7 +598,7 @@ var scenarios = (function () {
                },
                next:['wire1', 'wire2', 'wire3'],
                locations:{
-                  where:{x:100, y:150}
+                  where:{x:110, y:150}
                }
             },
             {
@@ -611,7 +612,7 @@ var scenarios = (function () {
                   zoom:'0.85',
                   "page": "map"
                },
-               locations:{where:{x: 300, y:40}},
+               locations:{where:{x: 310, y:40}},
                "next": []
             },
             {
@@ -626,7 +627,7 @@ var scenarios = (function () {
                   "page": "map",
                   maxRequestSize: 5
                },               
-               locations:{where:{x: 310, y:130}},
+               locations:{where:{x: 320, y:130}},
                "next": [],
                "script": [
                   {  eventName: "client2_accepted_response4",
@@ -649,7 +650,7 @@ var scenarios = (function () {
                   "page": "map",
                   parseStrategy: 'progressive'
                },               
-               locations:{where:{x: 290, y:220}},
+               locations:{where:{x: 300, y:220}},
                "next": []
             }
          ]

@@ -115,7 +115,7 @@ There is often a tradeoff using traditional REST clients:
 * Request less and, while the first data is handled earlier, more requests are needed,
   meaning a greater http overhead and more time overall.
 
-Oboe.js breaks out of this tradeoff by beating both.
+Oboe.js breaks out of the tradeoff by beating both.
 Large resources load just as responsively as smaller ones so request more
 and let it stream. 
 

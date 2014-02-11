@@ -83,7 +83,7 @@ than
 <span class="server1">Origin 2</span>
 but the 
 <span class="aggregator">aggregator</span> is forced to respond at the speed of
-the slowest service:
+<span class="server2">the slowest service</span>:
 
 {{demo "aggregated-discrete"}}
 
@@ -105,7 +105,7 @@ problem reading it as a static resource.
 In a Java stack this could also be implemented by using 
 [GSON](http://code.google.com/p/google-gson/) in the middle tier.
 
-Avoid compromising between big and small JSON
+Step outside the trade-off between big and small JSON
 ---------------------------------------------
 
 There is oftentimes a tradeoff designing AJAX architectures using traditional tools:
@@ -116,9 +116,9 @@ There is oftentimes a tradeoff designing AJAX architectures using traditional to
   overhead and showing spinners more often.
 
 Oboe.js breaks out of this tradeoff because loading large resources is just as
-responsive as loading small ones. In the visualisation below three clients
+responsive as loading small ones. In the visualisation below three rival clients
 connect to <span class="place">the same server</span>. The
-<span class="client1">top client requests a little data</span>,
+<span class="client1">top client requests a little data twice</span>,
 <span class="client2">the middle a lot</span>, and
 <span class="client3">the bottom a lot using Oboe.js</span>.
 
@@ -139,8 +139,8 @@ The only difference between 'old' and 'new' data is timing.
 
 {{demo "historic-and-live"}}
 
-Allow caching of streamed content
----------------------------------
+Publish cacheable, streamed content
+-----------------------------------
 
 [Above](#historic-and-live-data-on-the-same-transport) we had a
 service where the response intentionally never completes. Here we will

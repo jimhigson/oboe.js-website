@@ -99,6 +99,7 @@ function readMarkdownFromFile(req, opts, callback) {
 }
 
 app
+   .use(express.favicon(__dirname + '/statics/favicons/favicon.ico'))   
    .use(gzippo.staticGzip('statics')) // gzip for static
    .use(gzippo.staticGzip('pdf'))
    .use(gzippo.staticGzip('bower_components')) // gzip for static

@@ -116,8 +116,8 @@ Oftentimes there is a tradeoff using traditional REST clients:
   meaning a greater http overhead and more time overall.
 
 Oboe.js breaks out of this tradeoff by beating both.
-Large resources load just as
-responsively as smaller ones.
+Large resources load just as responsively as smaller ones so request more
+and let it stream. 
 
 In the visualisation below three rival clients
 connect to <span class="place">the same server</span>. The

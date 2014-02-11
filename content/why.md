@@ -127,7 +127,7 @@ connect to <span class="place">the same server</span>. The
 
 {{demo "big-small"}}
 
-Send historic and live data on the same transport
+Send historic and live data using the same transport
 -------------------------------------------------
 
 It is a common pattern for an application to fetch existing data

@@ -603,7 +603,8 @@ var scenarios = (function () {
             {  name: 'client1',
                type: 'client',
                options:{
-                  zoom:'0.85'
+                  zoom:'0.85',
+                  "page": "map"
                },
                locations:{where:{y:40}},
                "next": []
@@ -615,7 +616,8 @@ var scenarios = (function () {
             {  name: 'client2',
                type: 'client',
                options:{
-                  zoom:'0.85'
+                  zoom:'0.85',
+                  "page": "map"
                },               
                locations:{where:{y:130}},
                "next": []
@@ -627,7 +629,9 @@ var scenarios = (function () {
             {  name: 'client3',
                type: 'client',
                options:{
-                  zoom:'0.85'
+                  zoom:'0.85',
+                  "page": "map",
+                  parseStrategy: 'progressive'
                },               
                locations:{where:{y:220}},
                "next": []

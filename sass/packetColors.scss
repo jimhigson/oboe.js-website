@@ -19,6 +19,8 @@
 
 $evenColor: $categoricalBlue;
 $oddColor:  $categoricalOrange;
+$evenPlace: desaturate($evenColor, 40%);
+$oddPlace:  desaturate($oddColor, 40%);
 
 .twoSeries {
 
@@ -53,10 +55,10 @@ $oddColor:  $categoricalOrange;
 }
 
 .origin-slow rect.box {
-  fill: desaturate($oddColor, 40%);
+  fill: $oddPlace;
 }
 .origin-fast rect.box {
-  fill: desaturate($evenColor, 40%);
+  fill: $evenPlace;
 }
 
 $requestColor: lighten($categoricalBlue, 20%);
@@ -67,4 +69,14 @@ $requestColor: lighten($categoricalBlue, 20%);
 }
 .request .packet.airwave {
   stroke:$requestColor;
+}
+
+figure[data-demo=big-small] {
+  .client1 .frame {
+    fill: $oddPlace;
+  }
+
+  .client2 .frame {
+    fill: $evenPlace;
+  }  
 }

@@ -105,7 +105,7 @@ function loadScenario(scenarioId, autoplay) {
     });
     
     demo.startSimulation = function() {
-        scenario.options.startSimulation(modelItems);
+        scenario.options.startSimulation.call(demo, modelItems);
     }
    
     if( autoplay ) {

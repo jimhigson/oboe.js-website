@@ -582,8 +582,12 @@ var scenarios = (function () {
       "big-small": {
          options:{
             "startSimulation": function (modelItems) {
-               modelItems.client1.makeRequest();
-               modelItems.client2.makeRequest();
+               this.schedule(function(){
+                  modelItems.client1.makeRequest();
+               }, 250);
+               this.schedule(function(){
+                  modelItems.client2.makeRequest();
+               }, 125);
                modelItems.client3.makeRequest();
             },
             endSimulationEvent: 'client2_accepted_response9',

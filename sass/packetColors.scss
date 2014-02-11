@@ -95,11 +95,11 @@ span.aggregator {
 
 figure[data-demo=big-small] {
   .client1 .frame {
-    fill: $oddPlace;
+    fill: $evenPlace;
   }
 
   .client2 .frame {
-    fill: $evenPlace;
+    fill: $oddPlace;
   }
 
   .client3 .frame {

@@ -41,8 +41,11 @@ code {
   padding: 2px 5px;
 }
 
+.marked ul, ol {
+  margin:0 2em 2em 2em;
+}
+
 .marked ul {
-   margin:0 2em 2em 2em;
    list-style: none;
 }
 
@@ -54,7 +57,7 @@ code {
    line-height: 1.5; 
 }   
    
-.marked li:before {
+.marked ul li:before {
     content: "•";
     padding-right: 0;
     position:absolute;

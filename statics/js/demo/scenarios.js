@@ -594,11 +594,14 @@ var scenarios = (function () {
                   zoom:'0.85'
                },
                next:['wire1', 'wire2', 'wire3'],
-               locations:{where:{y:150}}
+               locations:{
+                  where:{x:100, y:150}
+               }
             },
             {
                "name": "wire1",
-               "type": "wire"
+               "type": "wire",
+               options:{latency:1500}
             },            
             {  name: 'client1',
                type: 'client',
@@ -606,12 +609,13 @@ var scenarios = (function () {
                   zoom:'0.85',
                   "page": "map"
                },
-               locations:{where:{y:40}},
+               locations:{where:{x: 300, y:40}},
                "next": []
             },
             {
                "name": "wire2",
-               "type": "wire"
+               "type": "wire",
+               options:{latency:1500}
             },            
             {  name: 'client2',
                type: 'client',
@@ -619,12 +623,13 @@ var scenarios = (function () {
                   zoom:'0.85',
                   "page": "map"
                },               
-               locations:{where:{y:130}},
+               locations:{where:{x: 310, y:130}},
                "next": []
             },
             {
                "name": "wire3",
-               "type": "wire"
+               "type": "wire",
+               options:{latency:1500}
             },
             {  name: 'client3',
                type: 'client',
@@ -633,7 +638,7 @@ var scenarios = (function () {
                   "page": "map",
                   parseStrategy: 'progressive'
                },               
-               locations:{where:{y:220}},
+               locations:{where:{x: 290, y:220}},
                "next": []
             }
          ]

@@ -43,6 +43,7 @@ var Packet = (function(){
        )   
            .inDemo(this.demo)
            .startingAt(this.gotAlreadyUpTo)
+           .endingAt(this.requestingUpto)
            .withPayload(this.payload);
    };
    Packet.prototype.replayedCopy = function() {
@@ -54,6 +55,10 @@ var Packet = (function(){
        this.gotAlreadyUpTo = firstPacketNumber;
        return this; // chaining
    };
+   Packet.prototype.endingAt = function( lastPacketNumber ) {
+      this.requestingUpto = lastPacketNumber;
+      return this; // chaining
+   };   
    Packet.prototype.withPayload = function( payload ) {
        this.payload = payload;
        return this; // chaining

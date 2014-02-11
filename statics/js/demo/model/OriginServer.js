@@ -20,8 +20,11 @@ var OriginServer = (function(){
     OriginServer.prototype.acceptFromDownstream = function(packet, source){
        
         this.addToScript('gotRequest');
-        var startingAt = packet.gotAlreadyUpTo;
-        this.responseGenerator.generateResponse(startingAt, source);
+        this.responseGenerator.generateResponse(
+            packet.gotAlreadyUpTo, 
+            packet.requestingUpto, 
+            source
+        );
         packet.done();
     };
 

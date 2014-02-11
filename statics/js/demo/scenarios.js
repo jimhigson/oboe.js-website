@@ -621,7 +621,8 @@ var scenarios = (function () {
                type: 'client',
                options:{
                   zoom:'0.85',
-                  "page": "map"
+                  "page": "map",
+                  maxRequestSize: 5
                },               
                locations:{where:{x: 310, y:130}},
                "next": []

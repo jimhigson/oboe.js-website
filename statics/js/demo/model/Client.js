@@ -1,4 +1,5 @@
 var Client = extend( PacketHolder, function Client(name, locations, options) {
+    "use strict";
 
     PacketHolder.apply(this, arguments);
     this.page = options.page;
@@ -6,6 +7,7 @@ var Client = extend( PacketHolder, function Client(name, locations, options) {
     this.retryAfter = options.retryAfter;
     this.aspect = options.aspect;
     this.showProgress = options.showProgress;
+    this.maxRequestSize = options.maxRequestSize || Number.POSITIVE_INFINITY;
 
     this.parser = Parser(options.parseStrategy);
     this.parseStrategy = options.parseStrategy;
@@ -27,18 +29,23 @@ var Client = extend( PacketHolder, function Client(name, locations, options) {
 Client.newEvent = 'Client';
 
 Client.prototype.makeRequest = function(){
-
+   
     this.events('request').emit();
     this.addToScript('requestAttempt', this.attemptNumber);
     
-    var packet =
-        new Packet('request', 'GET', 'upstream', {isFirst:true, isLast:true, i:0})
-            .inDemo(this.demo)
-            .startingAt(this.receivedUpTo +1)
-            .announce();
+    var startingAt = this.receivedUpTo + 1, 
+        endingAt = startingAt + this.maxRequestSize - 1,
+   
+        packet = new Packet('request', 'GET', 'upstream', {isFirst:true, isLast:true, i:0})
+                     .inDemo(this.demo)
+                     .startingAt(startingAt)
+                     .endingAt(endingAt)
+                     .announce();
 
     this.scheduleFail();
     
+    console.log('client', '"' + this.name + '"', 'requested', packet.gotAlreadyUpTo, '->', packet.requestingUpto);
+   
     this.propagate(packet);
     
     this.attemptNumber++; // increment for next time

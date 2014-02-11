@@ -71,7 +71,6 @@ var Wire = (function(){
         var upstreamLocations = upstreamLocation.locations;
         this.locations.upstream = upstreamLocations.downstream || upstreamLocations.where;
 
-
         return this; // chaining
     };
     

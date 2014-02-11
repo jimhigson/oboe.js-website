@@ -14,7 +14,7 @@ var ResponseGenerator = (function(){
         this.packetPayloads = packetPayloads;
     });
     
-    ResponseGenerator.prototype.packetGenerator = function() {
+    ResponseGenerator.prototype.packetGenerator = function(lastPacketNumber) {
 
         var firstPacketCreated = false;
 
@@ -23,11 +23,11 @@ var ResponseGenerator = (function(){
             var ordering = {
                 i:       n,
                 isFirst: !firstPacketCreated,
-                isLast:  n >= (this.messageSize -1)
+                isLast:  n >= (lastPacketNumber)
             };
            
             if( ordering.isFirst && Number.isFinite(this.messageSize) ) {
-               ordering.expectedSize = this.messageSize;
+               ordering.expectedSize = lastPacketNumber +1;
             }
     
             var packet = new Packet(
@@ -46,14 +46,15 @@ var ResponseGenerator = (function(){
         }.bind(this)
     };
     
-    ResponseGenerator.prototype.generateResponse = function(startingAt, intendedRecipient) {
+    ResponseGenerator.prototype.generateResponse = function(startingAt, endingAt, intendedRecipient) {
 
-        var packets = this.packetGenerator(); 
+        var lastPacketNumber = Math.min(this.messageSize - 1, endingAt),
+            packets = this.packetGenerator( lastPacketNumber );
         
         function sendNext(previousPacketNumber){
     
             var curPacketNumber = this.packetNumberAfter(previousPacketNumber),
-                lastPacket = curPacketNumber >= (this.messageSize - 1);
+                lastPacket = curPacketNumber >= lastPacketNumber;
     
             this.events('packetGenerated').emit(packets(curPacketNumber), intendedRecipient);
 

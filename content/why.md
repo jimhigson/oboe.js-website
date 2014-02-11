@@ -4,8 +4,8 @@ Why Oboe.js?
 This page visualises using streaming to speed up web applications. See
 also [Oboe.js vs. SAX vs. DOM](parsers).
 
-Downloading REST resources
---------------------------
+Stream any REST resource
+------------------------
 
 Let's start by examining the standard pattern found on most AJAX-powered sites.
 We have a client-side web application and a service that it goes to for data.
@@ -21,8 +21,8 @@ show data sooner and give a more responsive feel by using streaming.
 As the connection gets slower or the response gets larger the improvement
 is more significant.
 
-Mobile data connections
------------------------
+Transmit fluently over mobile
+-----------------------------
 
 Mobile networks today are high-bandwidth but can also be
 high-latency and come with inconsistent packet delivery times.
@@ -41,8 +41,8 @@ as they arrive. This helps webapps to feel faster when running over mobile netwo
 The visualisation above shows how the data is displayed sooner.
 In itself, progressive display also improves the *perception* of performance.
 
-Dropped connections
--------------------
+Handle dropped connections with grace
+-------------------------------------
 
 Oboe.js provides improved tolerance if a connection is lost before
 the response completes.
@@ -69,8 +69,8 @@ comes back it only requests the data that it missed on the first request:
 
 {{demo "mobile-fail-progressive"}}
 
-Aggregating resources
----------------------
+Streamline resource aggregation
+-------------------------------
 
 It is a common architectural pattern for web clients to
 retrieve their data through an aggreating middle tier.
@@ -105,8 +105,8 @@ problem reading it as a static resource.
 In a Java stack this could also be implemented by using 
 [GSON](http://code.google.com/p/google-gson/) in the middle tier.
 
-Not having to choose between big and small JSON
------------------------------------------------
+Avoid the tradeoff between big and small JSON
+---------------------------------------------
 
 There is oftentimes a tradeoff designing AJAX architectures using traditional tools:
 
@@ -124,8 +124,8 @@ connect to <span class="place">the same server</span>. The
 
 {{demo "big-small"}}
 
-Historic and live data on the same transport
---------------------------------------------
+Send historic and live data on the same transport
+-------------------------------------------------
 
 It is a common pattern for an application to fetch existing data
 and then keep the page updated with 'live' events as they happen.
@@ -139,8 +139,8 @@ The only difference between 'old' and 'new' data is timing.
 
 {{demo "historic-and-live"}}
 
-Cacheable streaming
--------------------
+Allow caching of streamed content
+---------------------------------
 
 [Above](#historic-and-live-data-on-the-same-transport) we had a
 service where the response intentionally never completes. Here we will
@@ -167,14 +167,7 @@ live data after-the-fact is no longer interesting. REST-based Cacheable streamin
 works best for cases where the live data is not specific to a single user and remains
 interesting as it ages.
 
-In Summary
-----------
-
-Using streaming to load data is usually faster and more fault tolerant.
-The biggest advantages come with large responses, mobile networks, or reading from streaming
-JSON services.
-
-Downsides?
+What downsides?
 ----------
 
 Because it is a pure Javascript parser, Oboe.js requires more CPU time

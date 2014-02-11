@@ -108,7 +108,7 @@ In a Java stack this could also be implemented by using
 Step outside the trade-off between big and small JSON
 ---------------------------------------------
 
-Oftentimes there is a tradeoff using traditional REST clients:
+There is often a tradeoff using traditional REST clients:
 
 * Request too much data at once and the application is unresponsive because each request
   takes some time to download.

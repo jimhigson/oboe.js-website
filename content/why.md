@@ -7,15 +7,16 @@ Stream any JSON REST resource
 -----------------------------
 
 Let's start by examining the standard pattern found on most AJAX-powered sites.
-We have a client-side web application and a service that it goes to for data.
+We have a client-side web application and a service that provides it with data.
 The page isn't updated until the response completes:
 
 {{demo "fast-ajax-discrete"}}
 
 Oboe is different from most streaming JSON libraries since the JSON
 does not have to follow a special format. 
-On a good connection there isn't a huge amount of time to save but we can
-show data sooner and give a more responsive feel by using streaming:
+On a good connection there isn't a lot of time to save but 
+it is likely that [progressive display in itself will improve the *perception* of 
+performance](http://www.sigchi.org/chi95/proceedings/shortppr/egd_bdy.htm):
 
 {{demo "fast-ajax-progressive"}}
 
@@ -38,9 +39,6 @@ as they arrive. This helps webapps to feel faster when running over mobile netwo
 
 
 {{demo "mobile-progressive"}}
-
-In itself, [progressive display probably improves the *perception* of 
-performance](http://www.sigchi.org/chi95/proceedings/shortppr/egd_bdy.htm).
 
 Handle dropped connections with grace
 -------------------------------------

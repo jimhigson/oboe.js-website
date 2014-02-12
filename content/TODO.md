@@ -46,6 +46,8 @@ Writing
 -------
 
 * Merge [why](why) into [homepage](/)?
+* Browser support is a bit buried at bottom of [API](/api)
+* Patterns should probably have own page
 * <s>Licence somewhere</s>
 * <s>Not having to decide between big and small</s>
    * <s>Vis: 3 servers, 3 clients. Big message, small message and progressive message all in one!</s>

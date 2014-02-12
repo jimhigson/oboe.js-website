@@ -73,16 +73,18 @@
                  {{/if}}
                  
                  {{#unless home}}
-                    <div class="internalNav">
-                       <h2>{{heading.text}}</h2>
-                       {{#if sections}}         
-                          <ul class="sections">
-                             {{#sections}}
-                                <li><a href="#{{id}}">{{text}}</a></li>
-                             {{/sections}}
-                          </ul>
-                       {{/if}}
-                    </div>
+                    {{#if multipleSections}}
+                       <div class="internalNav">
+                          <h2>{{heading.text}}</h2>
+                          {{#if sections}}         
+                             <ul class="sections">
+                                {{#sections}}
+                                   <li><a href="#{{id}}">{{text}}</a></li>
+                                {{/sections}}
+                             </ul>
+                          {{/if}}
+                       </div>
+                    {{/if}}
                  {{/unless}}
         
                  {{#home}}               

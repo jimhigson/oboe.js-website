@@ -64,7 +64,8 @@ function outline($){
    return {
       content: $.html(),
       heading: mainHeading,
-      sections: sectionHeadings
+      sections: sectionHeadings,
+      multipleSections: sectionHeadings.length > 1
    }
 }
 

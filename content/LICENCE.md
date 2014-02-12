@@ -2,6 +2,9 @@
 Licence
 =======
 
+Using Oboe in your projects
+--------------------------
+
 Oboe.js is licenced under the [2-clause BSD licence](http://en.wikipedia.org/wiki/BSD_licenses#2-clause_license_.28.22Simplified_BSD_License.22_or_.22FreeBSD_License.22.29).
 This is one of the more liberal FLOSS licences and shouldn't impair integration with commercial products.
 

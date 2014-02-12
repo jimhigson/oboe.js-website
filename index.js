@@ -83,6 +83,7 @@ function respondWithMarkdown(req, res, getContentFn, opts){
         opts.content = outline.content;
         opts.heading = outline.heading;
         opts.sections = outline.sections;
+        opts.multipleSections = outline.multipleSections;
         res.status(outline.status);
     }));
 

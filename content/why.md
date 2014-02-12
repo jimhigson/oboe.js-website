@@ -49,7 +49,7 @@ Most AJAX frameworks equate a dropped connection with total failure and discard
 the partially transferred data, even if 90% was received correctly.
 
 We can handle this situation better by using the partially transferred data
-instead of throwing it away. Given a incremental approach to parsing, using partial data
+instead of throwing it away. Given an incremental approach to parsing, using partial data
 follows naturally without requiring any extra programming. 
 
 In the next visualisation we have a mobile connection which fails when the
@@ -71,7 +71,7 @@ Streamline resource aggregation
 -------------------------------
 
 It is a architecture for web clients to
-retrieve their data through an aggreating middle tier.
+retrieve their data through an aggregating middle tier.
 The aggregator connects to several back-end services and
 combines their data into a single response.
 

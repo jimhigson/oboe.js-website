@@ -1,7 +1,7 @@
 Why Oboe.js?
 ============
 
-This page visualises how streaming can speed up web applications.
+This page visualises how streaming AJAX speeds up the web.
 
 Stream any JSON REST resource
 -----------------------------

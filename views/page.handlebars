@@ -65,12 +65,12 @@
         
               <nav class="col col1">
                  
-                 {{#unless isDownloadPage}}
+                 {{#if home}}
                     <a href="/download"
                        id="download" title="Get the code">
                         Download <em id="version">{{latestTag}}</em>
                     </a>
-                 {{/unless}}
+                 {{/if}}
                  
                  {{#unless home}}
                     <div class="internalNav">

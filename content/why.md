@@ -1,8 +1,7 @@
 Why Oboe.js?
 ============
 
-This page visualises how streaming can speed up web applications. See
-also [Oboe.js vs. SAX vs. DOM](parsers).
+This page visualises how streaming can speed up web applications.
 
 Stream any JSON REST resource
 -----------------------------

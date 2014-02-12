@@ -18,6 +18,7 @@ What next?
 - Learn the Oboe.js [API](api)
 - [Download](download) the library
 - [Discuss](discuss) Oboe.js
+- Compare [Oboe.js vs. SAX vs. DOM](parsers)
 - Visit the [project on Github](http://github.com/jimhigson/oboe.js)
 
 Other tools

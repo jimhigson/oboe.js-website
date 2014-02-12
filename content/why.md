@@ -1,7 +1,7 @@
 Why Oboe.js?
 ============
 
-This page visualises using streaming to speed up web applications. See
+This page visualises how streaming can speed up web applications. See
 also [Oboe.js vs. SAX vs. DOM](parsers).
 
 Stream any JSON REST resource
@@ -9,16 +9,18 @@ Stream any JSON REST resource
 
 Let's start by examining the standard pattern found on most AJAX-powered sites.
 We have a client-side web application and a service that it goes to for data.
-The page isn't updated until the response completes.
+The page isn't updated until the response completes:
 
 {{demo "fast-ajax-discrete"}}
 
+Oboe is different from most streaming JSON libraries since the JSON
+does not have to follow a special format. 
 On a good connection there isn't a huge amount of time to save but we can
-show data sooner and give a more responsive feel by using streaming.
+show data sooner and give a more responsive feel by using streaming:
 
 {{demo "fast-ajax-progressive"}}
 
-As the connection gets slower or the response gets larger the improvement
+With a slower connection or larger data the improvement
 is more significant.
 
 Transmit fluently over mobile
@@ -26,20 +28,20 @@ Transmit fluently over mobile
 
 Mobile networks today are high-bandwidth but can also be
 high-latency and come with inconsistent packet delivery times.
-This is why buffered content like streaming HD video plays
+This is why buffered content like streaming <abbr title="high definition">HD</abbr> video plays
 fluidly but web surfing still feels laggy. The visualisation
-below approximates a medium-sized download on a mobile network.
+below approximates a medium-sized download on a mobile network:
 
 {{demo "mobile-discrete"}}
 
 Oboe.js makes it easy for the programmer to use chunks from the response as soon 
-as they arrive. This helps webapps to feel faster when running over mobile networks.
+as they arrive. This helps webapps to feel faster when running over mobile networks:
 
 
 {{demo "mobile-progressive"}}
 
-The visualisation above shows how the data is displayed sooner.
-In itself, progressive display also improves the *perception* of performance.
+In itself, [progressive display probably improves the *perception* of 
+performance](http://www.sigchi.org/chi95/proceedings/shortppr/egd_bdy.htm).
 
 Handle dropped connections with grace
 -------------------------------------
@@ -47,10 +49,10 @@ Handle dropped connections with grace
 Oboe.js provides improved tolerance if a connection is lost before
 the response completes.
 Most AJAX frameworks equate a dropped connection with total failure and discard
-the partially transferred data, even if 90% transferred correctly.
+the partially transferred data, even if 90% was received correctly.
 
 We can handle this situation better by using the partially transferred data
-instead of throwing it away. From a streaming approach using this data
+instead of throwing it away. Given a incremental approach to parsing, using partial data
 follows naturally without requiring any extra programming. 
 
 In the next visualisation we have a mobile connection which fails when the
@@ -61,18 +63,17 @@ user enters a building:
 Because Oboe.js views the HTTP response as a
 series of small, useful parts, when a connection is lost it is simply
 the case that some parts were successful and were used already,
-while others did not arrive. Fault tolerance follows naturally from this
-model and no special cases are required.
+while others did not arrive. Fault tolerance comes for free.
 
 In the example below the client is smart enough so that when the network
-comes back it only requests the data that it missed on the first request:
+comes back it only requests the data that was missed on the first attempt:
 
 {{demo "mobile-fail-progressive"}}
 
 Streamline resource aggregation
 -------------------------------
 
-It is a common architectural pattern for web clients to
+It is a architecture for web clients to
 retrieve their data through an aggreating middle tier.
 The aggregator connects to several back-end services and
 combines their data into a single response.
@@ -116,21 +117,21 @@ There is often a tradeoff using traditional REST clients:
   meaning a greater http overhead and more time overall.
 
 Oboe.js breaks out of the tradeoff by beating both.
-Large resources load just as responsively as smaller ones so request more
+Large resources load just as responsively as smaller ones so the developer can request more
 and let it stream. 
 
 In the visualisation below three rival clients
 connect to <span class="place">the same server</span>. The
 <span class="client1">top client requests a little data twice</span>,
 <span class="client2">the middle a lot</span>, and
-<span class="client3">the bottom a lot using Oboe.js</span>.
+<span class="client3">the bottom a lot using Oboe.js</span>:
 
 {{demo "big-small"}}
 
 Send historic and live data using the same transport
 -------------------------------------------------
 
-It is a common pattern for an interface to fetch existing data
+It is a common pattern in web interfaces to fetch existing data
 and then keep the page updated with 'live' events as they happen.
 We traditionally use two transports here but
 wouldn't our day be easier if we didn't have to program distinct cases?
@@ -138,7 +139,7 @@ wouldn't our day be easier if we didn't have to program distinct cases?
 In the example below the message server intentionally writes a JSON response
 that never completes. It starts by writing out the existing messages
 as a chunk and then continues to write out new ones as they happen.
-The only difference between 'old' and 'new' data is timing.
+The only difference between 'old' and 'new' data is timing:
 
 {{demo "historic-and-live"}}
 

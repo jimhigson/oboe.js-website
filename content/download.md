@@ -8,6 +8,21 @@ The latest stable version is *{{latestTag}}*.
 
 Older versions are [available via Github]({{repo}}/releases).
 
+Node.js
+-------
+
+Install using NPM:
+
+``` bash
+$ npm install oboe
+```
+
+Then load as usual:
+
+``` javascript
+var oboe = require('oboe');
+```
+
 Downloading Oboe.js for the Browser
 -----------------------------------
 
@@ -30,7 +45,7 @@ If there is no AMD present, once the Oboe Javascript is loaded you can start usi
 Using Jam
 ---------
 
-Oboe.js is also available through the [Jam package manager](http://jamjs.org/):
+Oboe.js is also [available](http://jamjs.org/packages/#/details/oboe) through the [Jam package manager](http://jamjs.org/):
 
 ``` bash
 $ jam install oboe
@@ -52,19 +67,4 @@ require.config({
         oboe: 'oboe-browser'
     }
 });
-```
-
-Node.js
--------
-
-Install using NPM:
-
-``` bash
-$ npm install oboe
-```
-
-Then load as usual:
-
-``` javascript
-var oboe = require('oboe');
 ```

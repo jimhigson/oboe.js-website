@@ -4,20 +4,18 @@ Download
 Versions
 --------
 
-The latest stable version is *{{latestTag}}*.
-
-Older versions are [available via Github]({{repo}}/releases).
+The latest stable version is *{{latestTag}}*. Older versions are also [available via Github]({{repo}}/releases).
 
 Node.js
 -------
 
-Install using NPM:
+Install [Oboe from NPM](http://www.npmjs.org/package/oboe):
 
 ``` bash
 $ npm install oboe
 ```
 
-Or, use `--save` to keep Oboe as a dependency in your package.json file:
+Add `--save` if you want to keep Oboe as a dependency in your package.json file:
 
 ``` bash
 $ npm install oboe --save
@@ -32,12 +30,12 @@ var oboe = require('oboe');
 Downloading Oboe.js for the Browser
 -----------------------------------
 
-Grab one of these files:
+Save one of these files:
  
- * [oboe-browser.js]({{releasedJs}}/oboe-browser.js) (for development) 
- * [oboe-browser.min.js]({{releasedJs}}/oboe-browser.min.js) (minified for production) The size after gzip is 4.9k.
+ * [oboe-browser.js]({{releasedJs}}/oboe-browser.js) for development 
+ * [oboe-browser.min.js]({{releasedJs}}/oboe-browser.min.js) - minified for production. The size after gzip is 4.9k.
  
-Using Bower
+Using Bower package manager
 -----------
 
 You can fetch using [Bower](http://bower.io/) like this:
@@ -46,22 +44,39 @@ You can fetch using [Bower](http://bower.io/) like this:
 $ bower install oboe
 ```
 
-If there is no AMD present, once the Oboe Javascript is loaded you can start using the global `oboe` object.
-
-Using Jam
+Using Jam package manager
 ---------
 
-Oboe.js is also [available](http://jamjs.org/packages/#/details/oboe) through the [Jam package manager](http://jamjs.org/):
+Oboe.js is also [available](http://jamjs.org/packages/#/details/oboe) through [Jam](http://jamjs.org/):
 
 ``` bash
 $ jam install oboe
 ```
 
-Loading Oboe.js via AMD
------------------------
+Loading using AMD
+-----------------
 
-If AMD is detected Oboe will `define` itself instead of adding to the 
-global namespace.
+If there is no AMD present, once the Oboe Javascript is loaded you can start 
+using the global `oboe` object. However, when AMD is detected Oboe `defines` itself instead 
+of adding itself as global variable.
+
+When AMD is used Oboe can be accessed asynchronously using `require`:
+
+``` javascript
+require( ['oboe'], function( oboe ) {
+   
+});
+```
+
+If you know Oboe has already been loaded you can also access it synchronously although this
+is usually not the best way:
+
+``` javascript
+var oboe = require('oboe');
+```
+
+Configuration for Require.js
+------------------------
 
 When using with Require.js some config is needed so Require knows to load a file
 named `oboe-browser.js` for the `oboe` module. Alternatively, you could rename
@@ -74,3 +89,5 @@ require.config({
     }
 });
 ```
+
+This is similar to the [config required to use jQuery with Require](http://requirejs.org/docs/jquery.html).

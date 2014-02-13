@@ -20,6 +20,9 @@ What next?
 - [Discuss](discuss) Oboe.js
 - Compare [Oboe.js vs. SAX vs. DOM](parsers)
 - Visit the [project on Github](http://github.com/jimhigson/oboe.js)
+- If you're in for the long haul,
+  [my MSc dissertation](https://github.com/jimhigson/oboe.js-dissertation/blob/master/main/main.pdf?raw=true)
+  was written on this subject (PDF, 64 pages plus appendices)
 
 Other tools
 -----------

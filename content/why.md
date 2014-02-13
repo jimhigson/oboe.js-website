@@ -172,9 +172,13 @@ What downsides?
 ----------
 
 Because it is a pure Javascript parser, Oboe.js requires more CPU time
-than JSON.parse. Oboe.js is marginally
-slower for messages that load very quickly 
-but for most real-world cases reacting to i/o sooner beats
-fussing about CPU usage. If in doubt, benchmark, but don't forget to
-use the real internet and think about perceptual performance.
+than JSON.parse. Oboe.js works marginally more
+slowly for small messages that load very quickly 
+but for most real-world cases sage use of i/o beats optimising CPU cycles.
+
+SAX parsers require less memory than Oboe's pattern-based parsing model because
+they do not build up a parse tree. See [Oboe.js vs SAX vs DOM](parsers). 
+
+If in doubt, benchmark, but don't forget to
+use the real internet, including mobile, and think about perceptual performance.
 

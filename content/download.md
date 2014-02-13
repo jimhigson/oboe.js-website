@@ -17,7 +17,13 @@ Install using NPM:
 $ npm install oboe
 ```
 
-Then load as usual:
+Or, use `--save` to keep Oboe as a dependency in your package.json file:
+
+``` bash
+$ npm install oboe --save
+```
+
+Once installed load as usual:
 
 ``` javascript
 var oboe = require('oboe');

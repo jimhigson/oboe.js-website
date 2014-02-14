@@ -34,7 +34,7 @@ Save one of these files:
  
  * [oboe-browser.js]({{releasedJs}}/oboe-browser.js) for development 
  * [oboe-browser.min.js]({{releasedJs}}/oboe-browser.min.js) - minified for production. The size after gzip is 4.9k.
- 
+  
 Using Bower package manager
 -----------
 
@@ -91,3 +91,10 @@ require.config({
 ```
 
 This is similar to the [config required to use jQuery with Require](http://requirejs.org/docs/jquery.html).
+
+Polyfills
+---------
+
+If you need Oboe to work with older versions of Internet Explorer polyfils such as
+[ES5-shim](http://github.com/es-shims/es5-shim) are required to bring the environment
+up to ECMAScript 5.

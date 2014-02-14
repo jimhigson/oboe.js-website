@@ -1,7 +1,6 @@
 
 var express = require('express'),
     gzippo = require('gzippo'),
-    app = express(),
     consolidate = require('consolidate'),
     readContent = require('./read-content.js'),
     readPagesList = require('./read-pages-list.js'),
@@ -20,7 +19,9 @@ var express = require('express'),
     LATEST_TAG = 'v1.12.3',
     ANALYTICS_ID = 'UA-47871814-1',
     RAW_REPO_LOCATION = 'https://raw.github.com/jimhigson/oboe.js',
-    REPO_LOCATION = 'https://github.com/jimhigson/oboe.js';
+    REPO_LOCATION = 'https://github.com/jimhigson/oboe.js',
+
+    app = express();
 
 require('colors');
 

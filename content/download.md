@@ -27,7 +27,7 @@ Once installed load as usual:
 var oboe = require('oboe');
 ```
 
-Downloading Oboe.js for the Browser
+Downloading manually for the Browser
 -----------------------------------
 
 Save one of these files:

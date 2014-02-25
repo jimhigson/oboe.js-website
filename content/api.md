@@ -11,11 +11,12 @@ Calling this function starts a new HTTP request unless the caller is
 oboe( String url )
       
 oboe({
-   method: String,
    url: String,
-   headers: Object,
-   body: String|Object,
-   cached: Boolean
+   method: String,          // optional
+   headers: Object,         // optional
+   body: String|Object,     // optional
+   cached: Boolean,         // optional
+   withCredentials: Boolean // optional, browser only
 })
 ```
 
@@ -35,7 +36,7 @@ oboe.doPut(    {url:String, headers:Object, cached:Boolean, body:String|Object} 
 oboe.doPatch(  {url:String, headers:Object, cached:Boolean, body:String|Object} )
 ```
 
-The `method`, `headers`, `body`, and `cached` arguments are optional.
+The `method`, `headers`, `body`, `cached`, and `withCredentials` arguments are optional.
 
 * If `method` is not given Oboe defaults to `GET`.
 * If `body` is given as an object it will be stringified using `JSON.stringify` 
@@ -44,6 +45,26 @@ unless a different value is explicitly given.
 * If the cached option is given as `false` cachebusting will be applied by
 appending `_={timestamp}` to the URL's query string. Any other value will be
 ignored.
+
+Cross-domain requests
+---------------------
+
+Oboe.js is able to make cross-domain requests so long as the server
+is set up for <abbr title="Cross-site HTTP requests">CORS</abbr>, for example by setting the
+[Access-Control-Allow-Origin](http://developer.mozilla.org/en/docs/HTTP/Access_control_CORS#Access-Control-Allow-Origin)
+response header.
+
+* If `withCredentials` is given as `true`, cookies and other auth will be propagated to
+cross-domain requests as per the [XHR spec](http://www.w3.org/TR/2014/WD-XMLHttpRequest-20140130/#the-withcredentials-attribute).
+For this to work the server must be set up to send the 
+[Access-Control-Allow-Credentials](http://developer.mozilla.org/en/docs/HTTP/Access_control_CORS#Access-Control-Allow-Credentials)
+response header.
+
+Note that Internet Explorer only fully supports CORS from version 10 onwards.
+
+When making requests from Node the `withCredentials` option is never needed and is ignored.
+[The cors middleware](https://www.npmjs.org/package/cors) might be useful if you are
+serving cross-domain requests from Node.
 
 BYO stream
 ----------
@@ -55,7 +76,7 @@ It is your responsibility to initiate the stream and Oboe will not start
 a new HTTP request on your behalf.
 
 ```js
-oboe( stream )
+oboe( stream )   // Node.js only
 ```
  
 node event

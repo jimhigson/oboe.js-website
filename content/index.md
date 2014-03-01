@@ -5,8 +5,8 @@ Oboe.js is an [open source](LICENCE) Javascript library
 for loading JSON using streaming, combining the convenience of DOM with
 the speed and fluidity of SAX.
 
-It parses any JSON resource as a stream, is small enough to be a [micro-library](http://microjs.com/#),
-doesn't have any external dependencies, and doesn't care which other libraries you need it to speak to.
+It can parse any JSON as a stream, is small enough to be a [micro-library](http://microjs.com/#),
+doesn't have external dependencies, and doesn't care which other libraries you need it to speak to.
 
 {{demo "aggregated-progressive" "autoplay"}}
    

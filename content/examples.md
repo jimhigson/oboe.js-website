@@ -186,7 +186,7 @@ oboe('/agileReport/sprint42')
             .text('We made progress in ' + itemText);
       },
       '!.progress': function(){
-         MyApp.hideSpinnerAt('#foods');
+         MyApp.hideSpinnerAt('#progress');
       },
       '!.problems.*': function( itemText ){
          $('#problems')

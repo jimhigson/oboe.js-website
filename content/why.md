@@ -121,8 +121,8 @@ and let it stream.
 
 In the visualisation below three rival clients
 connect to <span class="place">the same server</span>. The
-<span class="client1">top client requests a little data twice</span>,
-<span class="client2">the middle a lot</span>, and
+<span class="client1">top client requests a lot of data</span>,
+<span class="client2">the middle a little data twice</span>, and
 <span class="client3">the bottom a lot using Oboe.js</span>:
 
 {{demo "big-small"}}

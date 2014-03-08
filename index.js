@@ -137,6 +137,8 @@ if( environment == 'dev' ) {
 
 // As a catch-all generate a 404.
 app.use(function(req,res){
+   console.warn('Unrecognised path; catch-all serving 404:'.red, req.url);
+   
    req.params = {page:'404'};
    respondWithMarkdown(req, res, readMarkdownFromFile);
 });

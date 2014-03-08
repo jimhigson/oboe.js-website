@@ -71,6 +71,8 @@ function outline($){
 
 function readContent(requestedPage, opts, callback) {
 
+   console.log('request for page:', requestedPage.blue);
+   
    function pdfFile(pageName) {
       return 'pdf/' + pageName + '.pdf';
    }
@@ -96,7 +98,11 @@ function readContent(requestedPage, opts, callback) {
                 $ = postProcessMarkup(cheerio.load(html)),
                 response = outline($);
 
-            response.status = requestedMarkdownExists? 200 : 404; 
+            response.status = requestedMarkdownExists? 200 : 404;
+             
+            if( !requestedMarkdownExists ) {
+               console.log('no such markdown file:'.red, markdownFile(requestedPage));
+            }
              
             callback( response );
          });

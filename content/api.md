@@ -60,7 +60,7 @@ For this to work the server must be set up to send the
 [Access-Control-Allow-Credentials](http://developer.mozilla.org/en/docs/HTTP/Access_control_CORS#Access-Control-Allow-Credentials)
 response header.
 
-Note that Internet Explorer only fully supports CORS from version 10 onwards.
+Note that [Internet Explorer only fully supports CORS from version 10 onwards](http://enable-cors.org/client.html).
 
 When making requests from Node the `withCredentials` option is never needed and is ignored.
 [The cors middleware](https://www.npmjs.org/package/cors) might be useful if you are

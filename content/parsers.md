@@ -30,7 +30,7 @@ Oboe.js pros:
 * Finding nodes is pattern-based. Unlike SAX, you don't have to maintain state on what you have alredy seen
 in order to drill down into a JSON document.
 * Oboe's parser provides actual JS objects which can then be used much as you would with a DOM parser. In
-comparison, with SAX you must programatically infer objects from many callbacks.
+comparison, with SAX you must programmatically infer objects from many callbacks.
 * Can be used to search the JSON while streaming is flowing.
  
 Oboe.js cons:

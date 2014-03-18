@@ -14,7 +14,7 @@ DOM pros:
 DOM cons:
 
 * You can't do anything until you have the whole document.
-* If the connection drops while transfering you lose everything.
+* If the connection drops while transferring you lose everything.
 * Perpetual documents are not possible.
  
 SAX pros:

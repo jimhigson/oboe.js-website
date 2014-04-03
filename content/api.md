@@ -64,7 +64,7 @@ Note that [Internet Explorer only fully supports CORS from version 10 onwards](h
 
 When making requests from Node the `withCredentials` option is never needed and is ignored.
 [The cors middleware](https://www.npmjs.org/package/cors) might be useful if you are
-serving cross-domain requests from Node.
+serving cross-domain requests from Express/Connect.
 
 BYO stream
 ----------

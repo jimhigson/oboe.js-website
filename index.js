@@ -134,7 +134,7 @@ app
 if( environment == 'dev' ) {
    app.get('/demo/:demo', function(req, res){
         
-       function generateMarkdownForSingleDemo(req, opts, callback){
+       function generateMarkdownForSingleDemo(req, _opts, callback){
            var demoName = req.params.demo;
            
            callback({

@@ -59,21 +59,20 @@ function defaultOpts(opts) {
 
 function respondWithMarkdown(req, res, getContentFn, opts){
     
-    var view = req.query.mode == 'raw'? 'raw' : 'page',
-        pageName = req.params.page || 'index';
+    var view = (req.query.mode == 'raw'? 'raw' : 'page');
 
     opts = defaultOpts(opts);
         
     var bar = barrier(function(){
         res.render(view, opts);
-        console.log('html page', pageName.blue, 'created in', String(bar.duration).blue, 'ms');
+        console.log('The HTML page for', req.url.blue, 'was created in', String(bar.duration).blue, 'ms');
     });
     
-    
     readPagesList(bar.add(function(pages){
-        // mark one as current:
+        // if any page in the pages list is the current, mark as such:
         pages.forEach(function(page){
-            page.current = ( page.path == pageName ); 
+            var pageUrl = '/' + page.path;
+            page.current = ( pageUrl == req.url ); 
         });
         
         opts.pages = pages;
@@ -94,26 +93,41 @@ function respondWithMarkdown(req, res, getContentFn, opts){
     }));
 }
 
-function readMarkdownFromFile(req, opts, callback) {
-   var mdFile = req.params.page || 'index';
+function readMarkdownFromFile( filename ) {
+   
+   return function( req, opts, callback ) {
 
-   readContent(mdFile, opts, callback);
+      readContent(filename, opts, callback);
+   };
 }
 
 app
-   .use(express.favicon(__dirname + '/statics/favicons/favicon.ico'))   
+   .use(function(req, res, next) {
+      // Connect middleware:
+      // works around an issue in gzippo where requests from a load balancer for the homepage
+      // would 404 because it tries to serve as a non-existent static, non-gzipped resource.
+      // TODO: find something less buggy than gzippo
+      
+      if( !req.headers['Content-Encoding'] && req.url == '/' ) {
+         respondWithMarkdown(req, res, readMarkdownFromFile('index'));
+      } else {
+         // for all other requests, go on as usual:
+         next();
+      }
+   })
+   .use(express.favicon(__dirname + '/statics/favicons/favicon.ico'))
    .use(gzippo.staticGzip('statics')) // gzip for static
    .use(gzippo.staticGzip('pdf'))
    .use(gzippo.staticGzip('bower_components')) // gzip for static
    .use(express.compress()) // gzip for dynamic
    .get('/', function(req, res){
-        respondWithMarkdown(req, res, readMarkdownFromFile,
-            {   home: true,
-                twitter: true
-            });
+        respondWithMarkdown(req, res, readMarkdownFromFile('index'), {   
+           home: true,
+           twitter: true
+        });
    })
    .get('/:page', function(req, res){
-       respondWithMarkdown(req, res, readMarkdownFromFile);
+       respondWithMarkdown(req, res, readMarkdownFromFile(req.params.page));
    });
 
 // allow single demos to be viewed but only if we are in dev:
@@ -131,7 +145,7 @@ if( environment == 'dev' ) {
            });
        }
         
-       respondWithMarkdown( req, res, generateMarkdownForSingleDemo);
+       respondWithMarkdown(req, res, generateMarkdownForSingleDemo);
    })
 }
 
@@ -139,8 +153,7 @@ if( environment == 'dev' ) {
 app.use(function(req,res){
    console.warn('Unrecognised path; catch-all serving 404:'.red, req.url);
    
-   req.params = {page:'404'};
-   respondWithMarkdown(req, res, readMarkdownFromFile);
+   respondWithMarkdown(req, res, readMarkdownFromFile('404'));
 });
 
 app.listen(PORT);

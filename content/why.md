@@ -72,10 +72,9 @@ comes back it only requests the data that was missed on the first attempt:
 Streamline resource aggregation
 -------------------------------
 
-It is an architecture for web clients to
-retrieve their data through an aggregating middle tier.
-The aggregator connects to several back-end services and
-combines their data into a single response.
+It is a common pattern for web clients to retrieve data through a middle tier.
+Nodes in the middle tier connect to multiple back-end services and
+create a single, aggregated response by combining their data.
 
 The visualisation below shows an example without streaming.
 <span class="server2">Origin 1</span> is slower

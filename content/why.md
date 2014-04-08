@@ -72,7 +72,7 @@ comes back it only requests the data that was missed on the first attempt:
 Streamline resource aggregation
 -------------------------------
 
-It is a architecture for web clients to
+It is an architecture for web clients to
 retrieve their data through an aggregating middle tier.
 The aggregator connects to several back-end services and
 combines their data into a single response.

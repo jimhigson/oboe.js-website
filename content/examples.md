@@ -53,7 +53,7 @@ oboe('/myapp/things.json')
    })
    .node('badThings.*', function( badThing ){
           
-      console.log( 'Stay away from', badThings.name);
+      console.log( 'Stay away from', badThing.name);
    })   
    .done(function(things){
    

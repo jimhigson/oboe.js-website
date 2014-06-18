@@ -233,6 +233,25 @@ oboe('/content')
    });
 ```
 
+.source
+-------
+
+Gives the URL (or [stream](#byo-stream)) that the Oboe instance
+is fetching from. This is sometimes useful if one handler is being used
+for several streams.
+
+```js
+oboe('http://example.com/names.json')
+   .node('name', handleName);
+   
+oboe('http://example.com/more_names.json')
+   .node('name', handleName);   
+   
+function handleName(name){
+   console.log('got name', name, 'from', this.source);
+}   
+```
+
 .header([name])
 ---------------
 

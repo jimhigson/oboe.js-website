@@ -50,13 +50,10 @@ function outline($){
                var jEle = $(element),
                    text = jEle.text(); 
                
-               // Hack here to avoid putting 'Typos' heading in side links
-               if( text != 'Typos' ){
-                  sectionHeadings.push({
-                     text: text,
-                     id:   jEle.attr('id')
-                  });
-               }
+               sectionHeadings.push({
+                  text: text,
+                  id:   jEle.attr('id')
+               });
             });
    
    mainHeadingEle.remove();

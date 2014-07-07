@@ -33,3 +33,4 @@ Other tools
     mind writing [rather more code](parsers#code-comparison-sax), try
     [Clarinet](http://github.com/dscape/clarinet) (In fact, Oboe is
     built on Clarinet)
+-   For golang programmers there is an example of different [realtime web technologies](https://github.com/SimonWaldherr/GoRealtimeWeb), which uses Oboe.js

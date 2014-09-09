@@ -110,8 +110,10 @@ types so the syntax is the same:
 
 ``` js
 oboe('/myapp/things.json')
-   .node( 'colour': function( colour ){
-      // (colour instanceof String) === true
+   .node({
+      'colour': function( colour ){
+         // (colour instanceof String) === true
+      }
    });
 ```  
 

@@ -6,7 +6,7 @@ Versions
 
 The latest stable version is *{{latestTag}}*. Older versions are also [available via Github]({{repo}}/releases).
 
-Node.js
+Node.js and Browserify
 -------
 
 Install [Oboe from NPM](http://www.npmjs.org/package/oboe):
@@ -74,46 +74,6 @@ is usually not the best way:
 ``` javascript
 var oboe = require('oboe');
 ```
-
-Configuration for Browserify
-----------------------------
-
-Oboe needs a little config so that [browserify](http://browserify.org/) can package it into your app. This is because:
-
-* Oboe has different versions for node and browsers. Without any config Browserify will try to package the Node one.
-* Oboe needs to sit close to the native XHR. Browserify's wraps XHR in a node-like shim. Oboe prefers the real thing.
-* Oboe's browser package isn't defined as a common-js module. [Browserify-shim](https://github.com/thlorenz/browserify-shim)
-fixes this.
-
-If you haven't already, get Oboe and browserify-shim from npm.
-
-```
-npm install oboe browserify-shim --save
-```
-
-In `package.json` add the following:
-
-``` javascript
-{
-  "browserify": {
-    "transform": [
-      "browserify-shim"
-    ]
-  },
-  "browser": {
-    "oboe": "./node_modules/oboe/dist/oboe-browser.js"
-  },
-  "browserify-shim": {
-    "oboe": {
-      "exports": "oboe"
-    }
-  }
-}
-```
-
-Oboe should now work as usual from Browserify'd projects, bringing in the browser-specific version. Call
-`require('oboe')` as usual to bring in the shimmed, browser-specific version of Oboe.
-
 
 Configuration for Require.js
 ------------------------

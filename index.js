@@ -16,7 +16,7 @@ var express = require('express'),
 
     CSS_STYLESHEETS = isProd? ["all-min.css"] : ["all.css"],
         
-    LATEST_TAG = 'v1.15.2',
+    LATEST_TAG = 'v2.0.0',
     ANALYTICS_ID = 'UA-47871814-1',
     RAW_REPO_LOCATION = 'https://raw.github.com/jimhigson/oboe.js',
     REPO_LOCATION = 'https://github.com/jimhigson/oboe.js',

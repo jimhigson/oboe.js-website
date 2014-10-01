@@ -336,6 +336,136 @@ oboe('/myapp/things')
    });
 ```
 
+Transforming JSON while it is streaming
+---------------------------------------
+
+Say we have the JSON below: 
+
+``` js
+[
+   {"verb":"VISIT", "noun":"SHOPS"},
+   {"verb":"FIND", "noun":"WINE"},
+   {"verb":"MAKE", "noun":"PIZZA"}
+]
+```
+
+We want to read the JSON but the uppercase is a bit ugly.
+Oboe can transform the nodes as they stream:
+
+``` js
+
+function toLower(s){
+   return s.toLowerCase();
+}
+
+oboe('words.json')
+   .node('verb', toLower)
+   .node('noun', toLower)
+   .node('!.*', function(pair){
+   
+      console.log('Please', pair.verb, 'me some', pair.noun);
+   });
+```
+
+The code above logs:
+
+```
+Please visit me some shops
+Please find me some wine
+Please make me some pizza
+   
+```
+
+Demarshalling JSON to an OOP model
+----------------------------------
+
+If you are programming in an OO style you probably want to instantiate constructors
+based on the values you read from the JSON. 
+
+You can build the OOP model while streaming using Oboe's node replacement feature:
+
+``` js
+function Person(firstName, lastName) {
+   this.firstName = firstName;
+   this.lastName = lastName;
+}
+
+Person.prototype.getFullName = function() {
+   return this.firstName + ' ' + this.lastName;
+}
+
+oboe('/myapp/people')
+   .node('people.*', function(person){
+
+      // Any value we return from a node callback will replace
+      // the parsed object:
+      
+      return new Person(person.firstName, person.lastName)
+   })
+   .done(function(model){
+   
+      // We can call the .getFullName() method directly because the 
+      // model here contains Person instances, not plain JS objects
+      
+      console.log( model.people[1].getFullName() );
+   });
+```
+
+Loading JSON trees larger than the available RAM
+------------------------------------------------
+
+By default Oboe assembles the full tree of the JSON that it receives.
+This means that every node is kept in memory for the duration of the parse.
+
+If you are streaming large resources to avoid memory limitations, you can delete 
+any detected node by returning `oboe.drop` from [the node event](api#node-event).
+
+``` js
+// we are getting this large JSON
+{
+   "drinks":[
+      {"name":"Orange juice", "ingredients":"Oranges"},
+      {"name":"Wine", "ingredients":"Grapes"},
+      {"name":"Coffee", "ingredients":"Roasted Beans"}
+      
+      // ... lots more records ...
+   ]
+}
+```
+
+``` js
+oboe('drinks.json')
+   .node('!.*', function(drink){
+      
+      if( available(drink.ingredients) ) {
+         startMaking(drink.name);
+      }
+      
+      // By returning oboe.drop, the parsed JSON object will be freed,
+      // allowing it to be garbage collected.
+      return oboe.drop;
+      
+   }).done(function( finalJson ){
+   
+      // most of the nodes have been dropped
+      
+      console.log( finalJson );  // logs: {"drinks":[]}
+   })
+```
+
+There is also a shorthand form of ```oboe.drop``` if you want to drop nodes without examining them first:
+
+``` js
+oboe('drinks.json')
+   // we don't care how the drink is made
+   .node('ingredients', oboe.drop)
+   .done(function( finalJson ){
+         
+      console.log( finalJson.drinks );
+      //  [ {"name":"Orange juice"}, {"name":"Wine"}, {"name":"Coffee"} ]}
+   })
+```
+
 Streaming out HTML from express
 -------------------------------
 

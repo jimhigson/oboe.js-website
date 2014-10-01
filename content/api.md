@@ -117,6 +117,44 @@ oboe('friends.json')
    });
 ```
 
+transforming the JSON
+---------------------
+
+If the callback returns any value, the returned value will be used to replace the parsed JSON node.
+
+See [demarshalling to an OOP model](examples#demarshalling-json-to-an-oop-model)
+and [Transforming JSON while it is streaming](examples#transforming-json-while-it-is-streaming).
+
+```js
+// Replace any object with a name, date of birth, and address 
+// in the JSON with a Person instance
+  
+.on('node', '{name dob address}', function(personJson){
+   return new Person(personJson.name, personJson.dob, personJson.address);
+})
+```
+
+dropping nodes
+--------------
+
+If a node listener returns the special value `oboe.drop`, the detected node is dropped entirely
+from the tree.
+
+This can be used to ignore fields that you don't care about,
+or to [load large JSON without running out of memory]().
+
+```js  
+.on('node', 'person.address', function(address){
+   return oboe.drop;
+})
+```
+
+```oboe.drop``` can also be used in a shorthand form:
+
+```js  
+.on('node', 'person.address', oboe.drop)
+```
+
 path event
 ----------
 

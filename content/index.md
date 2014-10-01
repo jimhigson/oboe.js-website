@@ -6,7 +6,11 @@ for loading JSON using streaming, combining the convenience of DOM with
 the speed and fluidity of SAX.
 
 It can parse any JSON as a stream, is small enough to be a [micro-library](http://microjs.com/#),
-doesn't have external dependencies, and doesn't care which other libraries you need it to speak to.
+doesn't have dependencies, and doesn't care which other libraries you need it to speak to.
+
+We can load trees [larger than the available memory](examples#loading-json-trees-larger-than-the-available-ram).
+Or we can [instantiate a classical OOP models from JSON](examples#demarshalling-json-to-an-oop-model),
+or [completely transform your JSON](examples#transforming-json-while-it-is-streaming) while it is being read. 
 
 {{demo "aggregated-progressive" "autoplay"}}
    

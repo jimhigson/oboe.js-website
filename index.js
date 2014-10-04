@@ -1,6 +1,7 @@
 
 var express = require('express'),
     gzippo = require('gzippo'),
+    oboe = require('oboe'),
     consolidate = require('consolidate'),
     readContent = require('./read-content.js'),
     readPagesList = require('./read-pages-list.js'),
@@ -16,16 +17,38 @@ var express = require('express'),
 
     CSS_STYLESHEETS = isProd? ["all-min.css"] : ["all.css"],
         
-    LATEST_TAG = 'v2.0.0',
+    latestTag = '',
     ANALYTICS_ID = 'UA-47871814-1',
     RAW_REPO_LOCATION = 'https://raw.github.com/jimhigson/oboe.js',
     REPO_LOCATION = 'https://github.com/jimhigson/oboe.js',
+    GITHUB_TAGS_URL = 'https://api.github.com/repos/jimhigson/oboe.js/tags',
+    USER_AGENT = 'http://github.com/jimhigson/oboe.js-website',
 
     app = express();
 
 require('colors');
 
 console.log('starting up for environment', environment.blue );
+
+// Load the latest tag from Github. This will be unavailable for a second or two
+// when the site starts up.
+var FIFTEEN_MINUTES = 1000 * 60 * 15;
+
+
+function getLatestTag() {
+   oboe({url: GITHUB_TAGS_URL, headers: {'User-Agent': USER_AGENT}})
+
+      .node('![0].name', function (tagName) {
+
+         console.log('latest Oboe version is', tagName.blue);
+         latestTag = tagName;
+         this.abort();
+      })
+      .fail(console.error);
+}
+
+setInterval(getLatestTag, FIFTEEN_MINUTES);
+getLatestTag();
 
 app.engine('handlebars', consolidate.handlebars);
 app.set('view engine', 'handlebars');
@@ -46,12 +69,12 @@ function defaultOpts(opts) {
     opts = opts || {};
     opts.scripts     = SCRIPTS;
     opts.stylesheets = CSS_STYLESHEETS;
-    opts.latestTag   = LATEST_TAG;
+    opts.latestTag   = latestTag;
     opts.analyticsId = ANALYTICS_ID;
     opts.repo = REPO_LOCATION;
     opts.rawRepo = RAW_REPO_LOCATION;
     opts.logoSize = 64;
-    opts.releasedJs = RAW_REPO_LOCATION + '/' + LATEST_TAG + '/dist';
+    opts.releasedJs = RAW_REPO_LOCATION + '/' + latestTag + '/dist';
     opts.production = isProd;
     
     return opts;

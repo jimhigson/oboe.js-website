@@ -145,6 +145,7 @@ or to [load large JSON without running out of memory]().
 
 ```js  
 .on('node', 'person.address', function(address){
+   console.log("I don't care what's at", address);
    return oboe.drop;
 })
 ```
@@ -153,6 +154,37 @@ or to [load large JSON without running out of memory]().
 
 ```js  
 .on('node', 'person.address', oboe.drop)
+```
+
+Dropping from an *array* will result in 
+[an array with holes in it](http://speakingjs.com/es5/ch18.html#_arrays_are_maps_not_tuples).
+This is intentional so that the array indices from the original JSON are preserved:
+
+```js
+// json from service is an array of names:
+['john', 'wendy', 'frank', 'victoria', 'harry']
+
+oboe('names.json')
+   .on('2', oboe.drop)
+   .done(console.log)
+   
+// this logs:
+//    ['john', 'wendy', , 'victoria', 'harry']
+//    note the array hole 
+```
+
+Meanwhile, dropping from an *object* leaves no trace of the key/value pair:
+
+```js
+// json from service is a hash from names to numbers:
+{'john':4, 'wendy': 2, 'frank': 0, 'victoria': 9, 'harry': 2}
+
+oboe('gameScores.json')
+   .on('wendy', oboe.drop)
+   .done(console.log)
+   
+// this logs:
+//    {'john':4, 'frank': 0, 'victoria': 9, 'harry': 2} 
 ```
 
 path event

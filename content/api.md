@@ -134,8 +134,8 @@ and [Transforming JSON while it is streaming](examples#transforming-json-while-i
 })
 ```
 
-dropping nodes
---------------
+oboe.drop
+---------
 
 If a node listener returns the special value `oboe.drop`, the detected node is dropped entirely
 from the tree.

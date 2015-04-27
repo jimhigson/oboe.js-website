@@ -1,3 +1,10 @@
+Installation
+============================================
+```bash
+npm install --save oboe
+```
+
+
 Streaming JSON loading for Node and browsers
 ============================================
 

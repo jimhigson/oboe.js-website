@@ -303,7 +303,7 @@ even if the pattern as a whole matches a node further down the tree.
 {"people": [
    {"name":"Baz", "age":34, "email": "baz@example.com"},
    {"name":"Boz", "age":24},
-   {"name":"Bax", "age":98, "email": "bax@example.com"}}
+   {"name":"Bax", "age":98, "email": "bax@example.com"}
 ]}
 ```
 ``` js

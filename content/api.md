@@ -83,7 +83,7 @@ node event
 ----------
 
 The methods `.node()` and `.on()` are used to register interest in particular nodes by providing 
-JSONPath patterns. As the JSON stream is parsed the Oboe instance checks for matches 
+[JSONPath](https://code.google.com/p/json-path/) patterns. As the JSON stream is parsed the Oboe instance checks for matches 
 against these patterns and when a matching node is found it emits a `node` event.
  
 ```js
@@ -463,7 +463,7 @@ Oboe's pattern matching is a variation on [JSONPath](https://code.google.com/p/j
 | `['foo']`      | Equivalent to .foo                                                                              
 | `[*]`          | Equivalent to .*                                                                                
 | `..`           | Any number of intermediate nodes (non-greedy)
-| `$`            | Explicitly specify an intermediate clause in the jsonpath spec the callback should be applied to
+| `$`            | Explicitly specify an intermediate clause in the [JSONPath](https://code.google.com/p/json-path/) spec the callback should be applied to
 
 The pattern engine supports 
 [CSS-4 style node selection](/examples/#css4-style-patterns)

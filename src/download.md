@@ -16,13 +16,13 @@ Node.js and Browserify
 Install [Oboe from NPM](http://www.npmjs.org/package/oboe):
 
 ``` bash
-$ npm install oboe
+\$ npm install oboe
 ```
 
 Add `--save` if you want to keep Oboe as a dependency in your package.json file:
 
 ``` bash
-$ npm install oboe --save
+\$ npm install oboe --save
 ```
 
 Once installed load as usual:
@@ -45,7 +45,7 @@ Using Bower package manager
 You can fetch using [Bower](http://bower.io/) like this:
 
 ``` bash
-$ bower install oboe
+\$ bower install oboe
 ```
 
 Using Jam package manager
@@ -54,7 +54,7 @@ Using Jam package manager
 Oboe.js is also [available](http://jamjs.org/packages/#/details/oboe) through [Jam](http://jamjs.org/):
 
 ``` bash
-$ jam install oboe
+\$ jam install oboe
 ```
 
 Loading using AMD

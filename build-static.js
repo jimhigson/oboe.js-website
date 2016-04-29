@@ -10,6 +10,11 @@ const layouts = require('metalsmith-layouts');
 const sass = require('metalsmith-sass');
 
 const ROOT = 'http://localhost:8080';
+const ANALYTICS_ID = 'UA-47871814-1';
+const RAW_REPO_LOCATION = 'https://raw.github.com/jimhigson/oboe.js';
+const REPO_LOCATION = 'https://github.com/jimhigson/oboe.js';
+const GITHUB_TAGS_URL = 'https://api.github.com/repos/jimhigson/oboe.js/tags';
+const USER_AGENT = 'http://github.com/jimhigson/oboe.js-website';
 
 /* Sass processing functions */
 const isScss = R.contains('.scss');
@@ -37,9 +42,9 @@ const addPropertyToFile = R.curry(function(property, root, files, name) {
   files[name][property] = root;
 });
 
-const addRoot = R.curry(function(root, files) {
-  var names = R.keys(files);
-  R.forEach(addPropertyToFile('root', root, files), names);
+const addProperty = R.curry(function(property, root, files) {
+  const names = R.keys(files);
+  R.forEach(addPropertyToFile(property, root, files), names);
 });
 
 const addPages = function(files) {
@@ -107,7 +112,10 @@ function main(){
       files: require('./sourceList.js'),
       output: 'js/app.js'
     }))
-    .use(addRoot(ROOT))
+    .use(addProperty('root', ROOT))
+    .use(addProperty('analyticsId', ANALYTICS_ID))
+    .use(addProperty('repo', REPO_LOCATION))
+    .use(addProperty('rawRepo', RAW_REPO_LOCATION))
     .use(addPages)
     .use(addHeading)
     .use(addSections)
@@ -134,7 +142,7 @@ if (require.main === module) {
 module.exports = {
   fileIsNotScss: fileIsNotScss,
   excludeScss: excludeScss,
-  addRoot: addRoot,
+  addProperty: addProperty,
   addHeading: addHeading,
   addSections: addSections
 };

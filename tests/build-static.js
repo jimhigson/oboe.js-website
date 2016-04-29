@@ -42,7 +42,7 @@ describe('sass', function() {
 
 });
 
-describe('addRoot', function() {
+describe('addProperty', function() {
 
   it('adds root variable to all files', function() {
     const root = 'test';
@@ -51,7 +51,7 @@ describe('addRoot', function() {
     };
 
     // Mutates files
-    build.addRoot(root, files);
+    build.addProperty('root', root, files);
 
     expect(files.first).to.have.property('root', 'test');
   });

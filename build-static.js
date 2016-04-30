@@ -1,5 +1,7 @@
 const R = require('ramda');
 const cheerio = require('cheerio');
+const rp = require('request-promise');
+const Handlebars = require('handlebars');
 const Metalsmith = require('metalsmith');
 const markdown = require('./metalsmith-plugins/supermarked');
 const concat = require('metalsmith-concat');
@@ -15,6 +17,22 @@ const RAW_REPO_LOCATION = 'https://raw.github.com/jimhigson/oboe.js';
 const REPO_LOCATION = 'https://github.com/jimhigson/oboe.js';
 const GITHUB_TAGS_URL = 'https://api.github.com/repos/jimhigson/oboe.js/tags';
 const USER_AGENT = 'http://github.com/jimhigson/oboe.js-website';
+
+/* find latest version */
+const getLatestTag = function() {
+  const options = {
+    url: GITHUB_TAGS_URL,
+    headers: {
+      'User-Agent': USER_AGENT
+    },
+    json: true
+  };
+
+  return rp(options)
+    .then(function(json) {
+      return json[0].name;
+    });
+};
 
 /* Sass processing functions */
 const isScss = R.contains('.scss');
@@ -97,7 +115,7 @@ const addSections = function(files) {
   }, files);
 };
 
-function main(){
+function runBuild() {
   Metalsmith(__dirname)
     .source('./src')
     .use(registerHelpers({
@@ -133,6 +151,18 @@ function main(){
     .build(function(err) {
       if (err) console.log(err);
     });
+}
+
+function addLatestTagHelper(latestTag) {
+  return Handlebars.registerHelper('latestTag', function(a1) {
+    return latestTag;
+  })
+}
+
+function main() {
+  getLatestTag()
+    .then(addLatestTagHelper)
+    .then(runBuild)
 }
 
 if (require.main === module) {

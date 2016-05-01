@@ -1,0 +1,124 @@
+@import 'variables.scss';
+@import 'mixins.scss';
+
+.categorical {
+  /* categorical colors for packets */
+
+  $i: 1;
+  @while $i <= length($categoricalColors) {
+    $catColor: nth($categoricalColors, $i);
+
+    .unit-#{$i - 1} {
+      fill:$catColor;
+    }
+
+    .unit-#{$i - 1} .airwave {
+      stroke:$catColor;
+    }
+
+    $i: $i + 1;
+  }
+}
+
+$evenColor: $categoricalBlue;
+$evenPlace: desaturate($evenColor, 40%);
+$evenKey: transparentize($evenColor, 0.8);
+
+$oddColor:  $categoricalOrange;
+$oddPlace:  desaturate($oddColor, 40%);
+$oddKey: transparentize($oddColor, 0.8);
+
+$thirdColor: $categoricalPurple;
+$thirdPlace: desaturate($thirdColor, 25%);
+$thirdKey: transparentize($thirdColor, 0.8);
+
+
+.twoSeries {
+
+  $i: 1;
+  @while $i <= 10 {
+    $isEven: ($i % 2 == 0);
+    $isDark: ($i % 4 == 0) or ($i % 4 == 1);
+
+    $seriesColor: if($isEven, $evenColor, $oddColor);
+    $seriesColor: if($isDark, darken($seriesColor, 10%), lighten($seriesColor, 10%));
+
+    .unit-#{$i - 1} {
+      fill:$seriesColor;
+    }
+
+    line.unit-#{$i - 1} {
+      stroke: $seriesColor;
+    }
+
+    $i: $i + 1;
+  }
+}
+
+.political {
+  [data-wonby=dem] {
+    fill: $categoricalBlue;
+  }
+
+  [data-wonby=rep] {
+    fill: $categoricalRed;
+  }
+}
+
+.origin-slow rect.box {
+  fill: $oddPlace;
+}
+.origin-fast rect.box {
+  fill: $evenPlace;
+}
+.aggregator rect.box {
+  fill: $thirdPlace;
+}
+
+$requestColor: lighten($categoricalBlue, 20%);
+
+.aerial.request,
+.packet.request {
+  fill:$requestColor;
+}
+.request .packet.airwave {
+  stroke:$requestColor;
+}
+
+span.server1 {
+  background-color: $evenKey;
+}
+span.server2 {
+  background-color: $oddKey;
+}
+span.aggregator {
+  background-color: $thirdKey;
+}
+
+
+figure[data-demo=big-small] {
+  .client1 .frame {
+    fill: $evenPlace;
+  }
+
+  .client2 .frame {
+    fill: $oddPlace;
+  }
+
+  .client3 .frame {
+    fill: $thirdPlace;
+  }
+}
+span.client1 {
+  background-color: $evenKey;
+}
+span.client2 {
+  background-color: $oddKey;
+}
+span.client3 {
+  background-color: $thirdKey;
+}
+
+span.place {
+  background-color: transparentize($shadow, 0.5);
+}

@@ -1,0 +1,33 @@
+@import 'variables.scss';
+@import 'mixins.scss';
+
+.cartogram {
+
+  path[data-state] {
+    shape-rendering: crispEdges;
+  }
+
+  path {
+    transition:fill 0.5s;
+  }
+
+  path, circle {
+    stroke: $backgroundColor;
+    stroke-width:0.9;
+    vector-effect: non-scaling-stroke;
+    fill:$shadow;
+  }
+
+  .pie line {
+    vector-effect: non-scaling-stroke;
+    stroke: $backgroundColor;
+    stroke-width:1;
+  }
+
+}
+
+@media only screen and (max-width: $sizeRequiringPhoneLayout) {
+  .cartogram path, circle {
+      stroke-width:0.5;
+  }
+}

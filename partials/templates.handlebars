@@ -1,0 +1,368 @@
+<template id="demoCaption">
+   <div class="demoCaption narrative">
+       <div class="relativePosition">
+          <p class="label"></p>
+          <a class="dismiss" href="#">Continue</a>
+       </div>
+   </div>
+</template>
+
+<svg id="demoTemplateHolder" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+<template id="demo">
+    <svg width="100%" height="200">
+        <g class="scaling">
+            <g class="barriers"/>
+            <g class="wires"/>
+            <g class="messages">
+               <g class="outers">
+               </g>
+               <g class="inners">
+               </g>
+            </g>
+            <g class="packets"/>
+            <g class="places"/>
+            <g class="lightbox narrative">
+               <g class="zoom">
+                  <path d="M -520 -335 L -520 335 L 520 335 L 520 -335 L -520 -335 z M 0 -75 C 44.18278 -75 80 -41.421356 80 0 C 80 41.421356 44.18278 75 0 75 C -44.18278 75 -80 41.421356 -80 0 C -80 -41.421356 -44.18278 -75 0 -75 z"/>
+               </g>
+            </g>
+            <g class="controls">
+                <g class="fadeControls">
+                    <rect class="fade" x="0" y="0" width="500" height="200"/>
+                    <text class="play" x="250" y="100">Play &#x25B6;</text>
+                </g>
+                <g class="reset">
+                    <ellipse cx="0" xy="0" rx="125" ry="60" class="clickableArea"/>
+                    <text x="10" y="-10">Reset</text>
+                </g>
+            </g>
+        </g>
+    </svg>
+</template>
+<template id="tower">
+    <g class="tower" transform="scale(0.6) translate(0,6)">
+        <path class="area" d="M 0,0 C -14.5,36.2 -28.5,71.8 -43,108 l 12,0 c 8.5,-22.2 19.5,-34.2 31,-40.5 11.5,6.3 22.5,18.3 31,40.5 l 12,0 C 28.5,71.8 14.5,36.2 0,0 z"/>
+        <path class="structure" d="M 0,0 C -14.5,36.2 -28.5,71.8 -43,108 l 12,0 c 8.5,-22.2 19.5,-34.2 31,-40.5 11.5,6.3 22.5,18.3 31,40.5 l 12,0 C 28.5,71.8 14.5,36.2 0,0 z m 0,9 4.8,12.4 c -1.8,0.1 -3.4,0.2 -4.8,0.3 -1.4,-0.2 -3.1,-0.3 -4.8,-0.3 z M 0,24.8 c 1.4,0.2 2.7,0.5 3.7,0.9 1.8,0.8 3.3,2.5 4.8,5 l 0,0 c -2.5,0.2 -5.4,0.6 -8.5,1.6 -3.1,-1 -6,-1.4 -8.5,-1.6 1.5,-2.5 2.9,-4.2 4.8,-5 1,-0.4 2.2,-0.7 3.7,-0.9 z m -9.6,8.8 c 1.5,0.1 3.2,0.3 5.1,0.7 -3.1,1.7 -6,4 -8.2,7.3 z m 19.1,0 3.1,7.9 c -2.1,-3.3 -5.1,-5.6 -8.2,-7.3 1.9,-0.4 3.6,-0.6 5.1,-0.7 z M 0,35.5 c 0.4,0.1 0.7,0.3 1.1,0.4 3.8,1.6 7.3,4.2 9.6,8.2 C 6.9,44.3 3.3,44.8 0,45.7 c -3.3,-0.9 -6.9,-1.4 -10.7,-1.5 2.2,-4 5.7,-6.6 9.6,-8.2 0.4,-0.2 0.7,-0.3 1.1,-0.4 z m -11.9,11.6 c 2.3,0 4.6,0.2 6.7,0.5 -0.2,0.1 -0.4,0.2 -0.5,0.3 -3.9,2 -7.3,4.9 -9.8,8.7 z m 23.8,0 3.6,9.4 C 13,52.8 9.7,49.9 5.8,47.9 c -0.2,-0.1 -0.4,-0.2 -0.5,-0.3 2.1,-0.3 4.3,-0.5 6.7,-0.5 z M 0,48.9 c 1.5,0.5 3,1 4.4,1.7 4.1,2.1 7.4,5.2 9.7,9.5 -4.5,0.3 -9.2,1.4 -14,3.4 -4.8,-2 -9.5,-3.1 -14.1,-3.4 2.3,-4.3 5.5,-7.4 9.7,-9.5 1.4,-0.7 2.8,-1.2 4.4,-1.7 z m -15.3,14.2 c 0.1,0 0.2,0 0.3,0 0,0 0.1,0 0.1,0 3.5,0.2 7.1,1 10.7,2.5 -6.1,3.3 -12.1,8 -17.7,14.7 z m 30.2,0 c 0.1,0 0.2,0 0.3,0 l 6.5,17 c -5.5,-6.6 -11.5,-11.3 -17.5,-14.5 3.6,-1.4 7.2,-2.2 10.7,-2.4 z"/>
+    </g>
+</template>
+<template id="wire-cable">
+    <line class="wire cable"/>
+</template>
+<template id="wire-mobile">
+    <g class="wire mobile">
+        <circle class="aerial upstream" r="10"/>
+        <circle class="aerial downstream" r="10"/>
+    </g>
+</template>
+<template id="message">
+    <line class="messageOuter"/>
+    <line class="messageInner"/>
+</template>
+<template id="server">
+    <g class="server">
+      <rect class="box" x="-22.5" y="-40" width="45" height="80"/>
+      <text class="label" y="59"></text>
+    </g>
+</template>
+
+<template id="rotateAnimation">
+    <animateTransform class="rotate"
+                      attributeType="xml" attributeName="transform"
+                      type="rotate"
+                      from="0" to="360" dur="2s"
+                      repeatCount="indefinite"/>
+</template>
+
+<template id="client-portrait">
+    <g class="client position">
+       <g class="zoom">
+          <g class="browser">
+              <rect class="background" width="85" height="95" x="-40" y="-50"/>
+
+              <g class="browserContents" />
+
+              <path class="frame" d="M -40 -50 L -40 45 L 45 45 L 45 -50 L -40 -50 z M -35 -40 L 40 -40 L 40 40 L -35 40 L -35 -40 z"/>
+
+              <g class="progressBar" transform="translate(-32.5, -37.5) scale(35,1)">
+                 <rect class="space" width="1" height="4"/>
+                 <rect class="bar" width="0" height="4"/>
+              </g>
+              <g class="spinnerContainer" transform="translate(-30,-45)">
+                  <path class="spinner" d="M -0.1,-3 A 1,1 0 1 0 0,-1 C 0.6,-1 1,-0.6 1,0 1,0.3 0.9,0.5 0.7,0.7 A 1,1 0 1 0 2.1,2.1 C 2.7,1.6 3,0.8 3,0 3,-1.6 1.6,-3 0,-3 a 1,1 0 0 0 -0.1,0 z" />
+              </g>
+          </g>
+          <text class="label" y="66"></text>
+       </g>
+    </g>
+</template>
+
+<template id="client-landscape">
+    <g class="browser client">
+        <g class="zoom">
+           <rect class="background" width="95" height="85" x="-45" y="-45"/>
+           <g class="browserContents" />
+           <path class="frame" d="m 50,-45 -95,0 0,85 95,0 z m -5,10 0,70 -85,0 0,-70 z"/>
+
+           <g class="progressBar" transform="translate(-37.5, -32.5) scale(35,1)">
+               <rect class="space" width="1" height="4"/>
+               <rect class="bar" width="0" height="4"/>
+           </g>
+           <g class="spinnerContainer" transform="translate(-35,-40)">
+               <path class="spinner"
+                     d="M -0.1,-3 A 1,1 0 1 0 0,-1 C 0.6,-1 1,-0.6 1,0 1,0.3 0.9,0.5 0.7,0.7 A 1,1 0 1 0 2.1,2.1 C 2.7,1.6 3,0.8 3,0 3,-1.6 1.6,-3 0,-3 a 1,1 0 0 0 -0.1,0 z" />
+           </g>
+        </g>
+    </g>
+</template>
+
+<template id="client-singlePageSite">
+   <g transform="translate(-40, -50)"> {{!put origin for client graphics at top-left of browser window}}
+
+      <rect class="part unit-0" width="65" height="10" x="10" y="15"/>
+      <rect class="part unit-1" width="15" height="25" x="60" y="30"/>
+      <rect class="part unit-2" width="15" height="30" x="60" y="60"/>
+
+      <rect class="part unit-4" width="10" height="5" x="45" y="45"/>
+      <rect class="part unit-3" width="10" height="5" x="45" y="35"/>
+
+      <g class="pie">
+         <path class="part unit-4"
+               d="m 24.9,30.8 c -8.1,0.3 -14.5,6.9 -14.5,15 0,4 1.6,7.5 4.1,10.2 l 10.4,-10.4 z"
+         />
+         <path class="part unit-3"
+               d="m 25.9,30.8 c 0,5 0,10.1 0,15.1 -3.6,3.6 -7.1,7.2 -10.7,10.7 2.7,2.5 6.3,4.1 10.2,4.1 8.3,0 15,-6.7 15,-15 0,-8.1 -6.4,-14.7 -14.5,-15 z"
+         />
+      </g>
+
+      <rect class="part unit-5" width="45" height="5" x="10" y="66"/>
+      <rect class="part unit-6" width="45" height="14" x="10" y="76"/>
+   </g>
+</template>
+<template id="client-twitter">
+   <g transform="translate(-40, -50)"> {{!put origin for client graphics at top-left of browser window}}
+
+      <clipPath id="viewPort-clip">
+          <rect width="75" height="70" x="5" y="15"/>
+      </clipPath>
+      <g class="tweetsClipper" clip-path="url(#viewPort-clip)">
+          <g class="tweets" transform="translate(10, 15)">
+              <g class="tweetsScroll"/>
+          </g>
+      </g>
+   </g>
+</template>
+<template id="tweet">
+    <g class="tweet">
+        <rect class="shading" width="65" height="18"/>
+        <circle class="detail" cx="10" cy="9" r="5"/>
+        <rect class="detail" x="20" y="5" width="40" height="8"/>
+    </g>
+</template>
+
+<template id="client-graph">
+   <g class="graph" transform="translate(-24,2)">
+
+      <g transform="translate(0,22) scale(1,-1)">
+         <g class="data">
+
+            <g class="bars">
+               <rect class="part unit-1" width="8" height="42"/>
+               <rect class="part unit-3" transform="translate(12)"  width="8" height="35"/>
+               <rect class="part unit-5" transform="translate(24)"  width="8" height="17"/>
+               <rect class="part unit-7" transform="translate(36)"  width="8" height="25"/>
+               <rect class="part unit-9" transform="translate(48)"  width="8" height="20"/>
+            </g>
+
+            <g class="points" transform="translate(4,0)">
+               <line class="part unit-2" transform="translate(12)" x1="-12" y1="36" y2="43"/>
+               <line class="part unit-4" transform="translate(24)" x1="-12" y1="43" y2="44"/>
+               <line class="part unit-6" transform="translate(36)" x1="-12" y1="44" y2="32"/>
+               <line class="part unit-8" transform="translate(48)" x1="-12" y1="32" y2="25"/>
+
+               <circle class="part unit-0" cy="36" r="3"/>
+               <circle class="part unit-2" transform="translate(12)" cy="43" r="3"/>
+               <circle class="part unit-4" transform="translate(24)" cy="44" r="3"/>
+               <circle class="part unit-6" transform="translate(36)" cy="32" r="3"/>
+               <circle class="part unit-8" transform="translate(48)" cy="25" r="3"/>
+            </g>
+         </g>
+
+         <path class="axes" d="m -6,50 0,-50 66,0"/>
+      </g>
+
+   </g>
+</template>
+
+<template id="client-map">
+    <g class="map">
+       <g class="parks">
+           <path d="M -5.5,-0.1 4.8,-3.1 6.4,1.1 -3.4,5.2"/>
+           <path d="M -10 -45 C -10.5 -44.3 -10.7 -43.6 -10.8 -42.8 L -39.2 -42.5 L -36.1 -27.3 L -21.4 -38.5 L -19.3 -35.1 L -9.2 -35.1 C -8 -31.9 -5.6 -29.3 -2.8 -27.4 C 0.2 -25.9 6.8 -21.1 10 -20 C 15 -15 11.7 -17.3 15 -10 C 17.6 -8.1 22.4 -6.8 25 -5 C 27.9 -4 37.7 -7.1 40 -5 C 41.6 -3.9 41.2 -5.5 41.9 -9.3 C 41 -18.1 46.5 -40.7 40 -45 L -10 -45 z "/>
+           <path d="M 10.6,39.5 6.7,31.2 11.8,29.1 17.7,41.3"/>
+           <path d="m -24,9.8 10.6,-7.8 -1.4,-3.7 -11.7,9.2"/>
+       </g>
+       <path class="water" d="m 0,-40 c 2.4,-1.3 3.7,1.4 3.9,3.3 0.6,2 1.3,4.7 3.7,5 2.4,0.2 4.5,2.6 5.9,4.9 2.3,2.4 4.7,2.8 5.6,6 0.8,2.6 2.9,4.3 4.6,6.2 2.8,2.8 6.9,3.2 10.5,3.8 2.5,0.3 5.1,0.6 7.5,1.4 2.2,-0.8 -0.5,-3.3 -2.1,-2.5 -2.7,-0.2 -5.4,-1.2 -7.5,-3 -2.3,-1.6 -4.9,-3.2 -5.9,-6 -0.9,-2 -2,-4.3 -0.8,-6.4 0.9,-1.8 2.4,-3.4 3,-5.4 1.4,-2.3 2.6,-4.8 3.6,-7.2 0.4,-2.8 -3.2,-3.8 -5,-2.1 -2.9,2 -3.8,5.5 -5.5,8.3 -0.8,1.6 -1.5,3.3 -2.6,4.7 -2.4,0.5 -3.7,-2.1 -4.9,-3.7 -2.6,-3.8 -2.6,-9.2 -6.5,-12.2 C 6.7,-45.1 5.6,-45.9 5,-45"/>
+       <g class="roads major">
+           <path d="m -13.5,-40.2 c 0,0 5,13 13.5,16 8.5,3 9,3.5 10.5,6.3 1.5,2.8 2.3,5.8 3.8,7.3 1.5,1.5 9.2,6.5 11,6.5 1.8,0 14.8,-1.7 14.8,-1.7"/>
+           <path d="m 41.2,2.3 c 0,0 -60.2,18 -64.7,18.2 -4.5,0.3 -14.7,0.8 -14.7,0.8"/>
+           <path d="m -2,42 c 0,0 -16.8,-17.5 -19.7,-21.2 -3,-3.7 -15.5,-15 -15.5,-18.2 0,-3.2 -0.2,-3.2 -0.2,-3.2"/>
+           <path d="M 19.7,8.3 C 17.3,-0.5 20,-2.5 10,-9.7 0,-17 -12.5,-23.5 -15.5,-27.5 c -3,-4 -6.5,-16 -6.5,-16"/>
+           <path d="m 3.7,-13.5 c -1.2,3.3 6.2,24 6.2,24"/>
+       </g>
+       <g class="roads minor">
+           <path d="m 43.2,-21 c -7.2,-0.5 -7.9,1.5 -11.3,-1.7 -2.6,-2.4 -1.5,-7.8 0.1,-9.1 4.1,-3.1 8.9,-2.3 8.9,-2.3"/>
+           <path d="m -8.7,16.5 c 0,0 -4.6,-17.7 -7.8,-20.7 -3.2,-3 -9.4,-12.9 -12.2,-14 -2.8,-1.1 -9.2,-4.6 -9.2,-4.6"/>
+           <path d="M -5.7,16 C 2.7,28.4 4.4,42.5 4.4,42.5"/>
+           <path d="m -7.1,16 c -1.1,7.6 0.5,9.9 -1.4,14 C -10.4,34 -20.7,42.7 -20.7,42.7"/>
+           <path d="m -34.8,42.5 c 0,0 8.3,-13.6 12.2,-16.1 3.9,-2.5 12.9,-4.8 13.6,-5.3 0.7,-0.5 1.8,-2.1 1.8,-2.1"/>
+           <path d="M 9,12.1 24,42.9"/>
+           <path d="M 20,8.7 35.4,41.8"/>
+           <path d="m 2.7,-14.1 c -8.7,1.8 -16.8,3.7 -18.4,4.4 -1.6,0.7 -3.2,2.1 -3.2,2.1"/>
+           <path d="M -0.5,24.6 24.6,17.6 24.2,18.1"/>
+           <path d="m 1.8,32.1 c 0,0 27.8,-7.2 30.2,-7.8 2.5,-0.5 3.7,-2.1 3.5,-3.5 C 35.4,19.3 30.2,6.4 30.2,6.4 L 25.6,6.8"/>
+           <path d="M 4.2,39.3 40.5,30.7"/>
+           <path d="M -31.5,10.7 -6.5,-6.8"/>
+           <path d="m -7.8,-11.6 c 1.2,4.2 2.3,10.1 2.8,12.6 C -4.4,3.4 0,13.5 0,13.5 l 0,0 0,0"/>
+           <path d="M -11.5,7.8 C -6.2,5.7 6.2,1.7 6.2,1.7"/>
+           <path d="M 29.9,4.7 C 28.3,1.1 18,-2.8 18,-2.8"/>
+           <path d="m -21.4,-38.6 -15,11.7"/>
+           <path d="m -21.4,-11.2 c 4.1,-3.4 8.5,-3.4 6,-6.5 -2.5,-3.2 -11.7,-16.6 -11.7,-16.6"/>
+           <path d="m -29.9,-32.1 -6.2,-8.5"/>
+           <path d="m -25.1,16.7 c 5.3,-4.6 12.7,-8.1 14,-9 1.2,-0.9 1.2,-0.9 1.2,-0.9"/>
+           <path d="M -21,13 -26.7,7.7"/>
+           <path d="M -16.1,10.1 C -21.6,0.4 -17.5,5.6 -21.9,0.2 -26.3,-5.1 -37.1,-10.5 -37.1,-10.5"/>
+           <path d="m -21.2,-10.2 c 0,0 -8.8,5.8 -10.1,6.7 -1.2,0.9 -4.4,3.5 -4.4,3.5"/>
+           <path d="m -25.3,28.9 c -1.2,-2.3 -2.3,-4.4 -5.3,-4.1 -3,0.4 -6,1.6 -6,1.6"/>
+           <path d="m 21.7,27.5 7.4,13.4"/>
+           <path d="M 6.2,1.7 16.6,-1"/>
+           <path d="m -26.2,-16.2 7.8,-5.5"/>
+           <path d="m -22.8,-27.5 -9.9,7.1"/>
+           <path d="M 9.2,-10 15,8.9"/>
+           <path d="m 12.2,29.6 5.5,12.6"/>
+           <path d="M 6.7,30.8 11.3,41.6"/>
+           <path d="M -17,26.8 -30.4,42.9"/>
+           <path d="M -14.5,29.8 -23.9,42.7"/>
+           <path d="m -27.6,31.2 10.1,7.6"/>
+       </g>
+       <g class="pins">
+           <g class="part unit-8" transform="translate(18,3)"      ><path class="shadow" d="M -0.33,0 5.67,-3 11,-9 4.33,-9 -1,-3 z"/><path class="pointer" d="m 0,0 5,-5 0,-10 -10,0 0,10 z"/></g>
+           <g class="part unit-1" transform="translate(0.1,-4.8)"  ><path class="shadow" d="M -0.33,0 5.67,-3 11,-9 4.33,-9 -1,-3 z"/><path class="pointer" d="m 0,0 5,-5 0,-10 -10,0 0,10 z"/></g>
+           <g class="part unit-7" transform="translate(-14,-6)"    ><path class="shadow" d="M -0.33,0 5.67,-3 11,-9 4.33,-9 -1,-3 z"/><path class="pointer" d="m 0,0 5,-5 0,-10 -10,0 0,10 z"/></g>
+           <g class="part unit-3" transform="translate(-9.8,0.6)"  ><path class="shadow" d="M -0.33,0 5.67,-3 11,-9 4.33,-9 -1,-3 z"/><path class="pointer" d="m 0,0 5,-5 0,-10 -10,0 0,10 z"/></g>
+           <g class="part unit-4" transform="translate(4.4,8.5)"   ><path class="shadow" d="M -0.33,0 5.67,-3 11,-9 4.33,-9 -1,-3 z"/><path class="pointer" d="m 0,0 5,-5 0,-10 -10,0 0,10 z"/></g>
+           <g class="part unit-5" transform="translate(-15.6,15.5)"><path class="shadow" d="M -0.33,0 5.67,-3 11,-9 4.33,-9 -1,-3 z"/><path class="pointer" d="m 0,0 5,-5 0,-10 -10,0 0,10 z"/></g>
+           <g class="part unit-6" transform="translate(-4.8,22.6)" ><path class="shadow" d="M -0.33,0 5.67,-3 11,-9 4.33,-9 -1,-3 z"/><path class="pointer" d="m 0,0 5,-5 0,-10 -10,0 0,10 z"/></g>
+           <g class="part unit-2" transform="translate(4,27)"      ><path class="shadow" d="M -0.33,0 5.67,-3 11,-9 4.33,-9 -1,-3 z"/><path class="pointer" d="m 0,0 5,-5 0,-10 -10,0 0,10 z"/></g>
+           <g class="part unit-0" transform="translate(26,13)"     ><path class="shadow" d="M -0.33,0 5.67,-3 11,-9 4.33,-9 -1,-3 z"/><path class="pointer" d="m 0,0 5,-5 0,-10 -10,0 0,10 z"/></g>
+           <g class="part unit-9" transform="translate(18.5,23.9)" ><path class="shadow" d="M -0.33,0 5.67,-3 11,-9 4.33,-9 -1,-3 z"/><path class="pointer" d="m 0,0 5,-5 0,-10 -10,0 0,10 z"/></g>
+       </g>
+   </g>
+</template>
+
+<template id="client-cartogram">
+    <g class="cartogram">
+       <g class="states" transform="translate(-37, -34) scale(2)">
+            <path data-state="ca" d="m 0,16 0,4 1,0 0,-1 1,0 0,3 -1,0 0,-1 -1,0 0,3 1,0 0,1 1,0 0,1 1,0 0,2 1,0 0,1 4,0 0,-5 -2,0 0,-1 -1,0 0,-1 -1,0 0,-5 -3,0 0,-1 -1,0 z"/>
+            <path data-state="or" d="m 0,15 0,1 1,0 0,1 3,0 0,-2 -4,0 z"/>
+            <path data-state="wa" d="m 1,12 0,1 -1,0 0,2 5,0 0,-1 -1,0 0,-2 -3,0 z"/>
+            <path data-state="nv" d="m 4,17 0,5 1,0 0,-4 1,0 0,-1 -2,0 z"/>
+            <path data-state="co" d="m 7,17 3,0 0,3 -3,0 z"/>
+            <path data-state="nm" d="m 9,20 0,1 -1,0 0,2 2,0 0,-3 -1,0 z"/>
+            <path data-state="ia" d="m 14,12 0,2 -1,0 0,1 3,0 0,-2 -1,0 0,-1 -1,0 z"/>
+            <path data-state="mn" d="m 14,6 0,6 1,0 0,1 1,0 0,-3 -1,0 0,-3 1,0 0,-1 -2,0 z"/>
+            <path data-state="wi" d="m 15,7 0,3 1,0 0,1 2,0 0,-4 -1,0 0,1 -1,0 0,-1 -1,0 z"/>
+            <path data-state="il" d="m 16,11 0,6 1,0 0,2 1,0 0,-1 1,0 0,-6 -1,0 0,-1 -2,0 z"/>
+            <path data-state="mi" d="m 18,6 0,1 2,0 0,-1 -2,0 z m 2,1 0,5 3,0 0,-1 1,0 0,-2 -1,0 0,1 -1,0 0,-3 -2,0 z"/>
+            <path data-state="oh" d="m 21,12 0,5 2,0 0,1 1,0 0,-1 1,0 0,-4 -1,0 0,1 -1,0 0,-2 -2,0 z"/>
+            <path data-state="va" d="m 26,17 0,1 -2,0 0,1 -1,0 0,1 8,0 0,-1 -3,0 0,-1 -1,0 0,-1 -1,0 z"/>
+            <path data-state="fl" d="m 20,24 0,2 4,0 0,4 1,0 0,1 1,0 0,1 1,0 0,-1 1,0 0,-5 -2,0 0,-1 -4,0 0,-1 -2,0 z m 6,8 -1,0 0,1 1,0 0,-1 z"/>
+            <path data-state="dc" d="m 27,17 0,1 1,0 0,1 1,0 0,-2 -2,0 z"/>
+            <path data-state="md" d="m 26,16 0,1 3,0 0,2 3,0 0,-1 -1,0 0,-2 -5,0 z"/>
+            <path data-state="de" d="m 31,15 0,3 1,0 0,-3 -1,0 z"/>
+            <path data-state="pa" d="m 27,11 0,1 -1,0 0,1 -1,0 0,2 2,0 0,1 4,0 0,-1 -1,0 0,-3 -1,0 0,-1 -2,0 z"/>
+            <path data-state="nj" d="m 30,12 0,3 2,0 0,2 1,0 0,-1 1,0 0,-3 -1,0 0,-1 -3,0 z"/>
+            <path data-state="ny" d="m 31,5 0,1 -1,0 0,2 -3,0 0,1 1,0 0,1 -1,0 0,1 2,0 0,1 3,0 0,-2 1,0 0,-5 -2,0 z m 2,5 0,1 2,0 0,-1 -2,0 z"/>
+            <path data-state="ct" d="m 33,7 0,3 1,0 0,-1 2,0 0,-2 -3,0 z"/>
+            <path data-state="ri" d="m 36,7 0,2 2,0 0,-2 -2,0 z"/>
+            <path data-state="ma" d="m 34,5 0,1 -1,0 0,1 7,0 0,-2 -1,0 0,1 -2,0 0,-1 -3,0 z"/>
+            <path data-state="vt" d="m 33,4 0,2 1,0 0,-1 1,0 0,-1 -2,0 z"/>
+            <path data-state="nh" d="m 35,3 0,2 2,0 0,-2 -2,0 z"/>
+            <path data-state="me" d="m 36,1 0,2 2,0 0,-2 -2,0 z"/>
+            <path data-state="hi" d="m 0,30 0,1 1,0 0,-1 -1,0 z m 1,1 0,1 1,0 0,-1 -1,0 z m 1,1 0,1 2,0 0,-1 -2,0 z"/>
+            <path data-state="nd" d="m 9,15 0,1 3,0 0,-1 -3,0 z"/>
+            <path data-state="id" d="m 4,15 0,2 2,0 0,-2 -2,0 z"/>
+            <path data-state="ut" d="m 6,17 0,1 -1,0 0,3 1,0 0,-1 1,0 0,-3 -1,0 z"/>
+            <path data-state="az" d="m 6,20 0,1 -1,0 0,2 1,0 0,1 2,0 0,-3 1,0 0,-1 -3,0 z"/>
+            <path data-state="mt" d="m 6,15 0,1 3,0 0,-1 -3,0 z"/>
+            <path data-state="wy" d="m 6,16 0,1 3,0 0,-1 -3,0 z"/>
+            <path data-state="sd" d="m 9,16 0,1 3,0 0,-1 -3,0 z"/>
+            <path data-state="ks" d="m 10,17 3,0 0,2 -3,0 z"/>
+            <path data-state="ok" d="m 13,18 0,1 -3,0 0,1 2,0 0,1 2,0 0,-3 -1,0 z"/>
+            <path data-state="tx" d="m 10,20 0,3 -2,0 0,1 1,0 0,2 1,0 0,-1 1,0 0,4 1,0 0,-1 2,0 0,-2 1,0 0,-1 1,0 0,-1 -1,0 0,-3 -3,0 0,-1 -2,0 z"/>
+            <path data-state="ne" d="m 12,15 0,2 1,0 0,1 1,0 0,-3 -2,0 z"/>
+            <path data-state="mo" d="m 14,15 0,4 3,0 0,-2 -1,0 0,-2 -2,0 z"/>
+            <path data-state="ar" d="m 14,19 0,2 3,0 0,-2 -3,0 z"/>
+            <path data-state="la" d="m 15,21 0,3 1,0 0,1 2,0 0,-2 -2,0 0,-1 1,0 0,-1 -2,0 z"/>
+            <path data-state="ms" d="m 17,21 0,1 -1,0 0,1 2,0 0,1 1,0 0,-3 -2,0 z"/>
+            <path data-state="tn" d="m 17,19 0,2 4,0 1,0 0,-1 1,0 0,-1 -6,0 z"/>
+            <path data-state="al" d="m 19,21 0,3 3,0 0,-3 -3,0 z"/>
+            <path data-state="ky" d="m 21,17 0,1 -3,0 0,1 6,0 0,-1 -1,0 0,-1 -2,0 z"/>
+            <path data-state="in" d="m 20,12 0,1 -1,0 0,5 2,0 0,-6 -1,0 z"/>
+            <path data-state="nc" d="m 22,20 0,1 3,0 0,1 3,0 0,1 1,0 0,-1 1,0 0,-1 1,0 0,-1 -9,0 z"/>
+            <path data-state="ga" d="m 22,21 0,4 4,0 0,1 2,0 0,-1 -1,0 0,-1 -2,0 0,-3 -3,0 z"/>
+            <path data-state="sc" d="m 25,22 0,2 2,0 0,1 2,0 0,-2 -1,0 0,-1 -3,0 z"/>
+            <path data-state="wv" d="m 25,15 0,2 -1,0 0,1 2,0 0,-2 1,0 0,-1 -2,0 z"/>
+            <path data-state="ak" d="m 0,6 0,2 2,0 0,-1 -1,0 0,-1 -1,0 z"/>
+       </g>
+       <g class="pie" transform="translate(33, 16) scale(7)">
+         <circle class="pie" r="1"/>
+         <path data-wonby="dem" />
+         <path data-wonby="rep" transform="scale(-1,1)" />
+         <line y1="1.2" />
+       </g>
+    </g>
+</template>
+
+<template id="packet">
+    <circle class="packet" r="15"/>
+</template>
+<template id="firstPacket">
+    <g class="packet">
+        <circle r="15"/>
+        <text y="3.5">{</text>
+    </g>
+</template>
+<template id="lastPacket">
+    <g class="packet">
+        <circle r="15"/>
+        <text y="3.5">}</text>
+    </g>
+</template>
+<template id="getRequest">
+    <g class="packet">
+        <circle r="15"/>
+        <text y="3.5" class="method">GET</text>
+    </g>
+</template>
+<template id="airwavePacket">
+    <g class="packetClip">
+        <circle class="packet airwave" r="0"/>
+    </g>
+</template>
+<template id="airwaveDone">
+    <circle class="packet flash" r="8.5"/>
+</template>
+<template id="barrier">
+    <g class="barrier">
+        <path class="shadow" d="m 150,-110 -250,0 20,155 -60,60 330,0 -60,-60 z"/>
+        <path class="wall" d="m -105,-124 0,169 25,0 0,-84 c 0,-35.9 47,-65 105,-65 58,0 105,29.1 105,65 l 0,84 25,0 0,-169 z"/>
+        <clipPath id="downstream-clip">
+            <path d="m 25,-104 c -58,0 -105,29.1 -105,65 l 0,84 -60,60 330,0 -60,-60 0,-84 c 0,-35.8 -47,-65 -105,-65 z"/>
+        </clipPath>
+        <clipPath id="upstream-clip">
+            <path d="m -105,45 60,60 -435,0 0,-320 640,0 0,50 -265,41 z"/>
+        </clipPath>
+    </g>
+</template>
+</svg>

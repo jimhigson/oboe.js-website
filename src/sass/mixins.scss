@@ -1,0 +1,27 @@
+@import 'variables.scss';
+
+@mixin linkTiming {
+  transition: all 0.5s;
+}
+@mixin linkTimingHover {
+  transition: all 0.2s;
+}
+
+@mixin link {
+  color: $linkColor;
+  fill: $linkColor;
+  text-decoration: none;
+  @include linkTiming;
+}
+@mixin hovered-link {
+  color: $highlightHover;
+  fill: $highlightHover;
+  text-decoration: underline;
+  @include linkTimingHover;
+  cursor: pointer;
+}
+@mixin active-link {
+  color: $nearBlack;
+  fill: $nearBlack;
+  transition: all 0s;
+}

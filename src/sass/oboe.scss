@@ -1,0 +1,575 @@
+﻿@import 'variables.scss';
+@import 'mixins.scss';
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+figure {
+   margin: 0;
+   padding: 0;
+   border: 0;
+   outline: 0;
+   vertical-align: baseline;
+   background: transparent;
+   font-weight: normal;
+}
+
+html {
+   line-height: 1;
+   background-color: $nearBlack;
+}
+
+body {
+   color: $nearBlack;
+}
+
+nav ul {
+   list-style: none;
+}
+
+blockquote, q {
+   quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+   content: '';
+   content: none;
+}
+
+ins {
+   text-decoration: none;
+}
+
+del {
+   text-decoration: line-through;
+}
+
+table {
+   border-collapse: collapse;
+   border-spacing: 0;
+}
+
+
+body {
+   background: $backgroundColor;
+   color: $nearBlack;
+   font-family: $themeFont, georgia, serif;
+   font-size: 120%;
+}
+
+em {
+   font-family: $themeItalicFont;
+   font-style: normal;
+}
+
+#header {
+   height: 70px;
+   transition: height 0.5s; // for when screen size changes
+}
+
+#header, footer {
+   background: $nearBlack;
+}
+
+#siteNav {
+   text-align: right;
+   padding-top: 0.5em;
+   padding-bottom: 0.5em;
+   background-color: $shadedBackgroundColor;
+   z-index: 1;
+   border-bottom: 1px $backgroundColor solid;
+   left: 0;
+   right: 0;
+   overflow: hidden;
+   transition: padding 0.5s;
+   height: 1em; // stop Firefox getting confused what height this should be
+}
+
+.is-sticky #siteNav {
+   border-bottom-color: $underline;
+}
+
+#siteNav ul {
+   max-width: $maxPageWidth;
+   margin-left: auto;
+   margin-right: auto;
+}
+
+.reducedLogo {
+   float: left;
+   margin-left: 20px;
+   position: relative;
+   top: -40px;
+   transition: top 0.5s;
+}
+
+.reducedLogo.show {
+   top: 0;
+}
+
+#siteNav li {
+   display: inline-block;
+}
+
+#siteNav .siteLink {
+   margin-right: 1em;
+   color: $midTone;
+}
+
+#siteNav a.siteLink:hover {
+   color: $highlight;
+}
+
+#siteNav a.siteLink:active {
+   color: $highlightPressed;
+}
+
+#siteNav span.siteLink {
+   text-decoration: underline;
+}
+
+#pagearea {
+   display: table;
+   max-width: $maxPageWidth;
+   margin: 10px auto;
+   padding: 0 20px;
+   padding-bottom: 100px;
+}
+
+footer {
+   border-top: 10px solid $midTone;
+   border-bottom: 30px solid $nearBlack;
+   position: relative;
+   z-index: 10;
+   height: 20px;
+}
+
+.footer-contents {
+   max-width: 860px;
+   margin: 0 auto;
+}
+
+footer p,
+footer p a {
+   color: #5a5855;
+}
+
+footer p a:hover {
+   color: #82ca9c;
+}
+
+.col {
+   margin-top: 30px;
+}
+
+.col.col1 {
+   margin-right: 40px;
+}
+
+
+a, summary {
+   @include link;
+}
+
+a:hover, summary:hover {
+   @include hovered-link;
+}
+
+a:active, summary:active {
+   @include active-link;
+}
+
+.internalNav a.active {
+   background: $shadedBackgroundColor;
+   border-left-color: $midTone;
+}
+
+.internalNav a {
+   display: block;
+   padding: 5px;
+   margin: 0 -6px;
+   border-left: 1px solid $backgroundColor;
+}
+
+h1 a,
+h1 a:hover,
+li.reducedLogo a {
+   color: $nearBlack;
+   text-decoration: none;
+}
+
+.internalNav h2,
+.marked h2 {
+   border-bottom: 1px $underline solid;
+   padding-bottom: 6px;
+   margin: 1.2em 0 0.7em;
+}
+
+details {
+   margin:1.6em 0;
+   summary{
+     margin-left: 1em;
+     margin-bottom:0.5em;
+   }
+}
+
+/* main four elements making up grid */
+.row {
+   display: table-row;
+}
+
+h1, .strapline, .col {
+   display: table-cell;
+   vertical-align: top;
+}
+
+/* set width of left column */
+h1, .col1 {
+   width: 30%;
+}
+
+h1 {
+   font-size: 350%;
+   padding: 30px 40px 0.5em 0;
+}
+
+.strapline {
+   padding: 52px 0 0 70px;
+   font-size: 180%;
+   line-height: 1.1;
+}
+
+.col2 {
+   padding-left: 70px;
+}
+
+p {
+   margin: 0.6em 0 0.6em 0;
+   line-height: 1.5;
+}
+
+#download {
+   display: block;
+   background: $highlight;
+   padding: 15px;
+   box-shadow: inset 0 -3px 0 #69b284;
+   border-radius: 6px;
+   color: white;
+   font-size: 180%;
+   margin: 4px 0 40px 0;
+   width: 6em;
+   text-align: center;
+   transition: all 0.5s;
+}
+
+#download:hover {
+   transition: all 0.15s;
+   text-decoration: none;
+   background: $highlightHover;
+   box-shadow: inset 0 -3px 0 #569a6e;
+}
+
+#download:active {
+   transition: all 0s;
+   background: $highlightPressed;
+   box-shadow: inset 0 3px 0 #44805a;
+   padding: 16px 15px 14px 15px;
+}
+
+#version {
+   display: block;
+   font-size: 50%;
+   margin-top: 6px;
+   opacity: 0.6;
+}
+
+nav ul.links {
+   font-size: 120%;
+}
+
+nav ul.links li {
+   margin: 0.5em 0;
+}
+
+nav ul.sections li {
+   margin: 0.3em 0;
+}
+
+th {
+   padding: 0 0 1em 0;
+}
+
+td {
+   padding: 0 0.4em 0.6em 0.4em ;
+   line-height: 1.5;
+   min-width: 7em;
+}
+
+table {
+   margin: 1.5em 0 1em 0;
+}
+thead {
+   display:none;
+}
+
+footer {
+   padding:17px 20px;
+   height:30px;
+}
+
+#footer-contents {
+   text-align:center;
+   position:relative;
+   max-width: $maxPageWidth;
+   margin-left: auto;
+   margin-right: auto;
+
+   a {
+      display:inline-block;
+   }
+
+   .contact {
+      position:absolute;
+      left:0.8em;
+      padding:20px 0;
+      color: $midTone;
+   }
+   .contact:hover {
+      color: $highlight;
+   }
+   .contact:active {
+      color: $nearBlack;
+   }
+
+   #externalLinks {
+      display: inline-block;
+
+      .logo {
+         fill: $midTone;
+         @include linkTiming;
+      }
+
+      a {
+         margin: 0 15px;
+         padding: 0 15px;
+      }
+
+      a:hover {
+         text-decoration: none;
+
+         .logo {
+            fill: $highlight;
+            @include linkTimingHover;
+         }
+      }
+
+      a:active {
+         .logo {
+            fill:$nearBlack;
+         }
+      }
+   }
+
+   #sw {
+      position:absolute;
+      right:0.8em;
+      background: url(http://samwakeling.com/img/sw-icon-100.png) no-repeat;
+      height: 64px;
+      width: 50px;
+      background-size: 100%;
+      text-indent: -1000px;
+      overflow: hidden;
+      opacity: 0.8;
+      transition: all 0.6s;
+      background-position: 50%;
+   }
+
+   #sw:hover {
+      transition: all 0.2s;
+      opacity: 1;
+   }
+}
+
+
+
+
+svg.menuButton {
+   display: none;
+   margin-right: $menuMarginRight;
+   cursor: pointer;
+
+  .background {
+    fill: $shadedBackgroundColor;
+  }
+
+  .rung {
+    fill: $midTone;
+    transition: all 0.5s;
+  }
+
+}
+
+.open svg.menuButton .rung,
+svg.menuButton:hover .rung {
+    fill: $highlight;
+}
+svg.menuButton:active {
+
+  .background {
+    fill: $backgroundColor;
+  }
+
+  .rung {
+    fill: $nearBlack;
+    transition: all 0.2s;
+  }
+}
+
+
+
+
+/* Small screens - 1 column */
+@media only screen and (max-width: $minSizeForTwoCol) {
+
+   #header {
+      height: 60px;
+   }
+
+   #pagearea {
+      display: block;
+   }
+   .col1 {
+      width: auto;
+   }
+   .col2 {
+      padding-left: 0px;
+   }
+   .row {
+      display: block;
+   }
+
+   h1, .strapline, .col {
+      display: block;
+      vertical-align: top;
+   }
+
+   h1 {
+      margin-bottom: 0.1em;
+      padding: 30px 0 0.2em 0;
+   }
+
+   h1, .strapline {
+     margin-left:auto; margin-right:auto;
+     text-align:center;
+   }
+
+   body:not(.home) #download {
+     display:none;
+   }
+   #download {
+     margin-left:auto; margin-right:auto;
+   }
+
+   #footer-contents {
+      height: 135px;
+      #sw, .contact {
+         bottom:0;
+      }
+   }
+
+   .col.col1 {
+     margin-right:0;
+   }
+
+   .strapline {
+      padding: 0;
+      margin-top:0;
+   }
+
+   #siteNav .siteLink {
+     margin-right:0.7em;
+   }
+}
+
+/* Even Smaller screens */
+@media only screen and (max-width: $sizeRequiringPhoneLayout) {
+
+   figure .lightbox {
+      opacity:1;
+   }
+
+   svg.menuButton {
+      display: inline;
+   }
+
+   #siteNav:not(.open) ul {
+      display:none;
+   }
+
+   #siteNav li {
+      display: block;
+      margin-top:0.2em;
+   }
+
+   #siteNav {
+     position:fixed;
+     top: 0;
+   }
+
+   #siteNav .siteLink {
+     margin-right: $menuMarginRight;
+   }
+
+   #siteNav li.reducedLogo {
+      display:none;
+   }
+
+   #header {
+      height: 20px;
+   }
+   footer {
+      height: 30px;
+   }
+
+   #footer-contents #externalLinks a {
+      margin: 0 5px;
+      padding: 0 5px;
+   }
+
+   h1,
+   .strapline {
+      margin-top: 20px;
+   }
+
+   h1, .col1 {
+      width: auto;
+   }
+
+   .col.col1 {
+      margin-left: auto;
+      margin-right: auto;
+   }
+
+   .strapline {
+      width: auto;
+   }
+
+   #pagearea {
+      padding: 0 20px;
+   }
+
+   #siteNav {
+      text-align: right;
+      padding-top: 0.2em;
+      padding-bottom: 0.2em;
+      height: auto; // remove hack to stop Firefox getting confused what height this should be
+   }
+
+}

@@ -1,0 +1,279 @@
+@import 'variables.scss';
+@import 'mixins.scss';
+
+$demoBackground: $backgroundColor;
+$labelColor: $shadow;
+
+
+@mixin overlayText {
+  /* outline effect */
+  text-shadow:
+      -1px -1px 0 $demoBackground,
+      1px -1px 0 $demoBackground,
+      -1px 1px 0 $demoBackground,
+      1px 1px 0 $demoBackground;
+}
+
+template {
+  /* browsers that don't understand template elements fail to hide them */
+  display:none;
+}
+
+#demoTemplateHolder {
+  display:none;
+}
+
+[data-demo] {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  margin: 1em 0 2em 0;
+  background-color: $demoBackground;
+  position:relative;
+
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: 1000;
+}
+
+div.demoCaption {
+  position: absolute;
+  width:14em;
+  text-align: right;
+  bottom: 2em;
+  cursor: pointer;
+
+  p {
+    margin-bottom: 0.3em;
+    margin-top: 0;
+  }
+
+  p, a {
+    @include overlayText();
+  }
+}
+
+div.demoCaption:hover a {
+  @include hovered-link;
+}
+div.demoCaption:active a {
+  @include active-link;
+}
+
+rect.fade,
+.lightbox {
+  fill: $demoBackground;
+  opacity: 0.9;
+}
+
+.lightbox {
+  stroke: $highlight;
+  stroke-width:2;
+  vector-effect: non-scaling-stroke;
+}
+
+.lightbox div {
+  text-align: right;
+}
+.lightbox p {
+  line-height: 100%;
+  margin-bottom: 0.15em;
+}
+
+@mixin svg-text-centered {
+  text-anchor: middle;
+  alignment-baseline:middle;
+}
+
+
+.packet text {
+  fill:$demoBackground;
+  text-anchor: middle;
+  font-size: 60%;
+}
+
+.controls text {
+    @include link;
+}
+.controls text.play {
+  @include svg-text-centered;
+  font-size: 125%;
+}
+
+.controls:hover {
+    cursor: pointer;
+}
+.controls:hover text.play,
+.controls .reset:hover text {
+    @include hovered-link;
+}
+.controls:active text.play,
+.controls .reset:active text{
+   @include active-link;
+}
+.clickableArea {
+   opacity:0;
+}
+
+.paused .controls .reset:not(:hover) text {
+   fill:$shadow;
+}
+
+
+.pie-divide {
+    fill:none;
+    stroke:$backgroundColor;
+    stroke-width:1;
+}
+
+.aerial {
+  fill: $highlight;
+}
+
+$i: 1;
+@while $i <= length($categoricalColors) {
+
+  g.client.received-#{$i - 1} .part.unit-#{$i - 1} {
+    display:inline;
+  }
+
+  .unit-#{$i - 1} .packet.airwave {
+    fill:none;
+    stroke:black;
+  }
+
+  $i: $i + 1;
+}
+.packet.airwave {
+
+  stroke-width:5px;
+}
+
+line.wire.cable {
+   stroke:$highlight;
+   stroke-width:4;
+   stroke-linecap: round;
+}
+line.messageOuter {
+  stroke:$highlight;
+  stroke-width:41;
+  stroke-linecap: round;
+}
+line.messageInner {
+  stroke:white;
+  stroke-width:35;
+  stroke-linecap: round;
+}
+
+g.client .frame,
+.server .box,
+.graph .bars,
+.graph .axes {
+    fill: $midTone;
+    shape-rendering: crispEdges;
+}
+
+.aerial circle,
+circle.aerial,
+.browser .frame,
+.tower .area,
+.server .box {
+    stroke:$demoBackground;
+    stroke-width:3;
+    stroke-linejoin: round;
+}
+
+.playing text.label {
+  fill: $labelColor;
+}
+
+text.label {
+  text-anchor:middle;
+  fill: $demoBackground;
+  font-family: $themeItalicFont;
+  transition: fill 1s;
+  @include overlayText();
+}
+
+.tower .area {
+  fill:$demoBackground;
+  stroke:$demoBackground;
+  stroke-width:9;
+}
+.browser .background {
+  stroke:$demoBackground;
+  stroke-width:4;
+  fill:white;
+  shape-rendering: crispEdges;
+}
+
+.browser .frame {
+  stroke:$demoBackground;
+  stroke-width:1;
+}
+
+
+
+.tower .structure,
+.barrier .wall,
+.barrier .shadow,
+.browser .progressBar .bar{
+  fill: $midTone;
+}
+
+.progressBar,
+.tweet .shading {
+  shape-rendering: crispEdges;
+}
+
+.browser .progressBar .space{
+  fill: $shadow;
+  opacity:0.8;
+}
+.map .progressBar .space{
+  fill: $demoBackground;
+}
+
+.browser .progressBar{
+  transition: opacity 0.5s;
+  transition-delay: 0.5s;
+}
+.browser .progressBar.complete{
+  opacity:0;
+}
+
+.barrier .shadow {
+  fill: $shadow;
+}
+
+g.client .viewPort {
+  fill: $backgroundColor;
+}
+g.client .part {
+  display:none;
+}
+
+.tweet .detail {
+  fill:$backgroundColor;
+  opacity:0.5;
+}
+
+
+
+
+.browser .spinner {
+  fill:$shadow;
+  stroke:none;
+}
+.client g.spinnerContainer {
+  opacity:1;
+  transition:opacity 1s;
+  transition-delay:opacity 0.5s;
+}
+
+.client:not(.requesting) g.spinnerContainer {
+  opacity:0;
+}

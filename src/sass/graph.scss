@@ -1,0 +1,23 @@
+@import 'variables.scss';
+@import 'mixins.scss';
+
+.graph {
+  .axes {
+    fill:none;
+    stroke: $shadedBackgroundColor;
+    stroke-width: 3;
+    transition:stroke 0.5s;
+  }
+
+  .points line {
+    stroke:black;
+    stroke-width: 2;
+  }
+  .points circle {
+    stroke: $backgroundColor;
+  }
+}
+
+.received-1 .graph .axes {
+  stroke: $shadow;
+}

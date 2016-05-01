@@ -11,7 +11,7 @@ const inPlace = require('metalsmith-in-place');
 const layouts = require('metalsmith-layouts');
 const sass = require('metalsmith-sass');
 
-const ROOT = 'http://localhost:8080';
+const ROOT = '//www.oboejs.com';
 const ANALYTICS_ID = 'UA-47871814-1';
 const RAW_REPO_LOCATION = 'https://raw.github.com/jimhigson/oboe.js';
 const REPO_LOCATION = 'https://github.com/jimhigson/oboe.js';

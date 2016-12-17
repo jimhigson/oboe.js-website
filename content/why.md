@@ -90,7 +90,7 @@ We can speed this scenario up by using Oboe.js to load data in
 <span class="aggregator">the aggregator</span> and 
 <span class="place">the client</span>.
 The aggregator dispatches the data as soon as it has it and 
-the client displays the data as soon as it is arrives.
+the client displays the data as soon as it arrives.
 
 {{demo "aggregated-progressive"}}
 

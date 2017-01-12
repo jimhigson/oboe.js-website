@@ -59,7 +59,7 @@ oboe('/myapp/things.json')
    
       console.log(
          'there are', things.foods.length, 'things to eat',
-         'and', things.nonFoods.length, 'to avoid'); 
+         'and', things.badThings.length, 'to avoid'); 
    });
 ```
 

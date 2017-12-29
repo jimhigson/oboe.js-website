@@ -75,7 +75,7 @@ oboe('/myapp/things.json')
       // I'll be called for every object found that 
       // has both a name and a colour   
       console.log(thing.name, ' is ', thing.colour);
-   };
+   });
 ```
 
 Hanging up when we have what we need

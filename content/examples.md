@@ -11,12 +11,10 @@ towards progressive loading. The call style should be familiar to jQuery users.
 ``` js
 oboe('/myapp/things.json')
    .done(function(things) {
-   
-      // we got it
+      // We got it.
    })
    .fail(function() {
-   
-      // we don't got it
+      // We didn't get it.
    });
 ```
 
@@ -330,8 +328,8 @@ Like css4 stylesheets, this can also be used to express a 'containing' operator.
 oboe('/myapp/things')
    .node('people.$*.email', function(personWithAnEmailAddress){
       
-      // here we'll be called back with baz 
-      // and bax but not Boz.
+      // here we'll be called back with Baz
+      // and Bax but not Boz.
       
    });
 ```

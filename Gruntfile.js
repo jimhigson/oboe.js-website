@@ -1,59 +1,63 @@
-'use strict';
+
+const sass = require('node-sass');
 
 module.exports = function (grunt) {
 
     // set up config
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json')
-    ,
-        watch:{
-            sources:{
-                files:['*.js', 'sass/*.scss'],
-                tasks:['develop:server', 'build'],
+        ,
+        watch: {
+            sources: {
+                files: ['*.js', 'sass/*.scss'],
+                tasks: ['develop:server', 'build'],
                 options: { nospawn: true }
             }
         }
-    ,
+        ,
         sass: {
-            all:{
-                files: {'statics/css/all.css':'sass/all.scss'}
+            options: {
+                implementation: sass
+            },
+            all: {
+                files: { 'statics/css/all.css': 'sass/all.scss' }
             }
         }
-    ,   
+        ,
         develop: {
             server: {
                 file: 'index.js',
                 args: '--env=dev'
             }
         }
-        
-    ,
+
+        ,
         uglify: {
-            
-            clientSideJs:{
-                options:{
-                    wrap:'enclose'
+
+            clientSideJs: {
+                options: {
+                    wrap: 'enclose'
                 },
-                
-                files:{
-                    'statics/js-concat/all.js': require('./sourceList.js').map(function(name){
+
+                files: {
+                    'statics/js-concat/all.js': require('./sourceList.js').map(function (name) {
                         return 'statics' + name;
                     })
                 }
             }
         }
-    ,
-        cssmin:{
-            minifyCss:{
-                files:{
-                    'statics/css/all-min.css':['statics/css/all.css']
+        ,
+        cssmin: {
+            minifyCss: {
+                files: {
+                    'statics/css/all-min.css': ['statics/css/all.css']
                 }
             }
         }
-        
+
     });
 
-    
+
     // load all grunt tasks
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-develop');

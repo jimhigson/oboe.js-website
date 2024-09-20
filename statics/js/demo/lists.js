@@ -10,7 +10,7 @@ function cons(x, xs) {
 
      In older engines freeze should have been polyfilled as the 
      identity function. */
-    return Object.freeze([x,xs]);
+    return Object.freeze([x, xs]);
 }
 
 /**
@@ -23,14 +23,14 @@ var emptyList = null,
      *
      * Ie, head(cons(a,b)) = a
      */
-        head = attr(0),
+    head = attr(0),
 
     /**
      * Get the tail of a list.
      *
      * Ie, head(cons(a,b)) = a
      */
-        tail = attr(1);
+    tail = attr(1);
 
 
 /**
@@ -42,7 +42,7 @@ var emptyList = null,
  *
  *    cons(a, cons(b, cons(c, emptyList)))
  **/
-function arrayAsList(inputArray){
+function arrayAsList(inputArray) {
 
     return reverseList(
         inputArray.reduce(
@@ -67,14 +67,14 @@ var list = varArgs(arrayAsList);
 /**
  * Convert a list back to a js native array
  */
-function listAsArray(list){
+function listAsArray(list) {
 
-    return foldR( function(arraySoFar, listItem){
+    return foldR(function (arraySoFar, listItem) {
 
         arraySoFar.unshift(listItem);
         return arraySoFar;
 
-    }, [], list );
+    }, [], list);
 
 }
 
@@ -84,7 +84,7 @@ function listAsArray(list){
 function map(fn, list) {
 
     return list
-        ? cons(fn(head(list)), map(fn,tail(list)))
+        ? cons(fn(head(list)), map(fn, tail(list)))
         : emptyList
         ;
 }
@@ -126,9 +126,9 @@ function without(list, test, removedFn) {
 
     function withoutInner(subList, removedFn) {
         return subList
-            ?  ( test(head(subList))
-            ? (removedFn(head(subList)), tail(subList))
-            : cons(head(subList), withoutInner(tail(subList), removedFn))
+            ? (test(head(subList))
+                ? (removedFn(head(subList)), tail(subList))
+                : cons(head(subList), withoutInner(tail(subList), removedFn))
             )
             : emptyList
             ;
@@ -142,7 +142,7 @@ function without(list, test, removedFn) {
 function all(fn, list) {
 
     return !list ||
-        ( fn(head(list)) && all(fn, tail(list)) );
+        (fn(head(list)) && all(fn, tail(list)));
 }
 
 /**
@@ -152,24 +152,24 @@ function all(fn, list) {
  * it doesn't return anything. Hence, this is only really useful if the
  * functions being called have side-effects.
  */
-function applyEach(fnList, arguments) {
+function applyEach(fnList, args) {
 
-    if( fnList ) {
-        head(fnList).apply(null, arguments);
+    if (fnList) {
+        head(fnList).apply(null, args);
 
-        applyEach(tail(fnList), arguments);
+        applyEach(tail(fnList), args);
     }
 }
 
 /**
  * Reverse the order of a list
  */
-function reverseList(list){
+function reverseList(list) {
 
     // js re-implementation of 3rd solution from:
     //    http://www.haskell.org/haskellwiki/99_questions/Solutions/5
-    function reverseInner( list, reversedAlready ) {
-        if( !list ) {
+    function reverseInner(list, reversedAlready) {
+        if (!list) {
             return reversedAlready;
         }
 
@@ -180,8 +180,8 @@ function reverseList(list){
 }
 
 function first(test, list) {
-    return   list &&
+    return list &&
         (test(head(list))
             ? head(list)
-            : first(test,tail(list)));
+            : first(test, tail(list)));
 }

@@ -36,7 +36,7 @@ Basically, if you've been out of js dev for the last decade, you'll feel right a
 0.0.0-xxx
 =========
 
-(Jan 2015)
+(Jan 2013)
 
 Initial release of site
 

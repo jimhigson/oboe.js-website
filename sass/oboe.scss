@@ -1,12 +1,65 @@
-﻿html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, font, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
+﻿html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+font,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
 figure {
    margin: 0;
    padding: 0;
@@ -30,12 +83,15 @@ nav ul {
    list-style: none;
 }
 
-blockquote, q {
+blockquote,
+q {
    quotes: none;
 }
 
-blockquote:before, blockquote:after,
-q:before, q:after {
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
    content: '';
    content: none;
 }
@@ -67,12 +123,15 @@ em {
 }
 
 #header {
-   height: 70px;
    transition: height 0.5s; // for when screen size changes
+   text-align: center;
+   padding-bottom: 0.6em;
 }
 
-#header, footer {
+#header,
+footer {
    background: $nearBlack;
+   color: $backgroundColor;
 }
 
 #siteNav {
@@ -171,15 +230,18 @@ footer p a:hover {
 }
 
 
-a, summary {
+a,
+summary {
    @include link;
 }
 
-a:hover, summary:hover {
+a:hover,
+summary:hover {
    @include hovered-link;
 }
 
-a:active, summary:active {
+a:active,
+summary:active {
    @include active-link;
 }
 
@@ -210,10 +272,11 @@ li.reducedLogo a {
 }
 
 details {
-   margin:1.6em 0;
-   summary{
-     margin-left: 1em;
-     margin-bottom:0.5em;
+   margin: 1.6em 0;
+
+   summary {
+      margin-left: 1em;
+      margin-bottom: 0.5em;
    }
 }
 
@@ -222,13 +285,16 @@ details {
    display: table-row;
 }
 
-h1, .strapline, .col {
+h1,
+.strapline,
+.col {
    display: table-cell;
    vertical-align: top;
 }
 
 /* set width of left column */
-h1, .col1 {
+h1,
+.col1 {
    width: 30%;
 }
 
@@ -304,7 +370,7 @@ th {
 }
 
 td {
-   padding: 0 0.4em 0.6em 0.4em ;
+   padding: 0 0.4em 0.6em 0.4em;
    line-height: 1.5;
    min-width: 7em;
 }
@@ -312,55 +378,58 @@ td {
 table {
    margin: 1.5em 0 1em 0;
 }
+
 thead {
-   display:none;
+   display: none;
 }
 
 footer {
-   padding:17px 20px;
-   height:30px;
+   padding: 17px 20px;
+   height: 30px;
 }
 
 #footer-contents {
-   text-align:center;
-   position:relative;
+   text-align: center;
+   position: relative;
    max-width: $maxPageWidth;
    margin-left: auto;
    margin-right: auto;
-  
+
    a {
-      display:inline-block;
+      display: inline-block;
    }
 
    .contact {
-      position:absolute;
-      left:0.8em;
-      padding:20px 0;
+      position: absolute;
+      left: 0.8em;
+      padding: 20px 0;
       color: $midTone;
    }
+
    .contact:hover {
       color: $highlight;
    }
+
    .contact:active {
       color: $nearBlack;
    }
-  
+
    #externalLinks {
       display: inline-block;
-    
+
       .logo {
          fill: $midTone;
          @include linkTiming;
       }
-     
+
       a {
          margin: 0 15px;
          padding: 0 15px;
       }
-    
+
       a:hover {
          text-decoration: none;
-        
+
          .logo {
             fill: $highlight;
             @include linkTimingHover;
@@ -369,14 +438,14 @@ footer {
 
       a:active {
          .logo {
-            fill:$nearBlack;
+            fill: $nearBlack;
          }
       }
    }
 
    #sw {
-      position:absolute;
-      right:0.8em;
+      position: absolute;
+      right: 0.8em;
       background: url(http://samwakeling.com/img/sw-icon-100.png) no-repeat;
       height: 64px;
       width: 50px;
@@ -391,42 +460,43 @@ footer {
    #sw:hover {
       transition: all 0.2s;
       opacity: 1;
-   }  
+   }
 }
 
 
- 
+
 
 svg.menuButton {
    display: none;
    margin-right: $menuMarginRight;
    cursor: pointer;
 
-  .background {
-    fill: $shadedBackgroundColor;
-  }
-  
-  .rung {
-    fill: $midTone;
-    transition: all 0.5s;
-  }
-    
+   .background {
+      fill: $shadedBackgroundColor;
+   }
+
+   .rung {
+      fill: $midTone;
+      transition: all 0.5s;
+   }
+
 }
 
 .open svg.menuButton .rung,
 svg.menuButton:hover .rung {
-    fill: $highlight;
+   fill: $highlight;
 }
+
 svg.menuButton:active {
-  
-  .background {
-    fill: $backgroundColor;
-  }
-  
-  .rung {
-    fill: $nearBlack;
-    transition: all 0.2s;
-  }
+
+   .background {
+      fill: $backgroundColor;
+   }
+
+   .rung {
+      fill: $nearBlack;
+      transition: all 0.2s;
+   }
 }
 
 
@@ -435,24 +505,25 @@ svg.menuButton:active {
 /* Small screens - 1 column */
 @media only screen and (max-width: $minSizeForTwoCol) {
 
-   #header {
-      height: 60px;
-   }
-
    #pagearea {
       display: block;
    }
+
    .col1 {
       width: auto;
    }
+
    .col2 {
       padding-left: 0px;
    }
+
    .row {
       display: block;
    }
 
-   h1, .strapline, .col {
+   h1,
+   .strapline,
+   .col {
       display: block;
       vertical-align: top;
    }
@@ -461,37 +532,43 @@ svg.menuButton:active {
       margin-bottom: 0.1em;
       padding: 30px 0 0.2em 0;
    }
-  
-   h1, .strapline {
-     margin-left:auto; margin-right:auto;
-     text-align:center;
+
+   h1,
+   .strapline {
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
    }
 
    body:not(.home) #download {
-     display:none;
+      display: none;
    }
+
    #download {
-     margin-left:auto; margin-right:auto;
+      margin-left: auto;
+      margin-right: auto;
    }
-  
+
    #footer-contents {
       height: 135px;
-      #sw, .contact {
-         bottom:0;
+
+      #sw,
+      .contact {
+         bottom: 0;
       }
    }
-  
+
    .col.col1 {
-     margin-right:0;
+      margin-right: 0;
    }
-  
+
    .strapline {
       padding: 0;
-      margin-top:0;
+      margin-top: 0;
    }
 
    #siteNav .siteLink {
-     margin-right:0.7em;
+      margin-right: 0.7em;
    }
 }
 
@@ -499,38 +576,39 @@ svg.menuButton:active {
 @media only screen and (max-width: $sizeRequiringPhoneLayout) {
 
    figure .lightbox {
-      opacity:1;
+      opacity: 1;
    }
-  
+
    svg.menuButton {
       display: inline;
    }
 
    #siteNav:not(.open) ul {
-      display:none;
+      display: none;
    }
-  
+
    #siteNav li {
       display: block;
-      margin-top:0.2em;
+      margin-top: 0.2em;
    }
 
    #siteNav {
-     position:fixed;
-     top: 0;
-   }
-  
-   #siteNav .siteLink {
-     margin-right: $menuMarginRight;     
-   }
-
-   #siteNav li.reducedLogo {
-      display:none;
+      position: fixed;
+      top: 0;
    }
 
    #header {
-      height: 20px;
+      padding-top: 2em;
    }
+
+   #siteNav .siteLink {
+      margin-right: $menuMarginRight;
+   }
+
+   #siteNav li.reducedLogo {
+      display: none;
+   }
+
    footer {
       height: 30px;
    }
@@ -538,14 +616,15 @@ svg.menuButton:active {
    #footer-contents #externalLinks a {
       margin: 0 5px;
       padding: 0 5px;
-   }  
+   }
 
    h1,
    .strapline {
       margin-top: 20px;
    }
 
-   h1, .col1 {
+   h1,
+   .col1 {
       width: auto;
    }
 

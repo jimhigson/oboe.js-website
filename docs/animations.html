@@ -14,7 +14,7 @@
    <link rel="stylesheet" href="css/all-min.css">
    
 
-   <title>API : Oboe.js</title>
+   <title>🦄 Animations : Oboe.js</title>
 
    <link rel="icon" type="image/png" href="favicons/favicon-32.png" sizes="32x32">
    <link rel="icon" type="image/png" href="favicons/favicon-16.png" sizes="16x16">
@@ -65,7 +65,7 @@
          
          <li>
             
-            <span class="siteLink">API</span>
+            <a class="siteLink" href="api.html">API</a>
             
          </li>
 
@@ -86,7 +86,7 @@
          
          <li>
             
-            <a class="siteLink" href="animations.html">🦄 Animations</a>
+            <span class="siteLink">🦄 Animations</span>
             
          </li>
 
@@ -111,53 +111,6 @@
 
             
             
-            <div class="internalNav">
-               <h2>API</h2>
-               
-               <ul class="sections">
-                  
-                  <li><a href="api.html#the-oboe-function">The oboe function</a></li>
-                  
-                  <li><a href="api.html#cross-domain-requests">Cross-domain requests</a></li>
-                  
-                  <li><a href="api.html#byo-stream">BYO stream</a></li>
-                  
-                  <li><a href="api.html#node-event">node event</a></li>
-                  
-                  <li><a href="api.html#transforming-the-json">transforming the JSON</a></li>
-                  
-                  <li><a href="api.html#oboe-drop">oboe.drop</a></li>
-                  
-                  <li><a href="api.html#path-event">path event</a></li>
-                  
-                  <li><a href="api.html#done-event">done event</a></li>
-                  
-                  <li><a href="api.html#start-event">start event</a></li>
-                  
-                  <li><a href="api.html#fail-event">fail event</a></li>
-                  
-                  <li><a href="api.html#-source">.source</a></li>
-                  
-                  <li><a href="api.html#-header-name-">.header([name])</a></li>
-                  
-                  <li><a href="api.html#-root-">.root()</a></li>
-                  
-                  <li><a href="api.html#-forget-">.forget()</a></li>
-                  
-                  <li><a href="api.html#-removelistener-">.removeListener()</a></li>
-                  
-                  <li><a href="api.html#-abort-">.abort()</a></li>
-                  
-                  <li><a href="api.html#pattern-matching">Pattern matching</a></li>
-                  
-                  <li><a href="api.html#browser-support">Browser support</a></li>
-                  
-                  <li><a href="api.html#improve-this-page">Improve this page</a></li>
-                  
-               </ul>
-               
-            </div>
-            
             
 
             
@@ -165,448 +118,23 @@
          <div class="col col2">
 
             <main class="marked">
-               <html><head></head><body><p>This page is also <a href="api.pdf">available as a PDF</a>.</p>
-
-<h2 id="the-oboe-function">The oboe function</h2>
-<p>Oboe.js exposes only one function, <code>oboe</code>, which is used to instantiate a new Oboe instance.
-Calling this function starts a new HTTP request unless the caller is 
-<a href="api.html#byo-stream">managing the stream themselves</a>.</p>
-<pre><code class="undefinedjs">oboe( String url )
-
-oboe({
-   url: String,
-   method: String,          <span class="comment">// optional</span>
-   headers: Object,         <span class="comment">// optional</span>
-   body: String|Object,     <span class="comment">// optional</span>
-   cached: Boolean,         <span class="comment">// optional</span>
-   withCredentials: Boolean <span class="comment">// optional, browser only</span>
-})</code></pre>
-<details><summary>Deprecated API</summary><pre><code class="undefinedjs"><span class="comment">// the doMethod style of calling is deprecated </span>
-<span class="comment">// and will be removed in v2.0.0:</span>
-oboe.doGet(    url )
-oboe.doDelete( url )
-oboe.doPost(   url, body )
-oboe.doPut(    url, body )
-oboe.doPatch(  url, body )
-
-oboe.doGet(    {url:String, headers:Object, cached:Boolean} )
-oboe.doDelete( {url:String, headers:Object, cached:Boolean} )
-oboe.doPost(   {url:String, headers:Object, cached:Boolean, body:String|Object} )
-oboe.doPut(    {url:String, headers:Object, cached:Boolean, body:String|Object} )
-oboe.doPatch(  {url:String, headers:Object, cached:Boolean, body:String|Object} )</code></pre></details>
-<p>The <code>method</code>, <code>headers</code>, <code>body</code>, <code>cached</code>, and <code>withCredentials</code> arguments are optional.</p>
-<ul>
-<li>If <code>method</code> is not given Oboe defaults to <code>GET</code>.</li>
-<li>If <code>body</code> is given as an object it will be stringified using <code>JSON.stringify</code> 
-prior to sending. The Content-Type request header will automatically be set to <code>text/json</code>
-unless a different value is explicitly given.</li>
-<li>If the cached option is given as <code>false</code> cachebusting will be applied by
-appending <code>_={timestamp}</code> to the URL’s query string. Any other value will be
-ignored.</li>
-</ul>
-<h2 id="cross-domain-requests">Cross-domain requests</h2>
-<p>Oboe.js is able to make cross-domain requests so long as the server
-is set up for <abbr title="Cross-site HTTP requests">CORS</abbr>, for example by setting the
-<a href="http://developer.mozilla.org/en/docs/HTTP/Access_control_CORS#Access-Control-Allow-Origin">Access-Control-Allow-Origin</a>
-response header.</p>
-<ul>
-<li>If <code>withCredentials</code> is given as <code>true</code>, cookies and other auth will be propagated to
-cross-domain requests as per the <a href="http://www.w3.org/TR/2014/WD-XMLHttpRequest-20140130/#the-withcredentials-attribute">XHR spec</a>.
-For this to work the server must be set up to send the 
-<a href="http://developer.mozilla.org/en/docs/HTTP/Access_control_CORS#Access-Control-Allow-Credentials">Access-Control-Allow-Credentials</a>
-response header.</li>
-</ul>
-<p>Note that <a href="http://enable-cors.org/client.html">Internet Explorer only fully supports CORS from version 10 onwards</a>.</p>
-<p>When making requests from Node the <code>withCredentials</code> option is never needed and is ignored.
-<a href="https://www.npmjs.org/package/cors">The cors middleware</a> might be useful if you are
-serving cross-domain requests from Express/Connect.</p>
-<h2 id="byo-stream">BYO stream</h2>
-<p>Under Node.js you may also pass <code>oboe</code> an arbitrary
-<a href="http://nodejs.org/api/stream.html#stream_class_stream_readable">ReadableStream</a>
-for it to read JSON from.
-It is your responsibility to initiate the stream and Oboe will not start 
-a new HTTP request on your behalf.</p>
-<pre><code class="undefinedjs">oboe( stream )   <span class="comment">// Node.js only</span></code></pre>
-<h2 id="node-event">node event</h2>
-<p>The methods <code>.node()</code> and <code>.on()</code> are used to register interest in particular nodes by providing 
-<a href="http://goessner.net/articles/JsonPath/">JSONPath</a> patterns. As the JSON stream is parsed the Oboe instance checks for matches 
-against these patterns and when a matching node is found it emits a <code>node</code> event.</p>
-<pre><code class="undefinedjs">.on(<span class="string">'node'</span>, pattern, callback)
-
-<span class="comment">// 2-argument style .on() ala Node.js EventEmitter#on</span>
-.on(<span class="string">'node:{pattern}'</span>, callback)
-
-.node(pattern, callback)
-
-<span class="comment">// register several listeners at once</span>
-.node({
-   pattern1 : callback1,
-   pattern2 : callback2
-});</code></pre>
-<p>When the callback is notified, the context, <code>this</code>, is the Oboe instance,
-unless it is bound otherwise. The callback receives three parameters: </p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>node</code></td>
-<td>The node that was found in the JSON stream. This can be any valid JSON type - <code>Array</code>, <code>Object</code>, <code>String</code>, <code>Boolean</code> or <code>null</code></td>
-</tr>
-<tr>
-<td><code>path</code></td>
-<td>An array of strings describing the path from the root of the JSON to the matching item. For example, if the match is at <code>(root).foo.bar</code> this array will equal <code>['foo', 'bar']</code>. <a href="examples.html#taking-meaning-from-a-node-s-location">Example usage</a>.</td>
-</tr>
-<tr>
-<td><code>ancestors</code></td>
-<td>An array of the found item’s ancestors such that <code>ancestors[0]</code> is the JSON root, <code>ancestors[ancestors.length-1]</code> is the parent object, and <code>ancestors[ancestors.length-2]</code> is the grandparent. These ancestors will be as complete as possible given the data which has so far been read from the stream but because Oboe.js is a streaming parser they may not yet have all properties</td>
-</tr>
-</tbody>
-</table>
-<pre><code class="undefinedjs">oboe(<span class="string">'friends.json'</span>)
-   .node(<span class="string">'name'</span>, <span class="keyword">function</span>(name){
-      console.log(<span class="string">'You have a friend called'</span>, name);
-   });</code></pre>
-<h2 id="transforming-the-json">transforming the JSON</h2>
-<p>If the callback returns any value, the returned value will be used to replace the parsed JSON node.</p>
-<p>See <a href="examples.html#demarshalling-json-to-an-oop-model">demarshalling to an OOP model</a>
-and <a href="examples.html#transforming-json-while-it-is-streaming">Transforming JSON while it is streaming</a>.</p>
-<pre><code class="undefinedjs"><span class="comment">// Replace any object with a name, date of birth, and address </span>
-<span class="comment">// in the JSON with a Person instance</span>
-
-.on(<span class="string">'node'</span>, <span class="string">'{name dob address}'</span>, <span class="keyword">function</span>(personJson){
-   <span class="keyword">return</span> <span class="keyword">new</span> Person(personJson.name, personJson.dob, personJson.address);
-})</code></pre>
-<h2 id="oboe-drop">oboe.drop</h2>
-<p>If a node listener returns the special value <code>oboe.drop</code>, the detected node is dropped entirely
-from the tree.</p>
-<p>This can be used to ignore fields that you don’t care about,
-or to <a href="api.html">load large JSON without running out of memory</a>.</p>
-<pre><code class="undefinedjs">.on(<span class="string">'node'</span>, <span class="string">'person.address'</span>, <span class="keyword">function</span>(address){
-   console.log(<span class="string">"I don't care what's at"</span>, address);
-   <span class="keyword">return</span> oboe.drop;
-})</code></pre>
-<p><code>oboe.drop</code> can also be used in a shorthand form:</p>
-<pre><code class="undefinedjs">.on(<span class="string">'node'</span>, <span class="string">'person.address'</span>, oboe.drop)</code></pre>
-<p>Dropping from an <em>array</em> will result in 
-<a href="http://speakingjs.com/es5/ch18.html#_arrays_are_maps_not_tuples">an array with holes in it</a>.
-This is intentional so that the array indices from the original JSON are preserved:</p>
-<pre><code class="undefinedjs"><span class="comment">// json from service is an array of names:</span>
-[<span class="string">'john'</span>, <span class="string">'wendy'</span>, <span class="string">'frank'</span>, <span class="string">'victoria'</span>, <span class="string">'harry'</span>]
-
-oboe(<span class="string">'names.json'</span>)
-   .on(<span class="string">'2'</span>, oboe.drop)
-   .done(console.log)
-
-<span class="comment">// this logs:</span>
-<span class="comment">//    ['john', 'wendy', , 'victoria', 'harry']</span>
-<span class="comment">//    note the array hole</span></code></pre>
-<p>Meanwhile, dropping from an <em>object</em> leaves no trace of the key/value pair:</p>
-<pre><code class="undefinedjs"><span class="comment">// json from service is a hash from names to numbers:</span>
-{<span class="string">'john'</span>:<span class="number">4</span>, <span class="string">'wendy'</span>: <span class="number">2</span>, <span class="string">'frank'</span>: <span class="number">0</span>, <span class="string">'victoria'</span>: <span class="number">9</span>, <span class="string">'harry'</span>: <span class="number">2</span>}
-
-oboe(<span class="string">'gameScores.json'</span>)
-   .on(<span class="string">'wendy'</span>, oboe.drop)
-   .done(console.log)
-
-<span class="comment">// this logs:</span>
-<span class="comment">//    {'john':4, 'frank': 0, 'victoria': 9, 'harry': 2}</span></code></pre>
-<h2 id="path-event">path event</h2>
-<p>Path events are identical to <a href="api.html#node-event">node events</a> except that they are emitted as soon as matching paths are found,
-without waiting for the thing at the path to be revealed.</p>
-<pre><code class="undefinedjs">.on(<span class="string">'path'</span>, pattern, callback)
-
-<span class="comment">// 2-argument style .on() ala Node.js EventEmitter#on</span>
-.on(<span class="string">'path:{pattern}'</span>, callback)
-
-.path(pattern, callback)
-
-<span class="comment">// register several listeners at once</span>
-.path({
-   pattern1 : callback1,
-   pattern2 : callback2
-});</code></pre>
-<pre><code class="undefinedjs">oboe(<span class="string">'friends.json'</span>)
-   .path(<span class="string">'friend'</span>, <span class="keyword">function</span>(name){
-      friendCount++;
-   });</code></pre>
-<p>One use of path events is to <a href="examples.html#reacting-before-we-get-the-whole-object">start adding elements to an interface before they are complete</a>.</p>
-<h2 id="done-event">done event</h2>
-<pre><code class="undefinedjs">.done(callback)
-
-.on(<span class="string">'done'</span>, callback)</code></pre>
-<p>Done events are fired when the response is complete. The callback is passed the entire
-parsed JSON.</p>
-<p>In most cases it is faster to read the JSON in small parts by listening to <code>node</code> events
-(see <a href="api.html#node-event">above</a>) than waiting for it to be completely download.</p>
-<pre><code class="undefinedjs">oboe(<span class="string">'resource.json'</span>)
-   .on(<span class="string">'done'</span>, <span class="keyword">function</span>(parsedJson){
-      console.log(<span class="string">'Request complete'</span>, parsedJson);
-   });</code></pre>
-<h2 id="start-event">start event</h2>
-<pre><code class="undefinedjs">.start(callback)
-
-.on(<span class="string">'start'</span>, callback)</code></pre>
-<p>Start events are fired when Oboe
-has parsed the status code and the response headers but has not yet received any content 
-from the response body.</p>
-<p>The callback receives two parameters: </p>
-<table>
-<thead>
-<tr>
-<th>name</th>
-<th>type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>status</code></td>
-<td><code>Number</code></td>
-<td>HTTP status code </td>
-</tr>
-<tr>
-<td><code>headers</code></td>
-<td><code>Object</code></td>
-<td>Object of response headers</td>
-</tr>
-</tbody>
-</table>
-<pre><code class="undefinedjs">oboe(<span class="string">'resource.json'</span>)
-   .on(<span class="string">'start'</span>, <span class="keyword">function</span>(status, headers){
-      console.log(<span class="string">'Resource cached for'</span>, headers.Age, <span class="string">'secs'</span>);
-   });</code></pre>
-<p>Under Node.js this event is never fired for <a href="api.html#byo-stream">BYO streaming</a>.</p>
-<h2 id="fail-event">fail event</h2>
-<pre><code class="undefinedjs">   .fail(callback)
-
-   .on(<span class="string">'fail'</span>, callback)</code></pre>
-<p>Fetching a resource could fail for several reasons:</p>
-<ul>
-<li>Non-2xx status code</li>
-<li>Connection lost</li>
-<li>Invalid JSON from the server</li>
-<li>Error thrown by an event listener</li>
-</ul>
-<p>The fail callback receives an object with four fields:</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Meaning                                                 </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>thrown</code></td>
-<td>The error, if one was thrown                            </td>
-</tr>
-<tr>
-<td><code>statusCode</code></td>
-<td>The status code, if the request got that far            </td>
-</tr>
-<tr>
-<td><code>body</code></td>
-<td>The response body for the error, if any                 </td>
-</tr>
-<tr>
-<td><code>jsonBody</code></td>
-<td>If the server’s error response was JSON, the parsed body</td>
-</tr>
-</tbody>
-</table>
-<pre><code class="undefinedjs">oboe(<span class="string">'/content'</span>)
-   .fail( <span class="keyword">function</span>( errorReport ){
-      <span class="keyword">if</span>( <span class="number">404</span> == errorReport.statusCode ){
-         console.error(<span class="string">'no such content'</span>); 
-      }
-   });</code></pre>
-<h2 id="-source">.source</h2>
-<p><em>Since v.1.15.0</em></p>
-<p>Gives the URL (or <a href="api.html#byo-stream">stream</a>) that the Oboe instance
-is fetching from. This is sometimes useful if one handler is being used
-for several streams.</p>
-<pre><code class="undefinedjs">oboe(<span class="string">'http://example.com/names.json'</span>)
-   .node(<span class="string">'name'</span>, handleName);
-
-oboe(<span class="string">'http://example.com/more_names.json'</span>)
-   .node(<span class="string">'name'</span>, handleName);   
-
-<span class="function"><span class="keyword">function</span> <span class="title">handleName</span><span class="params">(name)</span>{</span>
-   console.log(<span class="string">'got name'</span>, name, <span class="string">'from'</span>, <span class="keyword">this</span>.source);
-}</code></pre>
-<h2 id="-header-name-">.header([name])</h2>
-<pre><code class="undefinedjs">.header()
-
-.header(name)</code></pre>
-<p><code>.header()</code> returns one or more HTTP response headers.
-If the name parameter is given that named header will be returned as a String,
-otherwise all headers are returned as an Object.</p>
-<p><code>undefined</code> wil be returned if the headers have not yet been received. The headers 
-are available anytime after the <code>start</code> event has been emitted. They will always be
-available from inside a <code>node</code>, <code>path</code>, <code>start</code> or <code>done</code> callback.</p>
-<p><code>.header()</code> always returns undefined for non-HTTP streams.</p>
-<pre><code class="undefinedjs">oboe(<span class="string">'data.json'</span>)
-   .node(<span class="string">'id'</span>, <span class="keyword">function</span>(id){
-      console.log(   <span class="string">'Server has id'</span>, id, 
-                     <span class="string">'as of'</span>, <span class="keyword">this</span>.headers(<span class="string">'Date'</span>));
-   });</code></pre>
-<h2 id="-root-">.root()</h2>
-<p>At any time, call <code>.root()</code> on the oboe instance to get the JSON parsed so far. 
-If nothing has yet been received this will return <code>undefined</code>.</p>
-<pre><code class="undefinedjs"><span class="keyword">var</span> interval;
-
-oboe(<span class="string">'resourceUrl'</span>)
-   .start(<span class="keyword">function</span>(){
-      interval = window.setInterval(<span class="keyword">function</span>(){
-         console.log(<span class="string">'downloaded so far:'</span>, <span class="keyword">this</span>.root());
-      }.bind(<span class="keyword">this</span>), <span class="number">10</span>);
-   })
-   .done(<span class="keyword">function</span>(completeJson){
-      console.log(<span class="string">'download finished:'</span>, completeJson);
-      window.clearInterval(interval);
-   });</code></pre>
-<h2 id="-forget-">.forget()</h2>
-<pre><code class="undefinedjs">.node(<span class="string">'*'</span>, <span class="keyword">function</span>(){
-   <span class="keyword">this</span>.forget();
-})</code></pre>
-<p><code>.forget()</code> is a shortcut for <a href="api.html#-removelistener-">.removeListener()</a> in
-the case where the listener to be removed is currently executing. 
-Calling <code>.forget()</code> on the Oboe instance from inside a <code>node</code> or <code>path</code> 
-callback de-registers that callback.</p>
-<pre><code class="undefinedjs"><span class="comment">// Display only the first ten downloaded items</span>
-<span class="comment">// but place all in the model </span>
-
-oboe(<span class="string">'/content'</span>)
-   .node(<span class="string">'!.*'</span>, <span class="keyword">function</span>(item, path){
-      <span class="keyword">if</span>( path[<span class="number">0</span>] == <span class="number">9</span> )
-         <span class="keyword">this</span>.forget();
-
-      displayItem(item);
-   })
-   .node(<span class="string">'!.*'</span>, <span class="keyword">function</span>(item){   
-      addToModel(item);
-   });</code></pre>
-<h2 id="-removelistener-">.removeListener()</h2>
-<pre><code class="undefinedjs">.removeListener(<span class="string">'node'</span>, pattern, callback)
-.removeListener(<span class="string">'node:{pattern}'</span>, pattern, callback)
-
-.removeListener(<span class="string">'path'</span>, pattern, callback)
-.removeListener(<span class="string">'path:{pattern}'</span>, pattern, callback)
-
-.removeListener(<span class="string">'start'</span>, callback)
-.removeListener(<span class="string">'done'</span>, callback)
-.removeListener(<span class="string">'fail'</span>, callback)</code></pre>
-<p>Remove any listener on the Oboe instance.</p>
-<p>From inside node and path callbacks <a href="api.html#-forget-">.forget()</a>
-is usually more convenient because it does not require that the programmer stores a reference
-to the callback function. However, <code>.removeListener()</code>
-has the advantage that it may be called from anywhere.</p>
-<h2 id="-abort-">.abort()</h2>
-<p>Calling <code>.abort()</code> stops an ongoing HTTP call at any time. 
-You are guaranteed not to get any further <code>path</code> or <code>node</code> 
-callbacks, even if the underlying transport has unparsed buffered content.
-After calling <code>.abort()</code> the <code>done</code> event will not fire.</p>
-<p>Under Node.js, if the Oboe instance is reading from a stream that it did not create
-this method deregisters all listeners but it is the caller’s responsibility to
-actually terminate the streaming.</p>
-<pre><code class="undefinedjs"><span class="comment">// Display the first nine nodes, then hang up </span>
-oboe(<span class="string">'/content'</span>)
-   .node(<span class="string">'!.*'</span>, <span class="keyword">function</span>(item){   
-      display(item);
-   })
-   .node(<span class="string">'![9]'</span>, <span class="keyword">function</span>(){
-      <span class="keyword">this</span>.abort();
-   });</code></pre>
-<h2 id="pattern-matching">Pattern matching</h2>
-<p>Oboe’s pattern matching is a variation on <a href="http://goessner.net/articles/JsonPath/">JSONPath</a>. It supports these clauses:</p>
-<table>
-<thead>
-<tr>
-<th>Clause</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>!</code></td>
-<td>Root object                                                                                      </td>
-</tr>
-<tr>
-<td><code>.</code></td>
-<td>Path separator                                                                                  </td>
-</tr>
-<tr>
-<td><code>person</code></td>
-<td>An element under the key ‘person’                                                               </td>
-</tr>
-<tr>
-<td><code>{name email}</code></td>
-<td>An element with attributes name and email                                                       </td>
-</tr>
-<tr>
-<td><code>*</code></td>
-<td>Any element at any name                                                                         </td>
-</tr>
-<tr>
-<td><code>[2]</code></td>
-<td>The second element (of an array)                                                                </td>
-</tr>
-<tr>
-<td><code>['foo']</code></td>
-<td>Equivalent to .foo                                                                              </td>
-</tr>
-<tr>
-<td><code>[*]</code></td>
-<td>Equivalent to .*                                                                                </td>
-</tr>
-<tr>
-<td><code>..</code></td>
-<td>Any number of intermediate nodes (non-greedy)</td>
-</tr>
-<tr>
-<td><code>$</code></td>
-<td>Explicitly specify an intermediate clause in the <a href="http://goessner.net/articles/JsonPath/">JSONPath</a> spec the callback should be applied to</td>
-</tr>
-</tbody>
-</table>
-<p>The pattern engine supports 
-<a href="examples/index.html#css4-style-patterns">CSS-4 style node selection</a>
-using the dollar, <code>$</code>, symbol. See also <a href="examples/index.html#example-patterns">the example patterns</a>. </p>
-<h2 id="browser-support">Browser support</h2>
-<p>These browsers have full support:</p>
-<ul>
-<li>Recent Chrome</li>
-<li>Recent Firefox</li>
-<li>Recent Safari</li>
-<li>Internet Explorer 10</li>
-</ul>
-<p>These browsers will run Oboe but not stream:</p>
-<ul>
-<li>Internet explorer 8 and 9, given <a href="https://github.com/kriskowal/es5-shim/blob/master/es5-sham.js">appropriate shims for ECMAScript 5</a></li>
-</ul>
-<p>Unfortunately, <abbr title="Internet Explorer">IE</abbr> before version 10 
-<a href="http://blogs.msdn.com/b/ieinternals/archive/2010/04/06/comet-streaming-in-internet-explorer-with-xmlhttprequest-and-xdomainrequest.aspx">doesn’t provide any convenient way to read an http request while it is in progress</a>.
-It may be possible to add support for limited streaming in Internet Explorer 8 and 9 using the proprietary
-<a href="http://msdn.microsoft.com/en-us/library/cc288060%28VS.85%29.aspx">XDomainRequest</a>
-but this object is has a reduced API and is buggy -
-<a href="http://blogs.msdn.com/b/ieinternals/archive/2010/05/13/xdomainrequest-restrictions-limitations-and-workarounds.aspx">only GET and POST are supported and it does not allow HTTP headers to be set</a>.
-It also requires that responses set the <code>Access-Control-Allow-Origin</code> 
-header and fails in IE8 for users browsing using InPrivate mode.</p>
-<p>The good news is that in older versions of IE Oboe gracefully degrades.
-It falls back to waiting for the whole response to return, then fires
-all the events instantaneously.
-You don’t get streaming but the responsiveness is no worse than if you
-had used a non-streaming AJAX download.</p>
+               <html><head></head><body>
+<p>The number one question I get asked about this site is how I made the the animations on the <a href="why.html">Why Oboe.js</a> page.</p>
+<p>jQuery was common back when this site was made, but was starting to get a bad rep. The animations are all rendered
+using jQuery to manipulate <a href="https://github.com/jimhigson/oboe.js-website/tree/master/svgSource">svgs</a>
+(like you would manipulate any other DOM), but the principles of how they’re animated could apply to React, d3, or any other more modern tech.</p>
+<p>The crux is, there’s a tiny MVC simulation engine implemented using OOP. Back in the day, es6 classes didn’t exist, so
+the OOP is all done via direct prototype manipulation. The code is all in the <a href="https://github.com/jimhigson/oboe.js-website/tree/master/statics/js/demo">demo</a> directory. Find the simulation models in <a href="https://github.com/jimhigson/oboe.js-website/tree/master/statics/js/demo/model">models dir</a> and the views in <a href="https://github.com/jimhigson/oboe.js-website/tree/master/statics/js/demo/view">views</a>. The models all use <a href="https://github.com/jimhigson/oboe.js-website/blob/master/statics/js/demo/pubSub.js#L35">pub-sub</a> to communicate with each other (when they start or end doing something) and the views also subscribe to the pubsub to know when they should render.</p>
+<p>There’s a widespread understanding that jQuery is opposed to MVC. Sure, I wouldn’t use it today, but when it was
+strictly called only from the view code, it could be useful for manipulating the DOM. Today I’d use React, or call the
+vanilla DOM directly.</p>
+<p>I think it’s an interesting window into how we could still make custom things with constrained tech, and severely limited and incompatible browsers. It harks back to an older age when not every js project had 10,000 transitive npm dependencies and we built lots starting from not much.</p>
 <h2 id="improve-this-page">Improve this page</h2>
 <p>Is this page clear enough? Typo-free? Could you improve it?</p>
 <p>Please fork the <a href="https://github.com/jimhigson/oboe.js-website">Oboe.js
 website repo</a> and make a pull
 request. The markdown source is
-<a href="https://github.com/jimhigson/oboe.js-website/blob/master/content/api.md">here</a>.</p>
+<a href="https://github.com/jimhigson/oboe.js-website/blob/master/content/animations.md">here</a>.</p>
 </body></html>
             </main>
 
@@ -662,7 +190,7 @@ request. The markdown source is
    <div class="demoCaption narrative">
        <div class="relativePosition">
           <p class="label"></p>
-          <a class="dismiss" href="api.html#">Continue</a>
+          <a class="dismiss" href="animations.html#">Continue</a>
        </div>
    </div>
 </template>

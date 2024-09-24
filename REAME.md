@@ -17,8 +17,8 @@ To scrape to static:
 Check that is scraped correctly:
 
 ```sh
-npx http-server -p 8123 ./scraped
-# and open localhost:8123 in a browser to check
+npx http-server -p 8123 ./docs
+# and open http://localhost:8123 in a browser to check
 ```
 
 The scraped site need to be checked into git on master branch to appear on the website on Github pages

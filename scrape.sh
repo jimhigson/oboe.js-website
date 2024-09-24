@@ -24,4 +24,6 @@ ps
 # kill npm processes started by this script:
 ps | awk '$4 == "npm" {print $1}' | xargs kill
 
-
+echo "scrape complete - you probably now want to run:"
+echo "    npx http-server -p 8123 ./docs"
+echo "    and visit http://localhost:8123 in your browser"

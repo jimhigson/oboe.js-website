@@ -27,6 +27,7 @@ What I haven't done:
         * or even removed [self-built OOP](https://github.com/jimhigson/oboe.js-website/blob/master/statics/js/demo/oop.js)!
     * update the node version in `package.json` from `0.1.0`! - hey, it's retro (but it works with v18 just fine)
     * `npm` (not pnpm/yarn)
+        * it still uses [bower](https://bower.io/) for client-side dependencies? Remember that?!
     * `typescript` (not `.js`)
     * ...and much more that's changed in the last 11 years!
     

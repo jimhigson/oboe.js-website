@@ -19,10 +19,21 @@
    <link rel="icon" type="image/png" href="/favicons/favicon-32.png" sizes="32x32">
    <link rel="icon" type="image/png" href="/favicons/favicon-16.png" sizes="16x16">
 
+   <script async defer src="https://buttons.github.io/buttons.js"></script>
+
 </head>
 
 <body {{#if home}}class="home" {{/if}}>
    <div id="header">
+      <p>
+         This project is no longer being maintained. It was my Masters dissertation in 2013, and gained some 4,700+
+         github
+         stars back in the day.</p>
+
+      <p>
+         The site is being kept up in all its last-decade, jQuery-rendered glory. <a href="/why">Enjoy the
+            animations!</a>
+      </p>
    </div>
    <nav id="siteNav">
       <svg width="24" height="24" class="menuButton">
@@ -93,10 +104,16 @@
             {{#home}}
             <ul class="links">
                <li>
+                  <a class="github-button" href="https://github.com/jimhigson/oboe.js"
+                     data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star"
+                     data-size="large" data-show-count="true" aria-label="Star jimhigson/oboe.js on GitHub">Star</a>
+                  <br />
                   <a href="https://twitter.com/OboeJs" class="twitter-follow-button" data-show-count="false"
                      data-lang="en" data-size="large">
                      Follow @OboeJs
                   </a>
+
+
                </li>
             </ul>
             {{/home}}

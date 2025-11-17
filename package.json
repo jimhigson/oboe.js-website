@@ -52,11 +52,9 @@
   "subdomain": "oboejs",
   "domains": [
     "oboejs.com",
-    "oboejs.org",
-    "www.oboejs.com",
-    "www.oboejs.org"
+    "www.oboejs.com"
   ],
   "engines": {
-    "node": "0.10.x"
+    "node": "20.19.x"
   }
 }
